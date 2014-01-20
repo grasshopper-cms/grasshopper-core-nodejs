@@ -5,7 +5,7 @@ describe('Grasshopper core - testing authentications', function(){
 
     var grasshopper = require('../lib/grasshopper');
 
-    before(function(){
+    before(function(done){
         grasshopper.configure(function(){
             this.config = {
                 "crypto": {
@@ -13,15 +13,15 @@ describe('Grasshopper core - testing authentications', function(){
                 },
                 "db": {
                     "type": "mongodb",
-                    "host": "mongodb://localhost:27017/grasshopper",
-                    "database": "grasshopper",
+                    "host": "mongodb://localhost:27017/test",
+                    "database": "test",
                     "username": "",
                     "password": "",
                     "debug": false
                 }
             };
         });
-
+        done();
     });
 
     it('not authenticate because user doesn\'t exist', function(done) {

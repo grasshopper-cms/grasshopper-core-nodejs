@@ -35,7 +35,8 @@ module.exports = function(grunt) {
     grunt.loadTasks('tasks');
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-    grunt.registerTask('seedDev', ['mongodb:dev']);
+    grunt.registerTask('db:dev', ['mongodb:dev']);
+    grunt.registerTask('db:test', ['mongodb:test']);
 
 
     grunt.registerTask('default', ['jshint']);
