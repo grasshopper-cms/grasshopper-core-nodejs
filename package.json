@@ -1,61 +1,62 @@
 {
-    "name": "grasshopper-core",
-    "description": "Core grasshopper library to interface with the grasshopper DMS (data management system)",
-    "main": "./lib/grasshopper",
-    "author": "Travis McHattie",
-    "version": "0.1.0",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Solid-Interactive/grasshopper-core-nodejs.git"
-    },
-    "bugs": {
-        "url": "https://github.com/Solid-Interactive/grasshopper-core-nodejs/issues"
-    },
-    "licenses": [
-        {
-            "type": "MIT",
-            "url": "https://github.com/Solid-Interactive/grasshopper-core-nodejs/blob/master/LICENSE"
-        }
-    ],
-    "engines": {
-        "node": "0.10.17",
-        "npm": "1.3.9"
-    },
-    "dependencies": {
-        "crypto-js": "~3.1.2-1",
-        "solid-logger-js": "~0.3.1",
-        "nano": "~4.1.1",
-        "mongodb": "~1.3.19",
-        "underscore": "~1.5.2",
-        "async": "~0.2.9",
-        "express": "~3.4.0",
-        "node-uuid": "~1.4.1",
-        "mongoose": "~3.6.20",
-        "mongoose-validator": "~0.2.2",
-        "aws-sdk": "~1.10.0",
-        "q": "~0.9.7"
-    },
-    "devDependencies": {
-        "matchdep": "~0.1.2",
-        "uglify-js": "1.2.x",
-        "nodelint": "~0.6.2",
-        "mocha": "~1.12.1",
-        "chai": "~1.7.2",
-        "sinon": "~1.7.3",
-        "grunt": "~0.4.1",
-        "grunt-contrib-watch": "~0.5.3",
-        "grunt-contrib-jshint": "~0.6.4",
-        "grunt-concurrent": "~0.4.0"
-    },
-    "jam": {
-        "main": "lib/grasshopper.js",
-        "include": [
-            "lib/grasshopper.js",
-            "README.md",
-            "LICENSE"
-        ]
-    },
-    "scripts": {
-        "test": "mocha --reporter spec"
+  "name": "grasshopper-core",
+  "description": "Core grasshopper library to interface with the grasshopper DMS (data management system)",
+  "main": "./lib/grasshopper",
+  "author": "Travis McHattie",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Solid-Interactive/grasshopper-core-nodejs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Solid-Interactive/grasshopper-core-nodejs/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/Solid-Interactive/grasshopper-core-nodejs/blob/master/LICENSE"
     }
+  ],
+  "engines": {
+    "node": "0.10.17",
+    "npm": "1.3.9"
+  },
+  "dependencies": {
+    "crypto-js": "~3.1.2-1",
+    "solid-logger-js": "~0.3.1",
+    "nano": "~4.1.1",
+    "mongodb": "~1.3.19",
+    "underscore": "~1.5.2",
+    "async": "~0.2.9",
+    "express": "~3.4.0",
+    "node-uuid": "~1.4.1",
+    "mongoose": "~3.6.20",
+    "mongoose-validator": "~0.2.2",
+    "aws-sdk": "~1.10.0",
+    "q": "~0.9.7"
+  },
+  "devDependencies": {
+    "matchdep": "~0.1.2",
+    "uglify-js": "1.2.x",
+    "nodelint": "~0.6.2",
+    "mocha": "~1.12.1",
+    "chai": "~1.7.2",
+    "sinon": "~1.7.3",
+    "grunt": "~0.4.1",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-concurrent": "~0.4.0",
+    "chai-as-promised": "~4.1.0"
+  },
+  "jam": {
+    "main": "lib/grasshopper.js",
+    "include": [
+      "lib/grasshopper.js",
+      "README.md",
+      "LICENSE"
+    ]
+  },
+  "scripts": {
+    "test": "mocha --reporter spec"
+  }
 }
