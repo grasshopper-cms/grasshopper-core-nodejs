@@ -43,6 +43,13 @@ describe('Grasshopper core - users', function(){
     });
 
 
+    it('Make sure that a reader cannot call create method (only admins can)', function(done) {
+        grasshopper.run(readerToken)
+            .users
+            .create({})
+            .should.eventually.be.rejected.notify(done);
+    });
+
     it('Make sure that a reader cannot call getByEmail method (only admins can)', function(done) {
         grasshopper.run(readerToken)
             .users
