@@ -5,9 +5,9 @@ chai.use(chaiAsPromised);
 
 require('chai').should();
 
-'use strict';
-
 describe('Grasshopper core - users', function(){
+    'use strict';
+
     var grasshopper = require('../lib/grasshopper'),
         adminToken = "",
         readerToken = "";
