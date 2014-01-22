@@ -64,4 +64,11 @@ describe('Grasshopper core - users', function(){
             .should.eventually.be.fulfilled.notify(done);
     });
 
+    it('Get a user by their login.', function(done) {
+        grasshopper.run(adminToken)
+            .users
+            .getByLogin('admin')
+            .should.eventually.be.fulfilled.notify(done);
+    });
+
 });
