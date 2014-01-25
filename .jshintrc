@@ -1,0 +1,27 @@
+{
+    "node": true,
+    "globals": {
+        "beforeEach": false,
+        "define": false,
+        "describe": false,
+        "it": false,
+        "xit": false
+    },
+    "curly": true,
+    "quotmark": "single",
+    "debug": true,
+    "validthis": true,
+    "expr": true,
+    "loopfunc": false,
+    "onevar": true,
+    "strict": true,
+    "undef": true,
+    "unused": true,
+    "maxlen": 121,
+    "newcap": false,
+    "trailing": true,
+    "indent": 4,
+    "noarg": true,
+    "maxdepth": 2,
+    "devel": true
+}
