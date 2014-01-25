@@ -48,4 +48,8 @@ describe('Grasshopper core - coordinator', function(){
             });
     });
 
+
+    if('coordinator should be able to register multiple methods with a specified set of firmware and process them as a batch.', function(done){
+       true.should.equal(false);
+    });
 });
