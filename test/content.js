@@ -6,8 +6,8 @@ describe('Grasshopper core - content', function(){
 
     var async = require('async'),
         _ = require('underscore'),
-        testContentId  = "5261781556c02c072a000007",
-        restrictedContentId = "5254908d56c02c076e000001",
+        testContentId  = '5261781556c02c072a000007',
+        restrictedContentId = '5254908d56c02c076e000001',
         sampleContentObject = null,
         tokens = {},
         tokenRequests = [
@@ -54,7 +54,7 @@ describe('Grasshopper core - content', function(){
     describe('create', function() {
         it('should return 401 because trying to access unauthenticated', function(done) {
             var obj = {
-                label:"Generated title", slug: 'generated_title', type: "524362aa56c02c0703000001", nonce:"1234fdsdfsa565", status: "Live", node : {_id: "526d5179966a883540000006", displayOrder: 1}, fields: {testfield: "test value"}, author: {_id: "5246e73d56c02c0744000001", name: "Test User"}
+                label:'Generated title', slug: 'generated_title', type: '524362aa56c02c0703000001', nonce:'1234fdsdfsa565', status: 'Live', node : {_id: '526d5179966a883540000006', displayOrder: 1}, fields: {testfield: 'test value'}, author: {_id: '5246e73d56c02c0744000001', name: 'Test User'}
             };
 
             true.should.equal(false);
@@ -63,7 +63,7 @@ describe('Grasshopper core - content', function(){
 
         it('should return 403 because I am am only a reader of content.', function(done) {
             var obj = {
-                label:"Generated title", slug: 'generated_title', type: "524362aa56c02c0703000001", nonce:"1234fdsdfsa565", status: "Live", node : {_id: "526d5179966a883540000006", displayOrder: 1}, fields: {testfield: "test value"}, author: {_id: "5246e73d56c02c0744000001", name: "Test User"}
+                label:'Generated title', slug: 'generated_title', type: '524362aa56c02c0703000001', nonce:'1234fdsdfsa565', status: 'Live', node : {_id: '526d5179966a883540000006', displayOrder: 1}, fields: {testfield: 'test value'}, author: {_id: '5246e73d56c02c0744000001', name: 'Test User'}
             };
 
             true.should.equal(false);
@@ -72,7 +72,7 @@ describe('Grasshopper core - content', function(){
 
         it('should successfully create content because I have the correct permissions.', function(done) {
             var obj = {
-                label:"Generated title", slug: 'generated_title', type: "524362aa56c02c0703000001", nonce:"1234fdsdfsa565", status: "Live", node : {_id: "526d5179966a883540000006", displayOrder: 1}, fields: {testfield: "test value"}, author: {_id: "5246e73d56c02c0744000001", name: "Test User"}
+                label:'Generated title', slug: 'generated_title', type: '524362aa56c02c0703000001', nonce:'1234fdsdfsa565', status: 'Live', node : {_id: '526d5179966a883540000006', displayOrder: 1}, fields: {testfield: 'test value'}, author: {_id: '5246e73d56c02c0744000001', name: 'Test User'}
             };
 
 
@@ -83,7 +83,7 @@ describe('Grasshopper core - content', function(){
 
         it('should return 403 because I am trying to create content in a node that is restricted to me.', function(done) {
             var obj = {
-                label:"Generated title", slug: 'generated_title', type: "524362aa56c02c0703000001", nonce:"1234fdsdfsa565", status: "Live", node : {_id: "526d5179966a883540000006", displayOrder: 1}, fields: {testfield: "test value"}, author: {_id: "5246e73d56c02c0744000001", name: "Test User"}
+                label:'Generated title', slug: 'generated_title', type: '524362aa56c02c0703000001', nonce:'1234fdsdfsa565', status: 'Live', node : {_id: '526d5179966a883540000006', displayOrder: 1}, fields: {testfield: 'test value'}, author: {_id: '5246e73d56c02c0744000001', name: 'Test User'}
             };
 
             true.should.equal(false);
@@ -96,7 +96,7 @@ describe('Grasshopper core - content', function(){
             var obj = {};
             _.extend(obj, sampleContentObject);
 
-            obj.fields.newColumn = "newValue";
+            obj.fields.newColumn = 'newValue';
 
             true.should.equal(false);
             done();
@@ -107,7 +107,7 @@ describe('Grasshopper core - content', function(){
             var obj = {};
             _.extend(obj, sampleContentObject);
 
-            obj.fields.newColumn = "newValue";
+            obj.fields.newColumn = 'newValue';
             true.should.equal(false);
             done();
         });
@@ -116,7 +116,7 @@ describe('Grasshopper core - content', function(){
             var obj = {};
             _.extend(obj, sampleContentObject);
 
-            obj.fields.newColumn = "newValue";
+            obj.fields.newColumn = 'newValue';
 
             true.should.equal(false);
             done();
@@ -127,7 +127,7 @@ describe('Grasshopper core - content', function(){
             var obj = {};
             _.extend(obj, sampleContentObject);
 
-            obj.fields.newColumn = "newValue";
+            obj.fields.newColumn = 'newValue';
 
             true.should.equal(false);
             done();
@@ -136,14 +136,14 @@ describe('Grasshopper core - content', function(){
 
     describe('query', function() {
         var query = {
-            filters: [{key: "slug", cmp: "=", value: "sample_content_title"}],
+            filters: [{key: 'slug', cmp: '=', value: 'sample_content_title'}],
             options: {
-                //include: ["node","fields.testfield"]
+                //include: ['node','fields.testfield']
             }
         }, query2 = {
-            filters: [{key: "nonsense", cmp: "=", value: "XXXNEVERSHOULDMATCHANTYHINGXXX"}],
+            filters: [{key: 'nonsense', cmp: '=', value: 'XXXNEVERSHOULDMATCHANTYHINGXXX'}],
             options: {
-                //include: ["node","fields.testfield"]
+                //include: ['node','fields.testfield']
             }
         };
 

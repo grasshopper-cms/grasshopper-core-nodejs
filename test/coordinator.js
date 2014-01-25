@@ -42,14 +42,13 @@ describe('Grasshopper core - coordinator', function(){
                 payload.ab.should.not.equal(1);
             })
             .fail(function(e){
-                e.should.not.be.undefined;
-            }).done(function(err){
-                done();
-            });
+                e.should.be(Error);
+            }).done(done);
     });
 
 
-    if('coordinator should be able to register multiple methods with a specified set of firmware and process them as a batch.', function(done){
+    it('coordinator should be able to register multiple methods with a specified set of firmware and process them as a batch.', function(done){
        true.should.equal(false);
+        done();
     });
 });
