@@ -82,6 +82,10 @@ describe('Grasshopper core - testing tokens', function(){
             done();
         });
 
+        it('a user should be able to authenticate then log themselves out using a convenience "logout" method.', function(done) {
+            true.should.equal(false);
+            done();
+        });
     });
 
     describe('tokens.getNew', function(){
