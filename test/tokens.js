@@ -54,14 +54,13 @@ describe('Grasshopper core - testing tokens', function(){
                     throw new Error('Payload should be null');
                 },
                 function(err){
-                    console.log(err)
                     err.errorCode.should.equal(401);
                 }
             ).done(done);
         });
 
         it('an administrator (only) should be able to delete any token that is not their own.', function(done) {
-            true.should.equal.false;
+            true.should.equal(false);
             done();
         });
 
@@ -79,7 +78,7 @@ describe('Grasshopper core - testing tokens', function(){
         });
 
         it('a user should be able to authenticate then log themselves out.', function(done) {
-            true.should.equal.false;
+            true.should.equal(false);
             done();
         });
 
@@ -88,12 +87,12 @@ describe('Grasshopper core - testing tokens', function(){
     describe('tokens.getNew', function(){
 
         it('a user should be able to create a new version of their token that they can use elsewhere', function(done) {
-            true.should.equal.false;
+            true.should.equal(false);
             done();
         });
 
         it('if a user is currently not logged in then they should receive a 401 error.', function(done){
-            true.should.equal.false;
+            true.should.equal(false);
             done();
         });
     });
@@ -102,12 +101,12 @@ describe('Grasshopper core - testing tokens', function(){
     describe('tokens.impersonate', function(){
 
         it('as an adminsitrator I should be able to impersonate another user.', function(done) {
-            true.should.equal.false;
+            true.should.equal(false);
             done();
         });
 
         it('as a user that in not an administrator I should not be able to impersonate anyone.', function(done) {
-            true.should.equal.false;
+            true.should.equal(false);
             done();
         });
 
