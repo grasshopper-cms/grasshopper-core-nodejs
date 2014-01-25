@@ -30,7 +30,7 @@ describe('Grasshopper core - testing authentications', function(){
                 should.not.exist(obj);
             })
             .fail(function(err){
-                err.message.should.equal('User does not exist');
+                err.message.should.equal('Your login was invalid.');
             })
             .done(function(){
                 done();

@@ -1,4 +1,4 @@
-require('chai').should();
+var should = require('chai').should();
 
 describe('Grasshopper core - coordinator', function(){
     'use strict';
@@ -39,16 +39,16 @@ describe('Grasshopper core - coordinator', function(){
 
         coordinator.handle('example.method', {payload:{}})
             .then(function(payload){
-                payload.ab.should.not.equal(1);
+                should.not.exist(payload);
             })
             .fail(function(e){
-                e.should.be(Error);
+                should.exist(e);
             }).done(done);
     });
 
 
-    it('coordinator should be able to register multiple methods with a specified set of firmware and process them as a batch.', function(done){
-       true.should.equal(false);
+    it('coordinator should be able to register multiple methods with a specified set of firmware.', function(done){
+        true.should.equal(false);
         done();
     });
 });
