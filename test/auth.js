@@ -1,4 +1,4 @@
-require('chai').should();
+var should = require('chai').should();
 
 describe('Grasshopper core - testing authentications', function(){
     'use strict';
@@ -27,7 +27,7 @@ describe('Grasshopper core - testing authentications', function(){
     it('not authenticate because user doesn\'t exist', function(done) {
         grasshopper.auth('travis', '12345')
             .then(function(obj){
-                obj.should.be.undefined;
+                should.not.exist(obj);
             })
             .fail(function(err){
                 err.message.should.equal('User does not exist');
@@ -40,10 +40,10 @@ describe('Grasshopper core - testing authentications', function(){
     it('should authenticate with a valid user.', function(done) {
         grasshopper.auth('admin', 'TestPassword')
             .then(function(obj){
-                obj.should.be.ok;
+                should.exist(obj);
             })
             .fail(function(err){
-                err.should.be.undefined;
+                should.not.exist(err);
             })
             .done(function(){
                 done();

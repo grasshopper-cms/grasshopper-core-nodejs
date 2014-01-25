@@ -1,5 +1,6 @@
 module.exports = function(grunt) {
-
+    'use strict';
+    
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         mongodb : {
@@ -22,7 +23,8 @@ module.exports = function(grunt) {
                     jQuery: true,
                     console: true,
                     module: true,
-                    document: true
+                    document: true,
+                    require: true
                 }
             }
         },
