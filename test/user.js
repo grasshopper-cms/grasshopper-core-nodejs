@@ -3,7 +3,7 @@ var chaiAsPromised = require('chai-as-promised');
 
 chai.use(chaiAsPromised);
 
-require('chai').should();
+var should = require('chai').should();
 
 describe('Grasshopper core - users', function(){
     'use strict';
@@ -42,48 +42,119 @@ describe('Grasshopper core - users', function(){
             });
     });
 
-    describe('Get a user by id', function() {
-        it('Make sure that a reader cannot call create method (only admins can)', function(done) {
-            grasshopper.run(readerToken)
-                .users
-                .create({})
-                .should.eventually.be.rejected.notify(done);
-        });
-
+    describe('Get a user by email', function(){
         it('Make sure that a reader cannot call getByEmail method (only admins can)', function(done) {
-            grasshopper.run(readerToken)
+            grasshopper.request(readerToken)
                 .users
                 .getByEmail('apitestuser_1@thinksolid.com')
-                .should.eventually.be.rejected.notify(done);
+                .then(function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(403);
+                }).done(done);
+
+        });
+        it('Make sure that admin can get a user by it\'s email address.', function(done) {
+            grasshopper.request(adminToken)
+                .users
+                .getByEmail('apitestuser_1@thinksolid.com')
+                .then(function(payload){
+                    payload.email.should.equal('apitestuser_1@thinksolid.com');
+                },function(err){
+                    should.not.exist(err);
+                })
+                .done(done);
         });
 
-        it('Make sure that admin can get a user by it\'s email address.', function(done) {
-            grasshopper.run(adminToken)
+        it('should return 401 because trying to access unauthenticated', function(done) {
+            grasshopper.request().users.getByEmail('test@test.com')
+                .then(function(payload){
+                    should.not.exist(payload);
+                },function(err){
+                    err.errorCode.should.equal(401);
+                }).done(done);
+        });
+
+        it('should return 404 because test user id does not exist', function(done) {
+            true.should.equal(false);
+            done();
+        });
+    });
+
+    describe('Get a user by their login.', function(){
+        it('Make sure that a reader cannot call getByEmail method (only admins can)', function(done) {
+            grasshopper.request(readerToken)
                 .users
                 .getByEmail('apitestuser_1@thinksolid.com')
-                .should.eventually.be.fulfilled.notify(done);
+                .then(function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(403);
+                }).done(done);
+
         });
 
         it('Get a user by their login.', function(done) {
-            grasshopper.run(adminToken)
+            grasshopper.request(adminToken)
                 .users
                 .getByLogin('admin')
-                .should.eventually.be.fulfilled.notify(done);
+                .then(function(payload){
+                    payload.login.should.equal('admin');
+                },function(err){
+                    should.not.exist(err);
+                }).done(done);
+        });
+
+        it('should return 401 because trying to access unauthenticated', function(done) {
+            grasshopper.request().users.getByLogin('admin')
+                .then(function(payload){
+                    should.not.exist(payload);
+                },function(err){
+                    err.errorCode.should.equal(401);
+                }).done(done);
+        });
+
+        it('should return 404 because test user id does not exist', function(done) {
+            true.should.equal(false);
+            done();
         });
     });
+
     describe('Get a user by id', function() {
+        it('Make sure that a reader cannot call getById method (only admins can)', function(done) {
+            grasshopper.request(readerToken)
+                .users
+                .getById('5246e73d56c02c0744000004')
+                .then(function(payload){
+                    should.not.exist(payload);
+                },function(err){
+                    err.errorCode.should.equal(403);
+                }).done(done);
+
+        });
+
+        it('Make sure that admin can get a by getById', function(done) {
+            grasshopper.request(adminToken)
+                .users
+                .getById('5246e73d56c02c0744000004')
+                .then(function(payload){
+                    should.not.exist(payload);
+                },function(err){
+                    err.errorCode.should.equal(403);
+                }).done(done);
+        });
+
         it('should return 401 because trying to access unauthenticated', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request().users.getById('5246e73d56c02c0744000004')
+                .then(function(payload){
+                    should.not.exist(payload);
+                },function(err){
+                    err.errorCode.should.equal(401);
+                }).done(done);
         });
-        it('should return a 403 because user does not have permissions to access users', function(done) {
-            true.should.equal(false);
-            done();
-        });
-        it('should return an existing user', function(done) {
-            true.should.equal(false);
-            done();
-        });
+
         it('should return 404 because test user id does not exist', function(done) {
             true.should.equal(false);
             done();
@@ -122,438 +193,449 @@ describe('Grasshopper core - users', function(){
             true.should.equal(false);
             done();
         });
+    });
 
-        describe('Create a new user', function() {
-            it('should create a user without an error.', function(done){
-                var newUser = {
-                    login: 'newtestuser1',
-                    role: 'reader',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    password: 'TestPassword',
-                    firstname: 'Test',
-                    lastname: 'User'
-                };
-
-                true.should.equal(false);
-                done();
-            });
-
-            it('should create a user without an error with additional custom params.', function(done){
-                var newUser = {
-                    login: 'newtestuser2',
-                    role: 'reader',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    firstname: 'Test',
-                    lastname: 'User',
-                    password: 'TestPassword',
-                    profile: {
-                        linkedid: 'tjmchattie'
-                    }
-                };
-                true.should.equal(false);
-                done();
-            });
-
-            it('should return error if a user id is sent with the request.', function(done){
-                var newUser = {
-                    _id: 'ISHOULDNOTBEHERE',
-                    login: 'newtestuser1',
-                    role: 'reader',
-                    enabled: true,
-                    email: 'newtestuser2@thinksolid.com',
-                    firstname: 'Test',
-                    lastname: 'User',
-                    password: 'TestPassword'
-                };
-                true.should.equal(false);
-                done();
-            });
-
-            it('should return error if a duplicate is created.', function(done){
-                var newUser = {
-                    login: 'newtestuser1',
-                    role: 'reader',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    firstname: 'Test',
-                    lastname: 'User',
-                    password: 'TestPassword'
-                };
-                true.should.equal(false);
-                done();
-            });
-
-            it('should validate and return error if a mandatory property is missing.',function(done){
-                var newUser = {
-                    role: 'reader',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    firstname: 'Test',
-                    lastname: 'User',
-                    password: 'TestPassword'
-                };
-                true.should.equal(false);
-                done();
-            });
-
-            it('should return error if an empty login is provided.', function(done){
-                var newUser = {
-                    login: '',
-                    role: 'reader',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    firstname: 'Test',
-                    lastname: 'User',
-                    password: 'TestPassword'
-                };
-                true.should.equal(false);
-                done();
-            });
-
-            it('should return error if an null login is provided.', function(done){
-                var newUser = {
-                    login: null,
-                    role: 'reader',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    firstname: 'Test',
-                    lastname: 'User',
-                    password: 'TestPassword'
-                };
-                true.should.equal(false);
-                done();
-            });
-
-            it('should return error if a login is too short.', function(done){
-                var newUser = {
-                    login: 'sho',
-                    role: 'reader',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    firstname: 'Test',
-                    lastname: 'User',
-                    password: 'TestPassword'
-                };
-                true.should.equal(false);
-                done();
-            });
-
-            it('should return error if a password is null.', function(done){
-                var newUser = {
-                    login: 'newtestuserunique',
-                    role: 'reader',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    firstname: 'Test',
-                    lastname: 'User',
-                    password: null
-                };
-                true.should.equal(false);
-                done();
-            });
-
-            it('should return error if a password is too short.', function(done){
-                var newUser = {
-                    login: 'newtestuserunique',
-                    role: 'reader',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    firstname: 'Test',
-                    lastname: 'User',
-                    password: 'sho'
-                };
-                true.should.equal(false);
-                done();
-            });
-
-            it('should return error if a user has a role that is not allowed.', function(done){
-                var newUser = {
-                    login: 'newtestuserunique',
-                    role: 'fake role',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    firstname: 'Test',
-                    lastname: 'User',
-                    password: 'TestPassword'
-                };
-                true.should.equal(false);
-                done();
-            });
+    describe('Create a new user', function() {
+        it('should error out because user does not have enough permissions to create a user.', function(done){
+            grasshopper.request(readerToken)
+                .users
+                .create({})
+                .then(function(payload){
+                    should.not.exist(payload);
+                },function(err){
+                    err.errorCode.should.equal(403);
+                }).done(done);
         });
 
-        describe('Update a user', function() {
-            it('should return a 403 because user does not have permissions to access users', function(done) {
-                var newUser = {
-                    //_id: testCreatedUserId,
-                    login: 'newtestuser1',
-                    role: 'reader',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    firstname: 'Test',
-                    lastname: 'User',
-                    password: 'TestPassword'
-                };
-                true.should.equal(false);
-                done();
-            });
-            it('should update a user', function(done) {
-                var newUser = {
-                    //_id: testCreatedUserId,
-                    login: 'newtestuser1_updated',
-                    role: 'reader',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    firstname: 'Test',
-                    lastname: 'User'
-                };
-                true.should.equal(false);
-                done();
-            });
+        it('should create a user without an error.', function(done){
+            var newUser = {
+                login: 'newtestuser1',
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                password: 'TestPassword',
+                firstname: 'Test',
+                lastname: 'User'
+            };
 
-            it('one admin should be able to change the role of another admin.', function(done) {
-                true.should.equal(false);
-                done();
-            });
-
-
-            it('should return error is user is updated without a set "ID"', function(done){
-                var newUser = {
-                    login: 'newtestuser1_updated',
-                    role: 'reader',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    firstname: 'Test',
-                    lastname: 'User',
-                    password: 'TestPassword'
-                };
-                true.should.equal(false);
-                done();
-            });
-            it('should return error if login is too short.', function(done){
-                var newUser = {
-                    //_id: testCreatedUserId,
-                    login: 'sho',
-                    role: 'reader',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    firstname: 'Test',
-                    lastname: 'User',
-                    password: 'TestPassword'
-                };
-                true.should.equal(false);
-                done();
-            });
-            it('should return error if user role is invalid.', function(done){
-                var newUser = {
-                    //_id: testCreatedUserId,
-                    login: 'newtestuesr1',
-                    role: 'reader_bad',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    firstname: 'Test',
-                    lastname: 'User',
-                    password: 'TestPassword'
-                };
-                true.should.equal(false);
-                done();
-            });
-            it('should return error if user login is null.', function(done){
-                var newUser = {
-                    // _id: testCreatedUserId,
-                    login: null,
-                    role: 'reader',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    firstname: 'Test',
-                    lastname: 'User',
-                    password: 'TestPassword'
-                };
-                true.should.equal(false);
-                done();
-            });
-            it('should return error if user login is empty.', function(done){
-                var newUser = {
-                    // _id: testCreatedUserId,
-                    login: '',
-                    role: 'reader',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    firstname: 'Test',
-                    lastname: 'User',
-                    password: 'TestPassword'
-                };
-                true.should.equal(false);
-                done();
-            });
-
-
-            it('should return error if the user login changed and is now a duplicate.', function(done){
-                var newUser = {
-                    // _id: testCreatedUserId,
-                    login: 'apitestuserreader',
-                    role: 'reader',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    firstname: 'Test',
-                    lastname: 'User',
-                    password: 'TestPassword'
-                };
-                true.should.equal(false);
-                done();
-            });
-
-            it('should a user to update themselves even if they do not have global permissions.', function(done){
-                var newUser = {
-                    //_id: testReaderUserId,
-                    login: 'apitestuserreader',
-                    role: 'reader',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    name: 'Updated test reader name with :id',
-                    password: 'TestPassword'
-                };
-                true.should.equal(false);
-                done();
-            });
-
-            it('should error if updating a user with an different ID than your own.', function(done){
-                var newUser = {
-                    //_id: testUserId,
-                    login: 'apitestuserreader',
-                    role: 'reader',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    firstname: 'Updated test reader name with :id',
-                    lastname: 'Last',
-                    password: 'TestPassword'
-                };
-                true.should.equal(false);
-                done();
-            });
-
-            it('should allow user to update themselves even if they do not have global permissions.', function(done){
-                var newUser = {
-                    //_id: testReaderUserId,
-                    login: 'apitestuserreader',
-                    role: 'reader',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    name: 'Updated test reader name with :id',
-                    password: 'TestPassword'
-                };
-                true.should.equal(false);
-                done();
-            });
-
-            it('should error if updating a user with an different ID than your own.', function(done){
-                var newUser = {
-                    //_id: testUserId,
-                    login: 'apitestuserreader',
-                    role: 'reader',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    firstname: 'Updated test reader name with :id',
-                    lastname: 'something',
-                    password: 'TestPassword'
-                };
-                true.should.equal(false);
-                done();
-            });
-            it('should error if updating a user with an different ID than your own. [variation 2]', function(done){
-                var newUser = {
-                    //_id: testReaderUserId,
-                    login: 'apitestuserreader',
-                    role: 'reader',
-                    enabled: true,
-                    email: 'newtestuser1@thinksolid.com',
-                    name: 'Updated test reader name with :id',
-                    password: 'TestPassword'
-                };
-                true.should.equal(false);
-                done();
-            });
+            true.should.equal(false);
+            done();
         });
 
-        describe('Query Users', function() {
-            var query = {
-                    filters: [{key: 'role', cmp: '=', value: 'editor'}],
-                    options: {
-                        //include: ['node','fields.testfield']
-                    }
-                },
-                query2 = {
-                    filters: [{key: 'role', cmp: '=', value: 'thisisnotarealrole'}],
-                    options: {
-                        //include: ['node','fields.testfield']
-                    }
-                };
-
-            it('should return 401 because trying to access unauthenticated', function(done) {
-                true.should.equal(false);
-                done();
-            });
-
-            it('should return user search results', function(done) {
-                true.should.equal(false);
-                done();
-            });
-
-            it('should not return user search results', function(done) {
-                true.should.equal(false);
-                done();
-            });
-
+        it('should create a user without an error with additional custom params.', function(done){
+            var newUser = {
+                login: 'newtestuser2',
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User',
+                password: 'TestPassword',
+                profile: {
+                    linkedid: 'tjmchattie'
+                }
+            };
+            true.should.equal(false);
+            done();
         });
 
-        describe('Delete Users', function() {
-            it('should return a 403 because user does not have permissions to access users', function(done) {
-                true.should.equal(false);
-                done();
-            });
-            it('should delete a user using the correct verb', function(done) {
-                true.should.equal(false);
-                done();
-            });
-
-            it('should return 200 when we try to delete a user that doesn\'t exist', function(done) {
-                true.should.equal(false);
-                done();
-            });
+        it('should return error if a user id is sent with the request.', function(done){
+            var newUser = {
+                _id: 'ISHOULDNOTBEHERE',
+                login: 'newtestuser1',
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser2@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User',
+                password: 'TestPassword'
+            };
+            true.should.equal(false);
+            done();
         });
 
-        describe('Test creating a user, logging in with the new user then revoking the token and confirming that they are locked out', function() {
-            it('auth token of user should be revoked if user is disabled.', function(done) {
+        it('should return error if a duplicate is created.', function(done){
+            var newUser = {
+                login: 'newtestuser1',
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User',
+                password: 'TestPassword'
+            };
+            true.should.equal(false);
+            done();
+        });
+
+        it('should validate and return error if a mandatory property is missing.',function(done){
+            var newUser = {
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User',
+                password: 'TestPassword'
+            };
+            true.should.equal(false);
+            done();
+        });
+
+        it('should return error if an empty login is provided.', function(done){
+            var newUser = {
+                login: '',
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User',
+                password: 'TestPassword'
+            };
+            true.should.equal(false);
+            done();
+        });
+
+        it('should return error if an null login is provided.', function(done){
+            var newUser = {
+                login: null,
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User',
+                password: 'TestPassword'
+            };
+            true.should.equal(false);
+            done();
+        });
+
+        it('should return error if a login is too short.', function(done){
+            var newUser = {
+                login: 'sho',
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User',
+                password: 'TestPassword'
+            };
+            true.should.equal(false);
+            done();
+        });
+
+        it('should return error if a password is null.', function(done){
+            var newUser = {
+                login: 'newtestuserunique',
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User',
+                password: null
+            };
+            true.should.equal(false);
+            done();
+        });
+
+        it('should return error if a password is too short.', function(done){
+            var newUser = {
+                login: 'newtestuserunique',
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User',
+                password: 'sho'
+            };
+            true.should.equal(false);
+            done();
+        });
+
+        it('should return error if a user has a role that is not allowed.', function(done){
+            var newUser = {
+                login: 'newtestuserunique',
+                role: 'fake role',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User',
+                password: 'TestPassword'
+            };
+            true.should.equal(false);
+            done();
+        });
+    });
+
+    describe('Update a user', function() {
+        it('should return a 403 because user does not have permissions to access users', function(done) {
+            var newUser = {
+                //_id: testCreatedUserId,
+                login: 'newtestuser1',
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User',
+                password: 'TestPassword'
+            };
+            true.should.equal(false);
+            done();
+        });
+        it('should update a user', function(done) {
+            var newUser = {
+                //_id: testCreatedUserId,
+                login: 'newtestuser1_updated',
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User'
+            };
+            true.should.equal(false);
+            done();
+        });
+
+        it('one admin should be able to change the role of another admin.', function(done) {
+            true.should.equal(false);
+            done();
+        });
+
+
+        it('should return error is user is updated without a set "ID"', function(done){
+            var newUser = {
+                login: 'newtestuser1_updated',
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User',
+                password: 'TestPassword'
+            };
+            true.should.equal(false);
+            done();
+        });
+        it('should return error if login is too short.', function(done){
+            var newUser = {
+                //_id: testCreatedUserId,
+                login: 'sho',
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User',
+                password: 'TestPassword'
+            };
+            true.should.equal(false);
+            done();
+        });
+        it('should return error if user role is invalid.', function(done){
+            var newUser = {
+                //_id: testCreatedUserId,
+                login: 'newtestuesr1',
+                role: 'reader_bad',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User',
+                password: 'TestPassword'
+            };
+            true.should.equal(false);
+            done();
+        });
+        it('should return error if user login is null.', function(done){
+            var newUser = {
+                // _id: testCreatedUserId,
+                login: null,
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User',
+                password: 'TestPassword'
+            };
+            true.should.equal(false);
+            done();
+        });
+        it('should return error if user login is empty.', function(done){
+            var newUser = {
+                // _id: testCreatedUserId,
+                login: '',
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User',
+                password: 'TestPassword'
+            };
+            true.should.equal(false);
+            done();
+        });
+
+
+        it('should return error if the user login changed and is now a duplicate.', function(done){
+            var newUser = {
+                // _id: testCreatedUserId,
+                login: 'apitestuserreader',
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User',
+                password: 'TestPassword'
+            };
+            true.should.equal(false);
+            done();
+        });
+
+        it('should a user to update themselves even if they do not have global permissions.', function(done){
+            var newUser = {
+                //_id: testReaderUserId,
+                login: 'apitestuserreader',
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                name: 'Updated test reader name with :id',
+                password: 'TestPassword'
+            };
+            true.should.equal(false);
+            done();
+        });
+
+        it('should error if updating a user with an different ID than your own.', function(done){
+            var newUser = {
+                //_id: testUserId,
+                login: 'apitestuserreader',
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Updated test reader name with :id',
+                lastname: 'Last',
+                password: 'TestPassword'
+            };
+            true.should.equal(false);
+            done();
+        });
+
+        it('should allow user to update themselves even if they do not have global permissions.', function(done){
+            var newUser = {
+                //_id: testReaderUserId,
+                login: 'apitestuserreader',
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                name: 'Updated test reader name with :id',
+                password: 'TestPassword'
+            };
+            true.should.equal(false);
+            done();
+        });
+
+        it('should error if updating a user with an different ID than your own.', function(done){
+            var newUser = {
+                //_id: testUserId,
+                login: 'apitestuserreader',
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Updated test reader name with :id',
+                lastname: 'something',
+                password: 'TestPassword'
+            };
+            true.should.equal(false);
+            done();
+        });
+        it('should error if updating a user with an different ID than your own. [variation 2]', function(done){
+            var newUser = {
+                //_id: testReaderUserId,
+                login: 'apitestuserreader',
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                name: 'Updated test reader name with :id',
+                password: 'TestPassword'
+            };
+            true.should.equal(false);
+            done();
+        });
+    });
+
+    describe('Query Users', function() {
+        var query = {
+                filters: [{key: 'role', cmp: '=', value: 'editor'}],
+                options: {
+                    //include: ['node','fields.testfield']
+                }
+            },
+            query2 = {
+                filters: [{key: 'role', cmp: '=', value: 'thisisnotarealrole'}],
+                options: {
+                    //include: ['node','fields.testfield']
+                }
+            };
+
+        it('should return 401 because trying to access unauthenticated', function(done) {
+            true.should.equal(false);
+            done();
+        });
+
+        it('should return user search results', function(done) {
+            true.should.equal(false);
+            done();
+        });
+
+        it('should not return user search results', function(done) {
+            true.should.equal(false);
+            done();
+        });
+
+    });
+
+    describe('Delete Users', function() {
+        it('should return a 403 because user does not have permissions to access users', function(done) {
+            true.should.equal(false);
+            done();
+        });
+        it('should delete a user using the correct verb', function(done) {
+            true.should.equal(false);
+            done();
+        });
+
+        it('should return 200 when we try to delete a user that doesn\'t exist', function(done) {
+            true.should.equal(false);
+            done();
+        });
+    });
+
+    describe('Test creating a user, logging in with the new user then revoking the token and confirming that they are locked out', function() {
+        it('auth token of user should be revoked if user is disabled.', function(done) {
+            true.should.equal(false);
+            done();
+        });
+
+        describe('Edit a users permissions', function() {
+            it('add permission to edit a node with an empty permissions collection.', function(done) {
                 true.should.equal(false);
                 done();
             });
 
-            describe('Edit a users permissions', function() {
-                it('add permission to edit a node with an empty permissions collection.', function(done) {
-                    true.should.equal(false);
-                    done();
-                });
+            it('update a permission that a user already has set to another value.', function(done) {
+                true.should.equal(false);
+                done();
+            });
 
-                it('update a permission that a user already has set to another value.', function(done) {
-                    true.should.equal(false);
-                    done();
-                });
+            it('add a permission that already has a permissions collection.', function(done) {
+                true.should.equal(false);
+                done();
+            });
 
-                it('add a permission that already has a permissions collection.', function(done) {
-                    true.should.equal(false);
-                    done();
-                });
+            it('try to add permissions unathenticated should result in a 401.', function(done) {
+                true.should.equal(false);
+                done();
+            });
 
-                it('try to add permissions unathenticated should result in a 401.', function(done) {
-                    true.should.equal(false);
-                    done();
-                });
-
-                it('try to add permissions without the correct permissions. Should result in a 403.', function(done) {
-                    true.should.equal(false);
-                    done();
-                });
+            it('try to add permissions without the correct permissions. Should result in a 403.', function(done) {
+                true.should.equal(false);
+                done();
             });
         });
     });
