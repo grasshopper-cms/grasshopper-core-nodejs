@@ -30,7 +30,7 @@
     "async": "~0.2.9",
     "express": "~3.4.0",
     "node-uuid": "~1.4.1",
-    "mongoose": "~3.6.20",
+    "mongoose": "~3.8.5",
     "mongoose-validator": "~0.2.2",
     "aws-sdk": "~1.10.0",
     "q": "~0.9.7"
