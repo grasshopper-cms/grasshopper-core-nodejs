@@ -3,6 +3,15 @@ module.exports = function(grunt) {
     
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        test: '',
+        shell: {
+            test: {
+                command: 'mocha <%= test %> --reporter spec',
+                options: {
+                    stdout: true
+                }
+            }
+        },
         mongodb : {
             test: {
                 host: 'mongodb://localhost:27017/test',
