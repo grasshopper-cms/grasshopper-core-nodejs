@@ -28,4 +28,20 @@ describe('Grasshopper utilts - error', function(){
         e.errorCode.should.equal(500);
         e.message.should.equal('Throw my custom message');
     });
+
+    it('should check if the code param is a type of an error object and build the custom error object.', function(){
+       var e = err(new Error('Custom Error'));
+        e.errorCode.should.equal(500);
+        e.message.should.equal('Custom Error');
+    });
+
+    it('should check if the custom error object has a "errorCode" param and pass that through.', function(){
+        var error = new Error('Custom Error'),
+            e = null;
+
+        error.errorCode = 404;
+        e = err(error);
+        e.errorCode.should.equal(404);
+        e.message.should.equal('Custom Error');
+    });
 });
