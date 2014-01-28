@@ -77,8 +77,12 @@ describe('Grasshopper core - users', function(){
         });
 
         it('should return 404 because test user id does not exist', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(adminToken).users.getByEmail('test@test.com')
+                .then(function(payload){
+                    should.not.exist(payload);
+                },function(err){
+                    err.errorCode.should.equal(404);
+                }).done(done);
         });
     });
 
@@ -117,8 +121,12 @@ describe('Grasshopper core - users', function(){
         });
 
         it('should return 404 because test user id does not exist', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(adminToken).users.getByLogin('test')
+                .then(function(payload){
+                    should.not.exist(payload);
+                },function(err){
+                    err.errorCode.should.equal(404);
+                }).done(done);
         });
     });
 
@@ -140,9 +148,9 @@ describe('Grasshopper core - users', function(){
                 .users
                 .getById('5246e73d56c02c0744000004')
                 .then(function(payload){
-                    should.not.exist(payload);
+                    payload.login.should.equal('admin');
                 },function(err){
-                    err.errorCode.should.equal(403);
+                    should.not.exist(err);
                 }).done(done);
         });
 
@@ -156,19 +164,35 @@ describe('Grasshopper core - users', function(){
         });
 
         it('should return 404 because test user id does not exist', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(adminToken).users.getById('526417710658fc1f0a00000b')
+                .then(function(payload){
+                    should.not.exist(payload);
+                },function(err){
+                    err.errorCode.should.equal(404);
+                }).done(done);
         });
     });
 
     describe('Get info about the current logged in user', function() {
         it('should return the current logged in user', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(readerToken).users.current().then(
+                function(payload){
+                    payload.login.should.equal('apitestuserreader');
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
         it('should return a 401 because user is not authenticated', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request().users.current().then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(401);
+                }
+            ).done(done);
         });
     });
 
