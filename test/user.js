@@ -3,15 +3,16 @@ var chaiAsPromised = require('chai-as-promised');
 
 chai.use(chaiAsPromised);
 
-var should = require('chai').should(),
-    ObjectID = require('mongodb').ObjectID;
+var should = require('chai').should();
 
 describe('Grasshopper core - users', function(){
     'use strict';
 
     var grasshopper = require('../lib/grasshopper'),
         adminToken = '',
-        readerToken = '';
+        readerToken = '',
+        testCreatedUserId = ''  ,
+        testCreatedUserIdCustomVerb = '';
 
     before(function(done){
 
@@ -246,6 +247,9 @@ describe('Grasshopper core - users', function(){
             grasshopper.request(adminToken).users.create(newUser).then(
                 function(payload){
                     payload.login.should.equal(newUser.login);
+                    payload.should.have.property('_id');
+                    payload.should.not.have.property('password');
+                    testCreatedUserId = payload._id;
                 },
                 function(err){
                     should.not.exist(err);
@@ -270,6 +274,9 @@ describe('Grasshopper core - users', function(){
             grasshopper.request(adminToken).users.create(newUser).then(
                 function(payload){
                     payload.login.should.equal(newUser.login);
+                    payload.should.have.property('_id');
+                    payload.should.not.have.property('password');
+                    testCreatedUserIdCustomVerb = payload._id;
                 },
                 function(err){
                     should.not.exist(err);
@@ -277,9 +284,9 @@ describe('Grasshopper core - users', function(){
             ).done(done);
         });
 
-        it('should return error if a user id is sent with the request.', function(done){
+        it('should return error if a an existing user id is sent with the request.', function(done){
             var newUser = {
-                _id: new ObjectID().toHexString(),
+                _id: testCreatedUserId,
                 login: 'newtestuser11111',
                 role: 'reader',
                 enabled: true,
@@ -291,10 +298,11 @@ describe('Grasshopper core - users', function(){
 
             grasshopper.request(adminToken).users.create(newUser).then(
                 function(payload){
-                    payload.login.should.equal(newUser.login);
+                    should.not.exist(payload);
                 },
                 function(err){
-                    should.not.exist(err);
+                    err.errorCode.should.equal(400);
+                    err.message.should.equal('Duplicate key already exists.');
                 }
             ).done(done);
         });
@@ -314,6 +322,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
+                    err.errorCode.should.equal(400);
                     err.message.should.equal('Duplicate key already exists.');
                 }
             ).done(done);
@@ -333,7 +342,8 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(500);
+                    err.errorCode.should.equal(400);
+                    err.message.should.equal('"login" is a required field.');
                 }
             ).done(done);
         });
@@ -353,7 +363,8 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(500);
+                    err.errorCode.should.equal(400);
+                    err.message.should.equal('"login" is a required field.');
                 }
             ).done(done);
         });
@@ -373,7 +384,8 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(500);
+                    err.errorCode.should.equal(400);
+                    err.message.should.equal('"login" is a required field.');
                 }
             ).done(done);
         });
@@ -388,8 +400,15 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: 'TestPassword'
             };
-            true.should.equal(false);
-            done();
+            grasshopper.request(adminToken).users.create(newUser).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(400);
+                    err.message.should.equal('Your login is too short.');
+                }
+            ).done(done);
         });
 
         it('should return error if a password is null.', function(done){
@@ -407,7 +426,8 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(500);
+                    err.errorCode.should.equal(400);
+                    err.message.should.equal('Password must be at least 6 characters.');
                 }
             ).done(done);
         });
@@ -422,8 +442,15 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: 'sho'
             };
-            true.should.equal(false);
-            done();
+            grasshopper.request(adminToken).users.create(newUser).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(400);
+                    err.message.should.equal('Password must be at least 6 characters.');
+                }
+            ).done(done);
         });
 
         it('should return error if a user has a role that is not allowed.', function(done){
@@ -441,8 +468,8 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    console.log(err);
-                    err.errorCode.should.equal(500);
+                    err.errorCode.should.equal(400);
+                    err.message.should.equal('User\'s role is invalid.');
                 }
             ).done(done);
         });
@@ -451,7 +478,7 @@ describe('Grasshopper core - users', function(){
     describe('Update a user', function() {
         it('should return a 403 because user does not have permissions to access users', function(done) {
             var newUser = {
-                //_id: testCreatedUserId,
+                _id: testCreatedUserId,
                 login: 'newtestuser1',
                 role: 'reader',
                 enabled: true,
@@ -460,8 +487,15 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: 'TestPassword'
             };
-            true.should.equal(false);
-            done();
+            grasshopper.request(readerToken).users.update(newUser).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(400);
+                    err.message.should.equal('User does not have enough privileges.');
+                }
+            ).done(done);
         });
         it('should update a user', function(done) {
             var newUser = {
