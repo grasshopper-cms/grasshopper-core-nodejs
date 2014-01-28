@@ -3,7 +3,8 @@ var chaiAsPromised = require('chai-as-promised');
 
 chai.use(chaiAsPromised);
 
-var should = require('chai').should();
+var should = require('chai').should(),
+    ObjectID = require('mongodb').ObjectID;
 
 describe('Grasshopper core - users', function(){
     'use strict';
@@ -242,8 +243,14 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User'
             };
 
-            true.should.equal(false);
-            done();
+            grasshopper.request(adminToken).users.create(newUser).then(
+                function(payload){
+                    payload.login.should.equal(newUser.login);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
         it('should create a user without an error with additional custom params.', function(done){
@@ -259,14 +266,21 @@ describe('Grasshopper core - users', function(){
                     linkedid: 'tjmchattie'
                 }
             };
-            true.should.equal(false);
-            done();
+
+            grasshopper.request(adminToken).users.create(newUser).then(
+                function(payload){
+                    payload.login.should.equal(newUser.login);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
         it('should return error if a user id is sent with the request.', function(done){
             var newUser = {
-                _id: 'ISHOULDNOTBEHERE',
-                login: 'newtestuser1',
+                _id: new ObjectID().toHexString(),
+                login: 'newtestuser11111',
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser2@thinksolid.com',
@@ -274,8 +288,15 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: 'TestPassword'
             };
-            true.should.equal(false);
-            done();
+
+            grasshopper.request(adminToken).users.create(newUser).then(
+                function(payload){
+                    payload.login.should.equal(newUser.login);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
         it('should return error if a duplicate is created.', function(done){
@@ -288,8 +309,14 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: 'TestPassword'
             };
-            true.should.equal(false);
-            done();
+            grasshopper.request(adminToken).users.create(newUser).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.message.should.equal('Duplicate key already exists.');
+                }
+            ).done(done);
         });
 
         it('should validate and return error if a mandatory property is missing.',function(done){
@@ -301,8 +328,14 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: 'TestPassword'
             };
-            true.should.equal(false);
-            done();
+            grasshopper.request(adminToken).users.create(newUser).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(500);
+                }
+            ).done(done);
         });
 
         it('should return error if an empty login is provided.', function(done){
@@ -315,8 +348,14 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: 'TestPassword'
             };
-            true.should.equal(false);
-            done();
+            grasshopper.request(adminToken).users.create(newUser).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(500);
+                }
+            ).done(done);
         });
 
         it('should return error if an null login is provided.', function(done){
@@ -329,8 +368,14 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: 'TestPassword'
             };
-            true.should.equal(false);
-            done();
+            grasshopper.request(adminToken).users.create(newUser).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(500);
+                }
+            ).done(done);
         });
 
         it('should return error if a login is too short.', function(done){
@@ -357,8 +402,14 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: null
             };
-            true.should.equal(false);
-            done();
+            grasshopper.request(adminToken).users.create(newUser).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(500);
+                }
+            ).done(done);
         });
 
         it('should return error if a password is too short.', function(done){
@@ -385,8 +436,15 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: 'TestPassword'
             };
-            true.should.equal(false);
-            done();
+            grasshopper.request(adminToken).users.create(newUser).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    console.log(err);
+                    err.errorCode.should.equal(500);
+                }
+            ).done(done);
         });
     });
 
