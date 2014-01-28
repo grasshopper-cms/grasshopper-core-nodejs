@@ -23,4 +23,9 @@ describe('Grasshopper utilts - error', function(){
         e.message.should.equal('This is my custom error message.');
     });
 
+    it('should check the code param to be an integer, if it is not then we should assume it is a message.',function(){
+        var e = err('Throw my custom message');
+        e.errorCode.should.equal(500);
+        e.message.should.equal('Throw my custom message');
+    });
 });
