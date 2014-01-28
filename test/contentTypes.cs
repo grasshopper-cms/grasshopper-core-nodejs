@@ -1,4 +1,4 @@
-require('chai').should();
+/*require('chai').should();
 var request = require('supertest');
 
 describe('api.contentTypes', function(){
@@ -50,7 +50,6 @@ describe('api.contentTypes', function(){
     });
 
     describe("POST: " + url + '/contentTypes', function() {
-        /*@@ VERIFIED */
         it('should create a content type without an error using correct verb.', function(done){
             var newContentType = {
                 label: "newtestsuitecontent",
@@ -96,7 +95,6 @@ describe('api.contentTypes', function(){
                         done();
         });
 
-        /*@@ VERIFIED */
         it('should return an error because we are missing a "label" field.', function(done){
             var newContentType = {
                 fields: {
@@ -115,7 +113,6 @@ describe('api.contentTypes', function(){
                         done();
         });
 
-        /*@@ VERIFIED */
         it('should return error if a content type id is sent with the request (maybe verb error).', function(done){
             var newContentType = {
                 _id: "ISHOULDNOTBEHERE",
@@ -137,7 +134,7 @@ describe('api.contentTypes', function(){
                         done();
         });
 
-        /*@@ VERIFIED */
+
         it('should return error when a malformed field id is passed in (id has a space).', function(done){
             var newContentType = {
                 label: "newtestsuitecontent",
@@ -158,7 +155,7 @@ describe('api.contentTypes', function(){
         });
 
 
-        /*@@ VERIFIED */
+
         it('should return error when a malformed field is passed in (missing label).', function(done){
             var newContentType = {
                 label: "newtestsuitecontent",
@@ -177,7 +174,7 @@ describe('api.contentTypes', function(){
                        done();
         });
 
-        /*@@ VERIFIED */
+
         it('should return error when a malformed field is passed in (missing type).', function(done){
             var newContentType = {
                 label: "newtestsuitecontent",
@@ -196,7 +193,7 @@ describe('api.contentTypes', function(){
                         done();
         });
 
-        /*@@ VERIFIED */
+
         it('should return error when a malformed field is passed in (invalid type).', function(done){
             var newContentType = {
                 label: "newtestsuitecontent",
@@ -216,7 +213,7 @@ describe('api.contentTypes', function(){
                         done();
         });
 
-        /*@@ VERIFIED */
+
         it('should return error when a malformed meta id is passed in (id has a space).', function(done){
             var newContentType = {
                 label: "newtestsuitecontent",
@@ -244,7 +241,7 @@ describe('api.contentTypes', function(){
         });
 
 
-        /*@@ VERIFIED */
+
         it('should return error when a malformed meta is passed in (missing label).', function(done){
             var newContentType = {
                 label: "newtestsuitecontent",
@@ -270,7 +267,7 @@ describe('api.contentTypes', function(){
                         done();
         });
 
-        /*@@ VERIFIED */
+
         it('should return error when a malformed meta is passed in (missing type).', function(done){
             var newContentType = {
                 label: "newtestsuitecontent",
@@ -294,7 +291,7 @@ describe('api.contentTypes', function(){
                         done();
         });
 
-        /*@@ VERIFIED */
+
         it('should return error when a malformed meta is passed in (invalid type).', function(done){
             var newContentType = {
                 label: "newtestsuitecontent",
@@ -442,3 +439,4 @@ true.should.equal(false);
         });
     });
 });
+*/

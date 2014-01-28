@@ -1,5 +1,5 @@
 var should = require('chai').should(),
-    request = require('supertest'),
+    //request = require('supertest'),
     async = require('async'),
     path = require('path');
 
