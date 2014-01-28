@@ -47,7 +47,7 @@ describe('Grasshopper core - coordinator', function(){
     });
 
 
-    it('coordinator should be able to register multiple methods with a specified set of firmware.', function(done){
+    it('coordinator should be able to register multiple methods with a specified set of middleware.', function(done){
         true.should.equal(false);
         done();
     });
