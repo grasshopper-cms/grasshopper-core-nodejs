@@ -9,7 +9,10 @@ describe('Grasshopper core - users', function(){
     'use strict';
 
     var grasshopper = require('../lib/grasshopper'),
+        testUserId  = '5245ce1d56c02c066b000001',
         adminToken = '',
+        admin2UserId = '5246e73d56c02c0744000004',
+        testReaderUserId = '5246e80c56c02c0744000002',
         readerToken = '',
         testCreatedUserId = ''  ,
         testCreatedUserIdCustomVerb = '';
@@ -33,7 +36,7 @@ describe('Grasshopper core - users', function(){
         });
 
 
-        grasshopper.auth('admin', 'TestPassword')
+        grasshopper.auth('apitestuseradmin', 'TestPassword')
             .then(function(token){
                 adminToken = token;
                 grasshopper.auth('apitestuserreader', 'TestPassword')
@@ -476,6 +479,17 @@ describe('Grasshopper core - users', function(){
     });
 
     describe('Update a user', function() {
+        it('should return a 401 because user is not authenticated.', function(done){
+            grasshopper.request().users.update({}).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(401);
+                }
+            ).done(done);
+        });
+
         it('should return a 403 because user does not have permissions to access users', function(done) {
             var newUser = {
                 _id: testCreatedUserId,
@@ -492,14 +506,15 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(400);
+                    err.errorCode.should.equal(403);
                     err.message.should.equal('User does not have enough privileges.');
                 }
             ).done(done);
         });
+
         it('should update a user', function(done) {
             var newUser = {
-                //_id: testCreatedUserId,
+                _id: testCreatedUserId,
                 login: 'newtestuser1_updated',
                 role: 'reader',
                 enabled: true,
@@ -507,15 +522,35 @@ describe('Grasshopper core - users', function(){
                 firstname: 'Test',
                 lastname: 'User'
             };
-            true.should.equal(false);
-            done();
+            grasshopper.request(adminToken).users.update(newUser).then(
+                function(payload){
+                    payload.login.should.equal(newUser.login);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
         it('one admin should be able to change the role of another admin.', function(done) {
-            true.should.equal(false);
-            done();
-        });
 
+            grasshopper.request(adminToken).users.getById(admin2UserId).then(
+                function(payload){
+                    payload.role = 'reader';
+
+                    grasshopper.request(adminToken).users.update(payload)
+                        .then(
+                            function(payload){
+                                payload.role.should.equal('reader');
+                            },
+                            function(err){
+                                should.not.exist(err);
+                            }
+                    ).done(done);
+                }
+            ).done();
+
+        });
 
         it('should return error is user is updated without a set "ID"', function(done){
             var newUser = {
@@ -527,12 +562,22 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: 'TestPassword'
             };
-            true.should.equal(false);
-            done();
+
+            grasshopper.request(adminToken).users.update(newUser).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    console.log(err);
+                    //err.errorCode.should.equal(404);
+                    //err.message.should.equal('Resource could not be found.');
+                }
+            ).done(done);
         });
+
         it('should return error if login is too short.', function(done){
             var newUser = {
-                //_id: testCreatedUserId,
+                _id: testCreatedUserId,
                 login: 'sho',
                 role: 'reader',
                 enabled: true,
@@ -541,12 +586,20 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: 'TestPassword'
             };
-            true.should.equal(false);
-            done();
+            grasshopper.request(adminToken).users.update(newUser).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(400);
+                    err.message.should.equal('Your login is too short.');
+                }
+            ).done(done);
         });
+
         it('should return error if user role is invalid.', function(done){
             var newUser = {
-                //_id: testCreatedUserId,
+                _id: testCreatedUserId,
                 login: 'newtestuesr1',
                 role: 'reader_bad',
                 enabled: true,
@@ -555,12 +608,20 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: 'TestPassword'
             };
-            true.should.equal(false);
-            done();
+            grasshopper.request(adminToken).users.update(newUser).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.message.should.equal('User\'s role is invalid.');
+                    err.errorCode.should.equal(400);
+                }
+            ).done(done);
         });
+
         it('should return error if user login is null.', function(done){
             var newUser = {
-                // _id: testCreatedUserId,
+                _id: testCreatedUserId,
                 login: null,
                 role: 'reader',
                 enabled: true,
@@ -569,12 +630,20 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: 'TestPassword'
             };
-            true.should.equal(false);
-            done();
+            grasshopper.request(adminToken).users.update(newUser).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(400);
+                    err.message.should.equal('"login" is a required field.');
+                }
+            ).done(done);
         });
+
         it('should return error if user login is empty.', function(done){
             var newUser = {
-                // _id: testCreatedUserId,
+                _id: testCreatedUserId,
                 login: '',
                 role: 'reader',
                 enabled: true,
@@ -583,14 +652,20 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: 'TestPassword'
             };
-            true.should.equal(false);
-            done();
+            grasshopper.request(adminToken).users.update(newUser).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(400);
+                    err.message.should.equal('"login" is a required field.');
+                }
+            ).done(done);
         });
-
 
         it('should return error if the user login changed and is now a duplicate.', function(done){
             var newUser = {
-                // _id: testCreatedUserId,
+                _id: testCreatedUserId,
                 login: 'apitestuserreader',
                 role: 'reader',
                 enabled: true,
@@ -599,13 +674,20 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: 'TestPassword'
             };
-            true.should.equal(false);
-            done();
+            grasshopper.request(adminToken).users.update(newUser).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(400);
+                    err.message.should.equal('Duplicate key already exists.');
+                }
+            ).done(done);
         });
 
         it('should a user to update themselves even if they do not have global permissions.', function(done){
             var newUser = {
-                //_id: testReaderUserId,
+                _id: testReaderUserId,
                 login: 'apitestuserreader',
                 role: 'reader',
                 enabled: true,
@@ -613,13 +695,19 @@ describe('Grasshopper core - users', function(){
                 name: 'Updated test reader name with :id',
                 password: 'TestPassword'
             };
-            true.should.equal(false);
-            done();
+            grasshopper.request(readerToken).users.update(newUser).then(
+                function(payload){
+                    payload.login.should.equal(newUser.login);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
         it('should error if updating a user with an different ID than your own.', function(done){
             var newUser = {
-                //_id: testUserId,
+                _id: testUserId,
                 login: 'apitestuserreader',
                 role: 'reader',
                 enabled: true,
@@ -628,51 +716,17 @@ describe('Grasshopper core - users', function(){
                 lastname: 'Last',
                 password: 'TestPassword'
             };
-            true.should.equal(false);
-            done();
+            grasshopper.request(readerToken).users.update(newUser).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(403);
+                    err.message.should.equal('User does not have enough privileges.');
+                }
+            ).done(done);
         });
 
-        it('should allow user to update themselves even if they do not have global permissions.', function(done){
-            var newUser = {
-                //_id: testReaderUserId,
-                login: 'apitestuserreader',
-                role: 'reader',
-                enabled: true,
-                email: 'newtestuser1@thinksolid.com',
-                name: 'Updated test reader name with :id',
-                password: 'TestPassword'
-            };
-            true.should.equal(false);
-            done();
-        });
-
-        it('should error if updating a user with an different ID than your own.', function(done){
-            var newUser = {
-                //_id: testUserId,
-                login: 'apitestuserreader',
-                role: 'reader',
-                enabled: true,
-                email: 'newtestuser1@thinksolid.com',
-                firstname: 'Updated test reader name with :id',
-                lastname: 'something',
-                password: 'TestPassword'
-            };
-            true.should.equal(false);
-            done();
-        });
-        it('should error if updating a user with an different ID than your own. [variation 2]', function(done){
-            var newUser = {
-                //_id: testReaderUserId,
-                login: 'apitestuserreader',
-                role: 'reader',
-                enabled: true,
-                email: 'newtestuser1@thinksolid.com',
-                name: 'Updated test reader name with :id',
-                password: 'TestPassword'
-            };
-            true.should.equal(false);
-            done();
-        });
     });
 
     describe('Query Users', function() {
@@ -690,13 +744,36 @@ describe('Grasshopper core - users', function(){
             };
 
         it('should return 401 because trying to access unauthenticated', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request().users.query(query).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(401);
+                }
+            ).done(done);
+        });
+
+        it('should return a 403 because a user does not have user access.', function(done){
+            grasshopper.request(readerToken).users.query(query).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(403);
+                }
+            ).done(done);
         });
 
         it('should return user search results', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(adminToken).users.query(query).then(
+                function(payload){
+                    console.log(payload);
+                },
+                function(err){
+                    console.log(err);
+                }
+            ).done(done);
         });
 
         it('should not return user search results', function(done) {
@@ -708,51 +785,106 @@ describe('Grasshopper core - users', function(){
 
     describe('Delete Users', function() {
         it('should return a 403 because user does not have permissions to access users', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(readerToken).users.deleteById(testUserId).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(403);
+                }
+            ).done(done);
         });
-        it('should delete a user using the correct verb', function(done) {
-            true.should.equal(false);
-            done();
+
+        it('should delete a user.', function(done) {
+            grasshopper.request(adminToken).users.deleteById(testCreatedUserId).then(
+                function(payload){
+                    payload.should.equal(true);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
         it('should return 200 when we try to delete a user that doesn\'t exist', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(adminToken).users.deleteById(testCreatedUserId).then(
+                function(payload){
+                    payload.should.equal(true);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
     });
 
     describe('Test creating a user, logging in with the new user then revoking the token and confirming that they are locked out', function() {
         it('auth token of user should be revoked if user is disabled.', function(done) {
+            var newUser = {
+                    login: 'futurerevokee',
+                    role: 'admin',
+                    enabled: true,
+                    email: 'newtestuser1@thinksolid.com',
+                    password: 'TestPassword',
+                    firstname: 'Test',
+                    lastname: 'User'
+                },
+                mytoken = '';
+
+            function startTest(payload){
+                newUser._id = payload._id;
+                grasshopper.auth('futurerevokee', 'TestPassword').then(authTempUser).done();
+            }
+
+            function authTempUser(payload){
+                mytoken = payload;
+                grasshopper.request(mytoken).users.current().then(disableUser).done();
+            }
+
+            // Getting here is proof that the user is logged in.
+            function disableUser(){
+                newUser.enabled = false;
+                grasshopper.request(adminToken).users.update(newUser).then(loadInactiveUser).done();
+            }
+
+            function loadInactiveUser(payload){
+                grasshopper.request(mytoken).users.current().then(
+                    function(payload){
+                        should.not.exist(payload);
+                    },function(err){
+                        err.errorCode.should.equal(401);
+                    }).done(done);
+            }
+
+            //Create User
+            grasshopper.request(adminToken).users.create(newUser).then(startTest).done();
+        });
+    });
+
+    describe('Edit a users permissions', function() {
+        it('add permission to edit a node with an empty permissions collection.', function(done) {
             true.should.equal(false);
             done();
         });
 
-        describe('Edit a users permissions', function() {
-            it('add permission to edit a node with an empty permissions collection.', function(done) {
-                true.should.equal(false);
-                done();
-            });
+        it('update a permission that a user already has set to another value.', function(done) {
+            true.should.equal(false);
+            done();
+        });
 
-            it('update a permission that a user already has set to another value.', function(done) {
-                true.should.equal(false);
-                done();
-            });
+        it('add a permission that already has a permissions collection.', function(done) {
+            true.should.equal(false);
+            done();
+        });
 
-            it('add a permission that already has a permissions collection.', function(done) {
-                true.should.equal(false);
-                done();
-            });
+        it('try to add permissions unathenticated should result in a 401.', function(done) {
+            true.should.equal(false);
+            done();
+        });
 
-            it('try to add permissions unathenticated should result in a 401.', function(done) {
-                true.should.equal(false);
-                done();
-            });
-
-            it('try to add permissions without the correct permissions. Should result in a 403.', function(done) {
-                true.should.equal(false);
-                done();
-            });
+        it('try to add permissions without the correct permissions. Should result in a 403.', function(done) {
+            true.should.equal(false);
+            done();
         });
     });
 });
