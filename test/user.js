@@ -43,7 +43,10 @@ describe('Grasshopper core - users', function(){
                     .then(function(token){
                         readerToken = token;
                         done();
-                    });
+                    },
+                function(err){
+                    console.log(err);
+                });
             });
     });
 
