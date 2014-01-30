@@ -917,74 +917,52 @@ describe('Grasshopper core - users', function(){
         it('update a permission that a user already has set to another value.', function(done) {
             grasshopper.request(adminToken).users.savePermissions(testReaderUserId,testNodeForPermissions,'none').then(
                 function(payload){
-                    console.log('test',payload);
-                    //payload.should.equal('Success');
+                    payload.should.equal('Success');
                 },
                 function(err){
-                    console.log(err);
-                    //should.not.exist(err);
+                    should.not.exist(err);
 
                 }
             ).done(done);
         });
 
-        /*it('add a permission that already has a permissions collection.', function(done) {
-            true.should.equal(false);
-            done();
+        it('add a permission that already has a permissions collection.', function(done) {
+            grasshopper.request(adminToken).users.savePermissions(testReaderUserId,testSubNodeForPermissions,'editor')
+                .then(
+                    function(payload){
+                        payload.should.equal('Success');
+                    },
+                    function(err){
+                        should.not.exist(err);
 
-            request(url)
-                .post('/users/' + testReaderUserId + "/permissions")
-                .set('Accept', 'application/json')
-                .set('Accept-Language', 'en_US')
-                .set('authorization', 'Token ' + adminToken)
-                .send({
-                    nodeid: testSubNodeForPermissions,
-                    role: "editor"
-                })
-                .end(function(err, res) {
-                    if (err) { throw err; }
-                    res.status.should.equal(200);
-                    done();
-                });
+                    }
+                ).done(done);
         });
 
         it('try to add permissions unathenticated should result in a 401.', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request().users.savePermissions(testReaderUserId,testSubNodeForPermissions,'editor')
+                .then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(401);
 
-            request(url)
-                .post('/users/' + testReaderUserId + "/permissions")
-                .set('Accept', 'application/json')
-                .set('Accept-Language', 'en_US')
-                .send({
-                    nodeid: testSubNodeForPermissions,
-                    role: "editor"
-                })
-                .end(function(err, res) {
-                    if (err) { throw err; }
-                    res.status.should.equal(401);
-                    done();
-                });
+                }
+            ).done(done);
         });
 
         it('try to add permissions without the correct permissions. Should result in a 403.', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(readerToken).users.savePermissions(testReaderUserId,testSubNodeForPermissions,'editor')
+                .then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(403);
 
-            request(url)
-                .post('/users/' + testReaderUserId + "/permissions")
-                .set('Accept', 'application/json')
-                .set('Accept-Language', 'en_US')
-                .set('authorization', 'Token ' + readerToken)
-                .send({
-                    nodeid: testSubNodeForPermissions,
-                    role: "editor"
-                })
-                .end(function(err, res) {
-                    if (err) { throw err; }
-                    res.status.should.equal(403);
-                    done();
-                });
-        });*/
+                }
+            ).done(done);
+        });
     });
 });
