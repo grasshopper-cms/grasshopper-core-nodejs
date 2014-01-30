@@ -6,7 +6,8 @@ describe('Grasshopper core - testing tokens', function(){
     var grasshopper = require('../lib/grasshopper'),
         adminToken = '',
         readerToken = '',
-        readerToken2 = '';
+        readerToken2 = '',
+        readerToken3 = '';
 
     before(function(done){
 
@@ -33,7 +34,10 @@ describe('Grasshopper core - testing tokens', function(){
                         readerToken = token;
                         grasshopper.auth('apitestuserreader', 'TestPassword').then(function(token){
                             readerToken2 = token;
-                            done();
+                            grasshopper.auth('apitestuserreader', 'TestPassword').then(function(token){
+                                readerToken3 = token;
+                                done();
+                            });
                         });
                     });
             });
@@ -118,13 +122,25 @@ describe('Grasshopper core - testing tokens', function(){
     describe('tokens.getNew', function(){
 
         it('a user should be able to create a new version of their token that they can use elsewhere', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(readerToken3).tokens.getNew().then(
+                function(payload){
+                    payload.should.be.string;
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
         it('if a user is currently not logged in then they should receive a 401 error.', function(done){
-            true.should.equal(false);
-            done();
+            grasshopper.request().tokens.getNew().then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(401);
+                }
+            ).done(done);
         });
     });
 
