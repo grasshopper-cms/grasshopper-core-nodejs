@@ -1,11 +1,12 @@
-require('chai').should();
+var should = require('chai').should();
 
 describe('Grasshopper core - testing tokens', function(){
     'use strict';
 
     var grasshopper = require('../lib/grasshopper'),
         adminToken = '',
-        readerToken = '';
+        readerToken = '',
+        readerToken2 = '';
 
     before(function(done){
 
@@ -30,7 +31,10 @@ describe('Grasshopper core - testing tokens', function(){
                 adminToken = token;
                 grasshopper.auth('apitestuserreader', 'TestPassword').then(function(token){
                         readerToken = token;
-                        done();
+                        grasshopper.auth('apitestuserreader', 'TestPassword').then(function(token){
+                            readerToken2 = token;
+                            done();
+                        });
                     });
             });
     });
@@ -60,31 +64,54 @@ describe('Grasshopper core - testing tokens', function(){
         });
 
         it('an administrator (only) should be able to delete any token that is not their own.', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(adminToken).tokens.deleteById(readerToken).then(
+                function(payload){
+                    payload.should.equal(true);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
         it('a user should not be able to delete a token that is not their own.', function(done) {
-            grasshopper.request(readerToken).tokens.deleteById(adminToken).then(
-                function(){
-                    throw new Error('Payload should be null');
+            grasshopper.request(readerToken2).tokens.deleteById(adminToken).then(
+                function(payload){
+                    should.not.exist(payload);
                 },
                 function(err){
                     err.errorCode.should.equal(403);
                 }
             ).done(done);
-
-
         });
 
         it('a user should be able to authenticate then log themselves out.', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(readerToken2).tokens.deleteById(readerToken2).then(
+                function(payload){
+                    payload.should.equal(true);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
         it('a user should be able to authenticate then log themselves out using a convenience "logout" method.', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.auth('apitestuserreader', 'TestPassword').then(
+                function(token){
+                    grasshopper.request(token).tokens.logout().then(
+                        function(payload){
+                            payload.should.equal(true);
+                        },
+                        function(err){
+                            should.not.exist(err);
+                        }
+                    ).done(done);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done();
         });
     });
 
