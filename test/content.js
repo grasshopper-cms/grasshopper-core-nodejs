@@ -188,7 +188,6 @@ describe('Grasshopper core - content', function(){
             ).done(done);
         });
 
-
         it('should return 200 because I have the correct permissions.', function(done) {
             var obj = {};
             _.extend(obj, sampleContentObject);
@@ -204,8 +203,6 @@ describe('Grasshopper core - content', function(){
                 }
             ).done(done);
         });
-
-
 
         it('should return 403 because I am trying to update content in a node that is restricted to me.', function(done) {
             var obj = {};
@@ -225,7 +222,7 @@ describe('Grasshopper core - content', function(){
             ).done(done);
         });
     });
-    /*
+
     describe('query', function() {
         var query = {
             filters: [{key: 'slug', cmp: '=', value: 'sample_content_title'}],
@@ -240,27 +237,33 @@ describe('Grasshopper core - content', function(){
         };
 
         it('should not a 401 because trying to access unauthenticated', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request().content.query(query).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(401);
+                }
+            ).done(done);
         });
 
-
+        /*
         it('should results for public content (unauthenticated)', function(done) {
             true.should.equal(false);
             done();
-        });
+        });*/
 
         it('should return empty results if it finds nothing', function(done) {
             true.should.equal(false);
             done();
         });
-
+/*
         it('should return complete results when a user has correct permissions', function(done){
             true.should.equal(false);
             done();
         });
-
-    });*/
+     */
+    });
 
     describe('deleteById', function() {
         it('should return 401 because trying to access unauthenticated', function(done) {
