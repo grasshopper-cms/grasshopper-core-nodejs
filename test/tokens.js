@@ -7,7 +7,8 @@ describe('Grasshopper core - testing tokens', function(){
         adminToken = '',
         readerToken = '',
         readerToken2 = '',
-        readerToken3 = '';
+        readerToken3 = '',
+        userId = '5245ce1d56c02c066b000001';
 
     before(function(done){
 
@@ -148,13 +149,25 @@ describe('Grasshopper core - testing tokens', function(){
     describe('tokens.impersonate', function(){
 
         it('as an adminsitrator I should be able to impersonate another user.', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(adminToken).tokens.impersonate(userId).then(
+                function(payload){
+                    payload.length.should.be.greaterThan(0);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
         it('as a user that in not an administrator I should not be able to impersonate anyone.', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(readerToken3).tokens.impersonate(userId).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(403);
+                }
+            ).done(done);
         });
 
     });
