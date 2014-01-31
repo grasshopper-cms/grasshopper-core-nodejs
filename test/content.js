@@ -260,30 +260,54 @@ describe('Grasshopper core - content', function(){
             done();
         });
 
-    });
+    });*/
 
     describe('deleteById', function() {
         it('should return 401 because trying to access unauthenticated', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request().content.deleteById(testContentId).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(401);
+                }
+            ).done(done);
         });
 
         it('should return 403 because I am am only a reader of content.', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(tokens.globalReaderToken).content.deleteById(testContentId).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(403);
+                }
+            ).done(done);
         });
 
         it('should return 403 because I am trying to delete content from a node that is restricted to me.', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(tokens.restrictedEditorToken).content.deleteById(restrictedContentId).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(403);
+                }
+            ).done(done);
         });
 
         it('should successfully delete content because I have the correct permissions.', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(tokens.globalEditorToken).content.deleteById(restrictedContentId).then(
+                function(payload){
+                    payload.should.equal('Success');
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
     });
-*/
+
     function createGetToken(username, password, storage) {
         return {
             closure : function getToken(cb){
