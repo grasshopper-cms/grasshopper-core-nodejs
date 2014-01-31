@@ -8,7 +8,8 @@ module.exports = function(grunt) {
             test: {
                 command: 'mocha <%= test %> --reporter spec',
                 options: {
-                    stdout: true
+                    stdout: true,
+                    stderr: true
                 }
             }
         },
