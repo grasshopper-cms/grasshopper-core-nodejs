@@ -47,13 +47,23 @@ describe('Grasshopper core - content', function(){
 
 
     describe('getById', function() {
-        it('should return content from a non-protected node unauthenticated', function(done) {
-            grasshopper.request(tokens.globalAdminToken).content.getById(testContentId).then(
+        it('should return 401 because trying to access unauthenticated', function(done) {
+            grasshopper.request().content.getById(testContentId).then(
                 function(payload){
-                    console.log(payload);
+                    should.not.exist(payload);
                 },
                 function(err){
-                    console.log(err);
+                    err.errorCode.should.equal(401);
+                }).done(done);
+        });
+
+        it('should return content from a non-protected node unauthenticated', function(done) {
+            grasshopper.request(tokens.globalReaderToken).content.getById(testContentId).then(
+                function(payload){
+                    payload._id.toString().should.equal(testContentId);
+                },
+                function(err){
+                    err.should.not.exist();
                 }).done(done);
         });
         /*
@@ -65,13 +75,19 @@ describe('Grasshopper core - content', function(){
         it('should return content because getting content that exists with correct permissions.', function(done) {
             true.should.equal(false);
             done();
-        });
+        });*/
 
 
         it('should return 403 because getting content from a node that is restricted to me.', function(done) {
-            true.should.equal(false);
-            done();
-        });*/
+            grasshopper.request(tokens.restrictedEditorToken).content.getById(restrictedContentId).then(
+                function(payload){
+                    console.log(payload);
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(403);
+                }).done(done);
+        });
     });
 /*
     describe('create', function() {
