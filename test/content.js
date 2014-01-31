@@ -61,6 +61,7 @@ describe('Grasshopper core - content', function(){
             grasshopper.request(tokens.globalReaderToken).content.getById(testContentId).then(
                 function(payload){
                     payload._id.toString().should.equal(testContentId);
+                    sampleContentObject = payload;
                 },
                 function(err){
                     err.should.not.exist();
@@ -89,15 +90,21 @@ describe('Grasshopper core - content', function(){
                 }).done(done);
         });
     });
-/*
+
     describe('create', function() {
         it('should return 401 because trying to access unauthenticated', function(done) {
             var obj = {
                 label:'Generated title', slug: 'generated_title', type: '524362aa56c02c0703000001', nonce:'1234fdsdfsa565', status: 'Live', node : {_id: '526d5179966a883540000006', displayOrder: 1}, fields: {testfield: 'test value'}, author: {_id: '5246e73d56c02c0744000001', name: 'Test User'}
             };
 
-            true.should.equal(false);
-            done();
+            grasshopper.request().content.create(obj).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(401);
+                }
+            ).done(done);
         });
 
         it('should return 403 because I am am only a reader of content.', function(done) {
@@ -105,8 +112,14 @@ describe('Grasshopper core - content', function(){
                 label:'Generated title', slug: 'generated_title', type: '524362aa56c02c0703000001', nonce:'1234fdsdfsa565', status: 'Live', node : {_id: '526d5179966a883540000006', displayOrder: 1}, fields: {testfield: 'test value'}, author: {_id: '5246e73d56c02c0744000001', name: 'Test User'}
             };
 
-            true.should.equal(false);
-            done();
+            grasshopper.request(tokens.globalReaderToken).content.create(obj).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(403);
+                }
+            ).done(done);
         });
 
         it('should successfully create content because I have the correct permissions.', function(done) {
@@ -115,18 +128,29 @@ describe('Grasshopper core - content', function(){
             };
 
 
-            true.should.equal(false);
-            done();
+            grasshopper.request(tokens.globalEditorToken).content.create(obj).then(
+                function(payload){
+                    payload.label.should.equal(obj.label);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
-
 
         it('should return 403 because I am trying to create content in a node that is restricted to me.', function(done) {
             var obj = {
                 label:'Generated title', slug: 'generated_title', type: '524362aa56c02c0703000001', nonce:'1234fdsdfsa565', status: 'Live', node : {_id: '526d5179966a883540000006', displayOrder: 1}, fields: {testfield: 'test value'}, author: {_id: '5246e73d56c02c0744000001', name: 'Test User'}
             };
 
-            true.should.equal(false);
-            done();
+            grasshopper.request(tokens.restrictedEditorToken).content.create(obj).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(403);
+                }
+            ).done(done);
         });
     });
 
@@ -137,8 +161,14 @@ describe('Grasshopper core - content', function(){
 
             obj.fields.newColumn = 'newValue';
 
-            true.should.equal(false);
-            done();
+            grasshopper.request().content.update(obj).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(401);
+                }
+            ).done(done);
         });
 
         it('should return 403 because I am am only a reader of content.', function(done) {
@@ -147,9 +177,17 @@ describe('Grasshopper core - content', function(){
             _.extend(obj, sampleContentObject);
 
             obj.fields.newColumn = 'newValue';
-            true.should.equal(false);
-            done();
+
+            grasshopper.request(tokens.globalReaderToken).content.update(obj).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(403);
+                }
+            ).done(done);
         });
+
 
         it('should return 200 because I have the correct permissions.', function(done) {
             var obj = {};
@@ -157,22 +195,37 @@ describe('Grasshopper core - content', function(){
 
             obj.fields.newColumn = 'newValue';
 
-            true.should.equal(false);
-            done();
+            grasshopper.request(tokens.globalEditorToken).content.update(obj).then(
+                function(payload){
+                    payload.fields.newColumn.should.equal('newValue');
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
+
 
 
         it('should return 403 because I am trying to update content in a node that is restricted to me.', function(done) {
             var obj = {};
             _.extend(obj, sampleContentObject);
 
+            obj._id = restrictedContentId;
             obj.fields.newColumn = 'newValue';
+            obj.slug = '3243243242141324312431242112';
 
-            true.should.equal(false);
-            done();
+            grasshopper.request(tokens.restrictedEditorToken).content.update(obj).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(403);
+                }
+            ).done(done);
         });
     });
-
+    /*
     describe('query', function() {
         var query = {
             filters: [{key: 'slug', cmp: '=', value: 'sample_content_title'}],
