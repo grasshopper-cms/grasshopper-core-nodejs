@@ -24,7 +24,7 @@ describe('Grasshopper core - testing nodes', function(){
         badTestNodeId = '526d545623c0ff9442000006';
 
     before(function(done){
-        async.parallel(
+        /*async.parallel(
             [
                 function(cb){
                     request(url)
@@ -89,7 +89,7 @@ describe('Grasshopper core - testing nodes', function(){
             ],function(){
                 done();
             }
-        );
+        );*/done();
     });
 
     describe('create', function() {
