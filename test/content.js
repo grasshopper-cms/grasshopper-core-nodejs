@@ -1,41 +1,62 @@
-/*
-var request = require('supertest');
-
-require('chai').should();
+var should = require('chai').should();
 
 describe('Grasshopper core - content', function(){
     'use strict';
 
     var async = require('async'),
         _ = require('underscore'),
+        grasshopper = require('../lib/grasshopper'),
         testContentId  = '5261781556c02c072a000007',
         restrictedContentId = '5254908d56c02c076e000001',
         sampleContentObject = null,
         tokens = {},
         tokenRequests = [
-            ['apitestuseradmin:TestPassword', 'globalAdminToken'],
-            ['apitestuserreader:TestPassword', 'globalReaderToken'],
-            ['apitestusereditor_restricted:TestPassword', 'restrictedEditorToken'],
+            ['apitestuseradmin', 'TestPassword', 'globalAdminToken'],
+            ['apitestuserreader', 'TestPassword', 'globalReaderToken'],
+            ['apitestusereditor_restricted', 'TestPassword', 'restrictedEditorToken'],
 
             // There are no tests for the following:
-            ['apitestusereditor:TestPassword', 'globalEditorToken'],
-            ['apitestuserreader_1:TestPassword', 'nodeEditorToken']
+            ['apitestusereditor', 'TestPassword', 'globalEditorToken'],
+            ['apitestuserreader_1', 'TestPassword', 'nodeEditorToken']
         ],
         parallelTokenRequests = [];
 
     before(function(done){
+        grasshopper.configure(function(){
+            this.config = {
+                'crypto': {
+                    'secret_passphrase' : '223fdsaad-ffc8-4acb-9c9d-1fdaf824af8c'
+                },
+                'db': {
+                    'type': 'mongodb',
+                    'host': 'mongodb://localhost:27017/test',
+                    'database': 'test',
+                    'username': '',
+                    'password': '',
+                    'debug': false
+                }
+            };
+        });
+
         _.each(tokenRequests, function(theRequest) {
-            parallelTokenRequests.push(createGetToken(theRequest[0], theRequest[1]).closure);
+            parallelTokenRequests.push(createGetToken(theRequest[0], theRequest[1], theRequest[2]).closure);
         });
         async.parallel(parallelTokenRequests, done);
+
     });
+
 
     describe('getById', function() {
         it('should return content from a non-protected node unauthenticated', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(tokens.globalAdminToken).content.getById(testContentId).then(
+                function(payload){
+                    console.log(payload);
+                },
+                function(err){
+                    console.log(err);
+                }).done(done);
         });
-
+        /*
         it('should return 401 because trying to access content from a protected node unauthenticated', function(done) {
             true.should.equal(false);
             done();
@@ -50,9 +71,9 @@ describe('Grasshopper core - content', function(){
         it('should return 403 because getting content from a node that is restricted to me.', function(done) {
             true.should.equal(false);
             done();
-        });
+        });*/
     });
-
+/*
     describe('create', function() {
         it('should return 401 because trying to access unauthenticated', function(done) {
             var obj = {
@@ -193,22 +214,15 @@ describe('Grasshopper core - content', function(){
             done();
         });
     });
-
-    function createGetToken(creds, storage) {
+*/
+    function createGetToken(username, password, storage) {
         return {
             closure : function getToken(cb){
-                request(url)
-                    .get('/token')
-                    .set('Accept', 'application/json')
-                    .set('Accept-Language', 'en_US')
-                    .set('authorization', new Buffer(creds).toString('base64'))
-                    .end(function(err, res) {
-                        if (err) { throw err; }
-                        tokens[storage] = res.body.access_token;
-                        cb();
-                    });
+                grasshopper.auth(username, password).then(function(token){
+                    tokens[storage] = token;
+                    cb();
+                }).done();
             }
         };
     }
 });
- */
