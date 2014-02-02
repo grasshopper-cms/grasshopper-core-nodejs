@@ -45,10 +45,4 @@ describe('Grasshopper core - coordinator', function(){
                 should.exist(e);
             }).done(done);
     });
-
-
-    it('coordinator should be able to register multiple methods with a specified set of middleware.', function(done){
-        true.should.equal(false);
-        done();
-    });
 });
