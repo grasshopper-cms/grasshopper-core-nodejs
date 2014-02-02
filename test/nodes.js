@@ -1,5 +1,4 @@
 var should = require('chai').should(),
-    //request = require('supertest'),
     async = require('async'),
     path = require('path');
 
@@ -7,6 +6,7 @@ describe('Grasshopper core - testing nodes', function(){
     'use strict';
 
     var async = require('async'),
+        grasshopper = require('../lib/grasshopper'),
         globalAdminToken  = '',
         globalReaderToken = '',
         globalEditorToken = '',
@@ -24,79 +24,78 @@ describe('Grasshopper core - testing nodes', function(){
         badTestNodeId = '526d545623c0ff9442000006';
 
     before(function(done){
-        /*async.parallel(
+        async.parallel(
             [
                 function(cb){
-                    request(url)
-                        .get('/token')
-                        .set('Accept', 'application/json')
-                        .set('Accept-Language', 'en_US')
-                        .set('authorization', new Buffer('apitestuseradmin:TestPassword').toString('base64'))
-                        .end(function(err, res) {
-                            if (err) { throw err; }
-                            globalAdminToken = res.body.access_token;
+                    grasshopper.configure(function(){
+                        this.config = {
+                            'crypto': {
+                                'secret_passphrase' : '223fdsaad-ffc8-4acb-9c9d-1fdaf824af8c'
+                            },
+                            'db': {
+                                'type': 'mongodb',
+                                'host': 'mongodb://localhost:27017/test',
+                                'database': 'test',
+                                'username': '',
+                                'password': '',
+                                'debug': false
+                            }
+                        };
+                    });
+                    cb();
+                },
+                function(cb){
+                    grasshopper.auth('apitestuseradmin', 'TestPassword').then(function(token){
+                        globalAdminToken = token;
+                        cb();
+                    });
+                },
+                function(cb){
+                    grasshopper.auth('apitestuserreader', 'TestPassword').then(function(token){
+                            globalReaderToken = token;
                             cb();
                         });
                 },
                 function(cb){
-                    request(url)
-                        .get('/token')
-                        .set('Accept', 'application/json')
-                        .set('Accept-Language', 'en_US')
-                        .set('authorization', new Buffer('apitestuserreader:TestPassword').toString('base64'))
-                        .end(function(err, res) {
-                            if (err) { throw err; }
-                            globalReaderToken = res.body.access_token;
-                            cb();
-                        });
+                    grasshopper.auth('apitestusereditor', 'TestPassword').then(function(token){
+                        globalEditorToken = token;
+                        cb();
+                    });
                 },
                 function(cb){
-                    request(url)
-                        .get('/token')
-                        .set('Accept', 'application/json')
-                        .set('Accept-Language', 'en_US')
-                        .set('authorization', new Buffer('apitestusereditor:TestPassword').toString('base64'))
-                        .end(function(err, res) {
-                            if (err) { throw err; }
-                            globalEditorToken = res.body.access_token;
-                            cb();
-                        });
+                    grasshopper.auth('apitestuserreader_1', 'TestPassword').then(function(token){
+                        nodeEditorToken = token;
+                        cb();
+                    });
                 },
                 function(cb){
-                    request(url)
-                        .get('/token')
-                        .set('Accept', 'application/json')
-                        .set('Accept-Language', 'en_US')
-                        .set('authorization', new Buffer('apitestuserreader_1:TestPassword').toString('base64'))
-                        .end(function(err, res) {
-                            if (err) { throw err; }
-                            nodeEditorToken = res.body.access_token;
-                            cb();
-                        });
-                },
-                function(cb){
-                    request(url)
-                        .get('/token')
-                        .set('Accept', 'application/json')
-                        .set('Accept-Language', 'en_US')
-                        .set('authorization', new Buffer('apitestusereditor_restricted:TestPassword').toString('base64'))
-                        .end(function(err, res) {
-                            if (err) { throw err; }
-                            restrictedEditorToken = res.body.access_token;
-                            cb();
-                        });
+                    grasshopper.auth('apitestusereditor_restricted', 'TestPassword').then(function(token){
+                        restrictedEditorToken = token;
+                        cb();
+                    });
                 }
             ],function(){
                 done();
             }
-        );*/done();
+        );
     });
 
     describe('create', function() {
 
         it('should create a node beause I have edit permissions.', function(done){
-            true.should.equal(false);
-            done();
+            var n = {
+                label : 'My Test Node',
+                parent: null
+            };
+
+            grasshopper.request(globalEditorToken).nodes.create(n).then(
+                function(payload){
+                    console.log(payload);
+                },
+                function(err){
+                    console.log(err);
+                }
+            ).done(done);
         });
 
         it('should create a node (sub node of root)', function(done){
