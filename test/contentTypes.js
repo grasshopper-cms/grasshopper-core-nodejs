@@ -97,7 +97,7 @@ describe('Grasshopper core - contentTypes', function(){
     });
 
     describe('create', function() {
-        it('should create a content type without an error using correct verb.', function(done){
+        it('should create a content type', function(done){
             var newContentType = {
                 label: 'newtestsuitecontent',
                 fields: {
@@ -112,35 +112,16 @@ describe('Grasshopper core - contentTypes', function(){
                 meta: [],
                 description: ''
             };
-            true.should.equal(false);
-                        done();
+            grasshopper.request(adminToken).contentTypes.create(newContentType).then(
+                function(payload){
+                    payload.label.should.equal(newContentType.label);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
-        it('should create a content type without an error using correct verb. supplying fields and meta info', function(done){
-            var newContentType = {
-                label: 'newtestsuitecontent',
-                fields: {
-                    testfield: {
-                        id: 'testfield',
-                        required: true,
-                        label: 'Title',
-                        instancing: 1,
-                        type: 'textbox'
-                    }
-                },
-                helpText: '',
-                meta: [{
-                    id: 'testfield',
-                    required: true,
-                    label: 'Title',
-                    instancing: 1,
-                    type: 'textbox'
-                }],
-                description: ''
-            };
-            true.should.equal(false);
-                        done();
-        });
 
         it('should return an error because we are missing a "label" field.', function(done){
             var newContentType = {
@@ -156,31 +137,16 @@ describe('Grasshopper core - contentTypes', function(){
                 meta: [],
                 description: ''
             };
-            true.should.equal(false);
-                        done();
-        });
-
-        it('should return error if a content type id is sent with the request (maybe verb error).', function(done){
-            var newContentType = {
-                _id: 'ISHOULDNOTBEHERE',
-                label: 'newtestsuitecontent',
-                fields: {
-                    testid: {
-                        required: true,
-                        label: 'Title',
-                        instancing: 1,
-                        type: 'textbox'
-                    }
+            grasshopper.request(adminToken).contentTypes.create(newContentType).then(
+                function(payload){
+                    should.not.exist(payload);
                 },
-                helpText: '',
-                meta: [],
-                description: ''
-            };
-
-            true.should.equal(false);
-                        done();
+                function(err){
+                    err.errorCode.should.equal(400);
+                    err.message.should.equal('"label" is a required field.');
+                }
+            ).done(done);
         });
-
 
         it('should return error when a malformed field id is passed in (id has a space).', function(done){
             var newContentType = {
@@ -197,8 +163,15 @@ describe('Grasshopper core - contentTypes', function(){
                 meta: [],
                 description: ''
             };
-            true.should.equal(false);
-                        done();
+
+            grasshopper.request(adminToken).contentTypes.create(newContentType).then(
+                function(payload){
+
+                },
+                function(err){
+                    console.log(err);
+                }
+            ).done(done);
         });
 
 
@@ -391,6 +364,7 @@ describe('Grasshopper core - contentTypes', function(){
                 }
             ).done(done);
         });
+
         it('should update a content type using the correct verb', function(done) {
             var newContentType = {
                 _id: testCreatedContentTypeId,
@@ -485,11 +459,7 @@ describe('Grasshopper core - contentTypes', function(){
             ).done(done);
         });
 
-        it('should delete a content type using the correct verb', function(done) {
-            true.should.equal(false);
-                        done();
-        });
-        it('should delete a content type using the method override', function(done) {
+        it('should delete a content type', function(done) {
             true.should.equal(false);
                         done();
         });
