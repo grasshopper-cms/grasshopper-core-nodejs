@@ -838,7 +838,7 @@ describe('Grasshopper core - users', function(){
         it('should delete a user.', function(done) {
             grasshopper.request(adminToken).users.deleteById(testCreatedUserId).then(
                 function(payload){
-                    payload.should.equal(true);
+                    payload.should.equal('Success');
                 },
                 function(err){
                     should.not.exist(err);
@@ -849,7 +849,7 @@ describe('Grasshopper core - users', function(){
         it('should return 200 when we try to delete a user that doesn\'t exist', function(done) {
             grasshopper.request(adminToken).users.deleteById(testCreatedUserId).then(
                 function(payload){
-                    payload.should.equal(true);
+                    payload.should.equal('Success');
                 },
                 function(err){
                     should.not.exist(err);
