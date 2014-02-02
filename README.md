@@ -4,6 +4,8 @@
 
 ### ALPHA - TO BE RELEASED OFFICIALLY EARLY 2014
 
+[![Build Status](https://travis-ci.org/Solid-Interactive/grasshopper-core-nodejs.png?branch=master)](https://travis-ci.org/Solid-Interactive/grasshopper-core-nodejs)
+
 
 ### What am I?
 
