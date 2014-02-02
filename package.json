@@ -58,6 +58,6 @@
     ]
   },
   "scripts": {
-    "test": "mocha --reporter spec"
+    "test": "grunt test"
   }
 }
