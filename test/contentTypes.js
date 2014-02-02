@@ -7,8 +7,7 @@ describe('Grasshopper core - contentTypes', function(){
         testContentTypeId  = '524362aa56c02c0703000001',
         readerToken = '',
         adminToken  = '',
-        testCreatedContentTypeId = '',
-        testCreatedContentTypeCustomVerb = '';
+        testCreatedContentTypeId = '';
 
     before(function(done){
         grasshopper.configure(function(){
@@ -78,21 +77,45 @@ describe('Grasshopper core - contentTypes', function(){
 
     describe('get list', function() {
         it('should return a list of content types with the default page size', function(done) {
-            true.should.equal(false);
-                        done();
+            grasshopper.request(adminToken).contentTypes.list().then(
+                function(payload){
+                    payload.results.length.should.equal(2);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
         it('should a list of content types with the specified page size', function(done) {
-            true.should.equal(false);
-                        done();
+            grasshopper.request(adminToken).contentTypes.list({limit:1}).then(
+                function(payload){
+                    payload.results.length.should.equal(1);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
         it('should return an empty list if the page size and current requested items are out of bounds.', function(done) {
-            true.should.equal(false);
-                        done();
+            grasshopper.request(adminToken).contentTypes.list({limit: 20, skip: 100}).then(
+                function(payload){
+                    payload.results.length.should.equal(0);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
         it('should return a 401 because user is not authenticated', function(done) {
-            true.should.equal(false);
-                        done();
+            grasshopper.request().contentTypes.list().then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(401);
+                }
+            ).done(done);
         });
     });
 
