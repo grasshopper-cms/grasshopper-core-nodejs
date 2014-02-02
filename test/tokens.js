@@ -71,7 +71,7 @@ describe('Grasshopper core - testing tokens', function(){
         it('an administrator (only) should be able to delete any token that is not their own.', function(done) {
             grasshopper.request(adminToken).tokens.deleteById(readerToken).then(
                 function(payload){
-                    payload.should.equal(true);
+                    payload.should.equal('Success');
                 },
                 function(err){
                     should.not.exist(err);
@@ -93,7 +93,7 @@ describe('Grasshopper core - testing tokens', function(){
         it('a user should be able to authenticate then log themselves out.', function(done) {
             grasshopper.request(readerToken2).tokens.deleteById(readerToken2).then(
                 function(payload){
-                    payload.should.equal(true);
+                    payload.should.equal('Success');
                 },
                 function(err){
                     should.not.exist(err);
@@ -106,7 +106,7 @@ describe('Grasshopper core - testing tokens', function(){
                 function(token){
                     grasshopper.request(token).tokens.logout().then(
                         function(payload){
-                            payload.should.equal(true);
+                            payload.should.equal('Success');
                         },
                         function(err){
                             should.not.exist(err);
