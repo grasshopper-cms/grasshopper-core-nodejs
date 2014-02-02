@@ -1,29 +1,78 @@
 var should = require('chai').should();
 
 describe('Grasshopper core - contentTypes', function(){
-    var testContentTypeId  = '524362aa56c02c0703000001',
+    'use strict';
+
+    var grasshopper= require('../lib/grasshopper'),
+        testContentTypeId  = '524362aa56c02c0703000001',
         readerToken = '',
         adminToken  = '',
         testCreatedContentTypeId = '',
         testCreatedContentTypeCustomVerb = '';
 
     before(function(done){
-        done();
+        grasshopper.configure(function(){
+            this.config = {
+                'crypto': {
+                    'secret_passphrase' : '223fdsaad-ffc8-4acb-9c9d-1fdaf824af8c'
+                },
+                'db': {
+                    'type': 'mongodb',
+                    'host': 'mongodb://localhost:27017/test',
+                    'database': 'test',
+                    'username': '',
+                    'password': '',
+                    'debug': false
+                }
+            };
+        });
+
+
+        grasshopper.auth('apitestuseradmin', 'TestPassword')
+            .then(function(token){
+                adminToken = token;
+                grasshopper.auth('apitestuserreader', 'TestPassword')
+                    .then(function(token){
+                        readerToken = token;
+                        done();
+                    },
+                    function(err){
+                        console.log(err);
+                    });
+            });
     });
 
     describe('getById', function() {
         it('should return 401 because trying to access unauthenticated', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request().contentTypes.getById(testContentTypeId).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(401);
+                }
+            ).done(done);
         });
 
         it('should return an existing content type', function(done) {
-            true.should.equal(false);
-                        done();
+            grasshopper.request(adminToken).contentTypes.getById(testContentTypeId).then(
+                function(payload){
+                    payload._id.toString().should.equal(testContentTypeId);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
         it('should return 404 because test user id does not exist', function(done) {
-            true.should.equal(false);
-                        done();
+            grasshopper.request(adminToken).contentTypes.getById('5246e73d56c02c0744000004').then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(404);
+                }
+            ).done(done);
         });
     });
 
@@ -332,8 +381,15 @@ describe('Grasshopper core - contentTypes', function(){
                 meta: [],
                 description: ''
             };
-true.should.equal(false);
-            done();
+
+            grasshopper.request(readerToken).contentTypes.update(newContentType).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(403);
+                }
+            ).done(done);
         });
         it('should update a content type using the correct verb', function(done) {
             var newContentType = {
@@ -419,9 +475,16 @@ true.should.equal(false);
 
     describe('deleteById', function() {
         it('should return a 403 because user does not have permissions to access content types', function(done) {
-            true.should.equal(false);
-                        done();
+            grasshopper.request(readerToken).contentTypes.deleteById(testContentTypeId).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(403);
+                }
+            ).done(done);
         });
+
         it('should delete a content type using the correct verb', function(done) {
             true.should.equal(false);
                         done();
