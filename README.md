@@ -109,6 +109,16 @@ Open the ```lib/config/configuration``` file
     * engines: collections of engines that will be used. NOTE: all engines get files saved to them, only the default returns results
 
 
+###  API Docs
+
+
+#### Content Types
+
+##### Valid Field Definition
+
+TBD - Need to provide rules related to content types.
+
+
 ### Running Tests
 
 -------------------------------------------------------

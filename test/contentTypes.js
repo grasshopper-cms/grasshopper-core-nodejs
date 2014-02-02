@@ -115,13 +115,13 @@ describe('Grasshopper core - contentTypes', function(){
             grasshopper.request(adminToken).contentTypes.create(newContentType).then(
                 function(payload){
                     payload.label.should.equal(newContentType.label);
+                    testCreatedContentTypeId = payload._id;
                 },
                 function(err){
                     should.not.exist(err);
                 }
             ).done(done);
         });
-
 
         it('should return an error because we are missing a "label" field.', function(done){
             var newContentType = {
@@ -166,15 +166,14 @@ describe('Grasshopper core - contentTypes', function(){
 
             grasshopper.request(adminToken).contentTypes.create(newContentType).then(
                 function(payload){
-
+                    should.not.exist(payload);
                 },
                 function(err){
-                    console.log(err);
+                    err.errorCode.should.equal(400);
+                    err.message.should.equal('Invalid Field Object');
                 }
             ).done(done);
         });
-
-
 
         it('should return error when a malformed field is passed in (missing label).', function(done){
             var newContentType = {
@@ -190,10 +189,17 @@ describe('Grasshopper core - contentTypes', function(){
                 meta: [],
                 description: ''
             };
-           true.should.equal(false);
-                       done();
-        });
 
+            grasshopper.request(adminToken).contentTypes.create(newContentType).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(400);
+                    err.message.should.equal('Invalid Field Object');
+                }
+            ).done(done);
+        });
 
         it('should return error when a malformed field is passed in (missing type).', function(done){
             var newContentType = {
@@ -209,10 +215,17 @@ describe('Grasshopper core - contentTypes', function(){
                 meta: [],
                 description: ''
             };
-            true.should.equal(false);
-                        done();
-        });
 
+            grasshopper.request(adminToken).contentTypes.create(newContentType).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(400);
+                    err.message.should.equal('Invalid Field Object');
+                }
+            ).done(done);
+        });
 
         it('should return error when a malformed field is passed in (invalid type).', function(done){
             var newContentType = {
@@ -229,111 +242,16 @@ describe('Grasshopper core - contentTypes', function(){
                 meta: [],
                 description: ''
             };
-            true.should.equal(false);
-                        done();
-        });
 
-
-        it('should return error when a malformed meta id is passed in (id has a space).', function(done){
-            var newContentType = {
-                label: 'newtestsuitecontent',
-                fields: {
-                    testid: {
-                        label: 'This is a test label',
-                        required: true,
-                        instancing: 1,
-                        type: 'textbox'
-                    }
+            grasshopper.request(adminToken).contentTypes.create(newContentType).then(
+                function(payload){
+                    should.not.exist(payload);
                 },
-                helpText: '',
-                meta: {
-                    'testmeta id' : {
-                        label: 'Test Field Label',
-                        type: 'textbox',
-                        required: true,
-                        instancing: 1
-                    }
-                },
-                description: ''
-            };
-            true.should.equal(false);
-                        done();
-        });
-
-
-
-        it('should return error when a malformed meta is passed in (missing label).', function(done){
-            var newContentType = {
-                label: 'newtestsuitecontent',
-                fields: {
-                    testid: {
-                        label: 'My Label',
-                        required: true,
-                        instancing: 1,
-                        type: 'textbox'
-                    }
-                },
-                helpText: '',
-                meta: {
-                    testmetaid: {
-                    id: 'testmetaid',
-                    type: 'I DO NOT EXIST',
-                    required: true,
-                    instancing: 1
-                }},
-                description: ''
-            };
-            true.should.equal(false);
-                        done();
-        });
-
-
-        it('should return error when a malformed meta is passed in (missing type).', function(done){
-            var newContentType = {
-                label: 'newtestsuitecontent',
-                fields: {
-                    testid: {
-                        label: 'Test Field Label',
-                        required: true,
-                        type: 'textbox',
-                        instancing: 1
-                    }
-                },
-                helpText: '',
-                meta: {testmetaid: {
-                    label: 'Test Field Label',
-                    required: true,
-                    instancing: 1
-                }},
-                description: ''
-            };
-            true.should.equal(false);
-                        done();
-        });
-
-
-        it('should return error when a malformed meta is passed in (invalid type).', function(done){
-            var newContentType = {
-                label: 'newtestsuitecontent',
-                fields: {
-                    testid: {
-                        label: 'Test Field Label',
-                        type: 'textbox',
-                        required: true,
-                        instancing: 1
-                    }
-                },
-                helpText: '',
-                meta: {testmetaid:{
-                    label: 'Test Field Label',
-                    type: 'I DO NOT EXIST',
-                    required: true,
-                    instancing: 1
-                }},
-                description: ''
-            };
-            true.should.equal(false);
-                        done();
+                function(err){
+                    err.errorCode.should.equal(400);
+                    err.message.should.equal('Invalid Field Object');
+                }
+            ).done(done);
         });
     });
 
@@ -365,7 +283,7 @@ describe('Grasshopper core - contentTypes', function(){
             ).done(done);
         });
 
-        it('should update a content type using the correct verb', function(done) {
+        it('should update a content type', function(done) {
             var newContentType = {
                 _id: testCreatedContentTypeId,
                 label: 'updatedlabel',
@@ -388,35 +306,14 @@ describe('Grasshopper core - contentTypes', function(){
                 description: ''
             };
 
-            true.should.equal(false);
-                        done();
-        });
-
-        it('should update a content type using the method override', function(done) {
-            var newContentType = {
-                _id: testCreatedContentTypeCustomVerb,
-                label: 'updatedlabel custom verb',
-                    fields: {
-                        testid : {
-                            id: 'testid',
-                            label: 'Test Field Label',
-                            type: 'textbox',
-                            required: true,
-                            instancing: 1
-                        }
+            grasshopper.request(adminToken).contentTypes.update(newContentType).then(
+                function(payload){
+                    payload.label.should.equal(newContentType.label);
                 },
-                helpText: '',
-                meta: {testmetaid:{
-                    label: 'Test Field Label',
-                    type: 'textbox',
-                    required: true,
-                    instancing: 1
-                }},
-                description: ''
-            };
-
-            true.should.equal(false);
-                        done();
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
         it('should return error if content type is updated without a set "ID"', function(done){
@@ -441,8 +338,14 @@ describe('Grasshopper core - contentTypes', function(){
                 description: ''
             };
 
-            true.should.equal(false);
-                        done();
+            grasshopper.request(adminToken).contentTypes.update(newContentType).then(
+                function(payload){
+                    payload.should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(404);
+                }
+            ).done(done);
         });
 
     });
@@ -460,13 +363,25 @@ describe('Grasshopper core - contentTypes', function(){
         });
 
         it('should delete a content type', function(done) {
-            true.should.equal(false);
-                        done();
+            grasshopper.request(adminToken).contentTypes.deleteById(testContentTypeId).then(
+                function(payload){
+                    payload.should.equal('Success');
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
         it('should return 200 when we try to delete a content type that doesn\'t exist', function(done) {
-            true.should.equal(false);
-                        done();
+            grasshopper.request(adminToken).contentTypes.deleteById(testContentTypeId).then(
+                function(payload){
+                    payload.should.equal('Success');
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
     });
 });
