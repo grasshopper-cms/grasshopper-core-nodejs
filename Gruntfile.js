@@ -6,7 +6,7 @@ module.exports = function(grunt) {
         test: '',
         shell: {
             test: {
-                command: 'mocha <%= test %> --reporter spec',
+                command: 'mocha --colors -R Spec <%= test %>',
                 options: {
                     stdout: true,
                     stderr: true
