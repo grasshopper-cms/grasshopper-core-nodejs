@@ -91,13 +91,13 @@ describe('Grasshopper core - content', function(){
         });
     });
 
-    describe('create', function() {
+    describe('insert', function() {
         it('should return 401 because trying to access unauthenticated', function(done) {
             var obj = {
                 label:'Generated title', slug: 'generated_title', type: '524362aa56c02c0703000001', nonce:'1234fdsdfsa565', status: 'Live', node : {_id: '526d5179966a883540000006', displayOrder: 1}, fields: {testfield: 'test value'}, author: {_id: '5246e73d56c02c0744000001', name: 'Test User'}
             };
 
-            grasshopper.request().content.create(obj).then(
+            grasshopper.request().content.insert(obj).then(
                 function(payload){
                     should.not.exist(payload);
                 },
@@ -112,7 +112,7 @@ describe('Grasshopper core - content', function(){
                 label:'Generated title', slug: 'generated_title', type: '524362aa56c02c0703000001', nonce:'1234fdsdfsa565', status: 'Live', node : {_id: '526d5179966a883540000006', displayOrder: 1}, fields: {testfield: 'test value'}, author: {_id: '5246e73d56c02c0744000001', name: 'Test User'}
             };
 
-            grasshopper.request(tokens.globalReaderToken).content.create(obj).then(
+            grasshopper.request(tokens.globalReaderToken).content.insert(obj).then(
                 function(payload){
                     should.not.exist(payload);
                 },
@@ -122,13 +122,13 @@ describe('Grasshopper core - content', function(){
             ).done(done);
         });
 
-        it('should successfully create content because I have the correct permissions.', function(done) {
+        it('should successfully insert content because I have the correct permissions.', function(done) {
             var obj = {
                 label:'Generated title', slug: 'generated_title', type: '524362aa56c02c0703000001', nonce:'1234fdsdfsa565', status: 'Live', node : {_id: '526d5179966a883540000006', displayOrder: 1}, fields: {testfield: 'test value'}, author: {_id: '5246e73d56c02c0744000001', name: 'Test User'}
             };
 
 
-            grasshopper.request(tokens.globalEditorToken).content.create(obj).then(
+            grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
                 function(payload){
                     payload.label.should.equal(obj.label);
                 },
@@ -138,12 +138,12 @@ describe('Grasshopper core - content', function(){
             ).done(done);
         });
 
-        it('should return 403 because I am trying to create content in a node that is restricted to me.', function(done) {
+        it('should return 403 because I am trying to insert content in a node that is restricted to me.', function(done) {
             var obj = {
                 label:'Generated title', slug: 'generated_title', type: '524362aa56c02c0703000001', nonce:'1234fdsdfsa565', status: 'Live', node : {_id: '526d5179966a883540000006', displayOrder: 1}, fields: {testfield: 'test value'}, author: {_id: '5246e73d56c02c0744000001', name: 'Test User'}
             };
 
-            grasshopper.request(tokens.restrictedEditorToken).content.create(obj).then(
+            grasshopper.request(tokens.restrictedEditorToken).content.insert(obj).then(
                 function(payload){
                     should.not.exist(payload);
                 },
