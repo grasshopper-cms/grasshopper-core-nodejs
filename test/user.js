@@ -259,11 +259,11 @@ describe('Grasshopper core - users', function(){
         });
     });
 
-    describe('Create a new user', function() {
-        it('should error out because user does not have enough permissions to create a user.', function(done){
+    describe('insert a new user', function() {
+        it('should error out because user does not have enough permissions to insert a user.', function(done){
             grasshopper.request(readerToken)
                 .users
-                .create({})
+                .insert({})
                 .then(function(payload){
                     should.not.exist(payload);
                 },function(err){
@@ -271,7 +271,7 @@ describe('Grasshopper core - users', function(){
                 }).done(done);
         });
 
-        it('should create a user without an error.', function(done){
+        it('should insert a user without an error.', function(done){
             var newUser = {
                 login: 'newtestuser1',
                 role: 'reader',
@@ -282,7 +282,7 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User'
             };
 
-            grasshopper.request(adminToken).users.create(newUser).then(
+            grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
                     payload.login.should.equal(newUser.login);
                     payload.should.have.property('_id');
@@ -295,7 +295,7 @@ describe('Grasshopper core - users', function(){
             ).done(done);
         });
 
-        it('should create a user without an error with additional custom params.', function(done){
+        it('should insert a user without an error with additional custom params.', function(done){
             var newUser = {
                 login: 'newtestuser2',
                 role: 'reader',
@@ -309,7 +309,7 @@ describe('Grasshopper core - users', function(){
                 }
             };
 
-            grasshopper.request(adminToken).users.create(newUser).then(
+            grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
                     payload.login.should.equal(newUser.login);
                     payload.should.have.property('_id');
@@ -334,7 +334,7 @@ describe('Grasshopper core - users', function(){
                 password: 'TestPassword'
             };
 
-            grasshopper.request(adminToken).users.create(newUser).then(
+            grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
                     should.not.exist(payload);
                 },
@@ -355,7 +355,7 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: 'TestPassword'
             };
-            grasshopper.request(adminToken).users.create(newUser).then(
+            grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
                     should.not.exist(payload);
                 },
@@ -375,7 +375,7 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: 'TestPassword'
             };
-            grasshopper.request(adminToken).users.create(newUser).then(
+            grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
                     should.not.exist(payload);
                 },
@@ -396,7 +396,7 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: 'TestPassword'
             };
-            grasshopper.request(adminToken).users.create(newUser).then(
+            grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
                     should.not.exist(payload);
                 },
@@ -417,7 +417,7 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: 'TestPassword'
             };
-            grasshopper.request(adminToken).users.create(newUser).then(
+            grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
                     should.not.exist(payload);
                 },
@@ -438,7 +438,7 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: 'TestPassword'
             };
-            grasshopper.request(adminToken).users.create(newUser).then(
+            grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
                     should.not.exist(payload);
                 },
@@ -459,7 +459,7 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: null
             };
-            grasshopper.request(adminToken).users.create(newUser).then(
+            grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
                     should.not.exist(payload);
                 },
@@ -480,7 +480,7 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: 'sho'
             };
-            grasshopper.request(adminToken).users.create(newUser).then(
+            grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
                     should.not.exist(payload);
                 },
@@ -501,7 +501,7 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 password: 'TestPassword'
             };
-            grasshopper.request(adminToken).users.create(newUser).then(
+            grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
                     should.not.exist(payload);
                 },
@@ -897,7 +897,7 @@ describe('Grasshopper core - users', function(){
             }
 
             //Create User
-            grasshopper.request(adminToken).users.create(newUser).then(startTest).done();
+            grasshopper.request(adminToken).users.insert(newUser).then(startTest).done();
         });
     });
 
