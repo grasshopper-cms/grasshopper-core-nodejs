@@ -188,10 +188,7 @@ describe('Grasshopper core - testing nodes', function(){
 
     describe('Add content types to a node.', function() {
 
-        it('should add a content type to an existing node as the property allowedTypes sent as a single value.', function(done){
-            var t = {
-                id: testContentTypeID
-            };
+        it('should add a content type to an existing node as the property allowedTypes sent as a single string value.', function(done){
             grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, testContentTypeID).then(
                 function(payload){
                     payload.should.equal('Success');
@@ -203,51 +200,105 @@ describe('Grasshopper core - testing nodes', function(){
 
         });
 
-        it('should add a content type to an existing node as the property allowedTypes sent as an array of values.', function(done){
-            true.should.equal(false);
-            done();
+        it('should add a content type to an existing node as the property allowedTypes sent as a single object value.', function(done){
+            var t = {
+                id: testContentTypeID
+            };
+            grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, t).then(
+                function(payload){
+                    payload.should.equal('Success');
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
+
+        });
+
+        it('should add a content type to an existing node as the property allowedTypes sent as an array of objects.', function(done){
+            var t = [{
+                id: testContentTypeID
+            },{
+                id: testContentTypeID_Users
+            }];
+            grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, t).then(
+                function(payload){
+                    payload.should.equal('Success');
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
+        });
+
+        it('should add a content type to an existing node as the property allowedTypes sent as an array of strings.', function(done){
+            var t = [testContentTypeID, testContentTypeID_Users];
+            grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, t).then(
+                function(payload){
+                    payload.should.equal('Success');
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
         it('should replace a content type in an existing node with existing contenttypes.', function(done){
-            true.should.equal(false);
-            done();
-        });
+            grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, testContentTypeID).then(
+                function(){
+                    grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, testContentTypeID_Users).then(
+                        function(){
 
-        it('should replace multiple contenttypes in an existing node with a single contenttype.', function(done){
-            true.should.equal(false);
-            done();
-        });
+                            grasshopper.request(globalEditorToken).nodes.getById(testNodeId).then(
+                                function(payload){
+                                    payload.allowedTypes[0].label.should.equal('Users');
+                                },
+                                function(err){
+                                    should.not.exist(err);
+                                }
+                            ).done(done);
 
-
-
-        it('should be successful when adding a content type to an existing node sent as a single value.', function(done){
-            true.should.equal(false);
-            done();
-        });
-
-        it('should be successful when adding a collection of content types to an existing node sent as an array.', function(done){
-            true.should.equal(false);
-            done();
+                        },function(err){
+                            should.not.exist(err);
+                        }
+                    ).done();
+                },function(err){
+                    should.not.exist(err);
+                }
+            ).done();
         });
 
         it('should fail with 401 if the user is unauthenticated.', function(done){
-            true.should.equal(false);
-            done();
+            grasshopper.request().nodes.saveContentTypes(testNodeId, testContentTypeID).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(401);
+                }
+            ).done(done);
         });
 
         it('Should fail with a 403 if a user does not have editor permissions to the parent node.', function(done){
-            true.should.equal(false);
-            done();
+            grasshopper.request(globalReaderToken).nodes.saveContentTypes(testNodeId, testContentTypeID).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(403);
+                }
+            ).done(done);
         });
 
         it('should fail with 500 if trying to save a content type to a node that doesn\'t exist.', function(done){
-            true.should.equal(false);
-            done();
-        });
-
-        it('should fail if the payload to the node types is not a correct format.', function(done){
-            true.should.equal(false);
-            done();
+            grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, badTestContentTypeID).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(404);
+                }
+            ).done(done);
         });
     });
 
@@ -277,7 +328,6 @@ describe('Grasshopper core - testing nodes', function(){
         it('should return a nodes allowedTypes when using a id', function(done) {
             grasshopper.request(globalAdminToken).nodes.getById(testNodeId).then(
                 function(payload){
-                    console.log(payload);
                     payload.should.include.keys('allowedTypes');
                 },
                 function(err){
@@ -289,7 +339,6 @@ describe('Grasshopper core - testing nodes', function(){
         it('should return a nodes allowedTypes with the fields (id, label, helptext) when using a id', function(done) {
             grasshopper.request(globalEditorToken).nodes.getById(testNodeId).then(
                 function(payload){
-                    console.log(payload);
                     payload.should.include.keys('allowedTypes');
                 },
                 function(err){

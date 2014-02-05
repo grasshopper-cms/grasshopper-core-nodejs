@@ -375,7 +375,7 @@ describe('Grasshopper core - contentTypes', function(){
 
     describe('deleteById', function() {
         it('should return a 403 because user does not have permissions to access content types', function(done) {
-            grasshopper.request(readerToken).contentTypes.deleteById(testContentTypeId).then(
+            grasshopper.request(readerToken).contentTypes.deleteById(testCreatedContentTypeId).then(
                 function(payload){
                     should.not.exist(payload);
                 },
@@ -386,7 +386,7 @@ describe('Grasshopper core - contentTypes', function(){
         });
 
         it('should delete a content type', function(done) {
-            grasshopper.request(adminToken).contentTypes.deleteById(testContentTypeId).then(
+            grasshopper.request(adminToken).contentTypes.deleteById(testCreatedContentTypeId).then(
                 function(payload){
                     payload.should.equal('Success');
                 },
@@ -397,7 +397,7 @@ describe('Grasshopper core - contentTypes', function(){
         });
 
         it('should return 200 when we try to delete a content type that doesn\'t exist', function(done) {
-            grasshopper.request(adminToken).contentTypes.deleteById(testContentTypeId).then(
+            grasshopper.request(adminToken).contentTypes.deleteById(testCreatedContentTypeId).then(
                 function(payload){
                     payload.should.equal('Success');
                 },
