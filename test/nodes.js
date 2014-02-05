@@ -80,7 +80,7 @@ describe('Grasshopper core - testing nodes', function(){
         );
     });
 
-    describe('create', function() {
+    describe('insert', function() {
 
         it('should create a node beause I have edit permissions.', function(done){
             var n = {
@@ -88,47 +88,119 @@ describe('Grasshopper core - testing nodes', function(){
                 parent: null
             };
 
-            grasshopper.request(globalEditorToken).nodes.create(n).then(
+            grasshopper.request(globalEditorToken).nodes.insert(n).then(
                 function(payload){
-                    console.log(payload);
+                    testNodeIdRoot_generated = payload._id.toString();
+                    payload.label.should.equal('My Test Node');
                 },
                 function(err){
-                    console.log(err);
+                    should.not.exist(err);
                 }
             ).done(done);
         });
 
         it('should create a node (sub node of root)', function(done){
-            true.should.equal(false);
-            done();
+            var n = {
+                label : 'My Test Sub-Node',
+                parent: testNodeIdRoot_generated
+            };
+
+            grasshopper.request(globalEditorToken).nodes.insert(n).then(
+                function(payload){
+                    var id = payload.parent._id.toString();
+                    payload.label.should.equal('My Test Sub-Node');
+                    id.should.equal(testNodeIdRoot_generated);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
         it('should return an error because we are missing a "label" field.', function(done){
-            true.should.equal(false);
-            done();
+            var n = {
+                parent: testNodeIdRoot_generated
+            };
+
+            grasshopper.request(globalEditorToken).nodes.insert(n).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(400);
+                    err.message.should.equal('"label" is a required field.');
+                }
+            ).done(done);
         });
 
         it('should create a node when a reader with editor permissions creates a node', function(done){
-            true.should.equal(false);
-            done();
+            var n = {
+                label : 'Reader Created Node',
+                parent: testNodeId
+            };
+
+            grasshopper.request(nodeEditorToken).nodes.insert(n).then(
+                function(payload){
+                    var id = payload.parent._id.toString();
+                    payload.label.should.equal('Reader Created Node');
+                    id.should.equal(testNodeId);
+
+                    testNodeIdSubSub_generated = payload._id.toString();
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
         it('should return error when a reader tries to create a node', function(done){
-            true.should.equal(false);
-            done();
+            var n = {
+                label: "Reader Created Node",
+                parent: testNodeIdRoot_generated
+            };
+
+            grasshopper.request(globalReaderToken).nodes.insert(n).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(403);
+                }
+            ).done(done);
         });
 
         it('should return error when a reader tries to create a node', function(done){
-            true.should.equal(false);
-            done();
+            var n = {
+                label: "Editor Created Node",
+                parent: testNodeId
+            };
+
+            grasshopper.request(restrictedEditorToken).nodes.insert(n).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(403);
+                }
+            ).done(done);
         });
     });
 
     describe('Add content types to a node.', function() {
 
         it('should add a content type to an existing node as the property allowedTypes sent as a single value.', function(done){
-            true.should.equal(false);
-            done();
+            var t = {
+                id: testContentTypeID
+            };
+            grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, testContentTypeID).then(
+                function(payload){
+                    payload.should.equal('Success');
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
+
         });
 
         it('should add a content type to an existing node as the property allowedTypes sent as an array of values.', function(done){
@@ -164,7 +236,7 @@ describe('Grasshopper core - testing nodes', function(){
         });
 
         it('Should fail with a 403 if a user does not have editor permissions to the parent node.', function(done){
-            rtrue.should.equal(false);
+            true.should.equal(false);
             done();
         });
 
@@ -181,45 +253,96 @@ describe('Grasshopper core - testing nodes', function(){
 
     describe('getById', function() {
         it('should return 401 because trying to access unauthenticated', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request().nodes.getById(testNodeId).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(401);
+                }
+            ).done(done);
         });
 
         it('should return a node when using a id', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(globalAdminToken).nodes.getById(testNodeId).then(
+                function(payload){
+                    payload._id.toString().should.equal(testNodeId);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
         it('should return a nodes allowedTypes when using a id', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(globalAdminToken).nodes.getById(testNodeId).then(
+                function(payload){
+                    console.log(payload);
+                    payload.should.include.keys('allowedTypes');
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
         it('should return a nodes allowedTypes with the fields (id, label, helptext) when using a id', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(globalEditorToken).nodes.getById(testNodeId).then(
+                function(payload){
+                    console.log(payload);
+                    payload.should.include.keys('allowedTypes');
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
         it('a reader should return a 403 because user does not have permissions to access a particular node', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(nodeEditorToken).nodes.getById(testLockedDownNodeId).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(403);
+                }
+            ).done(done);
         });
 
         it('an editor with rights restricted to a specific node should return a 403 error', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(restrictedEditorToken).nodes.getById(testLockedDownNodeId).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(403);
+                }
+            ).done(done);
         });
 
         it('an editor should return an existing node object', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(globalEditorToken).nodes.getById(testNodeId).then(
+                function(payload){
+                    payload._id.toString().should.equal(testNodeId);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
+
         it('a reader should return an existing node object', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(globalReaderToken).nodes.getById(testNodeId).then(
+                function(payload){
+                    payload._id.toString().should.equal(testNodeId);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
     });
-
+/*
     describe('getById hydrated.', function() {
         it('a reader with all valid permissions should get a node object back with a full collection of child nodes and its content', function(done) {
             true.should.equal(false);
@@ -277,7 +400,6 @@ describe('Grasshopper core - testing nodes', function(){
         });
 
         it('post test fixtures', function(done) {
-            /*
             function upload(file, next){
                 request(url)
                     .post('/node/' + testNodeIdRoot_generated + '/assets')
@@ -297,12 +419,12 @@ describe('Grasshopper core - testing nodes', function(){
                 './test/fixtures/48.png',
                 './test/fixtures/72.png',
                 './test/fixtures/96.png'
-            ], upload, function(){done});*/
+            ], upload, function(){done});
 
         });
     });
 
-    ///////////////////////////////////////////////////////
+
     describe('rename asset', function() {
         it('should rename an asset to a new name in the same node.', function(done) {
             true.should.equal(false);
@@ -341,7 +463,7 @@ describe('Grasshopper core - testing nodes', function(){
     });
 
 
-    /*
+
      describe('POST: ' + url + '/node/:id/assets/move', function() {
      it('should move one asset to another node.', function(done) {
 
@@ -370,9 +492,9 @@ describe('Grasshopper core - testing nodes', function(){
      done();
      });
      });
-     */
 
-    /* describe('DELETE: ' + url + '/node/:id/assets/:name', function() {
+
+     describe('DELETE: ' + url + '/node/:id/assets/:name', function() {
      it('should delete an asset with a specific name', function(done) {
 
      request(url)
@@ -396,7 +518,7 @@ describe('Grasshopper core - testing nodes', function(){
      done();
      });
      });
-     */
+
     describe('delete assets', function() {
         it('should delete all files in a node.', function(done) {
             true.should.equal(false);
@@ -413,7 +535,7 @@ describe('Grasshopper core - testing nodes', function(){
             done();
         });
     });
-////////////////////////////////////////////////////////
+
     describe('get all the assets in a node.', function() {
         it('should return 401 because trying to access unauthenticated', function(done) {
             true.should.equal(false);
@@ -466,6 +588,6 @@ describe('Grasshopper core - testing nodes', function(){
             true.should.equal(false);
             done();
         });
-    });
+    });*/
 
 });
