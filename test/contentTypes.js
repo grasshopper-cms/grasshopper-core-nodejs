@@ -119,8 +119,8 @@ describe('Grasshopper core - contentTypes', function(){
         });
     });
 
-    describe('create', function() {
-        it('should create a content type', function(done){
+    describe('insert', function() {
+        it('should insert a content type', function(done){
             var newContentType = {
                 label: 'newtestsuitecontent',
                 fields: {
@@ -135,7 +135,7 @@ describe('Grasshopper core - contentTypes', function(){
                 meta: [],
                 description: ''
             };
-            grasshopper.request(adminToken).contentTypes.create(newContentType).then(
+            grasshopper.request(adminToken).contentTypes.insert(newContentType).then(
                 function(payload){
                     payload.label.should.equal(newContentType.label);
                     testCreatedContentTypeId = payload._id;
@@ -160,7 +160,7 @@ describe('Grasshopper core - contentTypes', function(){
                 meta: [],
                 description: ''
             };
-            grasshopper.request(adminToken).contentTypes.create(newContentType).then(
+            grasshopper.request(adminToken).contentTypes.insert(newContentType).then(
                 function(payload){
                     should.not.exist(payload);
                 },
@@ -187,7 +187,7 @@ describe('Grasshopper core - contentTypes', function(){
                 description: ''
             };
 
-            grasshopper.request(adminToken).contentTypes.create(newContentType).then(
+            grasshopper.request(adminToken).contentTypes.insert(newContentType).then(
                 function(payload){
                     should.not.exist(payload);
                 },
@@ -213,7 +213,7 @@ describe('Grasshopper core - contentTypes', function(){
                 description: ''
             };
 
-            grasshopper.request(adminToken).contentTypes.create(newContentType).then(
+            grasshopper.request(adminToken).contentTypes.insert(newContentType).then(
                 function(payload){
                     should.not.exist(payload);
                 },
@@ -239,7 +239,7 @@ describe('Grasshopper core - contentTypes', function(){
                 description: ''
             };
 
-            grasshopper.request(adminToken).contentTypes.create(newContentType).then(
+            grasshopper.request(adminToken).contentTypes.insert(newContentType).then(
                 function(payload){
                     should.not.exist(payload);
                 },
@@ -266,7 +266,7 @@ describe('Grasshopper core - contentTypes', function(){
                 description: ''
             };
 
-            grasshopper.request(adminToken).contentTypes.create(newContentType).then(
+            grasshopper.request(adminToken).contentTypes.insert(newContentType).then(
                 function(payload){
                     should.not.exist(payload);
                 },
