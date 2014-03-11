@@ -391,7 +391,7 @@ describe('Grasshopper core - testing nodes', function(){
             ).done(done);
         });
     });
-/*
+
     describe('getById hydrated.', function() {
         it('a reader with all valid permissions should get a node object back with a full collection of child nodes and its content', function(done) {
             true.should.equal(false);
@@ -511,7 +511,7 @@ describe('Grasshopper core - testing nodes', function(){
         });
     });
 
-
+/*
 
      describe('POST: ' + url + '/node/:id/assets/move', function() {
      it('should move one asset to another node.', function(done) {
@@ -567,7 +567,7 @@ describe('Grasshopper core - testing nodes', function(){
      done();
      });
      });
-
+*/
     describe('delete assets', function() {
         it('should delete all files in a node.', function(done) {
             true.should.equal(false);
@@ -637,6 +637,6 @@ describe('Grasshopper core - testing nodes', function(){
             true.should.equal(false);
             done();
         });
-    });*/
+    });
 
 });
