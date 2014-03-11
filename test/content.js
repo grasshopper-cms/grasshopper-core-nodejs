@@ -247,15 +247,26 @@ describe('Grasshopper core - content', function(){
             ).done(done);
         });
 
-        /*
-        it('should results for public content (unauthenticated)', function(done) {
-            true.should.equal(false);
-            done();
-        });*/
+        it('should return array of search results.', function(done) {
+            grasshopper.request(tokens.globalReaderToken).content.query(query).then(
+                function(payload){
+                    payload.length.should.equal(1);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
+        });
 
         it('should return empty results if it finds nothing', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(tokens.globalReaderToken).content.query(query2).then(
+                function(payload){
+                    payload.length.should.equal(0);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 /*
         it('should return complete results when a user has correct permissions', function(done){
