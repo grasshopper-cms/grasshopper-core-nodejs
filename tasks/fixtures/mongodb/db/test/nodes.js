@@ -13,6 +13,7 @@ module.exports = function(ObjectID) {
         { _id: ObjectID("5254908d56c02c076e000001"), label: "Sample  Sub-Node 9",  parent: ObjectID("5261781556c02c072a000007"),ancestors: [ObjectID("5261781556c02c072a000007")] },
         { _id: ObjectID("52712a3e2eacd5a714000002"), label: "Sample Sub Sub-Node 1",  parent: ObjectID("5254908d56c02c076e000001"),ancestors: [ObjectID("5261781556c02c072a000007"), ObjectID("5254908d56c02c076e000001")] },
         { _id: ObjectID("52712a3e2eacd5a714000001"), label: "Sample Sub Sub-Node 2",  parent: ObjectID("524362aa56c02c0703000001"),ancestors: [ObjectID("5261781556c02c072a000007"), ObjectID("5254908d56c02c076e000001")] },
-        { _id: ObjectID("52712a3e2eacd5a714000006"), label: "Sample Sub Sub-Node 3",  parent: ObjectID("524362aa56c02c0703000001"),ancestors: [ObjectID("5261781556c02c072a000007"), ObjectID("5254908d56c02c076e000001")] }
+        { _id: ObjectID("52712a3e2eacd5a714000006"), label: "Sample Sub Sub-Node 3",  parent: ObjectID("524362aa56c02c0703000001"),ancestors: [ObjectID("5261781556c02c072a000007"), ObjectID("5254908d56c02c076e000001")] },
+        { _id: ObjectID("5320ed3fb9c9cb6364e23031"), label: "Sample Sub Sub Sub-Node 1",  parent: ObjectID("52712a3e2eacd5a714000006"),ancestors: [ObjectID("5261781556c02c072a000007"), ObjectID("5254908d56c02c076e000001"), ObjectID("52712a3e2eacd5a714000006")] }
     ];
 };
