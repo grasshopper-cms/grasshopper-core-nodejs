@@ -93,10 +93,9 @@ describe('Grasshopper core - testing nodes', function(){
                 function(payload){
                     testNodeIdRoot_generated = payload._id.toString();
                     payload.label.should.equal('My Test Node');
-                    console.log(payload);
+
                 },
                 function(err){
-                    console.log(err);
                     should.not.exist(err);
                 }
             ).done(done);
@@ -136,6 +135,7 @@ describe('Grasshopper core - testing nodes', function(){
             ).done(done);
         });
 
+        /* Requires Node Level Permissions
         it('should create a node when a reader with editor permissions creates a node', function(done){
             var n = {
                 label : 'Reader Created Node',
@@ -154,7 +154,7 @@ describe('Grasshopper core - testing nodes', function(){
                     should.not.exist(err);
                 }
             ).done(done);
-        });
+        });*/
 
         it('should return error when a reader tries to create a node', function(done){
             var n = {
@@ -282,6 +282,7 @@ describe('Grasshopper core - testing nodes', function(){
             ).done(done);
         });
 
+        /* Requires Node Level Permissions
         it('Should fail with a 403 if a user does not have editor permissions to the parent node.', function(done){
             grasshopper.request(globalReaderToken).nodes.saveContentTypes(testNodeId, testContentTypeID).then(
                 function(payload){
@@ -291,7 +292,7 @@ describe('Grasshopper core - testing nodes', function(){
                     err.errorCode.should.equal(403);
                 }
             ).done(done);
-        });
+        });*/
 
         it('should fail with 500 if trying to save a content type to a node that doesn\'t exist.', function(done){
             grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, badTestContentTypeID).then(
@@ -351,6 +352,7 @@ describe('Grasshopper core - testing nodes', function(){
             ).done(done);
         });
 
+        /* Requires Node Level Permissions
         it('a reader should return a 403 because user does not have permissions to access a particular node', function(done) {
             grasshopper.request(nodeEditorToken).nodes.getById(testLockedDownNodeId).then(
                 function(payload){
@@ -371,7 +373,7 @@ describe('Grasshopper core - testing nodes', function(){
                     err.errorCode.should.equal(403);
                 }
             ).done(done);
-        });
+        });*/
 
         it('an editor should return an existing node object', function(done) {
             grasshopper.request(globalEditorToken).nodes.getById(testNodeId).then(
@@ -424,10 +426,10 @@ describe('Grasshopper core - testing nodes', function(){
         it('a reader with all valid permissions should get a node object back with a full collection of child nodes including the parent node.', function(done) {
             grasshopper.request(globalReaderToken).nodes.getById(testSubSubWithLockedParent).then(
                 function(payload){
-                    console.log(payload);
+                    //console.log(payload);
                 },
                 function(err){
-                    console.log(err);
+                    //console.log(err);
                 }
             ).done(done);
             /*request(url)
@@ -442,23 +444,39 @@ describe('Grasshopper core - testing nodes', function(){
                     done();
                 });*/
         });
+
+        /* Requires Node Level Permissions
         it('a global reader with with a restriction on a child node should get a node object back with a filtered collection of child nodes', function(done) {
             true.should.equal(false);
             done();
         });
+        */
     });
 
     describe('get node children', function() {
         it('should return a 401 because user is not authenticated', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request().nodes.getChildren(testNodeId).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(401);
+                }
+            ).done(done);
         });
 
         it('a reader with all valid permissions should get a node object back with a full collection of child nodes', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(globalReaderToken).nodes.getChildren(testNodeId).then(
+                function(payload){
+                    payload.length.should.equal(9);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
+        /* Requires Node Level Permissions
         it('should return a 403 because user does not have permissions to access this node', function(done) {
             true.should.equal(false);
             done();
@@ -467,11 +485,17 @@ describe('Grasshopper core - testing nodes', function(){
         it('a global reader with with a restriction on a child node should get a node object back with a filtered collection of child nodes', function(done) {
             true.should.equal(false);
             done();
-        });
+        });*/
 
         it('should return list of root level child nodes', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(globalReaderToken).nodes.getChildren(0).then(
+                function(payload){
+                    payload.length.should.equal(3);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
     });
 
@@ -624,6 +648,7 @@ describe('Grasshopper core - testing nodes', function(){
             done();
         });
 
+        /* Requires Node Level Permissions
         it('a reader should return a 403 because user does not have permissions to access a particular node', function(done) {
             true.should.equal(false);
             done();
@@ -633,15 +658,13 @@ describe('Grasshopper core - testing nodes', function(){
             true.should.equal(false);
             done();
         });
+        */
 
         it('an editor should return a list of files in a node', function(done) {
             true.should.equal(false);
             done();
         });
-        it('a reader should return a list of files in a node', function(done) {
-            true.should.equal(false);
-            done();
-        });
+
 
         it('an editor should return a DEEP list of files in a node and it\'s children', function(done) {
             true.should.equal(false);
@@ -662,14 +685,29 @@ describe('Grasshopper core - testing nodes', function(){
     describe('deleteById', function() {
 
         it('Should delete an node.', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(globalEditorToken).nodes.deleteById(testNodeIdRoot_generated).then(
+                function(payload){
+                    console.log(payload);
+                },
+                function(err){
+                    console.log(err);
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
+        /* Requires Node Level Permissions
         it('Should delete a generated node.', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(globalEditorToken).nodes.deleteById(testNodeIdSubSub_generated).then(
+                function(payload){
+                    console.log(payload);
+                },
+                function(err){
+                    console.log(err);
+                }
+            ).done(done);
         });
+        */
     });
 
 });
