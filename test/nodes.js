@@ -324,7 +324,6 @@ describe('Grasshopper core - testing nodes', function(){
                     payload._id.toString().should.equal(testNodeId);
                 },
                 function(err){
-                    console.log(err);
                     should.not.exist(err);
                 }
             ).done(done);
@@ -398,9 +397,10 @@ describe('Grasshopper core - testing nodes', function(){
         });
     });
 
+    /* Future requirement
     describe('getById hydrated.', function() {
         it('a reader with all valid permissions should get a node object back with a full collection of child nodes and its content', function(done) {
-            /*grasshopper.request(globalReaderToken).nodes.getById()
+            grasshopper.request(globalReaderToken).nodes.getById()
             request(url)
                 .get('/node/' + testNodeId + "/hydrate")
                 .set('Accept', 'application/json')
@@ -411,7 +411,7 @@ describe('Grasshopper core - testing nodes', function(){
                     res.status.should.equal(200);
                     res.body.length.should.equal(11);
                     done();
-                });*/
+                });
             true.should.equal(false);
             done();
         });
@@ -419,39 +419,37 @@ describe('Grasshopper core - testing nodes', function(){
 
     describe('getById - Deep load children', function() {
         it('a reader with all valid permissions should get a node object back with a full collection of child nodes', function(done) {
-            true.should.equal(false);
-            done();
-        });
-
-        it('a reader with all valid permissions should get a node object back with a full collection of child nodes including the parent node.', function(done) {
-            grasshopper.request(globalReaderToken).nodes.getById(testSubSubWithLockedParent).then(
+            grasshopper.request(globalReaderToken).nodes.getChildren(testSubSubWithLockedParent, true, true).then(
                 function(payload){
                     //console.log(payload);
                 },
                 function(err){
-                    //console.log(err);
+                    console.log(err);
+                    should.not.exist(err);
                 }
             ).done(done);
-            /*request(url)
-                .get('/node/' + testNodeId + "/deep")
-                .set('Accept', 'application/json')
-                .set('Accept-Language', 'en_US')
-                .set('authorization', 'Token ' + globalReaderToken)
-                .end(function(err, res) {
-                    if (err) { throw err; }
-                    res.status.should.equal(200);
-                    res.body.length.should.equal(14);
-                    done();
-                });*/
         });
+
+        it('a reader with all valid permissions should get a node object back with a full collection of child nodes including the parent node.', function(done) {
+            grasshopper.request(globalReaderToken).nodes.getById(testSubSubWithLockedParent, true, true).then(
+                function(payload){
+                    //console.log(payload);
+                },
+                function(err){
+                    console.log(err);
+                    should.not.exist(err);
+                }
+            ).done(done);
+        });
+     */
 
         /* Requires Node Level Permissions
         it('a global reader with with a restriction on a child node should get a node object back with a filtered collection of child nodes', function(done) {
             true.should.equal(false);
             done();
         });
-        */
-    });
+
+    });*/
 
     describe('get node children', function() {
         it('should return a 401 because user is not authenticated', function(done) {
@@ -488,7 +486,7 @@ describe('Grasshopper core - testing nodes', function(){
         });*/
 
         it('should return list of root level child nodes', function(done) {
-            grasshopper.request(globalReaderToken).nodes.getChildren(0).then(
+            grasshopper.request(globalReaderToken).nodes.getChildren(null).then(
                 function(payload){
                     payload.length.should.equal(3);
                 },
@@ -499,198 +497,14 @@ describe('Grasshopper core - testing nodes', function(){
         });
     });
 
-    describe('create a new asset in a node', function() {
-        it('an editor with all valid permissions should be able to post an attachment to a node.', function(done) {
-            true.should.equal(false);
-            done();
-        });
-
-        it('post test fixtures', function(done) {
-           /* function upload(file, next){
-                request(url)
-                    .post('/node/' + testNodeIdRoot_generated + '/assets')
-                    .set('Accept', 'application/json')
-                    .set('Accept-Language', 'en_US')
-                    .set('authorization', 'Token ' + globalEditorToken)
-                    .attach('file', file)
-                    .end(function(err, res) {
-                        if (err) { throw err; }
-                        next();
-                    });
-            }
-
-            async.each([
-                './test/fixtures/artwork.png',
-                './test/fixtures/36.png',
-                './test/fixtures/48.png',
-                './test/fixtures/72.png',
-                './test/fixtures/96.png'
-            ], upload, function(){done});
-*/
-        });
-    });
-
-
-    describe('rename asset', function() {
-        it('should rename an asset to a new name in the same node.', function(done) {
-            true.should.equal(false);
-            done();
-        });
-
-        it('should fail because asset does not exist.', function(done) {
-            true.should.equal(false);
-            done();
-        });
-
-        it('should fail because the user does not have permissions.', function(done) {
-            true.should.equal(false);
-            done();
-        });
-    });
-
-    describe('copy asset', function() {
-        it('should copy an asset from one node to another.', function(done) {
-            true.should.equal(false);
-            done();
-        });
-
-    });
-
-    describe('Get the details of one file', function() {
-        it('should get a file from a node specified by the filename.', function(done) {
-            true.should.equal(false);
-            done();
-        });
-
-        it('should return a 404 when it could not find the file.', function(done) {
-            true.should.equal(false);
-            done();
-        });
-    });
-
-/*
-
-     describe('POST: ' + url + '/node/:id/assets/move', function() {
-     it('should move one asset to another node.', function(done) {
-
-     request(url)
-     .post('/node/' + testNodeId + '/assets/move')
-     .set('Accept', 'application/json')
-     .set('Accept-Language', 'en_US')
-     .set('authorization', 'Token ' + globalEditorToken)
-     .send({
-     newnodeid: '',
-     filename: ''
-     })
-     .end(function(err, res) {
-     if (err) { throw err; }
-     res.status.should.equal(200);
-     res.body.message.should.equal('Success');
-     done();
-     });
-     });
-
-     it('should fail because the user does not have permissions on the new node id.', function(done) {
-     done();
-     });
-
-     it('should succeed when a user that is a reader but had editor rights on a specific node.', function(done) {
-     done();
-     });
-     });
-
-
-     describe('DELETE: ' + url + '/node/:id/assets/:name', function() {
-     it('should delete an asset with a specific name', function(done) {
-
-     request(url)
-     .del('/node/' + testNodeId + '/assets/' + testNodeId)
-     .set('Accept', 'application/json')
-     .set('Accept-Language', 'en_US')
-     .set('authorization', 'Token ' + globalEditorToken)
-     .end(function(err, res) {
-     if (err) { throw err; }
-     res.status.should.equal(200);
-     res.body.message.should.equal('Success');
-     done();
-     });
-     });
-
-     it('should fail because the user does not have permissions.', function(done) {
-     done();
-     });
-
-     it('should succeed when a user that is a reader but had editor rights on a specific node.', function(done) {
-     done();
-     });
-     });
-*/
-    describe('delete assets', function() {
-        it('should delete all files in a node.', function(done) {
-            true.should.equal(false);
-            done();
-        });
-
-        it('should fail because the user does not have permissions.', function(done) {
-            true.should.equal(false);
-            done();
-        });
-
-        it('should succeed when a user that is a reader but had editor rights on a specific node.', function(done) {
-            true.should.equal(false);
-            done();
-        });
-    });
-
-    describe('get all the assets in a node.', function() {
-        it('should return 401 because trying to access unauthenticated', function(done) {
-            true.should.equal(false);
-            done();
-        });
-
-        /* Requires Node Level Permissions
-        it('a reader should return a 403 because user does not have permissions to access a particular node', function(done) {
-            true.should.equal(false);
-            done();
-        });
-
-        it('an editor with rights restricted to a specific node should return a 403 error', function(done) {
-            true.should.equal(false);
-            done();
-        });
-        */
-
-        it('an editor should return a list of files in a node', function(done) {
-            true.should.equal(false);
-            done();
-        });
-
-
-        it('an editor should return a DEEP list of files in a node and it\'s children', function(done) {
-            true.should.equal(false);
-            done();
-        });
-
-        it('an editor should return a DEEP list of files in a node and it\'s children (even when there are no children) And node is empty.', function(done) {
-            true.should.equal(false);
-            done();
-        });
-
-        it('an editor should return a DEEP list of files in a node and it\'s children (even when there are no children) And node is NOT empty.', function(done) {
-            true.should.equal(false);
-            done();
-        });
-    });
-
     describe('deleteById', function() {
 
         it('Should delete an node.', function(done) {
             grasshopper.request(globalEditorToken).nodes.deleteById(testNodeIdRoot_generated).then(
                 function(payload){
-                    console.log(payload);
+                    payload.should.equal('Success');
                 },
                 function(err){
-                    console.log(err);
                     should.not.exist(err);
                 }
             ).done(done);
