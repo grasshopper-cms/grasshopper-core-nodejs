@@ -554,4 +554,17 @@ describe('Grasshopper core - testing nodes', function(){
         */
     });
 
+    after(function(done){
+        function del(file, next){
+            fs.unlinkSync(path.join(__dirname, file));
+            next();
+        }
+
+        async.each([
+            '../tmp/36.png',
+            '../tmp/48.png',
+            '../tmp/72.png',
+            '../tmp/96.png'
+        ], del, done);
+    });
 });
