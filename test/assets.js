@@ -144,7 +144,7 @@ describe('Grasshopper core - testing assets', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(404);
+                    err.code.should.equal(404);
                 }
             ).done(done);
         });
@@ -159,7 +159,7 @@ describe('Grasshopper core - testing assets', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(403);
+                    err.code.should.equal(403);
                 }
             ).done(done);
         });
@@ -167,21 +167,49 @@ describe('Grasshopper core - testing assets', function(){
 
     describe('copy asset', function() {
         it('should copy an asset from one node to another.', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(globalEditorToken).assets.copy({
+                nodeid: testNodeId,
+                newnodeid: '5246e73d56c02c0744000001',
+                filename: 'testimage.png'
+            }).then(
+                function(payload) {
+                    payload.message.should.equal('Success');
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
     });
 
     describe('Get the details of one file', function() {
         it('should get a file from a node specified by the filename.', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(globalEditorToken).assets.find({
+                nodeid: testNodeId,
+                filename: 'testimage.png'
+            }).then(
+                function(payload) {
+                    payload.should.be.an.object;
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
         it('should return a 404 when it could not find the file.', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(globalEditorToken).assets.find({
+                nodeid: testNodeId,
+                filename: 'gobledigook.png'
+            }).then(
+                function(payload) {
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.code.should.equal(404);
+                }
+            ).done(done);
         });
     });
 
@@ -242,21 +270,92 @@ describe('Grasshopper core - testing assets', function(){
      });
      });
      */
-    describe('delete assets', function() {
-        it('should delete all files in a node.', function(done) {
-            true.should.equal(false);
-            done();
+    describe('delete named asset', function() {
+        before(function(done) {
+            function upload(file, next){
+                fs.writeFileSync(path.join(__dirname, file.replace('./fixtures/', '../public/' + testNodeId + '/')), fs.readFileSync(path.join(__dirname, file)));
+                next();
+            }
+
+            async.each([
+                './fixtures/assetfordeletion.png',
+                './fixtures/36.png',
+                './fixtures/48.png',
+                './fixtures/72.png',
+                './fixtures/96.png'
+            ], upload, done);
+
+        });
+
+        it('should delete asset with a specific name', function(done) {
+            grasshopper.request(globalEditorToken).assets.delete({
+                nodeid: testNodeId,
+                filename: 'assetfordeletion.png'
+            }).then(
+                function(payload) {
+                    payload.message.should.equal('Success');
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
         it('should fail because the user does not have permissions.', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(globalReaderToken).assets.delete({
+                nodeid: testNodeId,
+                filename: 'assetfordeletion.png'
+            }).then(
+                function(payload) {
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.code.should.equal(403);
+                }
+            ).done(done);
         });
 
-        it('should succeed when a user that is a reader but had editor rights on a specific node.', function(done) {
+        /** Requires node level permissions
+         it('should succeed when a user that is a reader but had editor rights on a specific node.', function(done) {
             true.should.equal(false);
             done();
         });
+         */
+    });
+
+    describe('delete assets', function() {
+        it('should delete all files in a node.', function(done) {
+            grasshopper.request(globalEditorToken).assets.deleteAll({
+                nodeid: testNodeId
+            }).then(
+                function(payload) {
+                    payload.message.should.equal('Success');
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
+        });
+
+        it('should fail because the user does not have permissions.', function(done) {
+           grasshopper.request(globalReaderToken).assets.deleteAll({
+                nodeid: testNodeId
+            }).then(
+                function(payload) {
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.code.should.equal(403);
+                }
+            ).done(done);
+        });
+
+        /** Requires node level permissions
+         it('should succeed when a user that is a reader but had editor rights on a specific node.', function(done) {
+            true.should.equal(false);
+            done();
+        });
+         */
     });
 
     describe('get all the assets in a node.', function() {
