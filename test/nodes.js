@@ -6,6 +6,7 @@ describe('Grasshopper core - testing nodes', function(){
     'use strict';
 
     var async = require('async'),
+        fs = require('fs'),
         grasshopper = require('../lib/grasshopper'),
         globalAdminToken  = '',
         globalReaderToken = '',
@@ -40,6 +41,16 @@ describe('Grasshopper core - testing nodes', function(){
                                 'username': '',
                                 'password': '',
                                 'debug': false
+                            },
+                            'assets': {
+                                'default' : 'local',
+                                'tmpdir' : path.join(__dirname, '../tmp'),
+                                'engines': {
+                                    'local' : {
+                                        'path' : path.join(__dirname, '../public'),
+                                        'urlbase' : 'http://localhost'
+                                    }
+                                }
                             }
                         };
                     });
@@ -498,9 +509,28 @@ describe('Grasshopper core - testing nodes', function(){
     });
 
     describe('deleteById', function() {
+        before(function(done) {
+            function upload(file, next){
+                fs.writeFileSync(path.join(__dirname, file.replace('./fixtures/', '../public/5320ed3fb9c9cb6364e23031/')), fs.readFileSync(path.join(__dirname, file)));
+                next();
+            }
+            try{
+                fs.mkdirSync(path.join(__dirname, '../public/5320ed3fb9c9cb6364e23031/'));
+            }
+            catch (e){}
+
+            async.each([
+                './fixtures/assetfordeletion.png',
+                './fixtures/36.png',
+                './fixtures/48.png',
+                './fixtures/72.png',
+                './fixtures/96.png'
+            ], upload, done);
+
+        });
 
         it('Should delete an node.', function(done) {
-            grasshopper.request(globalEditorToken).nodes.deleteById(testNodeIdRoot_generated).then(
+            grasshopper.request(globalEditorToken).nodes.deleteById(testNodeId).then(
                 function(payload){
                     payload.should.equal('Success');
                 },
