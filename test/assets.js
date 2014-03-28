@@ -323,6 +323,63 @@ describe('Grasshopper core - testing assets', function(){
          */
     });
 
+    describe('get all the assets in a node.', function() {
+        it('should return 401 because trying to access unauthenticated', function(done) {
+            grasshopper.request().assets.list({
+                nodeid: testNodeId
+            }).then(
+                function(payload) {
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.code.should.equal(401);
+                }
+            ).done(done);
+        });
+
+        /* Requires Node Level Permissions
+         it('a reader should return a 403 because user does not have permissions to access a particular node', function(done) {
+         true.should.equal(false);
+         done();
+         });
+
+         it('an editor with rights restricted to a specific node should return a 403 error', function(done) {
+         true.should.equal(false);
+         done();
+         });
+         */
+
+        it('an editor should return a list of files in a node', function(done) {
+            grasshopper.request(globalEditorToken).assets.list({
+                nodeid: testNodeId
+            }).then(
+                function(payload) {
+                    payload.length.should.equal(5);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
+        });
+
+
+        /** Deferred until later
+        it('an editor should return a DEEP list of files in a node and it\'s children', function(done) {
+            true.should.equal(false);
+            done();
+        });
+
+        it('an editor should return a DEEP list of files in a node and it\'s children (even when there are no children) And node is empty.', function(done) {
+            true.should.equal(false);
+            done();
+        });
+
+        it('an editor should return a DEEP list of files in a node and it\'s children (even when there are no children) And node is NOT empty.', function(done) {
+            true.should.equal(false);
+            done();
+        });*/
+    });
+
     describe('delete assets', function() {
         it('should delete all files in a node.', function(done) {
             grasshopper.request(globalEditorToken).assets.deleteAll({
@@ -356,45 +413,5 @@ describe('Grasshopper core - testing assets', function(){
             done();
         });
          */
-    });
-
-    describe('get all the assets in a node.', function() {
-        it('should return 401 because trying to access unauthenticated', function(done) {
-            true.should.equal(false);
-            done();
-        });
-
-        /* Requires Node Level Permissions
-         it('a reader should return a 403 because user does not have permissions to access a particular node', function(done) {
-         true.should.equal(false);
-         done();
-         });
-
-         it('an editor with rights restricted to a specific node should return a 403 error', function(done) {
-         true.should.equal(false);
-         done();
-         });
-         */
-
-        it('an editor should return a list of files in a node', function(done) {
-            true.should.equal(false);
-            done();
-        });
-
-
-        it('an editor should return a DEEP list of files in a node and it\'s children', function(done) {
-            true.should.equal(false);
-            done();
-        });
-
-        it('an editor should return a DEEP list of files in a node and it\'s children (even when there are no children) And node is empty.', function(done) {
-            true.should.equal(false);
-            done();
-        });
-
-        it('an editor should return a DEEP list of files in a node and it\'s children (even when there are no children) And node is NOT empty.', function(done) {
-            true.should.equal(false);
-            done();
-        });
     });
 });
