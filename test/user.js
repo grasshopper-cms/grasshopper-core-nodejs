@@ -61,7 +61,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(403);
+                    err.code.should.equal(403);
                 }).done(done);
 
         });
@@ -82,7 +82,7 @@ describe('Grasshopper core - users', function(){
                 .then(function(payload){
                     should.not.exist(payload);
                 },function(err){
-                    err.errorCode.should.equal(401);
+                    err.code.should.equal(401);
                 }).done(done);
         });
 
@@ -91,7 +91,7 @@ describe('Grasshopper core - users', function(){
                 .then(function(payload){
                     should.not.exist(payload);
                 },function(err){
-                    err.errorCode.should.equal(404);
+                    err.code.should.equal(404);
                 }).done(done);
         });
     });
@@ -105,7 +105,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(403);
+                    err.code.should.equal(403);
                 }).done(done);
 
         });
@@ -126,7 +126,7 @@ describe('Grasshopper core - users', function(){
                 .then(function(payload){
                     should.not.exist(payload);
                 },function(err){
-                    err.errorCode.should.equal(401);
+                    err.code.should.equal(401);
                 }).done(done);
         });
 
@@ -135,7 +135,7 @@ describe('Grasshopper core - users', function(){
                 .then(function(payload){
                     should.not.exist(payload);
                 },function(err){
-                    err.errorCode.should.equal(404);
+                    err.code.should.equal(404);
                 }).done(done);
         });
     });
@@ -148,7 +148,7 @@ describe('Grasshopper core - users', function(){
                 .then(function(payload){
                     should.not.exist(payload);
                 },function(err){
-                    err.errorCode.should.equal(403);
+                    err.code.should.equal(403);
                 }).done(done);
 
         });
@@ -169,7 +169,7 @@ describe('Grasshopper core - users', function(){
                 .then(function(payload){
                     should.not.exist(payload);
                 },function(err){
-                    err.errorCode.should.equal(401);
+                    err.code.should.equal(401);
                 }).done(done);
         });
 
@@ -178,7 +178,7 @@ describe('Grasshopper core - users', function(){
                 .then(function(payload){
                     should.not.exist(payload);
                 },function(err){
-                    err.errorCode.should.equal(404);
+                    err.code.should.equal(404);
                 }).done(done);
         });
     });
@@ -200,7 +200,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(401);
+                    err.code.should.equal(401);
                 }
             ).done(done);
         });
@@ -233,7 +233,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(403);
+                    err.code.should.equal(403);
                 }
             ).done(done);
         });
@@ -253,7 +253,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(401);
+                    err.code.should.equal(401);
                 }
             ).done(done);
         });
@@ -267,7 +267,7 @@ describe('Grasshopper core - users', function(){
                 .then(function(payload){
                     should.not.exist(payload);
                 },function(err){
-                    err.errorCode.should.equal(403);
+                    err.code.should.equal(403);
                 }).done(done);
         });
 
@@ -339,7 +339,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(400);
+                    err.code.should.equal(400);
                     err.message.should.equal('Duplicate key already exists.');
                 }
             ).done(done);
@@ -360,7 +360,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(400);
+                    err.code.should.equal(400);
                     err.message.should.equal('Duplicate key already exists.');
                 }
             ).done(done);
@@ -380,7 +380,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(400);
+                    err.code.should.equal(400);
                     err.message.should.equal('"login" is a required field.');
                 }
             ).done(done);
@@ -401,7 +401,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(400);
+                    err.code.should.equal(400);
                     err.message.should.equal('"login" is a required field.');
                 }
             ).done(done);
@@ -422,7 +422,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(400);
+                    err.code.should.equal(400);
                     err.message.should.equal('"login" is a required field.');
                 }
             ).done(done);
@@ -443,7 +443,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(400);
+                    err.code.should.equal(400);
                     err.message.should.equal('Your login is too short.');
                 }
             ).done(done);
@@ -464,7 +464,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(400);
+                    err.code.should.equal(400);
                     err.message.should.equal('Password must be at least 6 characters.');
                 }
             ).done(done);
@@ -485,7 +485,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(400);
+                    err.code.should.equal(400);
                     err.message.should.equal('Password must be at least 6 characters.');
                 }
             ).done(done);
@@ -506,7 +506,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(400);
+                    err.code.should.equal(400);
                     err.message.should.equal('User\'s role is invalid.');
                 }
             ).done(done);
@@ -520,7 +520,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(401);
+                    err.code.should.equal(401);
                 }
             ).done(done);
         });
@@ -541,7 +541,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(403);
+                    err.code.should.equal(403);
                     err.message.should.equal('User does not have enough privileges.');
                 }
             ).done(done);
@@ -603,7 +603,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(404);
+                    err.code.should.equal(404);
                     err.message.should.equal('Resource could not be found.');
                 }
             ).done(done);
@@ -625,7 +625,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(400);
+                    err.code.should.equal(400);
                     err.message.should.equal('Your login is too short.');
                 }
             ).done(done);
@@ -648,7 +648,7 @@ describe('Grasshopper core - users', function(){
                 },
                 function(err){
                     err.message.should.equal('User\'s role is invalid.');
-                    err.errorCode.should.equal(400);
+                    err.code.should.equal(400);
                 }
             ).done(done);
         });
@@ -669,7 +669,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(400);
+                    err.code.should.equal(400);
                     err.message.should.equal('"login" is a required field.');
                 }
             ).done(done);
@@ -691,7 +691,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(400);
+                    err.code.should.equal(400);
                     err.message.should.equal('"login" is a required field.');
                 }
             ).done(done);
@@ -713,7 +713,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(400);
+                    err.code.should.equal(400);
                     err.message.should.equal('Duplicate key already exists.');
                 }
             ).done(done);
@@ -755,7 +755,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(403);
+                    err.code.should.equal(403);
                     err.message.should.equal('User does not have enough privileges.');
                 }
             ).done(done);
@@ -783,7 +783,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(401);
+                    err.code.should.equal(401);
                 }
             ).done(done);
         });
@@ -794,7 +794,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(403);
+                    err.code.should.equal(403);
                 }
             ).done(done);
         });
@@ -830,7 +830,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(403);
+                    err.code.should.equal(403);
                 }
             ).done(done);
         });
@@ -892,7 +892,7 @@ describe('Grasshopper core - users', function(){
                     function(payload){
                         should.not.exist(payload);
                     },function(err){
-                        err.errorCode.should.equal(401);
+                        err.code.should.equal(401);
                     }).done(done);
             }
 
@@ -946,7 +946,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(401);
+                    err.code.should.equal(401);
 
                 }
             ).done(done);
@@ -959,7 +959,7 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(403);
+                    err.code.should.equal(403);
 
                 }
             ).done(done);

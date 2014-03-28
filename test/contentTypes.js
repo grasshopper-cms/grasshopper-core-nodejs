@@ -48,7 +48,7 @@ describe('Grasshopper core - contentTypes', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(401);
+                    err.code.should.equal(401);
                 }
             ).done(done);
         });
@@ -69,7 +69,7 @@ describe('Grasshopper core - contentTypes', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(404);
+                    err.code.should.equal(404);
                 }
             ).done(done);
         });
@@ -113,7 +113,7 @@ describe('Grasshopper core - contentTypes', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(401);
+                    err.code.should.equal(401);
                 }
             ).done(done);
         });
@@ -165,7 +165,7 @@ describe('Grasshopper core - contentTypes', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(400);
+                    err.code.should.equal(400);
                     err.message.should.equal('"label" is a required field.');
                 }
             ).done(done);
@@ -192,7 +192,7 @@ describe('Grasshopper core - contentTypes', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(400);
+                    err.code.should.equal(400);
                     err.message.should.equal('Invalid Field Object');
                 }
             ).done(done);
@@ -218,7 +218,7 @@ describe('Grasshopper core - contentTypes', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(400);
+                    err.code.should.equal(400);
                     err.message.should.equal('Invalid Field Object');
                 }
             ).done(done);
@@ -244,7 +244,7 @@ describe('Grasshopper core - contentTypes', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(400);
+                    err.code.should.equal(400);
                     err.message.should.equal('Invalid Field Object');
                 }
             ).done(done);
@@ -271,7 +271,7 @@ describe('Grasshopper core - contentTypes', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(400);
+                    err.code.should.equal(400);
                     err.message.should.equal('Invalid Field Object');
                 }
             ).done(done);
@@ -301,7 +301,7 @@ describe('Grasshopper core - contentTypes', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(403);
+                    err.code.should.equal(403);
                 }
             ).done(done);
         });
@@ -366,7 +366,7 @@ describe('Grasshopper core - contentTypes', function(){
                     payload.should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(404);
+                    err.code.should.equal(404);
                 }
             ).done(done);
         });
@@ -380,7 +380,7 @@ describe('Grasshopper core - contentTypes', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(403);
+                    err.code.should.equal(403);
                 }
             ).done(done);
         });

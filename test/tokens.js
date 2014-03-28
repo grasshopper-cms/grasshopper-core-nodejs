@@ -52,7 +52,7 @@ describe('Grasshopper core - testing tokens', function(){
                     throw new Error('Payload should be null');
                 },
                 function(err){
-                    err.errorCode.should.equal(401);
+                    err.code.should.equal(401);
                 }
             ).done(done);
         });
@@ -63,7 +63,7 @@ describe('Grasshopper core - testing tokens', function(){
                     throw new Error('Payload should be null');
                 },
                 function(err){
-                    err.errorCode.should.equal(401);
+                    err.code.should.equal(401);
                 }
             ).done(done);
         });
@@ -85,7 +85,7 @@ describe('Grasshopper core - testing tokens', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(403);
+                    err.code.should.equal(403);
                 }
             ).done(done);
         });
@@ -139,7 +139,7 @@ describe('Grasshopper core - testing tokens', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(401);
+                    err.code.should.equal(401);
                 }
             ).done(done);
         });
@@ -165,7 +165,7 @@ describe('Grasshopper core - testing tokens', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    err.errorCode.should.equal(403);
+                    err.code.should.equal(403);
                 }
             ).done(done);
         });
