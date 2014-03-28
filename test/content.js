@@ -225,10 +225,7 @@ describe('Grasshopper core - content', function(){
 
     describe('query', function() {
         var query = {
-            filters: [{key: 'slug', cmp: '=', value: 'sample_content_title'}],
-            options: {
-                //include: ['node','fields.testfield']
-            }
+            filters: [{key: 'slug', cmp: '=', value: 'sample_content_title'}]
         }, query2 = {
             filters: [{key: 'nonsense', cmp: '=', value: 'XXXNEVERSHOULDMATCHANTYHINGXXX'}],
             options: {

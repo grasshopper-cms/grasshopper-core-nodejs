@@ -3,7 +3,7 @@
   "description": "Core grasshopper library to interface with the grasshopper DMS (data management system)",
   "main": "./lib/grasshopper",
   "author": "Travis McHattie",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/Solid-Interactive/grasshopper-core-nodejs.git"
