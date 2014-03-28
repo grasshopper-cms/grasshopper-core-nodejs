@@ -150,8 +150,18 @@ describe('Grasshopper core - testing assets', function(){
         });
 
         it('should fail because the user does not have permissions.', function(done) {
-            true.should.equal(false);
-            done();
+            grasshopper.request(globalReaderToken).assets.rename({
+                nodeid: testNodeId,
+                original: 'artwork.png',
+                updated: 'testimage.png'
+            }).then(
+                function(payload) {
+                    should.not.exist(payload);
+                },
+                function(err){
+                    err.errorCode.should.equal(403);
+                }
+            ).done(done);
         });
     });
 
