@@ -2,7 +2,7 @@
 
 ---------------------------------------------------------------
 
-### ALPHA - TO BE RELEASED OFFICIALLY EARLY 2014
+[![NPM](https://nodei.co/npm/grasshopper-core.png)](https://nodei.co/npm/grasshopper-core/)
 
 [![Build Status](https://travis-ci.org/Solid-Interactive/grasshopper-core-nodejs.png?branch=master)](https://travis-ci.org/Solid-Interactive/grasshopper-core-nodejs)
 
@@ -11,13 +11,30 @@
 
 ------------------------------------------------------------------
 
-Grasshopper is a Data Management System (DMS). A DMS is a layer that sits on top of a database that makes working with the data easier for both administrators and developers.
+Grasshopper is a Data Management System (DMS). A DMS is a layer that sits on top of a database that makes working with the data easier for both administrators and developers. Grasshopper knows about data, schemas, data organization and permissions/roles. Since these concepts are core to grasshopper you will not have to figure them out for each of your applications.
 
-Consolidating data management is very important if you are developing a lot of applications. This grasshopper project is a NodeJS library that can be imported by any NodeJS application.
+Standardizing data management is very important if you are developing a lot of applications. The grasshopper project is a NodeJS library that can be used as part of your solution.
 
-Common CMS products do not cut it for real apps. When you push a CMS beyond it's intended use you are constantly at war with it.  Our DMS is different, it is simply a data management tool not a website creator. This distinction makes it very appealing when creating APIs, apps or non-traditional websites.
+The most common implementation of grasshopper includes the admin project (dynamic UI that manages grasshopper data) and grasshopper-api (HTTP wrapper for core). If you are building a NodeJS project then grasshopper-core could be used natively in your application as well.
 
 
+[GRASSHOPPER API](https://github.com/Solid-Interactive/grasshopper-api-js)
+
+[GRASSHOPPER ADMIN](https://github.com/Solid-Interactive/grasshopper-admin)
+
+
+
+### Core concepts
+
+------------------------------------------------------------------
+
+*Users* - most applications need the concept of users, grasshopper provides a standard way to create and extend user data. It also supports roles and node based permissions.
+
+*Content Types* - or virtual schemas, since you are most likely using a NoSQL database you are not bound to any specific schema. Most applications still require data to be predictable so grasshopper allows the developer to create virtual schemas to accomplish data consistency.
+
+*Nodes* - or directories, nodes can be created to organize content into buckets of your choosing.
+
+*Content* - or an implementation of a content type. Many types of content make up an application.
 
 
 ### How would you use me?
@@ -109,15 +126,6 @@ Open the ```lib/config/configuration``` file
     * engines: collections of engines that will be used. NOTE: all engines get files saved to them, only the default returns results
 
 
-###  API Docs
-
-
-#### Content Types
-
-##### Valid Field Definition
-
-TBD - Need to provide rules related to content types.
-
 
 ### Running Tests
 
@@ -125,19 +133,17 @@ TBD - Need to provide rules related to content types.
 
 There are a couple of ways to run our unit tests.
 
-* $: ```make test```
-* $: ```npm test```
 * $: ```grunt test```
 
 ### Upcoming Features
 
 -------------------------------------------------------
 
+* Node based permissions
 * Hooks are not yet supported
 * Full node permissions for search criteria
 * Cascading permissions for child nodes
 * Deleting content when deleting a content type
-* Deleting content when deleting a node
 * Registering new collections
 * Security enhancements
 * Publish content to other environments
