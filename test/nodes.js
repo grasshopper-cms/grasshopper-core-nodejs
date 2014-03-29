@@ -561,7 +561,6 @@ describe('Grasshopper core - testing nodes', function(){
         }
 
         async.each([
-            '../tmp/36.png',
             '../tmp/48.png',
             '../tmp/72.png',
             '../tmp/96.png'
