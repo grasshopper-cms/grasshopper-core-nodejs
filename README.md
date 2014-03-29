@@ -161,4 +161,4 @@ There are a couple of ways to run our unit tests.
 
 -------------------------------------------------------
 
-Grasshopper API JS is released under a [MIT license](https://github.com/Solid-Interactive/grasshopper-core-nodejs/blob/master/LICENSE).
+Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-Interactive/grasshopper-core-nodejs/blob/master/LICENSE).
