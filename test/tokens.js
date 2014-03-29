@@ -4,6 +4,7 @@ describe('Grasshopper core - testing tokens', function(){
     'use strict';
 
     var grasshopper = require('../lib/grasshopper'),
+        path = require('path'),
         adminToken = '',
         readerToken = '',
         readerToken2 = '',
@@ -24,6 +25,16 @@ describe('Grasshopper core - testing tokens', function(){
                     'username': '',
                     'password': '',
                     'debug': false
+                },
+                'assets': {
+                    'default' : 'local',
+                    'tmpdir' : path.join(__dirname, '../tmp'),
+                    'engines': {
+                        'local' : {
+                            'path' : path.join(__dirname, '../public'),
+                            'urlbase' : 'http://localhost'
+                        }
+                    }
                 }
             };
         });

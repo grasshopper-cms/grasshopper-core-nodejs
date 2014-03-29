@@ -3,7 +3,8 @@ var should = require('chai').should();
 describe('Grasshopper core - testing authentications', function(){
     'use strict';
 
-    var grasshopper = require('../lib/grasshopper');
+    var grasshopper = require('../lib/grasshopper'),
+        path = require('path');
 
     before(function(done){
         grasshopper.configure(function(){
@@ -18,6 +19,16 @@ describe('Grasshopper core - testing authentications', function(){
                     'username': '',
                     'password': '',
                     'debug': false
+                },
+                'assets': {
+                    'default' : 'local',
+                    'tmpdir' : path.join(__dirname, '../tmp'),
+                    'engines': {
+                        'local' : {
+                            'path' : path.join(__dirname, '../public'),
+                            'urlbase' : 'http://localhost'
+                        }
+                    }
                 }
             };
         });

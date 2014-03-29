@@ -9,6 +9,7 @@ describe('Grasshopper core - users', function(){
     'use strict';
 
     var grasshopper = require('../lib/grasshopper'),
+        path = require('path'),
         testUserId  = '5245ce1d56c02c066b000001',
         adminToken = '',
         admin2UserId = '5246e73d56c02c0744000004',
@@ -33,6 +34,16 @@ describe('Grasshopper core - users', function(){
                     'username': '',
                     'password': '',
                     'debug': false
+                },
+                'assets': {
+                    'default' : 'local',
+                    'tmpdir' : path.join(__dirname, '../tmp'),
+                    'engines': {
+                        'local' : {
+                            'path' : path.join(__dirname, '../public'),
+                            'urlbase' : 'http://localhost'
+                        }
+                    }
                 }
             };
         });

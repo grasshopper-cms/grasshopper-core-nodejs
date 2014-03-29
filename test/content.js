@@ -4,6 +4,7 @@ describe('Grasshopper core - content', function(){
     'use strict';
 
     var async = require('async'),
+        path = require('path'),
         _ = require('underscore'),
         grasshopper = require('../lib/grasshopper'),
         testContentId  = '5261781556c02c072a000007',
@@ -34,6 +35,16 @@ describe('Grasshopper core - content', function(){
                     'username': '',
                     'password': '',
                     'debug': false
+                },
+                'assets': {
+                    'default' : 'local',
+                    'tmpdir' : path.join(__dirname, '../tmp'),
+                    'engines': {
+                        'local' : {
+                            'path' : path.join(__dirname, '../public'),
+                            'urlbase' : 'http://localhost'
+                        }
+                    }
                 }
             };
         });

@@ -4,6 +4,7 @@ describe('Grasshopper core - contentTypes', function(){
     'use strict';
 
     var grasshopper= require('../lib/grasshopper'),
+        path = require('path'),
         testContentTypeId  = '524362aa56c02c0703000001',
         readerToken = '',
         adminToken  = '',
@@ -22,6 +23,16 @@ describe('Grasshopper core - contentTypes', function(){
                     'username': '',
                     'password': '',
                     'debug': false
+                },
+                'assets': {
+                    'default' : 'local',
+                    'tmpdir' : path.join(__dirname, '../tmp'),
+                    'engines': {
+                        'local' : {
+                            'path' : path.join(__dirname, '../public'),
+                            'urlbase' : 'http://localhost'
+                        }
+                    }
                 }
             };
         });
