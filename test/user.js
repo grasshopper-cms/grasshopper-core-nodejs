@@ -1,15 +1,12 @@
-var chai = require('chai');
-var chaiAsPromised = require('chai-as-promised');
-
-chai.use(chaiAsPromised);
-
-var should = require('chai').should();
+var chai = require('chai'),
+    should = require('chai').should();
 
 describe('Grasshopper core - users', function(){
     'use strict';
 
     var grasshopper = require('../lib/grasshopper'),
         path = require('path'),
+        async = require('async'),
         testUserId  = '5245ce1d56c02c066b000001',
         adminToken = '',
         admin2UserId = '5246e73d56c02c0744000004',
@@ -576,6 +573,73 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(err);
                 }
             ).done(done);
+        });
+
+        describe('admin should be able to change a user\'s password', function(){
+            var token,
+                error;
+
+            before(function (done) {
+                function getTestUser(next){
+                    grasshopper.request(adminToken).users.getById(testReaderUserId).then(
+                        function(payload){
+                            next(null, payload);
+                        },
+                        function(err){
+                            next(err);
+                        }
+                    ).done();
+                }
+
+                function updateUser(user, next){
+                    user.password = 'thisismytestpassword';
+
+                    grasshopper.request(adminToken).users.update(user).then(
+                        function(){
+                            next();
+                        },
+                        function(err){
+                            next(err);
+                        }
+                    ).done();
+                }
+
+                function tryUseOldLogin(next){
+                    grasshopper.auth('apitestuserreader', 'TestPassword').then(
+                        function(token){
+                            next(should.not.exist(token));
+                        },
+                        function(){
+                            next();
+                        });
+                }
+
+                function tryUseNewLogin(next){
+                    grasshopper.auth('apitestuserreader', 'thisismytestpassword').then(
+                        function(token){
+                            next(null, token);
+                        },
+                        function(err){
+                            next(err);
+                        });
+                }
+
+                function complete(err, result) {
+                    error = err;
+                    token = result;
+                    done();
+                }
+
+                async.waterfall([getTestUser, updateUser, tryUseOldLogin, tryUseNewLogin],complete);
+            });
+
+            it('no error should be thrown', function(){
+                should.not.exist(error);
+            });
+
+            it('should return a valid token for new login',function() {
+                token.length.should.be.greaterThan(0);
+            });
         });
 
         it('one admin should be able to change the role of another admin.', function(done) {
