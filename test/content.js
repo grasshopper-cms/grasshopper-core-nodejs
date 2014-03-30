@@ -236,13 +236,24 @@ describe('Grasshopper core - content', function(){
 
     describe('query', function() {
         var query = {
-            filters: [{key: 'slug', cmp: '=', value: 'sample_content_title'}]
-        }, query2 = {
-            filters: [{key: 'nonsense', cmp: '=', value: 'XXXNEVERSHOULDMATCHANTYHINGXXX'}],
-            options: {
-                //include: ['node','fields.testfield']
-            }
-        };
+                filters: [{key: 'slug', cmp: '=', value: 'sample_content_title'}]
+            },
+            query2 = {
+                filters: [{key: 'nonsense', cmp: '=', value: 'XXXNEVERSHOULDMATCHANTYHINGXXX'}],
+                options: {}
+            },
+            query3 = {
+                filters: [{key: 'slug', cmp: '=', value: 'sample_content_title'}],
+                options: {
+                    include: ['fields.testfield']
+                }
+            },
+            query4 = {
+                filters: [{key: 'slug', cmp: '=', value: 'sample_content_title'}],
+                options: {
+                    exclude: ['fields.newColumn']
+                }
+            };
 
         it('should not a 401 because trying to access unauthenticated', function(done) {
             grasshopper.request().content.query(query).then(
@@ -259,6 +270,32 @@ describe('Grasshopper core - content', function(){
             grasshopper.request(tokens.globalReaderToken).content.query(query).then(
                 function(payload){
                     payload.length.should.equal(1);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
+        });
+
+        it('test "including" fields in a query', function(done) {
+            grasshopper.request(tokens.globalReaderToken).content.query(query3).then(
+                function(payload){
+                    payload.length.should.equal(1);
+                    payload[0].fields.testfield.should.equal('test value');
+                    payload[0].fields.should.not.have.property('newColumn');
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
+        });
+
+        it('test "excluding" fields in a query', function(done) {
+            grasshopper.request(tokens.globalReaderToken).content.query(query4).then(
+                function(payload){
+                    payload.length.should.equal(1);
+                    payload[0].fields.should.have.property('testfield');
+                    payload[0].fields.should.not.have.property('newColumn');
                 },
                 function(err){
                     should.not.exist(err);
