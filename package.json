@@ -1,6 +1,6 @@
 {
   "name": "grasshopper-core",
-  "description": "Core grasshopper library to interface with the grasshopper DMS (data management system)",
+  "description": "Core modules for the grasshopper data management system. A DMS is a layer that sits on top of a database that makes working with the data easier for both administrators and developers.",
   "main": "./lib/grasshopper",
   "author": "Travis McHattie",
   "version": "0.1.7",
