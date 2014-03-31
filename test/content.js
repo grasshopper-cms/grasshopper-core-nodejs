@@ -253,7 +253,17 @@ describe('Grasshopper core - content', function(){
                 options: {
                     exclude: ['fields.newColumn']
                 }
-            };
+            },
+            query5 = {
+                filters: [{key: 'slug', cmp: '=', value: 'sample_content_title'}],
+                options: {
+                    sortBy: 1111
+                }
+            },
+            query6 = {
+                filters: [{key: 'slug', cmp: '=', value: 'sample_content_title'}],
+                options: []
+            };;
 
         it('should not a 401 because trying to access unauthenticated', function(done) {
             grasshopper.request().content.query(query).then(
@@ -307,6 +317,28 @@ describe('Grasshopper core - content', function(){
             grasshopper.request(tokens.globalReaderToken).content.query(query2).then(
                 function(payload){
                     payload.length.should.equal(0);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
+        });
+
+        it('return valid results even if sortBy is not valid', function(done) {
+            grasshopper.request(tokens.globalReaderToken).content.query(query5).then(
+                function(payload){
+                    payload.length.should.equal(1);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
+        });
+
+        it('return valid results even if options is an empty array', function(done) {
+            grasshopper.request(tokens.globalReaderToken).content.query(query6).then(
+                function(payload){
+                    payload.length.should.equal(1);
                 },
                 function(err){
                     should.not.exist(err);
