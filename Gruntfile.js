@@ -6,7 +6,7 @@ module.exports = function(grunt) {
         test: '',
         shell: {
             test: {
-                command: 'mocha --colors -R Spec <%= test %>',
+                command: 'mocha --colors -R spec <%= test %>',
                 options: {
                     stdout: true,
                     stderr: true
@@ -37,20 +37,14 @@ module.exports = function(grunt) {
                     require: true
                 }
             }
-        },
-        watch: {
-            files: ['<%= jshint.files %>'],
-            tasks: ['jshint']
         }
     });
 
-    grunt.loadTasks('tasks');
+    grunt.loadTasks('grunt/tasks');
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
     grunt.registerTask('db:dev', ['mongodb:dev']);
     grunt.registerTask('db:test', ['mongodb:test']);
-
-
     grunt.registerTask('default', ['jshint']);
 
 };
