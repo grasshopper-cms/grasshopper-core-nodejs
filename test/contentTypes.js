@@ -398,11 +398,9 @@ describe('Grasshopper core - contentTypes', function(){
                 }
             }).then(
                 function(payload){
-                    console.log(payload);
                     done();
                 },
                 function(err){
-                    console.log(err);
                     done();
                 }
             ).done();
