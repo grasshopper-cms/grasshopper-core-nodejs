@@ -5,4 +5,4 @@ services:
   - mongodb
 before_script:
   - npm install -g grunt-cli
-  - ./tasks/importdb.sh
+  - ./grunt/tasks/importdb.sh
