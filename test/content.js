@@ -38,10 +38,10 @@ describe('Grasshopper core - content', function(){
                 },
                 'assets': {
                     'default' : 'local',
-                    'tmpdir' : path.join(__dirname, '../tmp'),
+                    'tmpdir' : path.join(__dirname, 'tmp'),
                     'engines': {
                         'local' : {
-                            'path' : path.join(__dirname, '../public'),
+                            'path' : path.join(__dirname, 'public'),
                             'urlbase' : 'http://localhost'
                         }
                     }

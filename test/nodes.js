@@ -44,10 +44,10 @@ describe('Grasshopper core - testing nodes', function(){
                             },
                             'assets': {
                                 'default' : 'local',
-                                'tmpdir' : path.join(__dirname, '../tmp'),
+                                'tmpdir' : path.join(__dirname, 'tmp'),
                                 'engines': {
                                     'local' : {
-                                        'path' : path.join(__dirname, '../public'),
+                                        'path' : path.join(__dirname, 'public'),
                                         'urlbase' : 'http://localhost'
                                     }
                                 }
@@ -511,11 +511,11 @@ describe('Grasshopper core - testing nodes', function(){
     describe('deleteById', function() {
         before(function(done) {
             function upload(file, next){
-                fs.writeFileSync(path.join(__dirname, file.replace('./fixtures/', '../public/5320ed3fb9c9cb6364e23031/')), fs.readFileSync(path.join(__dirname, file)));
+                fs.writeFileSync(path.join(__dirname, file.replace('./fixtures/', 'public/5320ed3fb9c9cb6364e23031/')), fs.readFileSync(path.join(__dirname, file)));
                 next();
             }
             try{
-                fs.mkdirSync(path.join(__dirname, '../public/5320ed3fb9c9cb6364e23031/'));
+                fs.mkdirSync(path.join(__dirname, 'public/5320ed3fb9c9cb6364e23031/'));
             }
             catch (e){}
 
@@ -561,9 +561,10 @@ describe('Grasshopper core - testing nodes', function(){
         }
 
         async.each([
-            '../tmp/48.png',
-            '../tmp/72.png',
-            '../tmp/96.png'
+            'tmp/36.png',
+            'tmp/48.png',
+            'tmp/72.png',
+            'tmp/96.png'
         ], del, done);
     });
 });

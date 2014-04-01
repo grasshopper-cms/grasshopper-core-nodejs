@@ -35,10 +35,10 @@ describe('Grasshopper core - testing assets', function(){
                             },
                             'assets': {
                                 'default' : 'local',
-                                'tmpdir' : path.join(__dirname, '../tmp'),
+                                'tmpdir' : path.join(__dirname, 'tmp'),
                                 'engines': {
                                     'local' : {
-                                        'path' : path.join(__dirname, '../public'),
+                                        'path' : path.join(__dirname, 'public'),
                                         'urlbase' : 'http://localhost'
                                     }
                                 }
@@ -87,7 +87,7 @@ describe('Grasshopper core - testing assets', function(){
     describe('create a new asset in a node', function() {
         it('post test fixtures', function(done) {
             function upload(file, next){
-                fs.writeFileSync(path.join(__dirname, file.replace('./fixtures/', '../tmp/')), fs.readFileSync(path.join(__dirname, file)));
+                fs.writeFileSync(path.join(__dirname, file.replace('./fixtures/', 'tmp/')), fs.readFileSync(path.join(__dirname, file)));
                 next();
              }
 
@@ -105,7 +105,7 @@ describe('Grasshopper core - testing assets', function(){
             grasshopper.request(globalEditorToken).assets.save({
                     nodeid: testNodeId,
                     filename: 'artwork.png',
-                    path: path.join(__dirname, '../tmp/artwork.png')
+                    path: path.join(__dirname, 'tmp/artwork.png')
                 }).then(
                     function(payload) {
                         payload.message.should.equal('Success');
@@ -216,7 +216,7 @@ describe('Grasshopper core - testing assets', function(){
     describe('Move an asset', function() {
         before(function(done) {
             function upload(file, next){
-                fs.writeFileSync(path.join(__dirname, file.replace('./fixtures/', '../public/' + testNodeId + '/')), fs.readFileSync(path.join(__dirname, file)));
+                fs.writeFileSync(path.join(__dirname, file.replace('./fixtures/', 'public/' + testNodeId + '/')), fs.readFileSync(path.join(__dirname, file)));
                 next();
             }
 
@@ -260,7 +260,7 @@ describe('Grasshopper core - testing assets', function(){
     describe('delete named asset', function() {
         before(function(done) {
             function upload(file, next){
-                fs.writeFileSync(path.join(__dirname, file.replace('./fixtures/', '../public/' + testNodeId + '/')), fs.readFileSync(path.join(__dirname, file)));
+                fs.writeFileSync(path.join(__dirname, file.replace('./fixtures/', 'public/' + testNodeId + '/')), fs.readFileSync(path.join(__dirname, file)));
                 next();
             }
 
