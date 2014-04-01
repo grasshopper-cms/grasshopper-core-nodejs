@@ -163,6 +163,24 @@ describe('Grasshopper core - content', function(){
                 }
             ).done(done);
         });
+
+        it('should return 400 because the content type we are using is invalid.', function(done) {
+            var obj = {
+                label:'Generated title', slug: 'generated_title', type: '5320ed3fb9c9cb6364e23031', nonce:'1234fdsdfsa565', status: 'Live', node : {_id: '526d5179966a883540000006', displayOrder: 1}, fields: {testfield: 'test value'}, author: {_id: '5246e73d56c02c0744000001', name: 'Test User'}
+            };
+
+
+            grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
+                function(payload){
+                    should.not.exist(payload);
+                },
+                function(err){
+                    console.log(err);
+                    err.code.should.equal(400);
+                    err.message.should.equal('The content type referenced is invalid.');
+                }
+            ).done(done);
+        });
     });
 
     describe('update', function() {
