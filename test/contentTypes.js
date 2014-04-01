@@ -385,6 +385,29 @@ describe('Grasshopper core - contentTypes', function(){
     });
 
     describe('deleteById', function() {
+        before(function(done){
+            grasshopper.request(adminToken).content.insert({
+                "label": "Future deletee",
+                "type": testCreatedContentTypeId,
+                "fields": {
+                    "testfield": "test value"
+                },
+                "node": {
+                    "_id": '526d5179966a883540000006',
+                    "displayOrder": 1
+                }
+            }).then(
+                function(payload){
+                    console.log(payload);
+                    done();
+                },
+                function(err){
+                    console.log(err);
+                    done();
+                }
+            ).done();
+        });
+
         it('should return a 403 because user does not have permissions to access content types', function(done) {
             grasshopper.request(readerToken).contentTypes.deleteById(testCreatedContentTypeId).then(
                 function(payload){
