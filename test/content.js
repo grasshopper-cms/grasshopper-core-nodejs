@@ -220,7 +220,7 @@ describe('Grasshopper core - content', function(){
                     },
                     function(err){
                         err.code.should.equal(400);
-                        err.message.should.equal('"Title" is not valid. Please your validation rules and try again.');
+                        err.message.should.equal('"Title" is not valid. Please check your validation rules and try again.');
                     }
                 ).done(done);
             });
@@ -242,12 +242,239 @@ describe('Grasshopper core - content', function(){
                     },
                     function(err){
                         err.code.should.equal(400);
-                        err.message.should.equal('"Title" is not valid. Please your validation rules and try again.');
+                        err.message.should.equal('"Title" is not valid. Please check your validation rules and try again.');
                     }
                 ).done(done);
             });
         });
 
+        describe('Number field validation testing for number value between 0-10',function(){
+            it('Should pass', function(done) {
+                grasshopper.request(tokens.globalEditorToken).content.insert({
+                    label:'Generated title',
+                    type: '524362aa56c02c0703000001',
+                    node: {
+                        _id: '526d5179966a883540000006',
+                        displayOrder: 1
+                    },
+                    fields: {
+                        testfield: 'testtest',
+                        numfield: 8
+                    }
+                }).then(
+                    function(payload){
+                        payload.label.should.equal('Generated title');
+                    },
+                    function(err){
+                        should.not.exist(err);
+                    }
+                ).done(done);
+            });
+
+            it('Should throw 400 because num is too low.', function(done) {
+                grasshopper.request(tokens.globalEditorToken).content.insert({
+                    label:'Generated title',
+                    type: '524362aa56c02c0703000001',
+                    node: {
+                        _id: '526d5179966a883540000006',
+                        displayOrder: 1
+                    },
+                    fields: {
+                        testfield: 'testtest',
+                        numfield: -1
+                    }
+                }).then(
+                    function(payload){
+                        should.not.exist(payload);
+                    },
+                    function(err){
+                        err.code.should.equal(400);
+                        err.message.should.equal('"Num Field" is not valid. Please check your validation rules and try again.');
+                    }
+                ).done(done);
+            });
+
+            it('Should throw 400 because num is too high.', function(done) {
+                grasshopper.request(tokens.globalEditorToken).content.insert({
+                    label:'Generated title',
+                    type: '524362aa56c02c0703000001',
+                    node: {
+                        _id: '526d5179966a883540000006',
+                        displayOrder: 1
+                    },
+                    fields: {
+                        testfield: 'testtest',
+                        numfield: 1000
+                    }
+                }).then(
+                    function(payload){
+                        should.not.exist(payload);
+                    },
+                    function(err){
+                        err.code.should.equal(400);
+                        err.message.should.equal('"Num Field" is not valid. Please check your validation rules and try again.');
+                    }
+                ).done(done);
+            });
+
+            it('Should throw 400 because number is a string.', function(done) {
+                grasshopper.request(tokens.globalEditorToken).content.insert({
+                    label:'Generated title',
+                    type: '524362aa56c02c0703000001',
+                    node: {
+                        _id: '526d5179966a883540000006',
+                        displayOrder: 1
+                    },
+                    fields: {
+                        testfield: 'testtest',
+                        numfield: '1a'
+                    }
+                }).then(
+                    function(payload){
+                        should.not.exist(payload);
+                    },
+                    function(err){
+                        err.code.should.equal(400);
+                        err.message.should.equal('"Num Field" is not valid. Please check your validation rules and try again.');
+                    }
+                ).done(done);
+            });
+
+            it('Should throw 400 because number is a string with a number in the string.', function(done) {
+                grasshopper.request(tokens.globalEditorToken).content.insert({
+                    label:'Generated title',
+                    type: '524362aa56c02c0703000001',
+                    node: {
+                        _id: '526d5179966a883540000006',
+                        displayOrder: 1
+                    },
+                    fields: {
+                        testfield: 'testtest',
+                        numfield: '1'
+                    }
+                }).then(
+                    function(payload){
+                        should.not.exist(payload);
+                    },
+                    function(err){
+                        err.code.should.equal(400);
+                        err.message.should.equal('"Num Field" is not valid. Please check your validation rules and try again.');
+                    }
+                ).done(done);
+            });
+        });
+
+        describe('AlphaNumeric field validation testing for length value between 5-10',function(){
+            it('Should pass', function(done) {
+                grasshopper.request(tokens.globalEditorToken).content.insert({
+                    label:'Generated title',
+                    type: '524362aa56c02c0703000001',
+                    node: {
+                        _id: '526d5179966a883540000006',
+                        displayOrder: 1
+                    },
+                    fields: {
+                        alphanumfield: 'tes123est'
+                    }
+                }).then(
+                    function(payload){
+                        payload.label.should.equal('Generated title');
+                    },
+                    function(err){
+                        should.not.exist(err);
+                    }
+                ).done(done);
+            });
+
+            it('Should throw 400 because alphanum is too short.', function(done) {
+                grasshopper.request(tokens.globalEditorToken).content.insert({
+                    label:'Generated title',
+                    type: '524362aa56c02c0703000001',
+                    node: {
+                        _id: '526d5179966a883540000006',
+                        displayOrder: 1
+                    },
+                    fields: {
+                        alphanumfield: '123f'
+                    }
+                }).then(
+                    function(payload){
+                        should.not.exist(payload);
+                    },
+                    function(err){
+                        err.code.should.equal(400);
+                        err.message.should.equal('"AlphaNum Field" is not valid. Please check your validation rules and try again.');
+                    }
+                ).done(done);
+            });
+
+            it('Should throw 400 because alphanum is too long.', function(done) {
+                grasshopper.request(tokens.globalEditorToken).content.insert({
+                    label:'Generated title',
+                    type: '524362aa56c02c0703000001',
+                    node: {
+                        _id: '526d5179966a883540000006',
+                        displayOrder: 1
+                    },
+                    fields: {
+                        alphanumfield: 'testtefdsafdsaf32432432st'
+                    }
+                }).then(
+                    function(payload){
+                        should.not.exist(payload);
+                    },
+                    function(err){
+                        err.code.should.equal(400);
+                        err.message.should.equal('"AlphaNum Field" is not valid. Please check your validation rules and try again.');
+                    }
+                ).done(done);
+            });
+        });
+
+        describe('Email field validation testing',function(){
+            it('Should pass', function(done) {
+                grasshopper.request(tokens.globalEditorToken).content.insert({
+                    label:'Generated title',
+                    type: '524362aa56c02c0703000001',
+                    node: {
+                        _id: '526d5179966a883540000006',
+                        displayOrder: 1
+                    },
+                    fields: {
+                        emailfield: 'test@test.com'
+                    }
+                }).then(
+                    function(payload){
+                        payload.label.should.equal('Generated title');
+                    },
+                    function(err){
+                        should.not.exist(err);
+                    }
+                ).done(done);
+            });
+
+            it('Should throw 400 because not a valid email address.', function(done) {
+                grasshopper.request(tokens.globalEditorToken).content.insert({
+                    label:'Generated title',
+                    type: '524362aa56c02c0703000001',
+                    node: {
+                        _id: '526d5179966a883540000006',
+                        displayOrder: 1
+                    },
+                    fields: {
+                        emailfield: '123f'
+                    }
+                }).then(
+                    function(payload){
+                        should.not.exist(payload);
+                    },
+                    function(err){
+                        err.code.should.equal(400);
+                        err.message.should.equal('"Email Field" is not valid. Please check your validation rules and try again.');
+                    }
+                ).done(done);
+            });
+        });
     });
 
     describe('update', function() {
