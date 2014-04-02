@@ -175,7 +175,6 @@ describe('Grasshopper core - content', function(){
                     should.not.exist(payload);
                 },
                 function(err){
-                    console.log(err);
                     err.code.should.equal(400);
                     err.message.should.equal('The content type referenced is invalid.');
                 }
