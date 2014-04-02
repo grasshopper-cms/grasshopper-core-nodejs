@@ -2,7 +2,7 @@ module.exports = function(ObjectID) {
     'use strict';
 
     return [
-        { _id: ObjectID('524362aa56c02c0703000001'), label: 'This is my test content type', helpText: '', meta: [], description: '', fields: [{id: 'testfield', required: true, instancing: 1, type: 'textbox', label: 'Title' } ]},
+        { _id: ObjectID('524362aa56c02c0703000001'), label: 'This is my test content type', helpText: '', meta: [], description: '', fields: [{id: 'testfield', required: true, instancing: 1, type: 'textbox', label: 'Title', validation: [{_id : 'alpha',options : {min : 5,max : 10}}] } ]},
         {
             _id: ObjectID('5254908d56c02c076e000001'),
             label: 'Users',
