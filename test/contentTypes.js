@@ -305,33 +305,6 @@ describe('Grasshopper core - contentTypes', function(){
                 }
             ).done(done);
         });
-
-        it('should return error when a malformed field is passed in (invalid type).', function(done){
-            var newContentType = {
-                label: 'newtestsuitecontent',
-                fields: {
-                    testid: {
-                        label: 'Test Field Label',
-                        type: 'I DONT EXIST',
-                        required: true,
-                        instancing: 1
-                    }
-                },
-                helpText: '',
-                meta: [],
-                description: ''
-            };
-
-            grasshopper.request(adminToken).contentTypes.insert(newContentType).then(
-                function(payload){
-                    should.not.exist(payload);
-                },
-                function(err){
-                    err.code.should.equal(400);
-                    err.message.should.equal('Invalid Field Object');
-                }
-            ).done(done);
-        });
     });
 
     describe('update', function() {

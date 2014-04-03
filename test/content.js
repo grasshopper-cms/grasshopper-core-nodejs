@@ -135,7 +135,7 @@ describe('Grasshopper core - content', function(){
 
         it('should successfully insert content because I have the correct permissions.', function(done) {
             var obj = {
-                label:'Generated title', type: '524362aa56c02c0703000001', node : {_id: '526d5179966a883540000006', displayOrder: 1}, fields: {testfield: 'testvalue'}
+                type: '524362aa56c02c0703000001', node : {_id: '526d5179966a883540000006', displayOrder: 1}, fields: {label:'Generated title',  testfield: 'testvalue'}
             };
 
             grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
@@ -183,18 +183,18 @@ describe('Grasshopper core - content', function(){
         describe('Alpha field validation testing for alpha value between 5-10 chars.',function(){
             it('Should pass', function(done) {
                 grasshopper.request(tokens.globalEditorToken).content.insert({
-                    label:'Generated title',
                     type: '524362aa56c02c0703000001',
                     node: {
                         _id: '526d5179966a883540000006',
                         displayOrder: 1
                     },
                     fields: {
+                        label:'Generated title',
                         testfield: 'testtest'
                     }
                 }).then(
                     function(payload){
-                        payload.label.should.equal('Generated title');
+                        payload.fields.label.should.equal('Generated title');
                     },
                     function(err){
                         should.not.exist(err);
@@ -250,19 +250,19 @@ describe('Grasshopper core - content', function(){
         describe('Number field validation testing for number value between 0-10',function(){
             it('Should pass', function(done) {
                 grasshopper.request(tokens.globalEditorToken).content.insert({
-                    label:'Generated title',
                     type: '524362aa56c02c0703000001',
                     node: {
                         _id: '526d5179966a883540000006',
                         displayOrder: 1
                     },
                     fields: {
+                        label:'Generated title',
                         testfield: 'testtest',
                         numfield: 8
                     }
                 }).then(
                     function(payload){
-                        payload.label.should.equal('Generated title');
+                        payload.fields.label.should.equal('Generated title');
                     },
                     function(err){
                         should.not.exist(err);
@@ -366,18 +366,18 @@ describe('Grasshopper core - content', function(){
         describe('AlphaNumeric field validation testing for length value between 5-10',function(){
             it('Should pass', function(done) {
                 grasshopper.request(tokens.globalEditorToken).content.insert({
-                    label:'Generated title',
                     type: '524362aa56c02c0703000001',
                     node: {
                         _id: '526d5179966a883540000006',
                         displayOrder: 1
                     },
                     fields: {
+                        label:'Generated title',
                         alphanumfield: 'tes123est'
                     }
                 }).then(
                     function(payload){
-                        payload.label.should.equal('Generated title');
+                        payload.fields.label.should.equal('Generated title');
                     },
                     function(err){
                         should.not.exist(err);
@@ -433,18 +433,18 @@ describe('Grasshopper core - content', function(){
         describe('Email field validation testing',function(){
             it('Should pass', function(done) {
                 grasshopper.request(tokens.globalEditorToken).content.insert({
-                    label:'Generated title',
                     type: '524362aa56c02c0703000001',
                     node: {
                         _id: '526d5179966a883540000006',
                         displayOrder: 1
                     },
                     fields: {
+                        label:'Generated title',
                         emailfield: 'test@test.com'
                     }
                 }).then(
                     function(payload){
-                        payload.label.should.equal('Generated title');
+                        payload.fields.label.should.equal('Generated title');
                     },
                     function(err){
                         should.not.exist(err);
