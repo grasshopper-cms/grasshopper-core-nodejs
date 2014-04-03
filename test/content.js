@@ -138,10 +138,9 @@ describe('Grasshopper core - content', function(){
                 label:'Generated title', type: '524362aa56c02c0703000001', node : {_id: '526d5179966a883540000006', displayOrder: 1}, fields: {testfield: 'testvalue'}
             };
 
-
             grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
                 function(payload){
-                    payload.label.should.equal(obj.label);
+                    payload.fields.label.should.equal(obj.fields.label);
                 },
                 function(err){
                     should.not.exist(err);
