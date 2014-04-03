@@ -135,13 +135,13 @@ describe('Grasshopper core - content', function(){
 
         it('should successfully insert content because I have the correct permissions.', function(done) {
             var obj = {
-                label:'Generated title', slug: 'generated_title', type: '524362aa56c02c0703000001', nonce:'1234fdsdfsa565', status: 'Live', node : {_id: '526d5179966a883540000006', displayOrder: 1}, fields: {testfield: 'test value'}, author: {_id: '5246e73d56c02c0744000001', name: 'Test User'}
+                type: '524362aa56c02c0703000001', node : {_id: '526d5179966a883540000006', displayOrder: 1}, fields: {label:'Generated title', testfield: 'test value'}
             };
 
 
             grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
                 function(payload){
-                    payload.label.should.equal(obj.label);
+                    payload.fields.label.should.equal(obj.fields.label);
                 },
                 function(err){
                     should.not.exist(err);
