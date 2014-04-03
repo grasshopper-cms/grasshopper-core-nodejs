@@ -131,6 +131,51 @@ describe('Grasshopper core - contentTypes', function(){
     });
 
     describe('insert', function() {
+
+
+        it('should insert a new contentType with the new schema', function(done){
+            var newContentType = {
+                "label": "Test Type",
+                "fields": [
+                    {
+                        "label": "Title",
+                        "max": 1,
+                        "min": 1,
+                        "options": false,
+                        "type": "textbox",
+                        "validation": [],
+                        "_id": "title"
+                    },
+                    {
+                        "label": "Something",
+                        "max": 1,
+                        "min": 1,
+                        "options": false,
+                        "type": "textbox",
+                        "validation": [
+                            {
+                                "type": "alpha",
+                                "options": {
+                                    "min": "5",
+                                    "max": "5"
+                                }
+                            }
+                        ],
+                        "_id": "something"
+                    }
+                ]
+            };
+
+            grasshopper.request(adminToken).contentTypes.insert(newContentType).then(
+                function(payload){
+                    payload.label.should.equal(newContentType.label);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
+        });
+
         it('should insert a content type', function(done){
             var newContentType = {
                 label: 'newtestsuitecontent',
