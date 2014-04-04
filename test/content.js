@@ -434,26 +434,21 @@ describe('Grasshopper core - content', function(){
 
 
             it('Should pass', function(done) {
-                grasshopper.request(tokens.globalEditorToken).content.insert(
-                    {
-                        "node": {
-                            "_id": "533e04dd48ece40b005625d9"
-                        },
-                        "fields": {
-                            "embeddedtype": {
-                                "title": "Hello World"
-                            },
-                            "title": "This Works?"
-                        },
-                        "type": "524362aa56c02c0703000001"
-
+                grasshopper.request(tokens.globalEditorToken).content.insert({
+                    type: '524362aa56c02c0703000001',
+                    node: {
+                        _id: '526d5179966a883540000006',
+                        displayOrder: 1
+                    },
+                    fields: {
+                        label:'Generated title',
+                        emailfield: 'test@test.com'
+                    }
                 }).then(
                     function(payload){
-                        console.log(payload);
                         payload.fields.label.should.equal('Generated title');
                     },
                     function(err){
-                        console.log(err);
                         should.not.exist(err);
                     }
                 ).done(done);
