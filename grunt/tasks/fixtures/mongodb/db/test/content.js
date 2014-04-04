@@ -15,7 +15,7 @@ module.exports = function(ObjectID) {
                 displayOrder: 1
             },
             fields: {
-                testfield: 'test value'
+                testfield: 'testvalue'
             },
             author: {
                 _id: ObjectID('5246e73d56c02c0744000001'),
@@ -33,7 +33,7 @@ module.exports = function(ObjectID) {
                 displayOrder: 1
             },
             fields: {
-                testfield: 'test value'
+                testfield: 'testvalue'
             },
             author: {
                 _id: ObjectID('5246e73d56c02c0744000001'),
