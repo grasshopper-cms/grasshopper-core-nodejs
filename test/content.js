@@ -431,6 +431,8 @@ describe('Grasshopper core - content', function(){
         });
 
         describe('Email field validation testing',function(){
+
+
             it('Should pass', function(done) {
                 grasshopper.request(tokens.globalEditorToken).content.insert({
                     type: '524362aa56c02c0703000001',
