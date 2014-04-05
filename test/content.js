@@ -430,9 +430,7 @@ describe('Grasshopper core - content', function(){
             });
         });
 
-        describe('Email field validation testing',function(){
-
-
+        describe('Unique field validation testing',function(){
             it('Should pass', function(done) {
                 grasshopper.request(tokens.globalEditorToken).content.insert({
                     type: '524362aa56c02c0703000001',
@@ -442,11 +440,11 @@ describe('Grasshopper core - content', function(){
                     },
                     fields: {
                         label:'Generated title',
-                        emailfield: 'test@test.com'
+                        uniquefield1: 'test'
                     }
                 }).then(
                     function(payload){
-                        payload.fields.label.should.equal('Generated title');
+                        payload.fields.uniquefield1.should.equal('test');
                     },
                     function(err){
                         should.not.exist(err);
@@ -454,16 +452,16 @@ describe('Grasshopper core - content', function(){
                 ).done(done);
             });
 
-            it('Should throw 400 because not a valid email address.', function(done) {
+            it('Should fail because we just created a record that will conflict.', function(done) {
                 grasshopper.request(tokens.globalEditorToken).content.insert({
-                    label:'Generated title',
                     type: '524362aa56c02c0703000001',
                     node: {
                         _id: '526d5179966a883540000006',
                         displayOrder: 1
                     },
                     fields: {
-                        emailfield: '123f'
+                        label:'Generated title',
+                        uniquefield1: 'test'
                     }
                 }).then(
                     function(payload){
@@ -471,7 +469,6 @@ describe('Grasshopper core - content', function(){
                     },
                     function(err){
                         err.code.should.equal(400);
-                        err.message.should.equal('"Email Field" is not valid. Please check your validation rules and try again.');
                     }
                 ).done(done);
             });
