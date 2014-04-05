@@ -58,13 +58,36 @@ module.exports = function(ObjectID) {
                 },
                 {
                     id: 'emailfield',
-                    required: false,
-                    instancing: 1,
                     type: 'textbox',
                     label: 'Email Field',
                     validation: [
                         {
                             _id : 'email'
+                        }
+                    ]
+                },{
+                    id: 'uniquefield1',
+                    type: 'textbox',
+                    label: 'Globally Unique Field',
+                    validation: [
+                        {
+                            _id : 'unique',
+                            options: {
+                                property: 'fields.uniquefield1'
+                            }
+                        }
+                    ]
+                },{
+                    id: 'uniquefield2',
+                    type: 'textbox',
+                    label: 'Unique Field For Specific Content Type',
+                    validation: [
+                        {
+                            _id : 'unique',
+                            options: {
+                                property: 'fields.uniquefield2',
+                                contentTypes: ['524362aa56c02c0703000001']
+                            }
                         }
                     ]
                 }
