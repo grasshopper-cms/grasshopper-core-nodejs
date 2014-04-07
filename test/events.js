@@ -43,5 +43,11 @@ describe('Grasshopper core - testing events', function(){
         grasshopper.event.channel('/node/testnodeid/type/testtypeid').on('save', function(){
 
         });
+
+        grasshopper.event.emit('save', {
+                node:'testnodeid'
+            },{
+                payload: 'object'
+            });
     });
 });
