@@ -38,7 +38,6 @@ describe('Grasshopper core - testing events', function(){
     describe('Registering channels', function(){
         it('I should be able to register a channel and fire and event and get the result.', function(){
             grasshopper.event.channel('/type/1').on('save', function(payload){
-                console.log('callback');
                 payload.should.equal(true);
             });
 
