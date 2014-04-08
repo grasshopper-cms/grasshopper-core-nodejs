@@ -36,14 +36,43 @@ describe('Grasshopper core - testing events', function(){
     });
 
     describe('Registering channels', function(){
-        it('I should be able to register a channel and fire and event and get the result.', function(){
-            grasshopper.event.channel('/type/1').on('save', function(payload){
+        it('I should be able to register a channel and fire and event and get the result.', function(done){
+            grasshopper.event.channel('/type/1').on('save', function(payload, next){
                 payload.should.equal(true);
+                next();
             });
 
-            grasshopper.event.emit('save', {
-                type:'1'
-            }, true);
+            grasshopper.event.emit('save', { type:'1' }, true).then(
+                function(){
+
+                },
+                function(err){
+                    should.not.exist(err);
+                }).done(done);
+        });
+    });
+
+    describe('Test validation event emitter', function(){
+        before(function(){
+            grasshopper.event.channel('/type/1').on('validate', function(payload, next){
+                console.log(payload);
+                next();
+            });
+        });
+
+        it('I should be able to register a channel and fire and event and get the result.', function(done){
+            grasshopper.event.channel('/type/1').on('save', function(payload, next){
+                payload.should.equal(true);
+                next();
+            });
+
+            grasshopper.event.emit('save', { type:'1' }, true).then(
+                function(){
+
+                },
+                function(err){
+                    should.not.exist(err);
+                }).done(done);
         });
     });
 });
