@@ -7,6 +7,7 @@ describe('Grasshopper core - testing events', function(){
         path = require('path');
 
     before(function(done){
+
         grasshopper.configure(function(){
             this.config = {
                 'crypto': {
@@ -32,6 +33,15 @@ describe('Grasshopper core - testing events', function(){
                 }
             };
         });
+
+        grasshopper.event.channel('/system/*').on('error', function(payload, next){
+            console.log(payload);
+        });
+
+        grasshopper.event.channel('/system/db').on('start', function(payload, next){
+
+            next();
+        });
         done();
     });
 
@@ -53,20 +63,13 @@ describe('Grasshopper core - testing events', function(){
     });
 
     describe('Test validation event emitter', function(){
-        before(function(){
-            grasshopper.event.channel('/type/1').on('validate', function(payload, next){
-                console.log(payload);
-                next();
-            });
-        });
-
         it('I should be able to register a channel and fire and event and get the result.', function(done){
-            grasshopper.event.channel('/type/1').on('save', function(payload, next){
+            grasshopper.event.channel('/type/1').on('validate', function(payload, next){
                 payload.should.equal(true);
                 next();
             });
 
-            grasshopper.event.emit('save', { type:'1' }, true).then(
+            grasshopper.event.emit('validate', { type:'1' }, true).then(
                 function(){
 
                 },
