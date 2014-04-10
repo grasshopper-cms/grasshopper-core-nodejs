@@ -4,7 +4,8 @@ describe('Grasshopper core - testing event events', function(){
     'use strict';
 
     var grasshopper = require('../lib/grasshopper'),
-        path = require('path');
+        path = require('path'),
+        _ = require('underscore');
 
     before(function(done){
 
@@ -97,7 +98,7 @@ describe('Grasshopper core - testing event events', function(){
             });
 
             afterEach(function(){
-                grasshopper.event.channel('/type/524362aa56c02c0703000001').remove('parse');
+                grasshopper.event.channel('/type/524362aa56c02c0703000001').off('parse');
             });
         });
 
@@ -124,7 +125,7 @@ describe('Grasshopper core - testing event events', function(){
             });
 
             afterEach(function(){
-                grasshopper.event.channel('/type/524362aa56c02c0703000001').remove('validate');
+                grasshopper.event.channel('/type/524362aa56c02c0703000001').off('validate');
             });
         });
 
@@ -154,7 +155,7 @@ describe('Grasshopper core - testing event events', function(){
             });
 
             afterEach(function(){
-                grasshopper.event.channel('/type/524362aa56c02c0703000001').remove('out');
+                grasshopper.event.channel('/type/524362aa56c02c0703000001').off('out');
             });
         });
 
@@ -176,7 +177,114 @@ describe('Grasshopper core - testing event events', function(){
             });
 
             afterEach(function(){
-                grasshopper.event.channel('/type/524362aa56c02c0703000001').remove('save');
+                grasshopper.event.channel('/type/524362aa56c02c0703000001').off('save');
+            });
+        });
+
+        describe('When updating all events should get called.', function(){
+            var sampleContentObject;
+
+            before(function(done){
+                grasshopper.request(token).content.getById('5261781556c02c072a000007').then(
+                    function(payload){
+                        sampleContentObject = payload;
+                    }).done(done);
+            });
+
+            it('out should manipulate the outputed payload', function(done){
+
+                var obj = {},
+                    eventCount = 0;
+                _.extend(obj, sampleContentObject);
+
+                grasshopper.event.channel('/type/524362aa56c02c0703000001/contentid/5261781556c02c072a000007').on('parse', function(kontx, next){
+                    eventCount++;
+                    next();
+                });
+
+                grasshopper.event.channel('/type/524362aa56c02c0703000001').on('parse', function(kontx, next){
+                    eventCount++;
+                    next();
+                });
+
+                grasshopper.event.channel('/type/524362aa56c02c0703000001').on('validate', function(kontx, next){
+                    eventCount++;
+                    next();
+                });
+
+                grasshopper.event.channel('/type/524362aa56c02c0703000001').on('out', function(kontx, next){
+                    eventCount++;
+                    next();
+                });
+
+                grasshopper.event.channel('/type/524362aa56c02c0703000001').on('save', function(kontx, next){
+                    eventCount++;
+                    eventCount.should.equal(5);
+                    done();
+                    next();
+                });
+
+                grasshopper.request(token).content.update(obj).done();
+            });
+
+            afterEach(function(){
+                grasshopper.event.channel('/type/524362aa56c02c0703000001/contentid/5261781556c02c072a000007').off('parse');
+                grasshopper.event.channel('/type/524362aa56c02c0703000001').off('parse');
+                grasshopper.event.channel('/type/524362aa56c02c0703000001').off('validate');
+                grasshopper.event.channel('/type/524362aa56c02c0703000001').off('out');
+                grasshopper.event.channel('/type/524362aa56c02c0703000001').off('save');
+            });
+        });
+
+        describe('When deleting data all events should get called.', function(){
+            var contentid,
+                eventCount = 0;
+
+            before(function(done){
+                grasshopper.request(token).content.insert({
+                    type: '524362aa56c02c0703000001',
+                    node : {_id: '526d5179966a883540000006', displayOrder: 1},
+                    fields: {
+                        testfield:'abcdefg'
+                    }
+                }).then(
+                    function(payload){
+                        contentid = payload._id.toString();
+                    }
+                ).done(done);
+            });
+
+            it('out should manipulate the outputed payload', function(done){
+                grasshopper.event.channel('/type/524362aa56c02c0703000001').on('parse', function(kontx, next){
+                    eventCount++;
+                    next();
+                });
+
+                grasshopper.event.channel('/type/524362aa56c02c0703000001').on('validate', function(kontx, next){
+                    eventCount++;
+                    next();
+                });
+
+                grasshopper.event.channel('/type/524362aa56c02c0703000001').on('out', function(kontx, next){
+                    eventCount++;
+                    next();
+                });
+
+                grasshopper.event.channel('/type/524362aa56c02c0703000001').on('delete', function(kontx, next){
+                    eventCount++;
+                    eventCount.should.equal(4);
+                    done();
+                    next();
+                });
+
+                grasshopper.request(token).content.deleteById(contentid).done();
+            });
+
+            afterEach(function(){
+                grasshopper.event.channel('/type/524362aa56c02c0703000001').off('parse');
+                grasshopper.event.channel('/type/524362aa56c02c0703000001').off('validate');
+                grasshopper.event.channel('/type/524362aa56c02c0703000001').off('out');
+                grasshopper.event.channel('/type/524362aa56c02c0703000001').off('delete');
             });
         });
     });
