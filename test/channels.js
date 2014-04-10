@@ -1,6 +1,6 @@
 var should = require('chai').should();
 
-describe('Grasshopper core - testing events', function(){
+describe('Grasshopper core - testing channels', function(){
     'use strict';
 
     var grasshopper = require('../lib/grasshopper'),
@@ -79,3 +79,4 @@ describe('Grasshopper core - testing events', function(){
         });
     });
 });
+
