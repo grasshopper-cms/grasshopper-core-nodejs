@@ -36,7 +36,7 @@ describe('Grasshopper core - testing authentications', function(){
     });
 
     it('not authenticate because user doesn\'t exist', function(done) {
-        grasshopper.auth('travis', '12345')
+        grasshopper.auth('username', {username:'travis', password:'12345'})
             .then(function(obj){
                 should.not.exist(obj);
             })
@@ -49,7 +49,7 @@ describe('Grasshopper core - testing authentications', function(){
     });
 
     it('should authenticate with a valid user.', function(done) {
-        grasshopper.auth('admin', 'TestPassword')
+        grasshopper.auth('username', {username:'admin', password:'TestPassword'})
             .then(function(obj){
                 should.exist(obj);
             })
