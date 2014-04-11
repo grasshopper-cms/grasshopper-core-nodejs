@@ -59,8 +59,11 @@ describe('Grasshopper core - testing event events', function(){
                 });
 
                 grasshopper.request(token).content.insert({
-                    type: '524362aa56c02c0703000001',
-                    node : {_id: '526d5179966a883540000006', displayOrder: 1},
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
+                    },
                     fields: {
                         testfield:'abcdefg'
                     }
@@ -77,8 +80,11 @@ describe('Grasshopper core - testing event events', function(){
             it('accept a completely incorrect data type and parse it into a valid data type.', function(done){
                 grasshopper.event.channel('/type/524362aa56c02c0703000001').on('parse', function(payload, next){
                     payload.args = {
-                        type: '524362aa56c02c0703000001',
-                            node : {_id: '526d5179966a883540000006', displayOrder: 1},
+                        meta: {
+                            type: '524362aa56c02c0703000001',
+                            node : '526d5179966a883540000006',
+                            labelfield: 'testfield'
+                        },
                         fields: {
                             testfield:'aaaaaa'
                         }
@@ -87,7 +93,7 @@ describe('Grasshopper core - testing event events', function(){
                     next();
                 });
 
-                grasshopper.request(token).content.insert({label:'thisismybadinput', type: '524362aa56c02c0703000001'}).then(
+                grasshopper.request(token).content.insert({label:'thisismybadinput', meta: {type: '524362aa56c02c0703000001'}}).then(
                     function(payload){
                         payload.fields.testfield.should.equal('aaaaaa');
                     },
@@ -109,8 +115,11 @@ describe('Grasshopper core - testing event events', function(){
                 });
 
                 grasshopper.request(token).content.insert({
-                    type: '524362aa56c02c0703000001',
-                    node : {_id: '526d5179966a883540000006', displayOrder: 1},
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
+                    },
                     fields: {
                         testfield:'abcdefg'
                     }
@@ -139,8 +148,11 @@ describe('Grasshopper core - testing event events', function(){
                 });
 
                 grasshopper.request(token).content.insert({
-                    type: '524362aa56c02c0703000001',
-                    node : {_id: '526d5179966a883540000006', displayOrder: 1},
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
+                    },
                     fields: {
                         testfield:'abcdefg'
                     }
@@ -168,8 +180,11 @@ describe('Grasshopper core - testing event events', function(){
                 });
 
                 grasshopper.request(token).content.insert({
-                    type: '524362aa56c02c0703000001',
-                    node : {_id: '526d5179966a883540000006', displayOrder: 1},
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
+                    },
                     fields: {
                         testfield:'abcdefg'
                     }
@@ -242,8 +257,11 @@ describe('Grasshopper core - testing event events', function(){
 
             before(function(done){
                 grasshopper.request(token).content.insert({
-                    type: '524362aa56c02c0703000001',
-                    node : {_id: '526d5179966a883540000006', displayOrder: 1},
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
+                    },
                     fields: {
                         testfield:'abcdefg'
                     }

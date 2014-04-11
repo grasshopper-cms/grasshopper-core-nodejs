@@ -105,7 +105,14 @@ describe('Grasshopper core - content', function(){
     describe('insert', function() {
         it('should return 401 because trying to access unauthenticated', function(done) {
             var obj = {
-                label:'Generated title', slug: 'generated_title', type: '524362aa56c02c0703000001', nonce:'1234fdsdfsa565', status: 'Live', node : {_id: '526d5179966a883540000006', displayOrder: 1}, fields: {testfield: 'testvalue'}, author: {_id: '5246e73d56c02c0744000001', name: 'Test User'}
+                meta: {
+                    type: '524362aa56c02c0703000001',
+                    node : '526d5179966a883540000006',
+                    labelfield: 'testfield'
+                },
+                fields: {
+                    testfield: 'testvalue'
+                }
             };
 
             grasshopper.request().content.insert(obj).then(
@@ -120,7 +127,14 @@ describe('Grasshopper core - content', function(){
 
         it('should return 403 because I am am only a reader of content.', function(done) {
             var obj = {
-                label:'Generated title', slug: 'generated_title', type: '524362aa56c02c0703000001', nonce:'1234fdsdfsa565', status: 'Live', node : {_id: '526d5179966a883540000006', displayOrder: 1}, fields: {testfield: 'testvalue'}, author: {_id: '5246e73d56c02c0744000001', name: 'Test User'}
+                meta: {
+                    type: '524362aa56c02c0703000001',
+                    node : '526d5179966a883540000006',
+                    labelfield: 'testfield'
+                },
+                fields: {
+                    testfield: 'testvalue'
+                }
             };
 
             grasshopper.request(tokens.globalReaderToken).content.insert(obj).then(
@@ -135,7 +149,15 @@ describe('Grasshopper core - content', function(){
 
         it('should successfully insert content because I have the correct permissions.', function(done) {
             var obj = {
-                type: '524362aa56c02c0703000001', node : {_id: '526d5179966a883540000006', displayOrder: 1}, fields: {label:'Generated title',  testfield: 'testvalue'}
+                meta: {
+                    type: '524362aa56c02c0703000001',
+                    node : '526d5179966a883540000006',
+                    labelfield: 'testfield'
+                },
+                fields: {
+                    label: 'Generated title',
+                    testfield: 'testvalue'
+                }
             };
 
             grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
@@ -150,7 +172,15 @@ describe('Grasshopper core - content', function(){
 
         it('should return 403 because I am trying to insert content in a node that is restricted to me.', function(done) {
             var obj = {
-                label:'Generated title', slug: 'generated_title', type: '524362aa56c02c0703000001', nonce:'1234fdsdfsa565', status: 'Live', node : {_id: '526d5179966a883540000006', displayOrder: 1}, fields: {testfield: 'testvalue'}, author: {_id: '5246e73d56c02c0744000001', name: 'Test User'}
+                meta: {
+                    type: '524362aa56c02c0703000001',
+                    node : '526d5179966a883540000006',
+                    labelfield: 'testfield'
+                },
+                fields: {
+                    label: 'Generated title',
+                    testfield: 'testvalue'
+                }
             };
 
             grasshopper.request(tokens.restrictedEditorToken).content.insert(obj).then(
@@ -165,9 +195,16 @@ describe('Grasshopper core - content', function(){
 
         it('should return 400 because the content type we are using is invalid.', function(done) {
             var obj = {
-                label:'Generated title', slug: 'generated_title', type: '5320ed3fb9c9cb6364e23031', nonce:'1234fdsdfsa565', status: 'Live', node : {_id: '526d5179966a883540000006', displayOrder: 1}, fields: {testfield: 'testvalue'}, author: {_id: '5246e73d56c02c0744000001', name: 'Test User'}
+                meta: {
+                    type: '5320ed3fb9c9cb6364e23031',
+                    node : '526d5179966a883540000006',
+                    labelfield: 'testfield'
+                },
+                fields: {
+                    label: 'Generated title',
+                    testfield: 'testvalue'
+                }
             };
-
 
             grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
                 function(payload){
@@ -182,17 +219,19 @@ describe('Grasshopper core - content', function(){
 
         describe('Alpha field validation testing for alpha value between 5-10 chars.',function(){
             it('Should pass', function(done) {
-                grasshopper.request(tokens.globalEditorToken).content.insert({
-                    type: '524362aa56c02c0703000001',
-                    node: {
-                        _id: '526d5179966a883540000006',
-                        displayOrder: 1
+                var obj = {
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
                     },
                     fields: {
-                        label:'Generated title',
-                        testfield: 'testtest'
+                        label: 'Generated title',
+                        testfield: 'testvalue'
                     }
-                }).then(
+                };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
                     function(payload){
                         payload.fields.label.should.equal('Generated title');
                     },
@@ -203,17 +242,19 @@ describe('Grasshopper core - content', function(){
             });
 
             it('Should throw 400 because alpha is too short.', function(done) {
-                grasshopper.request(tokens.globalEditorToken).content.insert({
-                    label:'Generated title',
-                    type: '524362aa56c02c0703000001',
-                    node: {
-                        _id: '526d5179966a883540000006',
-                        displayOrder: 1
+                var obj = {
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
                     },
                     fields: {
+                        label: 'Generated title',
                         testfield: 'test'
                     }
-                }).then(
+                };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
                     function(payload){
                         should.not.exist(payload);
                     },
@@ -225,17 +266,19 @@ describe('Grasshopper core - content', function(){
             });
 
             it('Should throw 400 because alpha includes a number.', function(done) {
-                grasshopper.request(tokens.globalEditorToken).content.insert({
-                    label:'Generated title',
-                    type: '524362aa56c02c0703000001',
-                    node: {
-                        _id: '526d5179966a883540000006',
-                        displayOrder: 1
+                var obj = {
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
                     },
                     fields: {
+                        label: 'Generated title',
                         testfield: 'testtest1'
                     }
-                }).then(
+                };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
                     function(payload){
                         should.not.exist(payload);
                     },
@@ -249,18 +292,20 @@ describe('Grasshopper core - content', function(){
 
         describe('Number field validation testing for number value between 0-10',function(){
             it('Should pass', function(done) {
-                grasshopper.request(tokens.globalEditorToken).content.insert({
-                    type: '524362aa56c02c0703000001',
-                    node: {
-                        _id: '526d5179966a883540000006',
-                        displayOrder: 1
+                var obj = {
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
                     },
                     fields: {
-                        label:'Generated title',
+                        label: 'Generated title',
                         testfield: 'testtest',
                         numfield: 8
                     }
-                }).then(
+                };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
                     function(payload){
                         payload.fields.label.should.equal('Generated title');
                     },
@@ -271,18 +316,20 @@ describe('Grasshopper core - content', function(){
             });
 
             it('Should throw 400 because num is too low.', function(done) {
-                grasshopper.request(tokens.globalEditorToken).content.insert({
-                    label:'Generated title',
-                    type: '524362aa56c02c0703000001',
-                    node: {
-                        _id: '526d5179966a883540000006',
-                        displayOrder: 1
+                var obj = {
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
                     },
                     fields: {
+                        label: 'Generated title',
                         testfield: 'testtest',
                         numfield: -1
                     }
-                }).then(
+                };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
                     function(payload){
                         should.not.exist(payload);
                     },
@@ -294,18 +341,19 @@ describe('Grasshopper core - content', function(){
             });
 
             it('Should throw 400 because num is too high.', function(done) {
-                grasshopper.request(tokens.globalEditorToken).content.insert({
-                    label:'Generated title',
-                    type: '524362aa56c02c0703000001',
-                    node: {
-                        _id: '526d5179966a883540000006',
-                        displayOrder: 1
+                var obj = {
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
                     },
                     fields: {
+                        label: 'Generated title',
                         testfield: 'testtest',
                         numfield: 1000
                     }
-                }).then(
+                };
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
                     function(payload){
                         should.not.exist(payload);
                     },
@@ -317,18 +365,20 @@ describe('Grasshopper core - content', function(){
             });
 
             it('Should throw 400 because number is a string.', function(done) {
-                grasshopper.request(tokens.globalEditorToken).content.insert({
-                    label:'Generated title',
-                    type: '524362aa56c02c0703000001',
-                    node: {
-                        _id: '526d5179966a883540000006',
-                        displayOrder: 1
+                var obj = {
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
                     },
                     fields: {
+                        label: 'Generated title',
                         testfield: 'testtest',
                         numfield: '1a'
                     }
-                }).then(
+                };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
                     function(payload){
                         should.not.exist(payload);
                     },
@@ -340,18 +390,20 @@ describe('Grasshopper core - content', function(){
             });
 
             it('Should throw 400 because number is a string with a number in the string.', function(done) {
-                grasshopper.request(tokens.globalEditorToken).content.insert({
-                    label:'Generated title',
-                    type: '524362aa56c02c0703000001',
-                    node: {
-                        _id: '526d5179966a883540000006',
-                        displayOrder: 1
+                var obj = {
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
                     },
                     fields: {
+                        label: 'Generated title',
                         testfield: 'testtest',
                         numfield: '1'
                     }
-                }).then(
+                };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
                     function(payload){
                         should.not.exist(payload);
                     },
@@ -365,17 +417,20 @@ describe('Grasshopper core - content', function(){
 
         describe('AlphaNumeric field validation testing for length value between 5-10',function(){
             it('Should pass', function(done) {
-                grasshopper.request(tokens.globalEditorToken).content.insert({
-                    type: '524362aa56c02c0703000001',
-                    node: {
-                        _id: '526d5179966a883540000006',
-                        displayOrder: 1
+                var obj = {
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
                     },
                     fields: {
-                        label:'Generated title',
+                        label: 'Generated title',
+                        testfield: 'testtest',
                         alphanumfield: 'tes123est'
                     }
-                }).then(
+                };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
                     function(payload){
                         payload.fields.label.should.equal('Generated title');
                     },
@@ -386,17 +441,20 @@ describe('Grasshopper core - content', function(){
             });
 
             it('Should throw 400 because alphanum is too short.', function(done) {
-                grasshopper.request(tokens.globalEditorToken).content.insert({
-                    label:'Generated title',
-                    type: '524362aa56c02c0703000001',
-                    node: {
-                        _id: '526d5179966a883540000006',
-                        displayOrder: 1
+                var obj = {
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
                     },
                     fields: {
-                        alphanumfield: '123f'
+                        label: 'Generated title',
+                        testfield: 'testtest',
+                        alphanumfield: '123F'
                     }
-                }).then(
+                };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
                     function(payload){
                         should.not.exist(payload);
                     },
@@ -408,17 +466,20 @@ describe('Grasshopper core - content', function(){
             });
 
             it('Should throw 400 because alphanum is too long.', function(done) {
-                grasshopper.request(tokens.globalEditorToken).content.insert({
-                    label:'Generated title',
-                    type: '524362aa56c02c0703000001',
-                    node: {
-                        _id: '526d5179966a883540000006',
-                        displayOrder: 1
+                var obj = {
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
                     },
                     fields: {
-                        alphanumfield: 'testtefdsafdsaf32432432st'
+                        label: 'Generated title',
+                        testfield: 'testtest',
+                        alphanumfield: 'tes123fdsfafsdafdsafsdafasfdsaest'
                     }
-                }).then(
+                };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
                     function(payload){
                         should.not.exist(payload);
                     },
@@ -432,17 +493,20 @@ describe('Grasshopper core - content', function(){
 
         describe('Unique field validation testing',function(){
             it('Should pass', function(done) {
-                grasshopper.request(tokens.globalEditorToken).content.insert({
-                    type: '524362aa56c02c0703000001',
-                    node: {
-                        _id: '526d5179966a883540000006',
-                        displayOrder: 1
+                var obj = {
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
                     },
                     fields: {
-                        label:'Generated title',
+                        label: 'Generated title',
+                        testfield: 'testtest',
                         uniquefield1: 'test'
                     }
-                }).then(
+                };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
                     function(payload){
                         payload.fields.uniquefield1.should.equal('test');
                     },
@@ -453,17 +517,20 @@ describe('Grasshopper core - content', function(){
             });
 
             it('Should fail because we just created a record that will conflict.', function(done) {
-                grasshopper.request(tokens.globalEditorToken).content.insert({
-                    type: '524362aa56c02c0703000001',
-                    node: {
-                        _id: '526d5179966a883540000006',
-                        displayOrder: 1
+                var obj = {
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
                     },
                     fields: {
-                        label:'Generated title',
+                        label: 'Generated title',
+                        testfield: 'testtest',
                         uniquefield1: 'test'
                     }
-                }).then(
+                };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
                     function(payload){
                         should.not.exist(payload);
                     },
@@ -531,7 +598,6 @@ describe('Grasshopper core - content', function(){
 
             obj._id = restrictedContentId;
             obj.fields.newColumn = 'newValue';
-            obj.slug = '3243243242141324312431242112';
 
             grasshopper.request(tokens.restrictedEditorToken).content.update(obj).then(
                 function(payload){
@@ -546,34 +612,96 @@ describe('Grasshopper core - content', function(){
 
     describe('query', function() {
         var query = {
-                filters: [{key: 'slug', cmp: '=', value: 'sample_content_title'}]
+                filters: [{key: 'fields.label', cmp: '=', value: 'search test1'}]
             },
             query2 = {
                 filters: [{key: 'nonsense', cmp: '=', value: 'XXXNEVERSHOULDMATCHANTYHINGXXX'}],
                 options: {}
             },
             query3 = {
-                filters: [{key: 'slug', cmp: '=', value: 'sample_content_title'}],
+                filters: [{key: 'fields.label', cmp: '=', value: 'search test2'}],
                 options: {
                     include: ['fields.testfield']
                 }
             },
             query4 = {
-                filters: [{key: 'slug', cmp: '=', value: 'sample_content_title'}],
+                filters: [{key: 'fields.label', cmp: '=', value: 'search test3'}],
                 options: {
                     exclude: ['fields.newColumn']
                 }
             },
             query5 = {
-                filters: [{key: 'slug', cmp: '=', value: 'sample_content_title'}],
+                filters: [{key: 'fields.label', cmp: '=', value: 'search test4'}],
                 options: {
                     sortBy: 1111
                 }
             },
             query6 = {
-                filters: [{key: 'slug', cmp: '=', value: 'sample_content_title'}],
+                filters: [{key: 'fields.label', cmp: '=', value: 'search test5'}],
                 options: []
             };;
+
+        before(function(done){
+            var base = {
+                meta: {
+                    type: '524362aa56c02c0703000001',
+                    node : '526d5179966a883540000006',
+                    labelfield: 'testfield'
+                }
+            };
+
+            grasshopper.request(tokens.globalEditorToken).content.insert(_.extend({
+                    fields:{
+                        label:'search test1'
+                    }
+                }, base)).then(
+                function(){
+                    grasshopper.request(tokens.globalEditorToken).content.insert(_.extend({
+                            fields:{
+                                label:'search test2',
+                                testfield: 'testvalue',
+                                newColumn: 'testvalue'
+                            }
+                        }, base)).then(
+                        function(){
+                            grasshopper.request(tokens.globalEditorToken).content.insert(_.extend({
+                                    fields:{
+                                        label:'search test3',
+                                        testfield: 'testvalue',
+                                        newColumn: 'testvalue'
+                                    }
+                                }, base)).then(
+                                function(){
+                                    grasshopper.request(tokens.globalEditorToken).content.insert(_.extend({
+                                            fields:{
+                                                label:'search test4',
+                                                testfield: 'testvalue',
+                                                newColumn: 'testvalue'
+                                            }
+                                        }, base)).then(
+                                        function(){
+                                            grasshopper.request(tokens.globalEditorToken).content.insert(_.extend({
+                                                    fields:{
+                                                        label:'search test5',
+                                                        testfield: 'testvalue',
+                                                        newColumn: 'testvalue'
+                                                    }
+                                                }, base)).then(
+                                                function(){
+                                                    done();
+                                                }
+                                            ).done();
+                                        }
+                                    ).done();
+                                }
+                            ).done();
+                        }
+                    ).done();
+                }
+            ).done();
+
+
+        });
 
         it('should not a 401 because trying to access unauthenticated', function(done) {
             grasshopper.request().content.query(query).then(

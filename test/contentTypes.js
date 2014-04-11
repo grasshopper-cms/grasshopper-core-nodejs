@@ -308,20 +308,34 @@ describe('Grasshopper core - contentTypes', function(){
     });
 
     describe('update', function() {
+        before(function(done){
+            grasshopper.request(adminToken).content.insert({
+                    meta: {
+                        type: testCreatedContentTypeId,
+                        node : '526d5179966a883540000006',
+                        labelfield: 'label'
+                    },
+                    fields: {
+                        label: 'Generated title',
+                        testfield: 'testtest',
+                        alphanumfield: 'tes123fdsfafsdafdsafsdafasfdsaest'
+                    }
+                }).then(
+                    function(payload){
+                        done();
+                    }
+                );
+        });
+
         it('should return a 403 because user does not have permissions to access users', function(done) {
             var newContentType = {
                 _id: testCreatedContentTypeId,
                 label: 'updatedlabel',
-                fields: {
-                    testfield: {
-                        required: true,
-                        label: 'Title',
-                        instancing: 1,
-                        type: 'textbox'
-                    }
-                },
+                fields: [{
+                    required: true,
+                    label: 'Title'
+                }],
                 helpText: '',
-                meta: [],
                 description: ''
             };
 
@@ -339,22 +353,12 @@ describe('Grasshopper core - contentTypes', function(){
             var newContentType = {
                 _id: testCreatedContentTypeId,
                 label: 'updatedlabel',
-                fields: {
-                    testid : {
-                        id: 'testid',
-                        label: 'Test Field Label',
-                        type: 'textbox',
-                        required: true,
-                        instancing: 1
-                    }
-                },
-                helpText: '',
-                meta: {testmetaid:{
+                fields: [{
+                    _id: 'testfield',
                     label: 'Test Field Label',
-                    type: 'textbox',
-                    required: true,
-                    instancing: 1
-                }},
+                    type: 'textbox'
+                }],
+                helpText: '',
                 description: ''
             };
 
@@ -371,22 +375,12 @@ describe('Grasshopper core - contentTypes', function(){
         it('should return error if content type is updated without a set "ID"', function(done){
             var newContentType = {
                 label: 'updatedlabel',
-                fields: {
-                    testid : {
-                        id: 'testid',
-                        label: 'Test Field Label',
-                        type: 'textbox',
-                        required: true,
-                        instancing: 1
-                    }
-                },
-                helpText: '',
-                meta: {testmetaid:{
+                fields:[{
+                    _id: 'testid',
                     label: 'Test Field Label',
-                    type: 'textbox',
-                    required: true,
-                    instancing: 1
-                }},
+                    type: 'textbox'
+                }],
+                helpText: '',
                 description: ''
             };
 
