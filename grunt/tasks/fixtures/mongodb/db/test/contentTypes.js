@@ -10,8 +10,6 @@ module.exports = function(ObjectID) {
             fields: [
                 {
                     id: 'testfield',
-                    required: true,
-                    instancing: 1,
                     type: 'textbox',
                     label: 'Title',
                     validation: [
@@ -26,8 +24,6 @@ module.exports = function(ObjectID) {
                 },
                 {
                     id: 'numfield',
-                    required: false,
-                    instancing: 1,
                     type: 'textbox',
                     label: 'Num Field',
                     validation: [
@@ -42,8 +38,6 @@ module.exports = function(ObjectID) {
                 },
                 {
                     id: 'alphanumfield',
-                    required: false,
-                    instancing: 1,
                     type: 'textbox',
                     label: 'AlphaNum Field',
                     validation: [
@@ -101,48 +95,35 @@ module.exports = function(ObjectID) {
             fields: {
                 login: {
                     label: 'Login',
-                    type: 'textbox',
-                    required: true,
-                    instancing: 1
+                    type: 'textbox'
                 },
                 name: {
                     label: 'Name',
-                    type: 'textbox',
-                    required: true,
-                    instancing: 1
+                    type: 'textbox'
                 },
                 email: {
                     label: 'Email',
-                    type: 'textbox',
-                    required: true,
-                    instancing: 1
+                    type: 'textbox'
                 },
                 role: {
                     label: 'Role',
                     type: 'dropdown',
                     required: true,
-                    options: {
-                        items: [
-                            { id: 'reader', val: 'Reader' },
-                            { id: 'author', val: 'Author' },
-                            { id: 'editor', val: 'Editor' },
-                            { id: 'admin', val: 'Admin' },
-                            { id: 'none', val: 'None' }
-                        ]
-                    },
-                    instancing: 1
+                    options: [
+                        { _id: 'reader', val: 'Reader' },
+                        { _id: 'author', val: 'Author' },
+                        { _id: 'editor', val: 'Editor' },
+                        { _id: 'admin', val: 'Admin' },
+                        { _id: 'none', val: 'None' }
+                    ]
                 },
                 password: {
                     label: 'Email',
-                    type: 'password',
-                    required: true,
-                    instancing: 1
+                    type: 'password'
                 },
                 enabled: {
                     label: 'Enabled',
-                    type: 'checkbox',
-                    required: true,
-                    instancing: 1
+                    type: 'checkbox'
                 }
             },
             meta: [],
