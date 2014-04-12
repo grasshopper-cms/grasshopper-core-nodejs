@@ -8,7 +8,7 @@ module.exports = function(grunt) {
         test: '',
         shell: {
             test: {
-                command: 'mocha --colors -R spec <%= test %>',
+                command: 'mocha <%= debug %> --colors -R spec <%= test %>',
                 options: {
                     stdout: true,
                     stderr: true
@@ -67,14 +67,4 @@ module.exports = function(grunt) {
 
     grunt.loadTasks('grunt/tasks');
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
-
-    grunt.registerTask('readme', 'create README.md from template', function() {
-        grunt.config.set('warning', 'Compiled file. Do not modify directly.');
-        grunt.task.run(['shell:shortlog', 'releaseNotes']);
-    });
-
-    grunt.registerTask('db:dev', ['mongodb:dev']);
-    grunt.registerTask('db:test', ['mongodb:test']);
-    grunt.registerTask('default', ['jshint']);
-
 };
