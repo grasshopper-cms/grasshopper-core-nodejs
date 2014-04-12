@@ -30,6 +30,7 @@ describe('Grasshopper core - users', function(){
                     'database': 'test',
                     'username': '',
                     'password': '',
+                    'defaultPageSize': 1,
                     'debug': false
                 },
                 'assets': {
@@ -877,7 +878,7 @@ describe('Grasshopper core - users', function(){
         it('should return user search results', function(done) {
             grasshopper.request(adminToken).users.query(query).then(
                 function(payload){
-                    payload.length.should.equal(2);
+                    payload.total.should.equal(2);
                 },
                 function(err){
                     should.not.exist(err);
@@ -888,7 +889,7 @@ describe('Grasshopper core - users', function(){
         it('should not return user search results', function(done) {
             grasshopper.request(adminToken).users.query(query2).then(
                 function(payload){
-                    payload.length.should.equal(0);
+                    payload.total.should.equal(0);
                 },
                 function(err){
                     should.not.exist(err);
