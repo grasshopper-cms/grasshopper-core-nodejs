@@ -717,7 +717,7 @@ describe('Grasshopper core - content', function(){
         it('should return array of search results.', function(done) {
             grasshopper.request(tokens.globalReaderToken).content.query(query).then(
                 function(payload){
-                    payload.length.should.equal(1);
+                    payload.results.length.should.equal(1);
                 },
                 function(err){
                     should.not.exist(err);
@@ -728,9 +728,9 @@ describe('Grasshopper core - content', function(){
         it('test "including" fields in a query', function(done) {
             grasshopper.request(tokens.globalReaderToken).content.query(query3).then(
                 function(payload){
-                    payload.length.should.equal(1);
-                    payload[0].fields.testfield.should.equal('testvalue');
-                    payload[0].fields.should.not.have.property('newColumn');
+                    payload.results.length.should.equal(1);
+                    payload.results[0].fields.testfield.should.equal('testvalue');
+                    payload.results[0].fields.should.not.have.property('newColumn');
                 },
                 function(err){
                     should.not.exist(err);
@@ -741,9 +741,9 @@ describe('Grasshopper core - content', function(){
         it('test "excluding" fields in a query', function(done) {
             grasshopper.request(tokens.globalReaderToken).content.query(query4).then(
                 function(payload){
-                    payload.length.should.equal(1);
-                    payload[0].fields.should.have.property('testfield');
-                    payload[0].fields.should.not.have.property('newColumn');
+                    payload.results.length.should.equal(1);
+                    payload.results[0].fields.should.have.property('testfield');
+                    payload.results[0].fields.should.not.have.property('newColumn');
                 },
                 function(err){
                     should.not.exist(err);
@@ -754,7 +754,7 @@ describe('Grasshopper core - content', function(){
         it('should return empty results if it finds nothing', function(done) {
             grasshopper.request(tokens.globalReaderToken).content.query(query2).then(
                 function(payload){
-                    payload.length.should.equal(0);
+                    payload.results.length.should.equal(0);
                 },
                 function(err){
                     should.not.exist(err);
@@ -765,7 +765,7 @@ describe('Grasshopper core - content', function(){
         it('return valid results even if sortBy is not valid', function(done) {
             grasshopper.request(tokens.globalReaderToken).content.query(query5).then(
                 function(payload){
-                    payload.length.should.equal(1);
+                    payload.results.length.should.equal(1);
                 },
                 function(err){
                     should.not.exist(err);
@@ -776,7 +776,7 @@ describe('Grasshopper core - content', function(){
         it('return valid results even if options is an empty array', function(done) {
             grasshopper.request(tokens.globalReaderToken).content.query(query6).then(
                 function(payload){
-                    payload.length.should.equal(1);
+                    payload.results.length.should.equal(1);
                 },
                 function(err){
                     should.not.exist(err);
