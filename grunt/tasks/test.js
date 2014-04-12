@@ -29,6 +29,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('debugTest', 'Shortcut for using the node-inspector. Tests to run can be supplied as the first ' +
     'argument.', function(tests) {
-        grunt.task.run(['test:'+tests+':node-inspector']);
+        grunt.task.run(['test:'+(tests?tests:'')+':node-inspector']);
     });
 };
