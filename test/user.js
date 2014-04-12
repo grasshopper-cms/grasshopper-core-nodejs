@@ -30,6 +30,7 @@ describe('Grasshopper core - users', function(){
                     'database': 'test',
                     'username': '',
                     'password': '',
+                    'defaultPageSize': 1,
                     'debug': false
                 },
                 'assets': {
