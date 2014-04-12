@@ -5,19 +5,30 @@ module.exports = function (grunt) {
     'The first arguments is the tests you want to run.\n' +
     'For example:\n' +
     'grunt test:content\n' +
-    'The second argument is whether you want the debugger.\n' +
-    'For example after putting a "debugger" into the code:\n' +
-    'grunt test::1', function (tests, debug) {
-        var _ = require('underscore');
+    'The second argument is which debugger you want. If you don\t want a debugger, leave this blank.\n' +
+    'If you want to use node-inspector enter that (requires: npm install -g node-inspector).\n' +
+    'If you want to use the native node debugger enter "native".\n' +
+    'For example:\n' +
+    'grunt test::node-inspector', function (tests, debuggerType) {
+        var _ = require('underscore'),
+            testCommand = 'test';
 
-        if(_.isString(tests)){
+        // Skip empty strings and undefined - tests is always a string or undefined
+        if(tests){
             grunt.config.set('test', './test/' + tests);
         }
 
-        if (debug) {
+        if ('node-inspector' === debuggerType) {
+            testCommand = 'testInspector'
+        } else if ('native' === debuggerType) {
             grunt.config.set('debug', 'debug');
         }
 
-        grunt.task.run(['mongodb:test', 'shell:test']);
+        grunt.task.run(['mongodb:test', 'shell:' + testCommand]);
+    });
+
+    grunt.registerTask('debugTest', 'Shortcut for using the node-inspector. Tests to run can be supplied as the first ' +
+    'argument.', function(tests) {
+        grunt.task.run(['test:'+tests+':node-inspector']);
     });
 };

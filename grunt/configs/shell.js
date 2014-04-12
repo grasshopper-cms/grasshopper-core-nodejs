@@ -10,6 +10,13 @@ module.exports = function (grunt) {
                 stderr : true
             }
         },
+        testInspector : {
+            command : 'node-debug _mocha -t 60000 --colors -R spec <%= test %>',
+            options : {
+                stdout : true,
+                stderr : true
+            }
+        },
         'shortlog' : {
             options : {
                 stderr : true,
