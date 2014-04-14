@@ -49,31 +49,31 @@ describe('Grasshopper core - testing assets', function(){
                     cb();
                 },
                 function(cb){
-                    grasshopper.auth('apitestuseradmin', 'TestPassword').then(function(token){
+                    grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' }).then(function(token){
                         globalAdminToken = token;
                         cb();
                     });
                 },
                 function(cb){
-                    grasshopper.auth('apitestuserreader', 'TestPassword').then(function(token){
+                    grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){
                         globalReaderToken = token;
                         cb();
                     });
                 },
                 function(cb){
-                    grasshopper.auth('apitestusereditor', 'TestPassword').then(function(token){
+                    grasshopper.auth('username', { username: 'apitestusereditor', password: 'TestPassword' }).then(function(token){
                         globalEditorToken = token;
                         cb();
                     });
                 },
                 function(cb){
-                    grasshopper.auth('apitestuserreader_1', 'TestPassword').then(function(token){
+                    grasshopper.auth('username', { username: 'apitestuserreader_1', password: 'TestPassword' }).then(function(token){
                         nodeEditorToken = token;
                         cb();
                     });
                 },
                 function(cb){
-                    grasshopper.auth('apitestusereditor_restricted', 'TestPassword').then(function(token){
+                    grasshopper.auth('username', { username: 'apitestusereditor_restricted', password: 'TestPassword' }).then(function(token){
                         restrictedEditorToken = token;
                         cb();
                     });

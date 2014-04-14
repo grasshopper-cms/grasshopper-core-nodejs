@@ -46,10 +46,10 @@ describe('Grasshopper core - users', function(){
         });
 
 
-        grasshopper.auth('apitestuseradmin', 'TestPassword')
+        grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
             .then(function(token){
                 adminToken = token;
-                grasshopper.auth('apitestuserreader', 'TestPassword')
+                grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' })
                     .then(function(token){
                         readerToken = token;
                         done();
@@ -605,7 +605,7 @@ describe('Grasshopper core - users', function(){
                 }
 
                 function tryUseOldLogin(next){
-                    grasshopper.auth('apitestuserreader', 'TestPassword').then(
+                    grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' }).then(
                         function(token){
                             next(should.not.exist(token));
                         },
@@ -615,7 +615,7 @@ describe('Grasshopper core - users', function(){
                 }
 
                 function tryUseNewLogin(next){
-                    grasshopper.auth('apitestuserreader', 'thisismytestpassword').then(
+                    grasshopper.auth('username', { username: 'apitestuserreader', password: 'thisismytestpassword' }).then(
                         function(token){
                             next(null, token);
                         },
@@ -948,7 +948,7 @@ describe('Grasshopper core - users', function(){
 
             function startTest(payload){
                 newUser._id = payload._id;
-                grasshopper.auth('futurerevokee', 'TestPassword').then(authTempUser).done();
+                grasshopper.auth('username', { username: 'futurerevokee', password: 'TestPassword' }).then(authTempUser).done();
             }
 
             function authTempUser(payload){

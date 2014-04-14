@@ -40,13 +40,13 @@ describe('Grasshopper core - testing tokens', function(){
         });
 
 
-        grasshopper.auth('admin', 'TestPassword').then(function(token){
+        grasshopper.auth('username', { username: 'admin', password: 'TestPassword' }).then(function(token){
                 adminToken = token;
-                grasshopper.auth('apitestuserreader', 'TestPassword').then(function(token){
+                grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){
                         readerToken = token;
-                        grasshopper.auth('apitestuserreader', 'TestPassword').then(function(token){
+                        grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){
                             readerToken2 = token;
-                            grasshopper.auth('apitestuserreader', 'TestPassword').then(function(token){
+                            grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){
                                 readerToken3 = token;
                                 done();
                             });
@@ -113,7 +113,7 @@ describe('Grasshopper core - testing tokens', function(){
         });
 
         it('a user should be able to authenticate then log themselves out using a convenience "logout" method.', function(done) {
-            grasshopper.auth('apitestuserreader', 'TestPassword').then(
+            grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' }).then(
                 function(token){
                     grasshopper.request(token).tokens.logout().then(
                         function(payload){

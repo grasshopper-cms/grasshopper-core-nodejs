@@ -38,10 +38,10 @@ describe('Grasshopper core - contentTypes', function(){
         });
 
 
-        grasshopper.auth('apitestuseradmin', 'TestPassword')
+        grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
             .then(function(token){
                 adminToken = token;
-                grasshopper.auth('apitestuserreader', 'TestPassword')
+                grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' })
                     .then(function(token){
                         readerToken = token;
                         done();

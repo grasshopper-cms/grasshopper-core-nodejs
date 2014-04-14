@@ -840,7 +840,7 @@ describe('Grasshopper core - content', function(){
     function createGetToken(username, password, storage) {
         return {
             closure : function getToken(cb){
-                grasshopper.auth(username, password).then(function(token){
+                grasshopper.auth('username', { username: username, password: password }).then(function(token){
                     tokens[storage] = token;
                     cb();
                 }).done();

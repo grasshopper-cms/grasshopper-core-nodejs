@@ -46,7 +46,7 @@ describe('Grasshopper core - testing event events', function(){
         var token;
 
         before(function(done){
-            grasshopper.auth('apitestusereditor', 'TestPassword').then(function(payload){
+            grasshopper.auth('username', { username: 'apitestusereditor', password: 'TestPassword' }).then(function(payload){
                 token = payload;
             }).done(done);
         });
