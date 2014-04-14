@@ -179,16 +179,12 @@ describe('Grasshopper core - contentTypes', function(){
         it('should insert a content type', function(done){
             var newContentType = {
                 label: 'newtestsuitecontent',
-                fields: {
-                    testfield: {
-                        required: true,
+                fields: [{
+                        id: 'testfield',
                         label: 'Title',
-                        instancing: 1,
                         type: 'textbox'
-                    }
-                },
+                }],
                 helpText: '',
-                meta: [],
                 description: ''
             };
             grasshopper.request(adminToken).contentTypes.insert(newContentType).then(
@@ -323,8 +319,7 @@ describe('Grasshopper core - contentTypes', function(){
                 }).then(
                     function(payload){
                         done();
-                    }
-                );
+                    });
         });
 
         it('should return a 403 because user does not have permissions to access users', function(done) {
