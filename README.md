@@ -131,6 +131,7 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 * 0.4.3 - 2014-04-14 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.4.3_2014-04-14.md)
 * 0.4.4 - 2014-04-14 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.4.4_2014-04-14.md)
 * 0.4.5 - 2014-04-15 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.4.5_2014-04-15.md)
+* 0.4.6 - 2014-04-16 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.4.6_2014-04-16.md)
 
 
 ## Contributors (`git shortlog -s -n`)
@@ -145,4 +146,4 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 To create the readme, update the release notes dir and package.json.version at a minimum. If needed update README.template.md.
 Then run `grunt readme`.
 
-_Compiled file. Do not modify directly. Created: 2014-04-15 05:33:36_
+_Compiled file. Do not modify directly. Created: 2014-04-16 03:32:40_
