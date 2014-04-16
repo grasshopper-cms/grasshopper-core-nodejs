@@ -6,3 +6,10 @@ services:
 before_script:
   - npm install -g grunt-cli
   - ./grunt/tasks/importdb.sh
+notifications:
+  email:
+    - travis.mchattie@thinksolid.com
+    - peter.ajtai@thinksolid.com
+    - cooper.hilscher@thinksolid.com
+    - greg.larrenaga@thinksolid.com
+    - kaija.rayne@thinksolid.com
