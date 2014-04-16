@@ -180,7 +180,7 @@ describe('Grasshopper core - contentTypes', function(){
             var newContentType = {
                 label: 'newtestsuitecontent',
                 fields: [{
-                        id: 'testfield',
+                        _id: 'testfield',
                         label: 'Title',
                         type: 'textbox'
                 }],
