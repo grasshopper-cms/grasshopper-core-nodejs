@@ -639,7 +639,11 @@ describe('Grasshopper core - content', function(){
             query6 = {
                 filters: [{key: 'fields.label', cmp: '=', value: 'search test5'}],
                 options: []
-            };;
+            },
+            query7 = {
+                filters: [],
+                nodes: ['526d5179966a883540000006']
+            };
 
         before(function(done){
             var base = {
@@ -777,6 +781,17 @@ describe('Grasshopper core - content', function(){
             grasshopper.request(tokens.globalReaderToken).content.query(query6).then(
                 function(payload){
                     payload.results.length.should.equal(1);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
+        });
+
+        it('return valid results for everything within a node', function(done) {
+            grasshopper.request(tokens.globalReaderToken).content.query(query7).then(
+                function(payload){
+                    console.log(payload);
                 },
                 function(err){
                     should.not.exist(err);
