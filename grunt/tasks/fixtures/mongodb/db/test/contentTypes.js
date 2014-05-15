@@ -9,7 +9,9 @@ module.exports = function(ObjectID) {
             description: '',
             fields: [
                 {
-                    id: 'testfield',
+                    _id: 'testfield',
+                    required: true,
+                    instancing: 1,
                     type: 'textbox',
                     label: 'Title',
                     validation: [
@@ -23,7 +25,9 @@ module.exports = function(ObjectID) {
                     ]
                 },
                 {
-                    id: 'numfield',
+                    _id: 'numfield',
+                    required: false,
+                    instancing: 1,
                     type: 'textbox',
                     label: 'Num Field',
                     validation: [
@@ -37,7 +41,9 @@ module.exports = function(ObjectID) {
                     ]
                 },
                 {
-                    id: 'alphanumfield',
+                    _id: 'alphanumfield',
+                    required: false,
+                    instancing: 1,
                     type: 'textbox',
                     label: 'AlphaNum Field',
                     validation: [
@@ -51,7 +57,7 @@ module.exports = function(ObjectID) {
                     ]
                 },
                 {
-                    id: 'emailfield',
+                    _id: 'emailfield',
                     type: 'textbox',
                     label: 'Email Field',
                     validation: [
@@ -60,7 +66,7 @@ module.exports = function(ObjectID) {
                         }
                     ]
                 },{
-                    id: 'uniquefield1',
+                    _id: 'uniquefield1',
                     type: 'textbox',
                     label: 'Globally Unique Field',
                     validation: [
@@ -72,7 +78,7 @@ module.exports = function(ObjectID) {
                         }
                     ]
                 },{
-                    id: 'uniquefield2',
+                    _id: 'uniquefield2',
                     type: 'textbox',
                     label: 'Unique Field For Specific Content Type',
                     validation: [
@@ -92,41 +98,55 @@ module.exports = function(ObjectID) {
             label: 'Users',
             description: 'Protected content type that defines users in the system.',
             helpText: 'These fields are the minimum required to create a user in the system. See more about extending users through plugins.',
-            fields: {
-                login: {
+            fields: [
+                {
+                    _id: 'login',
                     label: 'Login',
-                    type: 'textbox'
+                    type: 'textbox',
+                    validation: [
+                        {
+                            _id : 'unique',
+                            options: {
+                                property: 'login',
+                                contentTypes: ['5254908d56c02c076e000001']
+                            }
+                        }
+                    ]
                 },
-                name: {
+                {
+                    _id: 'name',
                     label: 'Name',
                     type: 'textbox'
                 },
-                email: {
+                {
+                    _id: 'email',
                     label: 'Email',
                     type: 'textbox'
                 },
-                role: {
+                {
+                    _id: 'role',
                     label: 'Role',
                     type: 'dropdown',
-                    required: true,
-                    options: [
-                        { _id: 'reader', val: 'Reader' },
-                        { _id: 'author', val: 'Author' },
-                        { _id: 'editor', val: 'Editor' },
-                        { _id: 'admin', val: 'Admin' },
-                        { _id: 'none', val: 'None' }
-                    ]
+                    options: {
+                        items: [
+                            { id: 'reader', val: 'Reader' },
+                            { id: 'author', val: 'Author' },
+                            { id: 'editor', val: 'Editor' },
+                            { id: 'admin', val: 'Admin' },
+                            { id: 'none', val: 'None' }
+                        ]
+                    }
                 },
-                password: {
+                {
+                    _id: 'password',
                     label: 'Email',
                     type: 'password'
-                },
-                enabled: {
+                },{
+                    _id: 'enabled',
                     label: 'Enabled',
                     type: 'checkbox'
                 }
-            },
-            meta: [],
+            ],
             protected: true
         }
 

@@ -170,6 +170,33 @@ describe('Grasshopper core - content', function(){
             ).done(done);
         });
 
+        it('should successfully insert content and also convert strings that are valid native dates to a date object.', function(done) {
+            var obj = {
+                meta: {
+                    type: '524362aa56c02c0703000001',
+                    node : '526d5179966a883540000006',
+                    labelfield: 'testfield'
+                },
+                fields: {
+                    label: 'Generated title',
+                    testfield: 'testvalue',
+                    testDateField: '2014-04-30T20:00:00.000Z',
+                    testNested: {
+                        dateField: '2014-04-30T20:00:00.000Z'
+                    }
+                }
+            };
+
+            grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
+                function(payload){
+                    payload.fields.label.should.equal(obj.fields.label);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
+        });
+
         it('should return 403 because I am trying to insert content in a node that is restricted to me.', function(done) {
             var obj = {
                 meta: {
@@ -639,7 +666,11 @@ describe('Grasshopper core - content', function(){
             query6 = {
                 filters: [{key: 'fields.label', cmp: '=', value: 'search test5'}],
                 options: []
-            };;
+            },
+            query7 = {
+                filters: [],
+                nodes: ['526d5179966a883540000006']
+            };
 
         before(function(done){
             var base = {
@@ -777,6 +808,17 @@ describe('Grasshopper core - content', function(){
             grasshopper.request(tokens.globalReaderToken).content.query(query6).then(
                 function(payload){
                     payload.results.length.should.equal(1);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
+        });
+
+        it('return valid results for everything within a node', function(done) {
+            grasshopper.request(tokens.globalReaderToken).content.query(query7).then(
+                function(payload){
+                    payload.total.should.be.greaterThan(0);
                 },
                 function(err){
                     should.not.exist(err);
