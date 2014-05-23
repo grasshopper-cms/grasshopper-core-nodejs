@@ -3,7 +3,8 @@ var should = require('chai').should();
 describe('Grasshopper core - content', function(){
     'use strict';
 
-    var async = require('async'),
+    var Q = require('q'),
+        async = require('async'),
         path = require('path'),
         _ = require('underscore'),
         grasshopper = require('../lib/grasshopper'),
@@ -225,6 +226,34 @@ describe('Grasshopper core - content', function(){
                     done();
                 }
             ).done();
+        });
+
+        it('should successfully insert content and not convert string numbers to a date object.', function(done) {
+            var obj = {
+                meta: {
+                    type: '5254908d56c02c076e000001',
+                    node : '526d5179966a883540000006',
+                    labelfield: 'testfield'
+                },
+                fields: {
+                    label: 'Generated title',
+                    testfield: 'testvalue',
+                    testDateField: '2014-04-30T20:00:00.000Z',
+                    testNested: {
+                        dateField: '2014-04-30T20:00:00.000Z'
+                    },
+                    stringnumfield : '42'
+                }
+            };
+
+            grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
+                function(payload){
+                    payload.fields.stringnumfield.should.equal('42');
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
         });
 
         it('should return 403 because I am trying to insert content in a node that is restricted to me.', function(done) {
