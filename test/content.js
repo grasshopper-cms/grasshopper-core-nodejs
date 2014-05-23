@@ -197,6 +197,34 @@ describe('Grasshopper core - content', function(){
             ).done(done);
         });
 
+        it('should successfully insert content and not convert booleans to a date object.', function(done) {
+            var obj = {
+                meta: {
+                    type: '524362aa56c02c0703000001',
+                    node : '526d5179966a883540000006',
+                    labelfield: 'testfield'
+                },
+                fields: {
+                    label: 'Generated title',
+                    testfield: 'testvalue',
+                    testBooleanField: true,
+                    testNested: {
+                        booleanField: false
+                    }
+                }
+            };
+
+            grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
+                function(payload){
+                    payload.fields.testBooleanField.should.equal(true);
+                    payload.fields.testNested.booleanField.should.equal(false);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done(done);
+        });
+
         it('should return 403 because I am trying to insert content in a node that is restricted to me.', function(done) {
             var obj = {
                 meta: {
