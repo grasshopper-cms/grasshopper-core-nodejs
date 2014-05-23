@@ -90,6 +90,10 @@ module.exports = function(ObjectID) {
                             }
                         }
                     ]
+                },{
+                    _id: 'booleanfield',
+                    label: 'BooleanField',
+                    type: 'checkbox'
                 }
             ]
         },
