@@ -90,6 +90,17 @@ module.exports = function(ObjectID) {
                             }
                         }
                     ]
+                },{
+                    _id: 'booleanfield',
+                    required: false,
+                    label: 'BooleanField',
+                    type: 'checkbox'
+                },
+                {
+                    _id: 'stringnumfield',
+                    required: false,
+                    type: 'textbox',
+                    label: 'String Num Field'
                 }
             ]
         },
