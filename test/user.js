@@ -252,10 +252,9 @@ describe('Grasshopper core - users', function(){
 
             grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
-                    console.log(payload);
-                    //payload.login.should.equal(newUser.login);
+                    payload.identities.basic.login.should.equal(newUser.identities.basic.login);
                     payload.should.have.property('_id');
-                    payload.should.not.have.property('password');
+                    payload.identities.basic.should.not.have.property('password');
                     testCreatedUserId = payload._id;
                 },
                 function(err){
@@ -263,17 +262,20 @@ describe('Grasshopper core - users', function(){
                 }
             ).done(done);
         });
-});
-        /*
+
         it('should insert a user without an error with additional custom params.', function(done){
             var newUser = {
-                login: 'newtestuser2',
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
                 firstname: 'Test',
                 lastname: 'User',
-                password: 'TestPassword',
+                identities: {
+                    basic: {
+                        login: 'newtestuser2',
+                        password: 'TestPassword'
+                    }
+                },
                 profile: {
                     linkedid: 'tjmchattie'
                 }
@@ -281,9 +283,10 @@ describe('Grasshopper core - users', function(){
 
             grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
-                    payload.login.should.equal(newUser.login);
+                    payload.identities.basic.login.should.equal(newUser.identities.basic.login);
                     payload.should.have.property('_id');
                     payload.should.not.have.property('password');
+                    payload.identities.basic.should.not.have.property('password');
                     testCreatedUserIdCustomVerb = payload._id;
                 },
                 function(err){
@@ -295,13 +298,17 @@ describe('Grasshopper core - users', function(){
         it('should return error if a an existing user id is sent with the request.', function(done){
             var newUser = {
                 _id: testCreatedUserId,
-                login: 'newtestuser11111',
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser2@thinksolid.com',
                 firstname: 'Test',
                 lastname: 'User',
-                password: 'TestPassword'
+                identities: {
+                    basic: {
+                        login: 'newtestuser11111',
+                        password: 'TestPassword'
+                    }
+                }
             };
 
             grasshopper.request(adminToken).users.insert(newUser).then(
@@ -317,13 +324,17 @@ describe('Grasshopper core - users', function(){
 
         it('should return error if a duplicate is created.', function(done){
             var newUser = {
-                login: 'newtestuser1',
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
                 firstname: 'Test',
                 lastname: 'User',
-                password: 'TestPassword'
+                identities: {
+                    basic: {
+                        login: 'newtestuser1',
+                        password: 'TestPassword'
+                    }
+                }
             };
             grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
@@ -331,7 +342,7 @@ describe('Grasshopper core - users', function(){
                 },
                 function(err){
                     err.code.should.equal(400);
-                    err.message.should.equal('Duplicate key already exists.');
+                    err.message.should.equal('This login is already in use.');
                 }
             ).done(done);
         });
@@ -343,7 +354,11 @@ describe('Grasshopper core - users', function(){
                 email: 'newtestuser1@thinksolid.com',
                 firstname: 'Test',
                 lastname: 'User',
-                password: 'TestPassword'
+                identities: {
+                    basic: {
+                        password: 'TestPassword'
+                    }
+                }
             };
             grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
@@ -351,20 +366,24 @@ describe('Grasshopper core - users', function(){
                 },
                 function(err){
                     err.code.should.equal(400);
-                    err.message.should.equal('"login" is a required field.');
+                    err.message.should.equal('login is required.');
                 }
             ).done(done);
         });
 
         it('should return error if an empty login is provided.', function(done){
             var newUser = {
-                login: '',
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
                 firstname: 'Test',
                 lastname: 'User',
-                password: 'TestPassword'
+                identities: {
+                    basic: {
+                        login: '',
+                        password: 'TestPassword'
+                    }
+                }
             };
             grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
@@ -372,20 +391,24 @@ describe('Grasshopper core - users', function(){
                 },
                 function(err){
                     err.code.should.equal(400);
-                    err.message.should.equal('"login" is a required field.');
+                    err.message.should.equal('login is required.');
                 }
             ).done(done);
         });
 
         it('should return error if an null login is provided.', function(done){
             var newUser = {
-                login: null,
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
                 firstname: 'Test',
                 lastname: 'User',
-                password: 'TestPassword'
+                identities: {
+                    basic: {
+                        login: null,
+                        password: 'TestPassword'
+                    }
+                }
             };
             grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
@@ -393,20 +416,24 @@ describe('Grasshopper core - users', function(){
                 },
                 function(err){
                     err.code.should.equal(400);
-                    err.message.should.equal('"login" is a required field.');
+                    err.message.should.equal('login is required.');
                 }
             ).done(done);
         });
 
         it('should return error if a login is too short.', function(done){
             var newUser = {
-                login: 'sho',
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
                 firstname: 'Test',
                 lastname: 'User',
-                password: 'TestPassword'
+                identities: {
+                    basic: {
+                        login: 'sho',
+                        password: 'TestPassword'
+                    }
+                }
             };
             grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
@@ -421,13 +448,17 @@ describe('Grasshopper core - users', function(){
 
         it('should return error if a password is null.', function(done){
             var newUser = {
-                login: 'newtestuserunique',
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
                 firstname: 'Test',
                 lastname: 'User',
-                password: null
+                identities: {
+                    basic: {
+                        login: 'newtestuserunique',
+                        password: null
+                    }
+                }
             };
             grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
@@ -442,13 +473,17 @@ describe('Grasshopper core - users', function(){
 
         it('should return error if a password is too short.', function(done){
             var newUser = {
-                login: 'newtestuserunique',
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
                 firstname: 'Test',
                 lastname: 'User',
-                password: 'sho'
+                identities: {
+                    basic: {
+                        login: 'newtestuserunique',
+                        password: 'sho'
+                    }
+                }
             };
             grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
@@ -463,13 +498,17 @@ describe('Grasshopper core - users', function(){
 
         it('should return error if a user has a role that is not allowed.', function(done){
             var newUser = {
-                login: 'newtestuserunique',
                 role: 'fake role',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
                 firstname: 'Test',
                 lastname: 'User',
-                password: 'TestPassword'
+                identities: {
+                    basic: {
+                        login: 'newtestuserunique',
+                        password: 'TestPassword'
+                    }
+                }
             };
             grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
@@ -482,6 +521,7 @@ describe('Grasshopper core - users', function(){
             ).done(done);
         });
     });
+
 
     describe('Update a user', function() {
         it('should return a 401 because user is not authenticated.', function(done){
@@ -498,13 +538,17 @@ describe('Grasshopper core - users', function(){
         it('should return a 403 because user does not have permissions to access users', function(done) {
             var newUser = {
                 _id: testCreatedUserId,
-                login: 'newtestuser1',
+                identities: {
+                    basic: {
+                        login: 'newtestuser1',
+                        password: 'TestPassword'
+                    }
+                },
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
                 firstname: 'Test',
-                lastname: 'User',
-                password: 'TestPassword'
+                lastname: 'User'
             };
             grasshopper.request(readerToken).users.update(newUser).then(
                 function(payload){
@@ -520,7 +564,11 @@ describe('Grasshopper core - users', function(){
         it('should update a user', function(done) {
             var newUser = {
                 _id: testCreatedUserId,
-                login: 'newtestuser1_updated',
+                identities: {
+                    basic: {
+                        login: 'newtestuser1_updated'
+                    }
+                },
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
@@ -529,7 +577,7 @@ describe('Grasshopper core - users', function(){
             };
             grasshopper.request(adminToken).users.update(newUser).then(
                 function(payload){
-                    payload.login.should.equal(newUser.login);
+                    payload.identities.basic.login.should.equal(newUser.identities.basic.login);
                 },
                 function(err){
                     should.not.exist(err);
@@ -554,7 +602,7 @@ describe('Grasshopper core - users', function(){
                 }
 
                 function updateUser(user, next){
-                    user.password = 'thisismytestpassword';
+                    user.identities.basic.password = 'thisismytestpassword';
 
                     grasshopper.request(adminToken).users.update(user).then(
                         function(){
@@ -626,13 +674,17 @@ describe('Grasshopper core - users', function(){
 
         it('should return error is user is updated without a set "ID"', function(done){
             var newUser = {
-                login: 'newtestuser1_updated',
+                identities: {
+                    basic: {
+                        login: 'newtestuser1_updated',
+                        password: 'TestPassword'
+                    }
+                },
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
                 firstname: 'Test',
-                lastname: 'User',
-                password: 'TestPassword'
+                lastname: 'User'
             };
 
             grasshopper.request(adminToken).users.update(newUser).then(
@@ -649,13 +701,17 @@ describe('Grasshopper core - users', function(){
         it('should return error if login is too short.', function(done){
             var newUser = {
                 _id: testCreatedUserId,
-                login: 'sho',
+                identities: {
+                    basic: {
+                        login: 'sho',
+                        password: 'TestPassword'
+                    }
+                },
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
                 firstname: 'Test',
-                lastname: 'User',
-                password: 'TestPassword'
+                lastname: 'User'
             };
             grasshopper.request(adminToken).users.update(newUser).then(
                 function(payload){
@@ -671,13 +727,17 @@ describe('Grasshopper core - users', function(){
         it('should return error if user role is invalid.', function(done){
             var newUser = {
                 _id: testCreatedUserId,
-                login: 'newtestuesr1',
+                identities: {
+                    basic: {
+                        login: 'newtestuesr1',
+                        password: 'TestPassword'
+                    }
+                },
                 role: 'reader_bad',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
                 firstname: 'Test',
-                lastname: 'User',
-                password: 'TestPassword'
+                lastname: 'User'
             };
             grasshopper.request(adminToken).users.update(newUser).then(
                 function(payload){
@@ -693,13 +753,17 @@ describe('Grasshopper core - users', function(){
         it('should return error if user login is null.', function(done){
             var newUser = {
                 _id: testCreatedUserId,
-                login: null,
+                identities:{
+                    basic:{
+                        login: null,
+                        password: 'TestPassword'
+                    }
+                },
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
                 firstname: 'Test',
-                lastname: 'User',
-                password: 'TestPassword'
+                lastname: 'User'
             };
             grasshopper.request(adminToken).users.update(newUser).then(
                 function(payload){
@@ -707,7 +771,7 @@ describe('Grasshopper core - users', function(){
                 },
                 function(err){
                     err.code.should.equal(400);
-                    err.message.should.equal('"login" is a required field.');
+                    err.message.should.equal('login is required.');
                 }
             ).done(done);
         });
@@ -715,13 +779,17 @@ describe('Grasshopper core - users', function(){
         it('should return error if user login is empty.', function(done){
             var newUser = {
                 _id: testCreatedUserId,
-                login: '',
+                identities:{
+                    basic: {
+                        login: '',
+                        password: 'TestPassword'
+                    }
+                },
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
                 firstname: 'Test',
-                lastname: 'User',
-                password: 'TestPassword'
+                lastname: 'User'
             };
             grasshopper.request(adminToken).users.update(newUser).then(
                 function(payload){
@@ -729,7 +797,7 @@ describe('Grasshopper core - users', function(){
                 },
                 function(err){
                     err.code.should.equal(400);
-                    err.message.should.equal('"login" is a required field.');
+                    err.message.should.equal('login is required.');
                 }
             ).done(done);
         });
@@ -737,13 +805,17 @@ describe('Grasshopper core - users', function(){
         it('should return error if the user login changed and is now a duplicate.', function(done){
             var newUser = {
                 _id: testCreatedUserId,
-                login: 'apitestuserreader',
+                identities: {
+                    basic: {
+                        login: 'apitestuserreader',
+                        password: 'TestPassword'
+                    }
+                },
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
                 firstname: 'Test',
-                lastname: 'User',
-                password: 'TestPassword'
+                lastname: 'User'
             };
             grasshopper.request(adminToken).users.update(newUser).then(
                 function(payload){
@@ -751,7 +823,7 @@ describe('Grasshopper core - users', function(){
                 },
                 function(err){
                     err.code.should.equal(400);
-                    err.message.should.equal('Duplicate key already exists.');
+                    err.message.should.equal('This login is already in use.');
                 }
             ).done(done);
         });
@@ -759,16 +831,20 @@ describe('Grasshopper core - users', function(){
         it('should a user to update themselves even if they do not have global permissions.', function(done){
             var newUser = {
                 _id: testReaderUserId,
-                login: 'apitestuserreader',
+                identities: {
+                    basic: {
+                        login: 'apitestuserreader',
+                        password: 'TestPassword'
+                    }
+                },
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
-                name: 'Updated test reader name with :id',
-                password: 'TestPassword'
+                name: 'Updated test reader name with :id'
             };
             grasshopper.request(readerToken).users.update(newUser).then(
                 function(payload){
-                    payload.login.should.equal(newUser.login);
+                    payload.identities.basic.login.should.equal(newUser.identities.basic.login);
                 },
                 function(err){
                     should.not.exist(err);
@@ -779,13 +855,15 @@ describe('Grasshopper core - users', function(){
         it('should error if updating a user with an different ID than your own.', function(done){
             var newUser = {
                 _id: testUserId,
-                login: 'apitestuserreader',
+                identities: {
+                    login: 'apitestuserreader',
+                    password: 'TestPassword'
+                },
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
                 firstname: 'Updated test reader name with :id',
-                lastname: 'Last',
-                password: 'TestPassword'
+                lastname: 'Last'
             };
             grasshopper.request(readerToken).users.update(newUser).then(
                 function(payload){
@@ -799,6 +877,7 @@ describe('Grasshopper core - users', function(){
         });
 
     });
+
 
     describe('Query Users', function() {
         var query = {
@@ -898,11 +977,15 @@ describe('Grasshopper core - users', function(){
     describe('Test creating a user, logging in with the new user then revoking the token and confirming that they are locked out', function() {
         it('auth token of user should be revoked if user is disabled.', function(done) {
             var newUser = {
-                    login: 'futurerevokee',
                     role: 'admin',
                     enabled: true,
                     email: 'newtestuser1@thinksolid.com',
-                    password: 'TestPassword',
+                    identities: {
+                        basic: {
+                            login: 'futurerevokee',
+                            password: 'TestPassword'
+                        }
+                    },
                     firstname: 'Test',
                     lastname: 'User'
                 },
@@ -1001,5 +1084,5 @@ describe('Grasshopper core - users', function(){
                 }
             ).done(done);
         });
-    });*/
+    });
 });
