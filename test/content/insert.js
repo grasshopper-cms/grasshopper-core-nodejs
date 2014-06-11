@@ -150,6 +150,39 @@ describe('Grasshopper core - content', function(){
         });
 
 
+        it('should successfully insert content and also convert multis that are strings ' +
+                'that are valid native dates to a date object.',
+            function(done) {
+                var obj = {
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
+                    },
+                    fields: {
+                        label: 'Generated title',
+                        testfield: 'testvalue',
+                        testDateField: '2014-04-30T20:00:00.000Z',
+                        multi : [
+                            {
+                                testNested : {
+                                    dateField : '2014-04-30T20:00:00.000Z'
+                                }
+                            }
+                        ]
+                    }
+                };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
+                    function(payload){
+                        _.isDate(payload.fields.multi[0].testNested.dateField).should.equal(true);
+                    },
+                    function(err){
+                        should.not.exist(err);
+                    }
+                ).done(done);
+            });
+
         it('should successfully insert content and not convert booleans to a date object.', function(done) {
             var obj = {
                 meta: {
