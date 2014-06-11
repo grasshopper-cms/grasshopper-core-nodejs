@@ -149,6 +149,7 @@ describe('Grasshopper core - content', function(){
             ).done(done);
         });
 
+
         it('should successfully insert content and not convert booleans to a date object.', function(done) {
             var obj = {
                 meta: {
@@ -178,6 +179,35 @@ describe('Grasshopper core - content', function(){
                 }
             ).done();
         });
+
+        it('should successfully insert content and not convert strings that end in numbers to a date object.',
+            function(done) {
+                var obj = {
+                    meta: {
+                        type: '5254908d56c02c076e000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
+                    },
+                    fields: {
+                        label: 'Generated title',
+                        testfield: 'testvalue',
+                        testDateField: '2014-04-30T20:00:00.000Z',
+                        testNested: {
+                            dateField: '2014-04-30T20:00:00.000Z'
+                        },
+                        stringnumfield : 'Step 2'
+                    }
+                };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
+                    function(payload){
+                        payload.fields.stringnumfield.should.equal('Step 2');
+                    },
+                    function(err){
+                        should.not.exist(err);
+                    }
+                ).done(done);
+            });
 
         it('should successfully insert content and not convert string numbers to a date object.', function(done) {
             var obj = {
