@@ -113,7 +113,6 @@ describe('Grasshopper core - content', function(){
                         }, base));
                 })
                 .then(function() {
-
                     return grasshopper.request(tokens.globalEditorToken).content.insert(_.extend({
                                 fields:{
                                     label:'search test3',
@@ -234,12 +233,29 @@ describe('Grasshopper core - content', function(){
                 }
             ).done(done);
         });
-/*
-        it('should return complete results when a user has correct permissions', function(done){
-            true.should.equal(false);
-            done();
+
+        it('returns distinct values within a find', function(done) {
+            grasshopper
+                .request(tokens.globalReaderToken)
+                .content.query({
+                    filters: [{key: 'meta.type', cmp: '=', value: '524362aa56c02c0703000001'}],
+                    options: {
+                        distinct : ['fields.label']
+                    }
+                }).then(function(payload){
+                    console.log(payload);
+                    payload.results.should.deep.equal([
+                        'Generated title',
+                        'search test1',
+                        'search test2',
+                        'search test3',
+                        'search test4',
+                        'search test5' ]);
+                },
+                function(err){
+                    should.not.exist(err);
+                }).done(done);
         });
-     */
     });
 
     function createGetToken(username, password, storage) {
