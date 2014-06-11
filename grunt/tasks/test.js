@@ -10,8 +10,7 @@ module.exports = function (grunt) {
     'If you want to use the native node debugger enter "native".\n' +
     'For example:\n' +
     'grunt test::node-inspector', function (tests, debuggerType) {
-        var _ = require('underscore'),
-            testCommand = 'test';
+        var testCommand = 'test';
 
         // Skip empty strings and undefined - tests is always a string or undefined
         if(tests){
@@ -19,12 +18,12 @@ module.exports = function (grunt) {
         }
 
         if ('node-inspector' === debuggerType) {
-            testCommand = 'testInspector'
+            testCommand = 'testInspector';
         } else if ('native' === debuggerType) {
             grunt.config.set('debug', 'debug');
         }
 
-        grunt.task.run(['mongodb:test', 'shell:' + testCommand]);
+        grunt.task.run(['jshint', 'mongodb:test', 'shell:' + testCommand]);
     });
 
     grunt.registerTask('debugTest', 'Shortcut for using the node-inspector. Tests to run can be supplied as the first ' +
