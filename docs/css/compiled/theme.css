@@ -242,7 +242,7 @@ a:focus, button:focus {
   -webkit-font-smoothing: antialiased; }
   .navbar.normal .navbar-header .navbar-brand {
     color: #fff;
-    padding: 18px 15px;
+    padding: 25px 15px;
     font-weight: 500;
     font-size: 23px; }
   .navbar.normal .navbar-header .navbar-toggle {
