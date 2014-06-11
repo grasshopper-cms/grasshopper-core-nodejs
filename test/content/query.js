@@ -97,57 +97,50 @@ describe('Grasshopper core - content', function(){
                 }
             };
 
-            grasshopper.request(tokens.globalEditorToken).content.insert(_.extend({
+            grasshopper.request(tokens.globalEditorToken)
+                .content.insert(_.extend({
                     fields:{
                         label:'search test1'
                     }
-                }, base)).then(
-                function(){
-                    grasshopper.request(tokens.globalEditorToken).content.insert(_.extend({
+                }, base))
+                .then(function(){
+                    return grasshopper.request(tokens.globalEditorToken).content.insert(_.extend({
                             fields:{
                                 label:'search test2',
                                 testfield: 'testvalue',
                                 newColumn: 'testvalue'
                             }
-                        }, base)).then(
-                        function(){
-                            grasshopper.request(tokens.globalEditorToken).content.insert(_.extend({
-                                    fields:{
-                                        label:'search test3',
-                                        testfield: 'testvalue',
-                                        newColumn: 'testvalue'
-                                    }
-                                }, base)).then(
-                                function(){
-                                    grasshopper.request(tokens.globalEditorToken).content.insert(_.extend({
-                                            fields:{
-                                                label:'search test4',
-                                                testfield: 'testvalue',
-                                                newColumn: 'testvalue'
-                                            }
-                                        }, base)).then(
-                                        function(){
-                                            grasshopper.request(tokens.globalEditorToken).content.insert(_.extend({
-                                                    fields:{
-                                                        label:'search test5',
-                                                        testfield: 'testvalue',
-                                                        newColumn: 'testvalue'
-                                                    }
-                                                }, base)).then(
-                                                function(){
-                                                    done();
-                                                }
-                                            ).done();
-                                        }
-                                    ).done();
+                        }, base));
+                })
+                .then(function() {
+
+                    return grasshopper.request(tokens.globalEditorToken).content.insert(_.extend({
+                                fields:{
+                                    label:'search test3',
+                                    testfield: 'testvalue',
+                                    newColumn: 'testvalue'
                                 }
-                            ).done();
-                        }
-                    ).done();
-                }
-            ).done();
-
-
+                            }, base));
+                })
+                .then(function() {
+                        return grasshopper.request(tokens.globalEditorToken).content.insert(_.extend({
+                            fields:{
+                                label:'search test4',
+                                testfield: 'testvalue',
+                                newColumn: 'testvalue'
+                            }
+                        }, base));
+                })
+                .then(function() {
+                        return grasshopper.request(tokens.globalEditorToken).content.insert(_.extend({
+                            fields:{
+                                label:'search test5',
+                                testfield: 'testvalue',
+                                newColumn: 'testvalue'
+                            }
+                        }, base));
+                })
+                .done(done.bind(done, undefined));
         });
 
         it('should not a 401 because trying to access unauthenticated', function(done) {
