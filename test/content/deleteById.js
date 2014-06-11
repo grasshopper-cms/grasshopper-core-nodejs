@@ -99,7 +99,6 @@ describe('Grasshopper core - content', function(){
                         function(payload){
                             payload.should.equal('Success');
 
-                            done();
                             grasshopper
                                 .request(tokens.globalEditorToken).content.insert(storedData)
                                 .done(done.bind(done, undefined));

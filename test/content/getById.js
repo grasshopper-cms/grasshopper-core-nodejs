@@ -9,7 +9,6 @@ describe('Grasshopper core - content', function(){
         grasshopper = require('../../lib/grasshopper'),
         testContentId  = '5261781556c02c072a000007',
         restrictedContentId = '5254908d56c02c076e000001',
-        sampleContentObject = null,
         tokens = {},
         tokenRequests = [
             ['apitestuseradmin', 'TestPassword', 'globalAdminToken'],
@@ -72,7 +71,6 @@ describe('Grasshopper core - content', function(){
             grasshopper.request(tokens.globalReaderToken).content.getById(testContentId).then(
                 function(payload){
                     payload._id.toString().should.equal(testContentId);
-                    sampleContentObject = payload;
                 },
                 function(err){
                     err.should.not.exist();
