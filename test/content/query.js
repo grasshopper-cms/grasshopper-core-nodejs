@@ -256,6 +256,29 @@ describe('Grasshopper core - content', function(){
                     should.not.exist(err);
                 }).done(done);
         });
+
+        it('distinct works with types', function(done) {
+            grasshopper
+                .request(tokens.globalReaderToken)
+                .content.query({
+                    types : ['524362aa56c02c0703000001'],
+                    options: {
+                        distinct : ['fields.label']
+                    }
+                }).then(function(payload){
+                    console.log(payload);
+                    payload.results.should.deep.equal([
+                        'Generated title',
+                        'search test1',
+                        'search test2',
+                        'search test3',
+                        'search test4',
+                        'search test5' ]);
+                },
+                function(err){
+                    should.not.exist(err);
+                }).done(done);
+        });
     });
 
     function createGetToken(username, password, storage) {
