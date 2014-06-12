@@ -240,10 +240,9 @@ describe('Grasshopper core - content', function(){
                 .content.query({
                     filters: [{key: 'meta.type', cmp: '=', value: '524362aa56c02c0703000001'}],
                     options: {
-                        distinct : ['fields.label']
+                        distinct : 'fields.label'
                     }
                 }).then(function(payload){
-                    console.log(payload);
                     payload.results.should.deep.equal([
                         'Generated title',
                         'search test1',
@@ -266,7 +265,6 @@ describe('Grasshopper core - content', function(){
                         distinct : 'fields.label'
                     }
                 }).then(function(payload){
-                    console.log(payload);
                     payload.results.should.deep.equal([
                         'Generated title',
                         'search test1',
