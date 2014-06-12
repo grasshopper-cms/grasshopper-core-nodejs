@@ -1,9 +1,9 @@
-.idea/*
+/.idea
 /node_modules
 /dist
 /cache
 /log
-.vagrant/*
+/.vagrant
 configuration.json
 atlassian-ide-plugin.xml
 Vagrantfile
