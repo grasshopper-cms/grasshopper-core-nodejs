@@ -4,7 +4,7 @@ module.exports = function (grunt) {
         _ = require('underscore');
     grunt.config('shell', {
         test : {
-            command : 'mocha <%= debug %> --colors -R spec <%= test %>',
+            command : 'mocha <%= debug %> --colors --recursive -R spec <%= test %>',
             options : {
                 stdout : true,
                 stderr : true
