@@ -263,7 +263,7 @@ describe('Grasshopper core - content', function(){
                 .content.query({
                     types : ['524362aa56c02c0703000001'],
                     options: {
-                        distinct : ['fields.label']
+                        distinct : 'fields.label'
                     }
                 }).then(function(payload){
                     console.log(payload);
