@@ -242,7 +242,7 @@ a:focus, button:focus {
   -webkit-font-smoothing: antialiased; }
   .navbar.normal .navbar-header .navbar-brand {
     color: #fff;
-    padding: 25px 15px;
+    padding: 18px 15px;
     font-weight: 500;
     font-size: 23px; }
   .navbar.normal .navbar-header .navbar-toggle {
@@ -252,7 +252,7 @@ a:focus, button:focus {
       text-align: center; } }
   @media (min-width: 768px) {
     .navbar.normal .navbar-collapse .navbar-nav {
-      float: none;
+      float: right;
       display: inline-block; } }
   .navbar.normal .navbar-collapse .navbar-nav > li {
     float: none;
@@ -310,11 +310,15 @@ a:focus, button:focus {
     .navbar.hero {
       background: transparent;
       padding-top: 10px; }
+      .navbar.hero .navbar-nav {
+          float: right } }
       .navbar.hero .navbar-nav > .active > a {
         background: transparent;
         color: #fff; } }
   .navbar.hero .navbar-brand {
     color: #fff;
+    padding-top:10px;
+
     font-weight: 500;
     font-size: 26px;
     font-family: "Lato", "Helvetica Neue", Arial; }
@@ -657,7 +661,7 @@ a:focus, button:focus {
   overflow: hidden;
   background: #4B4848;
   background-size: cover;
-  background-image: url("http://farm9.staticflickr.com/8222/8254861601_1fbf969a14_b.jpg");
+  background-image: url("/images/hero-background.jpg");
   /* These are some ready-to-use backgrounds you can test out by uncommenting them */
   /*background-image: url("../../images/bg2.png");*/
   /*background-image: url("../../images/bg3.png");*/
@@ -767,7 +771,7 @@ a:focus, button:focus {
 #home #features {
   /* mixin found in partials/snippets */
   margin-top: 100px;
-  margin-top: 20px; }
+  margin-top: 0px; }
   @media (max-width: 991px) {
     #home #features {
       margin-top: 50px; } }
@@ -785,7 +789,6 @@ a:focus, button:focus {
       font-size: 17px;
       color: #757575; }
   #home #features .feature {
-    margin-top: 55px;
     -webkit-font-smoothing: antialiased; }
     @media (min-width: 992px) {
       #home #features .feature.backwards .info {
@@ -798,9 +801,9 @@ a:focus, button:focus {
       #home #features .feature {
         margin-top: 10px; } }
     #home #features .feature .info h4 {
-      color: #3B88B6;
+      color: #165d01;
       font-weight: normal;
-      font-size: 19px;
+      font-size: 28px;
       line-height: 25px;
       margin-top: 35px; }
       @media (max-width: 991px) {
