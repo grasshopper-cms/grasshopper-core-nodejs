@@ -1,6 +1,12 @@
 @import "../snippets/features";
 
-#features {
+.features {
+    .container {
+      p {
+        margin-top:20px;
+      }
+    }
+
 	#tabs {
 		margin-top: 40px;
 		margin-bottom: 130px;

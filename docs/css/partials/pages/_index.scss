@@ -143,7 +143,12 @@
 	}
 
 
-	#features {
+	.features {
+        .container {
+          p {
+            margin-top:20px;
+          }
+        }
 		/* mixin found in partials/snippets */
 		@include features-section;
 
