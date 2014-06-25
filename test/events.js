@@ -158,7 +158,7 @@ describe('Grasshopper core - testing event events', function(){
                     }
                 }).then(
                     function(payload){
-                        payload.custom.should.equal('payload')
+                        payload.custom.should.equal('payload');
                     },
                     function(err){
                         should.not.exist(err);

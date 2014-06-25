@@ -5,3 +5,14 @@ nodelint.cfg
 .npmignore
 .gitmodules
 Makefile
+/.idea
+/node_modules
+/dist
+/cache
+/log
+/.vagrant
+configuration.json
+atlassian-ide-plugin.xml
+Vagrantfile
+.DS_Store
+/.git
