@@ -245,11 +245,11 @@ describe('Grasshopper core - content', function(){
                 }).then(function(payload){
                     payload.results.should.deep.equal([
                         'Generated title',
-                        'search test1',
                         'search test2',
                         'search test3',
                         'search test4',
-                        'search test5' ]);
+                        'search test5',
+                        'search test1']);
                 },
                 function(err){
                     should.not.exist(err);
@@ -267,11 +267,11 @@ describe('Grasshopper core - content', function(){
                 }).then(function(payload){
                     payload.results.should.deep.equal([
                         'Generated title',
-                        'search test1',
                         'search test2',
                         'search test3',
                         'search test4',
-                        'search test5' ]);
+                        'search test5',
+                        'search test1']);
                 },
                 function(err){
                     should.not.exist(err);
@@ -282,7 +282,7 @@ describe('Grasshopper core - content', function(){
     function createGetToken(username, password, storage) {
         return {
             closure : function getToken(cb){
-                grasshopper.auth(username, password).then(function(token){
+                grasshopper.auth('basic', { username: username, password: password }).then(function(token){
                     tokens[storage] = token;
                     cb();
                 }).done();
