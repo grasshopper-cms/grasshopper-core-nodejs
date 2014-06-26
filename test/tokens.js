@@ -41,7 +41,6 @@ describe('Grasshopper core - testing tokens', function(){
 
         grasshopper.auth('basic', { username: 'admin', password: 'TestPassword' }).then(function(token){
                 adminToken = token;
-                console.log(token);
                 grasshopper.auth('basic', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){
                         readerToken = token;
                         grasshopper.auth('basic', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){
@@ -51,9 +50,6 @@ describe('Grasshopper core - testing tokens', function(){
                                 done();
                             });
                         });
-                    })
-                    .fail(function(err) {
-                        console.log(err);
                     });
             });
     });
