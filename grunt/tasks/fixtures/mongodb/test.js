@@ -6,7 +6,7 @@
         _ = require('underscore');
 
     _.each([
-        'hookEvents',
+        'hookevents',
         'users',
         'nodes',
         'contentTypes',

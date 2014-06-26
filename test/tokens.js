@@ -39,18 +39,21 @@ describe('Grasshopper core - testing tokens', function(){
             };
         });
 
-
-        grasshopper.auth('username', { username: 'admin', password: 'TestPassword' }).then(function(token){
+        grasshopper.auth('basic', { username: 'admin', password: 'TestPassword' }).then(function(token){
                 adminToken = token;
-                grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){
+                console.log(token);
+                grasshopper.auth('basic', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){
                         readerToken = token;
-                        grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){
+                        grasshopper.auth('basic', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){
                             readerToken2 = token;
-                            grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){
+                            grasshopper.auth('basic', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){
                                 readerToken3 = token;
                                 done();
                             });
                         });
+                    })
+                    .fail(function(err) {
+                        console.log(err);
                     });
             });
     });
