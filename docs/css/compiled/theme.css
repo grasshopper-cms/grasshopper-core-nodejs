@@ -701,6 +701,34 @@ p {
       text-align: center;
       color: #A1AAB6; }
 
+.hexagons {
+  text-align: center; }
+  .hexagons .hexagon {
+    background: url("../../images/hexagon.png") 0 0 no-repeat;
+    width: 100px;
+    height: 113px;
+    position: relative;
+    display: inline-block;
+    margin-right: 60px;
+    cursor: pointer; }
+    @media (max-width: 991px) {
+      .hexagons .hexagon {
+        margin: 0; } }
+    .hexagons .hexagon:hover, .hexagons .hexagon.active {
+      background-position: 0 -117px; }
+      .hexagons .hexagon:hover .icon, .hexagons .hexagon.active .icon {
+        color: #fff; }
+    .hexagons .hexagon:last-child {
+      margin-right: 0px; }
+    .hexagons .hexagon .icon {
+      font-size: 48px;
+      color: #80939b;
+      position: absolute;
+      top: 32px;
+      left: 0;
+      right: 0;
+      text-align: center; }
+
 /* pages */
 #home #hero {
   overflow: hidden;
@@ -3039,37 +3067,10 @@ p {
         #services #hero .info p {
           width: 85%; } }
   #services #tabs {
-    margin-top: 110px; }
+    margin-top: 20px; }
     @media (max-width: 991px) {
       #services #tabs {
         margin-top: 70px; } }
-    #services #tabs .hexagons {
-      text-align: center; }
-      #services #tabs .hexagons .hexagon {
-        background: url("../../images/hexagon.png") 0 0 no-repeat;
-        width: 100px;
-        height: 113px;
-        position: relative;
-        display: inline-block;
-        margin-right: 60px;
-        cursor: pointer; }
-        @media (max-width: 991px) {
-          #services #tabs .hexagons .hexagon {
-            margin: 0; } }
-        #services #tabs .hexagons .hexagon:hover, #services #tabs .hexagons .hexagon.active {
-          background-position: 0 -117px; }
-          #services #tabs .hexagons .hexagon:hover .icon, #services #tabs .hexagons .hexagon.active .icon {
-            color: #fff; }
-        #services #tabs .hexagons .hexagon:last-child {
-          margin-right: 0px; }
-        #services #tabs .hexagons .hexagon .icon {
-          font-size: 48px;
-          color: #80939b;
-          position: absolute;
-          top: 32px;
-          left: 0;
-          right: 0;
-          text-align: center; }
     #services #tabs .sections {
       margin-top: 35px;
       position: relative;
