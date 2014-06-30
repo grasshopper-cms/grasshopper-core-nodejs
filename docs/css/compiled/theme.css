@@ -261,7 +261,7 @@ p {
   width: 100%;
   background-color: #ddd;
   position: relative;
-  margin: 70px 0 60px; }
+  margin: 70px 0 40px; }
   .divider:before {
     content: '';
     position: absolute;
@@ -3074,7 +3074,7 @@ p {
     #services #tabs .sections {
       margin-top: 35px;
       position: relative;
-      height: 220px; }
+      height: 320px; }
       #services #tabs .sections .section {
         display: none;
         position: absolute; }
@@ -3128,67 +3128,60 @@ p {
             color: #666;
             margin-top: 15px;
             line-height: 22px; }
-  #services #grid-second {
-    margin-top: 80px; }
-    @media (max-width: 991px) {
-      #services #grid-second {
-        margin-top: 50px; } }
-    #services #grid-second .header {
-      border-top: 1px solid #E6E6E8;
-      padding-top: 55px;
-      margin-bottom: 35px; }
-      #services #grid-second .header h3 {
-        font-size: 27px;
-        font-family: Myriad Pro, Lato, Helvetica Neue, Arial;
-        color: #444;
-        line-height: 25px;
-        font-weight: 500;
-        margin-bottom: 7px; }
-        @media (max-width: 991px) {
-          #services #grid-second .header h3 {
-            text-align: center; } }
-      #services #grid-second .header p {
-        font-size: 15px;
-        font-weight: 400;
-        color: #666;
-        width: 50%;
-        line-height: 24px;
-        margin-top: 15px; }
-        @media (max-width: 991px) {
-          #services #grid-second .header p {
-            margin: 0 auto;
-            width: 90%;
-            text-align: center; } }
-    #services #grid-second .features {
-      margin-bottom: 20px; }
+  #services #grid-second .header {
+    border-top: 1px solid #E6E6E8;
+    padding-top: 55px;
+    margin-bottom: 35px; }
+    #services #grid-second .header h3 {
+      font-size: 27px;
+      font-family: Myriad Pro, Lato, Helvetica Neue, Arial;
+      color: #444;
+      line-height: 25px;
+      font-weight: 500;
+      margin-bottom: 7px; }
       @media (max-width: 991px) {
-        #services #grid-second .features .feature {
-          text-align: center;
-          margin-bottom: 30px; } }
+        #services #grid-second .header h3 {
+          text-align: center; } }
+    #services #grid-second .header p {
+      font-size: 15px;
+      font-weight: 400;
+      color: #666;
+      width: 50%;
+      line-height: 24px;
+      margin-top: 15px; }
+      @media (max-width: 991px) {
+        #services #grid-second .header p {
+          margin: 0 auto;
+          width: 90%;
+          text-align: center; } }
+  @media (max-width: 991px) {
+    #services #grid-second .features .feature {
+      text-align: center;
+      margin-bottom: 30px; } }
+  #services #grid-second .features .feature img {
+    max-width: 40px;
+    position: relative;
+    top: 10px; }
+    @media (min-width: 992px) {
       #services #grid-second .features .feature img {
-        max-width: 40px;
-        position: relative;
-        top: 10px; }
-        @media (min-width: 992px) {
-          #services #grid-second .features .feature img {
-            float: left; } }
-      @media (min-width: 992px) {
-        #services #grid-second .features .feature .info {
-          float: left;
-          width: 80%;
-          margin-left: 20px; } }
-      #services #grid-second .features .feature .info strong {
-        display: block;
-        font-weight: 500;
-        font-size: 16px;
-        color: #444;
-        margin-top: 15px; }
-      #services #grid-second .features .feature .info p {
-        font-weight: normal;
-        font-size: 14px;
-        color: #797979;
-        margin-top: 10px;
-        line-height: 24px; }
+        float: left; } }
+  @media (min-width: 992px) {
+    #services #grid-second .features .feature .info {
+      float: left;
+      width: 65%;
+      margin-left: 20px; } }
+  #services #grid-second .features .feature .info strong {
+    display: block;
+    font-weight: 500;
+    font-size: 16px;
+    color: #444;
+    margin-top: 15px; }
+  #services #grid-second .features .feature .info p {
+    font-weight: normal;
+    font-size: 14px;
+    color: #797979;
+    margin-top: 10px;
+    line-height: 24px; }
   #services #features-hover {
     margin-top: 120px; }
     @media (max-width: 991px) {
