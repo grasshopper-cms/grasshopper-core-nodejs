@@ -204,7 +204,7 @@ textarea.form-control {
   .container {
     width: 970px; } }
 a {
-  color: #459CE7; }
+  color: #165d01; }
 
 .pagination > .active > a,
 .pagination > .active > span,
@@ -3074,7 +3074,7 @@ p {
     #services #tabs .sections {
       margin-top: 35px;
       position: relative;
-      height: 320px; }
+      height: 620px; }
       #services #tabs .sections .section {
         display: none;
         position: absolute; }
