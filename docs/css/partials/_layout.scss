@@ -37,7 +37,7 @@ p {
   width: 100%;
   background-color: #ddd;
   position: relative;
-  margin: 70px 0 60px;
+  margin: 70px 0 40px;
   &:before {
     content: '';
     position: absolute;
@@ -637,4 +637,42 @@ p {
 			color: #A1AAB6;
 		}
 	}
+}
+
+.hexagons {
+  text-align: center;
+
+  .hexagon {
+    background: url("../../images/hexagon.png") 0 0 no-repeat;
+    width: 100px;
+    height: 113px;
+    position: relative;
+    display: inline-block;
+    margin-right: 60px;
+    cursor: pointer;
+
+    @media(max-width: 991px) {
+      margin: 0;
+    }
+
+    &:hover,
+    &.active {
+      background-position: 0 -117px;
+      .icon {
+        color: #fff;
+      }
+    }
+    &:last-child {
+      margin-right: 0px;
+    }
+    .icon {
+      font-size: 48px;
+      color: #80939b;
+      position: absolute;
+      top: 32px;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+  }
 }
