@@ -24,327 +24,313 @@ navtype: normal
     </div>
 </div>
 
-<div class="container">
+<div id="grid-second" class="container">
     <div class="row">
-        <div class="col-md-12"><h2>Features</h2></div>
+        <div class="col-md-12">
+            <h3 style="margin-bottom: 15px;">Fast, scalable platform written in JavaScript for Node.js</h3>
+            <p>
+                The Grasshopper stack is modular and built on top of modern web developement technologies. It was written entirely in JavaScript and it
+                uses NoSQL on the backend. File storage can either be local or on a CDN.
+            </p>
+            <p>
+                Grasshopper will run in any environment that supports Node.js and MongoDB. This is great news for users
+                hosting the application themselves or using services like Heroku, Engine Yard or any other PaaS (Platform as a Service).
+            </p>
+            <p>Every implementation of the system is different but keep reading and you will start to get a sense of how the project is organized.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <img src="/images/stack.png" style="width:600px;" />
+        </div>
+        <div class="col-md-4">
+            <img src="/images/nodejs.png" />
+            <img src="/images/mongo-logo.png" />
+        </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div id="tabs">
+            <h3 style="margin-bottom: 15px;"><a name="requirements"></a>Requirements</h3>
+            <ul>
+                <li>
+                    Environment that can run <a href="http://nodejs.org" target="_blank">Node.js</a>.
+                    Node.js is released under the <a href="https://raw.github.com/joyent/node/v0.10.29/LICENSE" target="_blank">MIT license</a> and
+                    has <a href="http://nodejs.org/download/" target="_blank">installation packages</a> available for Linux, Windows and Macintosh.
+                </li>
+                <li>
+                    Instance of <a href="http://gruntjs.com/">Grunt</a> (JavaScript Task Runner) installed. This application is used for compiling the application.
+                </li>
+                <li>Access to a running instance of <a href="http://www.mongodb.org/" target="_blank">MongoDB</a>.
+                    You can host this yourself or use services like <a href="https://mongolab.com/welcome/" target="_blank">MongoLab</a>.</li>
+                <li>Access to local file system or CDN like <a href="http://aws.amazon.com/s3/" target="_blank">Amazon S3</a>.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3 style="margin-bottom: 15px;">Components</h3>
+            <p>
+                The Grasshopper system includes 3 parts, Core, API and Admin. Most deployments include all 3 of these parts.
+            </p>
+            <p>&nbsp;</p>
+        </div>
+    </div>
+
+    <div class="col-md-12 tabs-wrapper">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#core" data-toggle="tab">Grasshopper Core</a></li>
+            <li><a href="#api" data-toggle="tab">Grasshopper API</a></li>
+            <li><a href="#admin" data-toggle="tab">Grasshopper Admin</a></li>
+            <li><a href="#proxy" data-toggle="tab">Customer Proxy</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="core">
+                <p>&nbsp;</p>
+                <p>
+                    Core is responsible for all of the heavy lifting for the framework. It can be included directly into your
+                    project or it also comes with an instance of the API. It includes methods for managing users
+                    (data and access), content types, content, nodes (or folders) and assets.
+                </p>
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12 hexagons">
-                            <div class="hexagon active">
-                                <span class="icon brankic-monitor"></span>
+                        <div class="col-md-12">
+                            <h5 style="margin-bottom: 15px;">Users</h5>
+                            <p>
+                                Membership is a critical component to almost all applications. Grasshopper has the concept of membership built-in. Not only
+                                does Grasshopper handle logins and user data (fully extensible), but it contains a robust permissions mechanism that allows you
+                                to protect your data based off of your application's requirements.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row features">
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info">
+                                <p>Support for basic authentication as well as 3rd party logins like Google and others.</p>
                             </div>
-                            <div class="hexagon">
-                                <span class="icon brankic-profile"></span>
-                            </div>
-                            <div class="hexagon">
-                                <span class="icon brankic-site-map"></span>
-                            </div>
-                            <div class="hexagon">
-                                <span class="icon brankic-locked"></span>
-                            </div>
-                            <div class="hexagon">
-                                <span class="icon brankic-cloud"></span>
-                            </div>
-                            <div class="hexagon">
-                                <span class="icon brankic-tools"></span>
+                        </div>
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info">
+                                <p>User roles and permissions (global and folder level)</p>
                             </div>
                         </div>
                     </div>
+                    <div class="row features">
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info">
+                                <p>Managing custom user profile data</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info">
+                                <p>Emitting events when actions are taken on users</p>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="sections">
-                                <div class="section active">
-                                    <h3 style="margin-bottom: 15px;">Fast, scalable platform written in JavaScript for Node.js</h3>
-                                    <p>
-                                        Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications.
-                                    </p>
-                                    <p>
-                                        Node plays a critical role in the technology stack of many high-profile companies who depend on its unique benefits.
-                                    </p>
-                                    <p>
-                                        Don't take our word for it, read some of the testimonials from large companies implementing Node.js in production. <a href="http://www.nodejs.org/industry/" target="_blank">Click here</a> to read what industry professionals are saying.
-                                    </p>
-                                    <p>
-                                        <img src="http://nodejs.org/images/logos/nodejs.png" />
-                                    </p>
+                            <h5 style="margin-bottom: 15px;">Content Types</h5>
+                            <p>
+                                All content in Grasshopper is <code>typed</code>, meaning that it has a definition. Think of content types
+                                like a database table schema. More or less, that is what they are. All content types contain a
+                                a few metadata elements and a collection of <code>fields</code>. Fields are specific containers that you want to
+                                store data (think of a database column). Values for fields can be a single value (number, string), a collection of values
+                                (one-to-many), embeded content type, or a collection of embeded content types.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row features">
+                        <div class="col-md-6 feature">
+                            <img src="/images/checkmark.png" />
+                            <div class="info">
+                                <p>Leverage the power of NoSQL, fully supports "one-to-many" and nested objects</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 feature">
+                            <img src="/images/checkmark.png" />
+                            <div class="info">
+                                <p>Fields can have default values</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row features">
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info"><p>Fields can contain validation</p></div>
+                        </div>
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info"><p>Fields can nest other content types</p></div>
+                        </div>
+                    </div>
+                    <div class="row features">
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info"><p>Fields can support a collection of values</p></div>
+                        </div>
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info"><p>Fields can be made required</p></div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 style="margin-bottom: 15px;">Nodes = folders</h5>
+                            <p>
+                                Nodes provide you the ability to organize your content into logical groups. Grouping content
+                                into these collections does a couple of things for you. #1 content can be queried based off of the
+                                node it belongs to. #2 it makes it really nice to work with the data within the administration project.
+                                Many CMSs just list out all of the content that matches a content type but Grasshopper allows you to take
+                                control of how many folders you can create and what kind of content will be stored within those folders.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row features">
+                        <div class="col-md-6 feature">
+                            <img src="/images/checkmark.png" />
+                            <div class="info">
+                                <p>Organize your data so that it makes sense for the content administrators, not just the DBA</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 feature">
+                            <img src="/images/checkmark.png" />
+                            <div class="info">
+                                <p>Each node can be assigned permissions, perfect for sandboxing data in your application</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row features">
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info"><p>Content can be queried by node</p></div>
+                        </div>
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info"><p>Unlimited amount of nodes allowed</p></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 style="margin-bottom: 15px;">Content</h5>
+                            <p>
+                                Content
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row features">
+                        <div class="col-md-6 feature">
+                            <img src="/images/checkmark.png" />
+                            <div class="info">
+                                <p>Organize your data so that it makes sense for the content administrators, not just the DBA</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 feature">
+                            <img src="/images/checkmark.png" />
+                            <div class="info">
+                                <p>Each node can be assigned permissions, perfect for sandboxing data in your application</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row features">
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info"><p>Content can be queried by node</p></div>
+                        </div>
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info"><p>Unlimited amount of nodes allowed</p></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 style="margin-bottom: 15px;">Assets</h5>
+                        </div>
+                    </div>
+                    <div class="row features">
+                        <div class="col-md-6 feature">
+                            <img src="/images/checkmark.png" />
+                            <div class="info">
+                                <p>
+                                    Grasshopper allows you to store assets in nodes. You can either query out the assets that
+                                    are in a node, or you can link an asset to a piece of content.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 feature">
+                            <img src="/images/checkmark.png" />
+                            <div class="info">
+                                <p>Store your files either locally or publish to a CDN. Amazon S3 integration is included and any CDN that provides an API is fully compatible.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="api">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 style="margin-bottom: 15px;">Grasshopper API</h4>
+                            <p>
+                                TBD
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="admin">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 style="margin-bottom: 15px;">Grasshopper Admin</h4>
+                            <div class="container">
+                                <div class="row features">
+                                    <div class="col-md-12 feature">
+                                        <img src="images/checkmark.png" alt="globe">
+                                        <div class="info">
+                                            <p>Fully functional administration application without running scaffolding commands or writting any code. Flexible and extensible environment.</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="section">
-                                    <h4>Frontend development</h4>
-                                    <ul>
-                                        <li>User management</li>
-                                    </ul>
-                                    <p>
-                                        I love making the stuff, that’s sort of the core of it. I love creating the stuff. It’s so satisfying to get from the beginning to the end, from a shaky nothing idea to something that’s well formed and the audience really likes. It’s like a drug: You keep trying to do it again and again and again. I’ve learned from experience that if you work harder at it, and apply more energy and time to it, and more consistency, you get a better result. It comes from the work.
-                                        <br />
-                                        This thing will work on any device, it has a very easy to understand documentation and is made with SASS.
-                                    </p>
+                                <div class="row features">
+                                    <div class="col-md-12 feature">
+                                        <img src="images/checkmark.png" alt="globe">
+                                        <div class="info">
+                                            <p>Manage your content types and data entry forms using the provided application without writing any code. Quickly change the way your application works and the data-schema easily and effectively.</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="section">
-                                    <h4>Responsive web design</h4>
-                                    <ul>
-                                        <li>Data organization</li>
-                                        <li>Robust data management administration</li>
-                                        <li>Flexible data structures</li>
-                                        <li>Extensible data management plugins</li>
-                                    </ul>
-                                    <p>
-                                        We're always happy to offer support if you happen to have any doubts about anything, if you need some new stuff contact us.
-                                    </p>
-                                    <p>
-                                        You have to roll up your sleeves and be a stonecutter before you can become a sculptor – command of craft always precedes art: apprentice, journeyman, master. <br />
-                                        It doesn’t matter one damn bit whether fashion is art or not. You don’t question whether an incredible chef is an artist or not – his cakes are delicious and that’s all that matters.
-                                    </p>
-                                </div>
-                                <div class="section">
-                                    <h4>HTML & CSS Development</h4>
-                                    <ul>
-                                        <li>Data security</li>
-                                    </ul>
-                                    <p>
-                                        Well you’re in your little room and you’re working on something good but if it’s really good you’re gonna need a bigger room and when you’re in the bigger room you might not know what to do you might have to think of how you got started sitting in your little room.
-                                    </p>
-                                    <p>
-                                        We're always happy to offer support if you happen to have any doubts about anything, if you need some new stuff contact us.
-                                    </p>
-                                </div>
-                                <div class="section">
-                                    <h4>Photoshop Mockups</h4>
-                                    <ul>
-                                        <li>REST API</li>
-                                        <li>Cloud Support</li>
-                                        <li>Local and CDN file support</li>
-                                    </ul>
-                                    <p>
-                                        I want everything we do to be beautiful. I don’t give a damn whether the client understands that that’s worth anything, or that the client thinks it’s worth anything, or whether it is worth anything. It’s worth it to me. It’s the way I want to live my life. I want to make beautiful things, even if nobody cares.
-                                    </p>
-                                    <p>
-                                        We'll be adding some new stuff to make it even more awesome, if you have any idea please let us know.
-                                    </p>
-                                </div>
-                                <div class="section">
-                                    <h4>Retina display</h4>
-                                    <ul>
-                                        <li>Flexible query ability</li>
-                                        <li>Complete event system</li>
-                                        <li>Ability to proxy application and customize API endpoints</li>
-                                    </ul>
-                                    <p>
-                                        Functionality is so over-valued in design, and we’ve kept design very small in that way. Functionality is the sheer minimum. If your house burns down, what do you take? The cat in the window that you got from your mother, or the chair you have?
-                                    </p>
-                                    <p>
-                                        Simply are looking to sell digital goods or are interested in drop shipping — React has a complete solution in this.
-                                    </p>
+                                <div class="row features">
+                                    <div class="col-md-12 feature">
+                                        <img src="images/checkmark.png" alt="globe">
+                                        <div class="info">
+                                            <p>Easily extend the administration application to your project's needs without modifying the core source code.</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h2>What does Grasshopper do out of the box?</h2>
-        </div>
-        <div class="divider"></div>
-    </div>
-    <div id="grid-second">
-
-        <div class="row features">
-            <div class="col-md-12 feature">
-                <img src="images/gallery1.png" style="max-width:300px;margin-bottom:20px;">
-                <div class="info">
-                    <div class="container">
-                        <div class="row features">
-                            <div class="col-md-12 feature">
-                                <img src="images/checkmark.png" alt="globe">
-                                <div class="info">
-                                    <p>Fully functional administration application without running scaffolding commands or writting any code. Flexible and extensible environment.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row features">
-                            <div class="col-md-12 feature">
-                                <img src="images/checkmark.png" alt="globe">
-                                <div class="info">
-                                    <p>Built-in user management system, that is extensible and secure. Includes support for basic authentication as well as 3rd party logins like Google and others.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row features">
-                            <div class="col-md-12 feature">
-                                <img src="images/checkmark.png" alt="globe">
-                                <div class="info">
-                                    <p>Ability to organize your content into logical groups, making the administration of your data very easy.</p>
-                                </div>
-                            </div>
+            <div class="tab-pane fade" id="proxy">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 style="margin-bottom: 15px;">Proxy</h4>
+                            <p>
+                                TBD
+                            </p>
                         </div>
                     </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="row features">
-            <div class="col-md-12 feature">
-                <img src="images/gallery1a.png" style="max-width:300px;">
-                <div class="info">
-                    <div class="container">
-                        <div class="row features">
-                            <div class="col-md-12 feature">
-                                <img src="images/checkmark.png" alt="globe">
-                                <div class="info">
-                                    <p>Manage your content types and data entry forms using the provided application without writing any code. Quickly change the way your application works and the data-schema easily and effectively.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row features">
-                            <div class="col-md-12 feature">
-                                <img src="images/checkmark.png" alt="globe">
-                                <div class="info">
-                                    <p>Easily extend the administration application to your project's needs without modifying the core source code.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row features">
-                            <div class="col-md-12 feature">
-                                <img src="images/checkmark.png" alt="globe">
-                                <div class="info">
-                                    <p>Leverage the power of NoSQL to nest objects and create intuitive forms. Fully supports "one-to-many" and nested objects.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row features">
-            <div class="col-md-12 feature">
-                <img src="images/gallery2.png" style="max-width:300px;margin-bottom:20px">
-                <div class="info">
-                    <div class="container">
-                        <div class="row features">
-                            <div class="col-md-12 feature">
-                                <img src="images/checkmark.png" alt="globe">
-                                <div class="info">
-                                    <p>Store your files either locally or publish to a CDN. Amazon S3 integration is included and any CDN that provides an API is fully compatible.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row features">
-                            <div class="col-md-12 feature">
-                                <img src="images/checkmark.png" alt="globe">
-                                <div class="info">
-                                    <p>Grasshopper will run in any environment that supports Node.js and MongoDB. This is great news for users hosting the application themselves or using services like Heroku, Engine Yard or any other PaaS (Platform as a Service)</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="row features">
-            <div class="col-md-12 feature">
-                <img src="images/gallery3.png" style="max-width:300px;">
-                <div class="info">
-                    <div class="container">
-                        <div class="row features">
-                            <div class="col-md-12 feature">
-                                <img src="images/checkmark.png" alt="globe">
-                                <div class="info">
-                                    <p></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row features">
-                            <div class="col-md-12 feature">
-                                <img src="images/checkmark.png" alt="globe">
-                                <div class="info">
-                                    <p>Built-in user management system, that is extensible and secure. Includes support for basic authentication as well as 3rd party logins like Google and others.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row features">
-                            <div class="col-md-12 feature">
-                                <img src="images/checkmark.png" alt="globe">
-                                <div class="info">
-                                    <p>Manage your content types and data entry forms using the provided application without writing any code. Quickly change the way your application works and the data-schema easily and effectively.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row features">
-                            <div class="col-md-12 feature">
-                                <img src="images/checkmark.png" alt="globe">
-                                <div class="info">
-                                    <p>Easily extend the administration application to your project's needs without modifying the core source code.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row features">
-                            <div class="col-md-12 feature">
-                                <img src="images/checkmark.png" alt="globe">
-                                <div class="info">
-                                    <p>Ability to organize your content into logical groups, making the administration of your data very easy.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="row features">
-            <div class="col-md-12 feature">
-                <img src="images/gallery4.png" style="max-width:300px;">
-                <div class="info">
-                    <div class="container">
-                        <div class="row features">
-                            <div class="col-md-12 feature">
-                                <img src="images/checkmark.png" alt="globe">
-                                <div class="info">
-                                    <p></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row features">
-                            <div class="col-md-12 feature">
-                                <img src="images/checkmark.png" alt="globe">
-                                <div class="info">
-                                    <p>Built-in user management system, that is extensible and secure. Includes support for basic authentication as well as 3rd party logins like Google and others.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row features">
-                            <div class="col-md-12 feature">
-                                <img src="images/checkmark.png" alt="globe">
-                                <div class="info">
-                                    <p>Manage your content types and data entry forms using the provided application without writing any code. Quickly change the way your application works and the data-schema easily and effectively.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row features">
-                            <div class="col-md-12 feature">
-                                <img src="images/checkmark.png" alt="globe">
-                                <div class="info">
-                                    <p>Easily extend the administration application to your project's needs without modifying the core source code.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row features">
-                            <div class="col-md-12 feature">
-                                <img src="images/checkmark.png" alt="globe">
-                                <div class="info">
-                                    <p>Ability to organize your content into logical groups, making the administration of your data very easy.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
