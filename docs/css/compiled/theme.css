@@ -927,7 +927,7 @@ p {
     #home .features {
       margin-top: 0; } }
 #home #slider {
-  margin-top: 70px; }
+  margin-top: 20px; }
   @media (max-width: 991px) {
     #home #slider {
       margin-top: 30px; } }
@@ -2858,7 +2858,7 @@ p {
     margin-top: 10px;
     line-height: 24px; }
 .features #slider {
-  margin-top: 70px; }
+  margin-top: 20px; }
   @media (max-width: 991px) {
     .features #slider {
       margin-top: 30px; } }
