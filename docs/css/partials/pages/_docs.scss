@@ -213,14 +213,10 @@
 								font-family: Monaco, Consolas, Menlo;
 								font-size: 12px;
 
-								display: none;
+                                display: block;
 
 								&.always-visible {
 									display: block !important;
-								}
-
-								&.ruby {
-									display: block;
 								}
 
 								color: #DAE4F2;
@@ -231,7 +227,7 @@
 								}
 							}
 
-							.ruby {
+							.javascript {
 								color: #DAE4F2;
 
 								> * {
