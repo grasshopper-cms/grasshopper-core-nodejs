@@ -5993,29 +5993,27 @@ html.bg {
             background: none;
             font-family: Monaco, Consolas, Menlo;
             font-size: 12px;
-            display: none;
+            display: block;
             color: #DAE4F2; }
             #docs #api-docs #methods .method .method-section .method-example pre code.always-visible {
               display: block !important; }
-            #docs #api-docs #methods .method .method-section .method-example pre code.ruby {
-              display: block; }
             #docs #api-docs #methods .method .method-section .method-example pre code > * {
               color: #DAE4F2;
               line-height: 20px; }
-          #docs #api-docs #methods .method .method-section .method-example pre .ruby {
+          #docs #api-docs #methods .method .method-section .method-example pre .javascript {
             color: #DAE4F2; }
-            #docs #api-docs #methods .method .method-section .method-example pre .ruby > * {
+            #docs #api-docs #methods .method .method-section .method-example pre .javascript > * {
               color: #DAE4F2;
               line-height: 20px; }
-            #docs #api-docs #methods .method .method-section .method-example pre .ruby [class*=keyword] {
+            #docs #api-docs #methods .method .method-section .method-example pre .javascript [class*=keyword] {
               color: #9AB4DB; }
-            #docs #api-docs #methods .method .method-section .method-example pre .ruby [class*=string] {
+            #docs #api-docs #methods .method .method-section .method-example pre .javascript [class*=string] {
               color: #DAD0C6; }
-            #docs #api-docs #methods .method .method-section .method-example pre .ruby [class*=comment] {
+            #docs #api-docs #methods .method .method-section .method-example pre .javascript [class*=comment] {
               color: #B4B4B4; }
-            #docs #api-docs #methods .method .method-section .method-example pre .ruby [class*=constant] {
+            #docs #api-docs #methods .method .method-section .method-example pre .javascript [class*=constant] {
               color: #FFDF9D; }
-            #docs #api-docs #methods .method .method-section .method-example pre .ruby [class*=symbol] {
+            #docs #api-docs #methods .method .method-section .method-example pre .javascript [class*=symbol] {
               color: #9ECBEE; }
           #docs #api-docs #methods .method .method-section .method-example pre .python {
             color: #DAE4F2; }
