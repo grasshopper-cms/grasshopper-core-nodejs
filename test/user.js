@@ -579,7 +579,6 @@ describe('Grasshopper core - users', function(){
         });
     });
 
-
     describe('Update a user', function() {
         it('should return a 401 because user is not authenticated.', function(done){
             grasshopper.request().users.update({}).then(
@@ -934,7 +933,6 @@ describe('Grasshopper core - users', function(){
         });
 
     });
-
 
     describe('Query Users', function() {
         var query = {
