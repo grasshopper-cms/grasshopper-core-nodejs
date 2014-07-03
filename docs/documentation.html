@@ -8,10 +8,19 @@ bodyid: docs
 <div id="api-docs">
 <div id="methods">
 <div class="languages">
-    <a class="language selected" data-lang="ruby" href="#">Ruby</a>
-    <a class="language" data-lang="python" href="#">Python</a>
-    <a class="language" data-lang="php" href="#">PHP</a>
+    <a class="language selected" data-lang="javascript" href="#">Code Examples</a>
 </div>
+
+{% for post in site.documentation%}
+<div class="method" id="{{ post.uuid }}">
+    <div class="method-section clearfix">
+        <div class="method-description">
+            {{ post.content }}
+        </div>
+    </div>
+</div>
+{% endfor %}
+
 <div class="method" id="intro">
     <div class="method-section clearfix">
         <div class="method-description">
@@ -28,13 +37,8 @@ bodyid: docs
         </div>
         <div class="method-example">
 <pre>
-<code class="ruby"># All this code is just for demonstration purposes
-
-    React.api_key = "In here goes your api key!"</code><code class="python"># All this code is just for demonstration purposes
-
-    react.api_key = "In here goes your api key!"</code><code class="php"># All this code is just for demonstration purposes
-
-    React::setApiKey("In here goes your api key!");</code>
+<code class="javascript"># All this code is just for demonstration purposes
+    React.api_key = "In here goes your api key!"</code>
 </pre>
         </div>
     </div>
@@ -49,7 +53,7 @@ bodyid: docs
         </div>
         <div class="method-example">
 <pre>
-<code class="ruby">class A < B
+<code class="javascript">class A < B
     def self.create(object = User)
     return object
     end
@@ -58,23 +62,6 @@ bodyid: docs
     return "#{self.first_name} #{self.last_name}"
     end
     end
-</code><code class="python">class Mapping:
-    def __init__(self, iterable):
-    self.items_list = []
-    self.__update(iterable)
-
-    def update(self, iterable):
-    for item in iterable:
-    self.items_list.append(item)
-</code><code class="php">class myClass {
-    var $input;
-    var $output;
-
-    function myClass($input) {
-    $output = 'You entered: ' . $input;
-    return $output;
-    }
-    }
 </code>
 </pre>
         </div>
@@ -130,26 +117,14 @@ bodyid: docs
         </div>
         <div class="method-example">
 <pre>
-<code class="ruby">React::Game.create(
+<code class="javascript">React::Game.create(
     :name => "Super Mario Bros",
     :company => "Nintendo",
     :some_key => "yey_JA390094AWPIWWN435",
     :rating => 100
     )
-</code><code class="python">react.Game.create(
-    name="Super Mario Bros",
-    company="Nintendo",
-    some_key="yey_JA390094AWPIWWN435"
-    rating=100
-    )
-</code><code class="php">React_Charge::create(array(
-    "name" => "Super Mario Bros",
-    "company" => "Nintendo",
-    "some_key" => "yey_JA390094AWPIWWN435"
-    "rating" => 100
-    ));
 </code>
-<code class="ruby always-visible"># Object Response
+<code class="always-visible"># Object Response
     {
     "object": "Game",
     "name": "Super Mario Bros",
@@ -218,29 +193,15 @@ bodyid: docs
         </div>
         <div class="method-example">
 <pre>
-<code class="ruby">React::User.create(
+<code class="javascript">React::User.create(
     :name => "John McClane",
     :email => "john_mcclane@awesome.com",
     :country => "US",
     :some_key => "yey_JA390094AWPIWWN435",
     :age => 53
     )
-</code><code class="python">react.User.create(
-    name="John McClane",
-    email="john_mcclane@awesome.com",
-    country="US",
-    some_key="yey_JA390094AWPIWWN435",
-    age=53
-    )
-</code><code class="php">React_User::create(array(
-    "name" => "John McClane",
-    "email" => "john_mcclane@awesome.com",
-    "country" => "US",
-    "some_key" => "yey_JA390094AWPIWWN435",
-    "age" => 53
-    ));
 </code>
-<code class="ruby always-visible"># Object Response
+<code class="javascript always-visible"># Object Response
     {
     "object": "User",
     "name": "John McClane",
@@ -274,7 +235,7 @@ bodyid: docs
         </div>
         <div class="method-example">
 <pre>
-<code class="ruby">React::Order.create(
+<code class="javascript">React::Order.create(
     :item => "React Bootstrap Theme",
     :price => 1500,
     :name => "John McClane",
@@ -283,26 +244,8 @@ bodyid: docs
     :some_key => "yey_JA390094AWPIWWN435",
     :age => 53
     )
-</code><code class="python">react.User.create(
-    item="React Bootstrap Theme",
-    price=1500,
-    name="John McClane",
-    email="john_mcclane@awesome.com",
-    country="US",
-    some_key="yey_JA390094AWPIWWN435",
-    age=53
-    )
-</code><code class="php">React_User::create(array(
-    "item" => "React Bootstrap Theme",
-    "price" => 1500,
-    "name" => "John McClane",
-    "email" => "john_mcclane@awesome.com",
-    "country" => "US",
-    "some_key" => "yey_JA390094AWPIWWN435",
-    "age" => 53
-    ));
 </code>
-<code class="ruby always-visible"># Object Response
+<code class="javascript always-visible"># Object Response
     {
     "object": "Order",
     "item": "React Bootstrap Theme",
@@ -373,3 +316,25 @@ bodyid: docs
 </div>
 </div>
 </div>
+<script type="text/javascript">
+    $(function () {
+        hljs.configure({
+            tabReplace: '  ',
+            classPrefix: ''
+        })
+        hljs.initHighlightingOnLoad();
+
+
+        // language toggle
+        var $languages = $(".languages .language");
+        $languages.click(function (e) {
+            e.preventDefault();
+            var lang = $(this).data("lang");
+            $languages.removeClass("selected");
+            $(this).addClass("selected");
+
+            $("pre code").hide();
+            $("pre code." + lang).css("display", "block");
+        });
+    });
+</script>

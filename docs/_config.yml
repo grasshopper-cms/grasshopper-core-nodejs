@@ -8,3 +8,6 @@ url: "http://yourdomain.com"
 # Build settings
 markdown: kramdown
 permalink: pretty
+collections:
+  documentation:
+    output: true

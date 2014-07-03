@@ -3,13 +3,18 @@
 
 {% include head.html %}
 
-<body id="{{ page.bodyid }}">
+<body id="{{ page.bodyid }}" data-spy="scroll" data-target="#guide">
 
 <div id="guide">
     <h1 class="logo">
         <a href="/index.html">Grasshopper</a>
     </h1>
     <ul class="menu nav">
+        {% for post in site.documentation%}
+        <li>
+            <a href="#{{ post.uuid }}">{{ post.title }}</a>
+        </li>
+        {% endfor %}
         <li>
             <a href="#intro">Introduction</a>
         </li>
