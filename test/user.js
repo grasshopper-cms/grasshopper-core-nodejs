@@ -158,6 +158,7 @@ describe('Grasshopper core - users', function(){
                 }
             ).done(done);
         });
+
         it('should return a 401 because user is not authenticated', function(done) {
             grasshopper.request().users.current().then(
                 function(payload){
@@ -181,6 +182,7 @@ describe('Grasshopper core - users', function(){
                 }
             ).done(done);
         });
+
         it('should a list of users with the specified page size', function(done) {
             grasshopper.request(adminToken).users.list({limit:1}).then(
                 function(payload){
@@ -191,6 +193,7 @@ describe('Grasshopper core - users', function(){
                 }
             ).done(done);
         });
+
         it('should return a 403 because user does not have permissions to access users', function(done) {
             grasshopper.request(readerToken).users.list().then(
                 function(payload){
@@ -201,6 +204,7 @@ describe('Grasshopper core - users', function(){
                 }
             ).done(done);
         });
+
         it('should return an empty list if the page size and current requested items are out of bounds.', function(done) {
             grasshopper.request(adminToken).users.list({limit:10, skip: 30}).then(
                 function(payload){
@@ -211,6 +215,7 @@ describe('Grasshopper core - users', function(){
                 }
             ).done(done);
         });
+
         it('should return a 401 because user is not authenticated', function(done) {
             grasshopper.request().users.list().then(
                 function(payload){
@@ -255,6 +260,7 @@ describe('Grasshopper core - users', function(){
                     payload.identities.basic.login.should.equal(newUser.identities.basic.login);
                     payload.should.have.property('_id');
                     payload.identities.basic.should.not.have.property('password');
+                    payload.should.have.property('linkedIdentities');
                     testCreatedUserId = payload._id;
                 },
                 function(err){
@@ -600,6 +606,7 @@ describe('Grasshopper core - users', function(){
                         password: 'TestPassword'
                     }
                 },
+                linkedIdentities: [ 'basic' ],
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
@@ -626,6 +633,7 @@ describe('Grasshopper core - users', function(){
                     }
                 },
                 role: 'reader',
+                linkedIdentities: ['basic'],
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
                 firstname: 'Test',
@@ -639,6 +647,44 @@ describe('Grasshopper core - users', function(){
                     should.not.exist(err);
                 }
             ).done(done);
+        });
+
+        describe('with changes in the identities', function() {
+
+            it('should recreate the linkedIdentities array on the us', function(done) {
+                var updateUser = {
+                    _id: testCreatedUserId,
+                    identities: {
+                        basic: {
+                            login: 'newtestuser1_updated'
+                        },
+                        google : { // this is the property that is new.
+                            doesNotMatter: 'your Momma'
+                        }
+                    },
+                    linkedIdentities: ['basic'],
+                    role: 'reader',
+                    enabled: true,
+                    email: 'newtestuser1@thinksolid.com',
+                    firstname: 'Test',
+                    lastname: 'User'
+                };
+                grasshopper.request(adminToken).users.update(updateUser).then(
+                    function(payload){
+                        console.log('=================================');
+                        console.log(payload);
+
+                        payload.should.have.property('linkedIdentities');
+                        payload.linkedIdentities[0].should.equal('basic');
+                        payload.linkedIdentities[1].should.equal('google');
+                    },
+                    function(err){
+                        should.not.exist(err);
+                    }
+                ).done(done);
+
+            });
+
         });
 
         describe('admin should be able to change a user\'s password', function(){
@@ -736,6 +782,7 @@ describe('Grasshopper core - users', function(){
                         password: 'TestPassword'
                     }
                 },
+                linkedIdentities: [ 'basic' ],
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
@@ -763,6 +810,7 @@ describe('Grasshopper core - users', function(){
                         password: 'TestPassword'
                     }
                 },
+                linkedIdentities: [ 'basic' ],
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
@@ -789,6 +837,7 @@ describe('Grasshopper core - users', function(){
                         password: 'TestPassword'
                     }
                 },
+                linkedIdentities: [ 'basic' ],
                 role: 'reader_bad',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
@@ -815,6 +864,7 @@ describe('Grasshopper core - users', function(){
                         password: 'TestPassword'
                     }
                 },
+                linkedIdentities: [ 'basic' ],
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
@@ -841,6 +891,7 @@ describe('Grasshopper core - users', function(){
                         password: 'TestPassword'
                     }
                 },
+                linkedIdentities: [ 'basic' ],
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
@@ -867,6 +918,7 @@ describe('Grasshopper core - users', function(){
                         password: 'TestPassword'
                     }
                 },
+                linkedIdentities: [ 'basic' ],
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
@@ -893,6 +945,7 @@ describe('Grasshopper core - users', function(){
                         password: 'TestPassword'
                     }
                 },
+                linkedIdentities: [ 'basic' ],
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
@@ -915,6 +968,7 @@ describe('Grasshopper core - users', function(){
                     login: 'apitestuserreader',
                     password: 'TestPassword'
                 },
+                linkedIdentities: [ 'basic' ],
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
