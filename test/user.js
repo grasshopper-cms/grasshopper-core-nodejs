@@ -295,6 +295,63 @@ describe('Grasshopper core - users', function(){
             ).done(done);
         });
 
+        it('should insert a new with a linked identities array representing all linked identities', function(done) {
+            var newUser = {
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User',
+                identities: {
+                    basic: {
+                        login: 'somePerson',
+                        password: 'TestPassword'
+                    }
+                },
+                profile: {
+                    linkedid: 'tjmchattie'
+                }
+            };
+
+            grasshopper.request(adminToken).users.insert(newUser)
+                .then(function(payload){
+                    payload.should.have.property('linkedIdentities');
+                    payload.linkedIdentities[0].should.equal('basic');
+                },
+                function(err){
+                    should.not.exist(err);
+                })
+                .done(done);
+        });
+
+        it('Freshly Inserted user, Should not have a google property on identities.', function(done) {
+            var newUser = {
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User',
+                identities: {
+                    basic: {
+                        login: 'someOtherPerson',
+                        password: 'TestPassword'
+                    }
+                },
+                profile: {
+                    linkedid: 'tjmchattie'
+                }
+            };
+
+            grasshopper.request(adminToken).users.insert(newUser)
+                .then(function(payload){
+                    payload.identities.should.not.have.property('google');
+                },
+                function(err){
+                    should.not.exist(err);
+                })
+                .done(done);
+        });
+
         it('should return error if a an existing user id is sent with the request.', function(done){
             var newUser = {
                 _id: testCreatedUserId,
