@@ -11,3 +11,5 @@ permalink: pretty
 collections:
   documentation:
     output: true
+  gettingstarted:
+    output: true

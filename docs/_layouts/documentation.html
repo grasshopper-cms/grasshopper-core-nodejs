@@ -13,36 +13,18 @@
         {% for post in site.documentation%}
         <li>
             <a href="#{{ post.uuid }}">{{ post.title }}</a>
+            {% if site[post.uuid].size > 0  %}
+            <ul class="nav">
+                {% for subpost in site[post.uuid]%}
+                {% if subpost.uuid contains '-example' %}
+                {% else %}
+                <li><a href="#{{subpost.uuid}}">{{subpost.title}}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            {% endif %}
         </li>
         {% endfor %}
-        <li>
-            <a href="#intro">Introduction</a>
-        </li>
-        <li>
-            <a href="#auth">Authentication</a>
-        </li>
-        <li>
-            <a href="#games">Games</a>
-            <ul class="nav">
-                <li><a href="#js-individual-compiled">Retrieve a Game</a></li>
-                <li><a href="#js-data-attrs">Create a Game</a></li>
-                <li><a href="#js-programmatic-api">Delete a Game</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#users">Users</a>
-            <ul class="nav">
-                <li><a href="#users">Retrieve a User</a></li>
-                <li><a href="#users">Create a User</a></li>
-                <li><a href="#users">Delete a User</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#orders">Orders</a>
-        </li>
-        <li>
-            <a href="#errors">Errors</a>
-        </li>
     </ul>
 </div>
 
