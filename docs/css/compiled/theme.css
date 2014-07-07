@@ -5945,11 +5945,19 @@ html.bg {
           font-size: 21px;
           margin-top: 0;
           margin-bottom: 20px; }
+        #docs #api-docs #methods .method .method-section .method-description h4 {
+          margin-top: 0;
+          margin-bottom: 20px; }
         #docs #api-docs #methods .method .method-section .method-description p {
           font-size: 13px;
           color: #666;
           line-height: 21px;
           margin-bottom: 20px; }
+        #docs #api-docs #methods .method .method-section .method-description li {
+          color: #666;
+          font-size: 13px;
+          line-height: 21px;
+          margin-bottom: 10px; }
         #docs #api-docs #methods .method .method-section .method-description .info {
           margin-top: 45px;
           margin-bottom: 40px; }
