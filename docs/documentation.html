@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: About
+title: Grasshopper Documentation
 permalink: /documentation.html
 bodyid: docs
 ---
@@ -12,13 +12,48 @@ bodyid: docs
 </div>
 
 {% for post in site.documentation%}
-<div class="method" id="{{ post.uuid }}">
-    <div class="method-section clearfix">
-        <div class="method-description">
-            {{ post.content }}
+    {% if post.uuid contains '-example' %}
+    {% else %}
+        <div class="method" id="{{ post.uuid }}">
+            <div class="method-section clearfix">
+                <div class="method-description">
+                    {{ post.content }}
+                </div>
+                <div class="method-example">
+                    <pre>
+                        <code class="javascript">
+                            {% assign codeExample = post.uuid | append: '-example' %}
+
+                        </code>
+                    </pre>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+    {% endif %}
+
+    {% for subpost in site[post.uuid]%}
+        {% assign codeExample = '' %}
+        {% if subpost.uuid contains '-example' %}
+        {% else %}
+            <div class="method" id="{{ subpost.uuid }}">
+                <div class="method-section clearfix">
+                    <div class="method-description">
+                        {{ subpost.content }}
+                    </div>
+                    <div class="method-example">
+                        <pre>
+                            <code class="javascript">
+                                {% assign codeExample = subpost.uuid | append: '-example' %}
+                                {{ site[post.uuid][codeExample] }}
+                                {{post.uuid}}
+                                {{codeExample}}
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
 {% endfor %}
 
 <div class="method" id="intro">
@@ -36,10 +71,10 @@ bodyid: docs
             </p>
         </div>
         <div class="method-example">
-<pre>
-<code class="javascript"># All this code is just for demonstration purposes
-    React.api_key = "In here goes your api key!"</code>
-</pre>
+            <pre>
+                <code class="javascript"># All this code is just for demonstration purposes
+                    React.api_key = "In here goes your api key!"</code>
+            </pre>
         </div>
     </div>
 </div>
