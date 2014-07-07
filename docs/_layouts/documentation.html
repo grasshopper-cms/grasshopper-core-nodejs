@@ -9,35 +9,17 @@
     <h1 class="logo">
         <a href="/index.html">Grasshopper</a>
     </h1>
-    <ul class="menu nav">
-        {% for post in site.documentation%}
+    <ul class="menu nav">{% for post in site.documentation %}
         <li>
-            <a href="#{{ post.uuid }}">{{ post.title }}</a>
-            {% if site[post.uuid].size > 0  %}
-            <ul class="nav">
-                {% for subpost in site[post.uuid]%}
-                {% if subpost.uuid contains '-example' %}
-                {% else %}
-                <li><a href="#{{subpost.uuid}}">{{subpost.title}}</a></li>
-                {% endif %}
-                {% endfor %}
-            </ul>
-            {% endif %}
-        </li>
-        {% endfor %}
+            <a href="#{{ post.uuid }}">{{ post.title }}</a>{% if site[post.uuid].size > 0  %}
+            <ul class="nav">{% for subpost in site[post.uuid] %}{% if subpost.uuid contains '-example' %}{% else %}
+                <li><a href="#{{subpost.uuid}}">{{subpost.title}}</a></li>{% endif %}{% endfor %}
+            </ul>{% endif %}
+        </li>{% endfor %}
     </ul>
 </div>
 
 {{ content }}
 
-<script type="text/javascript">
-    $(function () {
-        hljs.configure({
-            tabReplace: '  ',
-            classPrefix: ''
-        })
-        hljs.initHighlightingOnLoad();
-    });
-</script>
 </body>
 </html>
