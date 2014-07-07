@@ -5953,6 +5953,8 @@ html.bg {
           color: #666;
           line-height: 21px;
           margin-bottom: 20px; }
+        #docs #api-docs #methods .method .method-section .method-description img {
+          max-width: 100%; }
         #docs #api-docs #methods .method .method-section .method-description li {
           color: #666;
           font-size: 13px;
