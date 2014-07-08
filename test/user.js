@@ -257,10 +257,9 @@ describe('Grasshopper core - users', function(){
 
             grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
-                    payload.identities.basic.login.should.equal(newUser.identities.basic.login);
                     payload.should.have.property('_id');
-                    payload.identities.basic.should.not.have.property('password');
                     payload.should.have.property('linkedIdentities');
+                    payload.should.not.have.property('identities');
                     testCreatedUserId = payload._id;
                 },
                 function(err){
@@ -289,16 +288,25 @@ describe('Grasshopper core - users', function(){
 
             grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
-                    payload.identities.basic.login.should.equal(newUser.identities.basic.login);
                     payload.should.have.property('_id');
                     payload.should.not.have.property('password');
-                    payload.identities.basic.should.not.have.property('password');
+                    payload.should.not.have.property('identities');
                     testCreatedUserIdCustomVerb = payload._id;
                 },
                 function(err){
                     should.not.exist(err);
                 }
             ).done(done);
+        });
+
+        describe('displayName', function() {
+            xit('should set the displayName on a user when inserting', function() {
+
+            });
+
+            xit('should set a default displayName if one is not sent', function() {
+
+            });
         });
 
         it('should insert a new with a linked identities array representing all linked identities', function(done) {
@@ -350,7 +358,8 @@ describe('Grasshopper core - users', function(){
 
             grasshopper.request(adminToken).users.insert(newUser)
                 .then(function(payload){
-                    payload.identities.should.not.have.property('google');
+                    payload.should.not.have.property('identities');
+                    payload.linkedIdentities.should.deep.equal(['basic']);
                 },
                 function(err){
                     should.not.exist(err);
@@ -706,45 +715,50 @@ describe('Grasshopper core - users', function(){
 
             before(function (done) {
                 function getTestUser(next){
-                    grasshopper.request(adminToken).users.getById(testReaderUserId).then(
-                        function(payload){
+                    console.log('1');
+                    grasshopper.request(adminToken).users.getById(testReaderUserId)
+                        .then(function(payload){
                             next(null, payload);
-                        },
-                        function(err){
+                        })
+                        .fail(function(err){
                             next(err);
-                        }
-                    ).done();
+                        })
+                        .done();
                 }
 
                 function updateUser(user, next){
-                    user.identities.basic.password = 'thisismytestpassword';
-
-                    grasshopper.request(adminToken).users.update(user).then(
-                        function(){
-                            next();
-                        },
-                        function(err){
-                            next(err);
+                    user.identities = {
+                        basic : {
+                            password : 'thisismytestpassword'
                         }
-                    ).done();
+                    };
+
+                    grasshopper.request(adminToken).users.update(user)
+                        .then(function(){
+                            next();
+                        })
+                        .fail(function(err){
+                            next(err);
+                        })
+                        .done();
                 }
 
                 function tryUseOldLogin(next){
-                    grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' }).then(
-                        function(token){
+                    grasshopper.auth('basic', { username: 'apitestuserreader', password: 'TestPassword' })
+                        .then(function(token){
                             next(should.not.exist(token));
-                        },
-                        function(){
+                        })
+                        .fail(function(){
                             next();
                         });
                 }
 
                 function tryUseNewLogin(next){
-                    grasshopper.auth('username', { username: 'apitestuserreader', password: 'thisismytestpassword' }).then(
-                        function(token){
+                    grasshopper.auth('basic', { username: 'apitestuserreader', password: 'thisismytestpassword' })
+                        .then(function(token){
                             next(null, token);
-                        },
-                        function(err){
+                        })
+                        .fail(function(err){
                             next(err);
                         });
                 }
@@ -769,21 +783,20 @@ describe('Grasshopper core - users', function(){
 
         it('one admin should be able to change the role of another admin.', function(done) {
 
-            grasshopper.request(adminToken).users.getById(admin2UserId).then(
-                function(payload){
+            grasshopper.request(adminToken).users.getById(admin2UserId)
+                .then(function(payload){
                     payload.role = 'reader';
 
                     grasshopper.request(adminToken).users.update(payload)
-                        .then(
-                            function(payload){
-                                payload.role.should.equal('reader');
-                            },
-                            function(err){
-                                should.not.exist(err);
-                            }
-                    ).done(done);
-                }
-            ).done();
+                        .then(function(payload){
+                            payload.role.should.equal('reader');
+                        })
+                        .fail(function(err){
+                            should.not.exist(err);
+                        })
+                        .done(done);
+                })
+                .done();
 
         });
 
@@ -884,15 +897,16 @@ describe('Grasshopper core - users', function(){
                 firstname: 'Test',
                 lastname: 'User'
             };
-            grasshopper.request(adminToken).users.update(newUser).then(
-                function(payload){
+            grasshopper.request(adminToken).users.update(newUser)
+                .then(function(payload){
                     should.not.exist(payload);
-                },
-                function(err){
+
+                })
+                .fail(function(err){
                     err.code.should.equal(400);
-                    err.message.should.equal('login is required.');
-                }
-            ).done(done);
+                    err.message.should.equal('Password, when supplied, cannot be empty.');
+                })
+                .done(done);
         });
 
         it('should return error if user login is empty.', function(done){
@@ -917,7 +931,7 @@ describe('Grasshopper core - users', function(){
                 },
                 function(err){
                     err.code.should.equal(400);
-                    err.message.should.equal('login is required.');
+                    err.message.should.equal('Password, when supplied, cannot be empty.');
                 }
             ).done(done);
         });
@@ -949,7 +963,7 @@ describe('Grasshopper core - users', function(){
             ).done(done);
         });
 
-        it('should a user to update themselves even if they do not have global permissions.', function(done){
+        it('should allow a user to update themselves even if they do not have global permissions.', function(done){
             var newUser = {
                 _id: testReaderUserId,
                 identities: {
@@ -964,14 +978,14 @@ describe('Grasshopper core - users', function(){
                 email: 'newtestuser1@thinksolid.com',
                 name: 'Updated test reader name with :id'
             };
-            grasshopper.request(readerToken).users.update(newUser).then(
-                function(payload){
-                    payload.identities.basic.login.should.equal(newUser.identities.basic.login);
-                },
-                function(err){
+            grasshopper.request(readerToken).users.update(newUser)
+                .then(function(payload){
+                    payload._id.toString().should.equal('5246e80c56c02c0744000002');
+                })
+                .fail(function(err){
                     should.not.exist(err);
-                }
-            ).done(done);
+                })
+                .done(done);
         });
 
         it('should error if updating a user with an different ID than your own.', function(done){
