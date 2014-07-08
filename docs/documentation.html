@@ -24,7 +24,7 @@ bodyid: docs
                     {% for exampleSubpost in site.documentation %}
                     {% if exampleSubpost.uuid == codeExample %}
 <pre>
-<code class="javascript">{{exampleSubpost.content | markdownify}}</code>
+<code class="{{exampleSubpost.language}}">{{exampleSubpost.content | markdownify}}</code>
 </pre>
                     {% endif %}
                     {% endfor %}
@@ -48,7 +48,7 @@ bodyid: docs
                 {% for exampleSubpost in site[post.uuid] %}
                     {% if exampleSubpost.uuid == codeExample %}
 <pre>
-<code class="javascript">{{exampleSubpost.content | markdownify}}</code>
+<code class="{{exampleSubpost.language}}">{{exampleSubpost.content | markdownify}}</code>
 </pre>
                     {% endif %}
                 {% endfor %}
@@ -68,18 +68,5 @@ bodyid: docs
             classPrefix: ''
         })
         hljs.initHighlightingOnLoad();
-
-
-        // language toggle
-        var $languages = $(".languages .language");
-        $languages.click(function (e) {
-            e.preventDefault();
-            var lang = $(this).data("lang");
-            $languages.removeClass("selected");
-            $(this).addClass("selected");
-
-            $("pre code").hide();
-            $("pre code." + lang).css("display", "block");
-        });
     });
 </script>
