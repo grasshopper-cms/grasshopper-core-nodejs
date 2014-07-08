@@ -21,3 +21,5 @@ collections:
     output: true
   gettingstarted:
     output: true
+  concepts:
+    output: true
