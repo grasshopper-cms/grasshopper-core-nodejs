@@ -6019,7 +6019,8 @@ html.bg {
               color: #DAE4F2;
               line-height: 20px; }
           #docs #api-docs #methods .method .method-section .method-example pre .javascript {
-            color: #DAE4F2; }
+            color: #DAE4F2;
+            white-space: pre-wrap; }
             #docs #api-docs #methods .method .method-section .method-example pre .javascript > * {
               color: #DAE4F2;
               line-height: 20px; }
