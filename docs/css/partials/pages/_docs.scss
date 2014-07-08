@@ -224,11 +224,15 @@
 							margin: 0;
 							padding: 0;
 
+                            word-break: normal;
+                            word-wrap: break-word;                 /* IE 5.5+ and up */
+                            /* overflow-x: auto; */                /* Firefox 2 only */
+
 							code {
 								background: none;
 								font-family: Monaco, Consolas, Menlo;
 								font-size: 12px;
-
+                                white-space: normal;
                                 display: block;
 
                                 a {
