@@ -6005,6 +6005,8 @@ html.bg {
             font-size: 12px;
             display: block;
             color: #DAE4F2; }
+            #docs #api-docs #methods .method .method-section .method-example pre code a {
+              color: #33cccc; }
             #docs #api-docs #methods .method .method-section .method-example pre code.always-visible {
               display: block !important; }
             #docs #api-docs #methods .method .method-section .method-example pre code > * {
@@ -6039,6 +6041,51 @@ html.bg {
             #docs #api-docs #methods .method .method-section .method-example pre .python [class*=class] {
               color: #FFDF9D; }
             #docs #api-docs #methods .method .method-section .method-example pre .python [class*=params] {
+              color: #9ECBEE; }
+          #docs #api-docs #methods .method .method-section .method-example pre .json {
+            color: #DAE4F2; }
+            #docs #api-docs #methods .method .method-section .method-example pre .json > * {
+              color: #DAE4F2;
+              line-height: 20px; }
+            #docs #api-docs #methods .method .method-section .method-example pre .json [class*=keyword] {
+              color: #9AB4DB; }
+            #docs #api-docs #methods .method .method-section .method-example pre .json [class*=string] {
+              color: #DAD0C6; }
+            #docs #api-docs #methods .method .method-section .method-example pre .json [class*=comment] {
+              color: #B4B4B4; }
+            #docs #api-docs #methods .method .method-section .method-example pre .json [class*=class] {
+              color: #FFDF9D; }
+            #docs #api-docs #methods .method .method-section .method-example pre .json [class*=params] {
+              color: #9ECBEE; }
+          #docs #api-docs #methods .method .method-section .method-example pre .ascidoc {
+            color: #DAE4F2; }
+            #docs #api-docs #methods .method .method-section .method-example pre .ascidoc > * {
+              color: #DAE4F2;
+              line-height: 20px; }
+            #docs #api-docs #methods .method .method-section .method-example pre .ascidoc [class*=keyword] {
+              color: #9AB4DB; }
+            #docs #api-docs #methods .method .method-section .method-example pre .ascidoc [class*=string] {
+              color: #DAD0C6; }
+            #docs #api-docs #methods .method .method-section .method-example pre .ascidoc [class*=comment] {
+              color: #B4B4B4; }
+            #docs #api-docs #methods .method .method-section .method-example pre .ascidoc [class*=class] {
+              color: #FFDF9D; }
+            #docs #api-docs #methods .method .method-section .method-example pre .ascidoc [class*=params] {
+              color: #9ECBEE; }
+          #docs #api-docs #methods .method .method-section .method-example pre .bash {
+            color: #DAE4F2; }
+            #docs #api-docs #methods .method .method-section .method-example pre .bash > * {
+              color: #DAE4F2;
+              line-height: 20px; }
+            #docs #api-docs #methods .method .method-section .method-example pre .bash [class*=keyword] {
+              color: #9AB4DB; }
+            #docs #api-docs #methods .method .method-section .method-example pre .bash [class*=string] {
+              color: #DAD0C6; }
+            #docs #api-docs #methods .method .method-section .method-example pre .bash [class*=comment] {
+              color: #B4B4B4; }
+            #docs #api-docs #methods .method .method-section .method-example pre .bash [class*=class] {
+              color: #FFDF9D; }
+            #docs #api-docs #methods .method .method-section .method-example pre .bash [class*=params] {
               color: #9ECBEE; }
           #docs #api-docs #methods .method .method-section .method-example pre .php {
             color: #DAE4F2; }
