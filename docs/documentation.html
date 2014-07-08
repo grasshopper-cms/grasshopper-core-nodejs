@@ -6,10 +6,10 @@ bodyid: docs
 ---
 
 <div id="api-docs">
-<div id="methods">
-<div class="languages">
-    <a class="language selected" data-lang="javascript" href="#">Code Examples</a>
-</div>
+    <div id="methods">
+        <div class="languages">
+            <a class="language selected" data-lang="javascript" href="#">Examples</a>
+        </div>
 
 {% for post in site.documentation%}
     {% if post.uuid contains '-example' %}
@@ -17,38 +17,41 @@ bodyid: docs
         <div class="method" id="{{ post.uuid }}">
             <div class="method-section clearfix">
                 <div class="method-description">
-                    {{ post.content }}
+                    {{ post.content | markdownify }}
                 </div>
                 <div class="method-example">
-                    <pre>
-                        <code class="javascript">
-                            {% assign codeExample = post.uuid | append: '-example' %}
-
-                        </code>
-                    </pre>
+                    {% assign codeExample = post.uuid | append: '-example' %}
+                    {% for exampleSubpost in site.documentation %}
+                    {% if exampleSubpost.uuid == codeExample %}
+<pre>
+<code class="{{exampleSubpost.language}}">{{exampleSubpost.content | markdownify}}</code>
+</pre>
+                    {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
     {% endif %}
 
     {% for subpost in site[post.uuid]%}
+
         {% assign codeExample = '' %}
         {% if subpost.uuid contains '-example' %}
         {% else %}
             <div class="method" id="{{ subpost.uuid }}">
                 <div class="method-section clearfix">
                     <div class="method-description">
-                        {{ subpost.content }}
+                        {{ subpost.content | markdownify }}
                     </div>
                     <div class="method-example">
-                        <pre>
-                            <code class="javascript">
-                                {% assign codeExample = subpost.uuid | append: '-example' %}
-                                {{ site[post.uuid][codeExample] }}
-                                {{post.uuid}}
-                                {{codeExample}}
-                            </code>
-                        </pre>
+            {% assign codeExample = subpost.uuid | append: '-example' %}
+                {% for exampleSubpost in site[post.uuid] %}
+                    {% if exampleSubpost.uuid == codeExample %}
+<pre>
+<code class="{{exampleSubpost.language}}">{{exampleSubpost.content | markdownify}}</code>
+</pre>
+                    {% endif %}
+                {% endfor %}
                     </div>
                 </div>
             </div>
@@ -56,299 +59,6 @@ bodyid: docs
     {% endfor %}
 {% endfor %}
 
-<div class="method" id="intro">
-    <div class="method-section clearfix">
-        <div class="method-description">
-            <h3>Introduction</h3>
-            <p>
-                This is a documentation page demo for <a href="http://en.wikipedia.org/wiki/Application_programming_interface">an API</a>, you can use it for your own purposes if you want to showcase your API or some other kind of documentation for your app.
-                The info shown here is merely for the demo so it is not real.
-            </p>
-            <p>
-                You can edit the code with anything you like and use only the languages that you want, the code syntax highlighting is made using
-                <a href="http://highlightjs.org" target="_blank">highlightjs.org</a> and supports a good
-                variety of languages. Comes with some color schemes by default but you can easily customize the scheme of each language directly from the CSS.
-            </p>
-        </div>
-        <div class="method-example">
-            <pre>
-                <code class="javascript"># All this code is just for demonstration purposes
-                    React.api_key = "In here goes your api key!"</code>
-            </pre>
-        </div>
-    </div>
-</div>
-<div class="method" id="auth">
-    <div class="method-section clearfix">
-        <div class="method-description">
-            <h3>Authentication</h3>
-            <p>
-                It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
-        </div>
-        <div class="method-example">
-<pre>
-<code class="javascript">class A < B
-    def self.create(object = User)
-    return object
-    end
-
-    def full_name
-    return "#{self.first_name} #{self.last_name}"
-    end
-    end
-</code>
-</pre>
-        </div>
-    </div>
-</div>
-<div class="method" id="games">
-    <div class="method-section clearfix">
-        <div class="method-description">
-            <h3>Games</h3>
-            <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            </p>
-            <p>
-                It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
-            <div class="info">
-                <h4>The Game Object</h4>
-                <div class="field clearfix">
-                    <div class="key">name:</div>
-                    <div class="desc">
-                        <strong>string</strong>
-                        The name of the game
-                    </div>
-                </div>
-                <div class="field clearfix">
-                    <div class="key">company:</div>
-                    <div class="desc">
-                        <strong>string</strong>
-                        The name of the company creator
-                    </div>
-                </div>
-                <div class="field clearfix">
-                    <div class="key">some_key:</div>
-                    <div class="desc">
-                        <strong>string</strong>
-                    </div>
-                </div>
-                <div class="field clearfix">
-                    <div class="key">rating:</div>
-                    <div class="desc">
-                        <strong>integer</strong>
-                        The rating of the game from 0 to 100.
-                    </div>
-                </div>
-                <div class="field clearfix">
-                    <div class="key">description:</div>
-                    <div class="desc">
-                        <strong>hash</strong>
-                        key/value pairs with fields that describe the game.
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="method-example">
-<pre>
-<code class="javascript">React::Game.create(
-    :name => "Super Mario Bros",
-    :company => "Nintendo",
-    :some_key => "yey_JA390094AWPIWWN435",
-    :rating => 100
-    )
-</code>
-<code class="always-visible"># Object Response
-    {
-    "object": "Game",
-    "name": "Super Mario Bros",
-    "company": "Nintendo",
-    "some_key": "yey_JA390094AWPIWWN435",
-    "rating": 100
-    "description": {
-    "some_desc1": null,
-    "some_desc2": null,
-    "some_desc3": null,
-    "some_desc4": null,
-    }
-    "valid": true,
-    "other_field": null
-    }
-</code>
-</pre>
-        </div>
-    </div>
-</div>
-<div class="method" id="users">
-    <div class="method-section clearfix">
-        <div class="method-description">
-            <h3>Users</h3>
-            <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            </p>
-            <div class="info">
-                <h4>The User Object</h4>
-                <div class="field clearfix">
-                    <div class="key">name:</div>
-                    <div class="desc">
-                        <strong>string</strong>
-                        The name of the user
-                    </div>
-                </div>
-                <div class="field clearfix">
-                    <div class="key">email:</div>
-                    <div class="desc">
-                        <strong>string</strong>
-                        The email of the user
-                    </div>
-                </div>
-                <div class="field clearfix">
-                    <div class="key">country:</div>
-                    <div class="desc">
-                        <strong>string</strong>
-                        2 letter code for the country
-                    </div>
-                </div>
-                <div class="field clearfix">
-                    <div class="key">age:</div>
-                    <div class="desc">
-                        <strong>integer</strong>
-                        Age of the user
-                    </div>
-                </div>
-                <div class="field clearfix">
-                    <div class="key">description:</div>
-                    <div class="desc">
-                        <strong>hash</strong>
-                        key/value pairs with fields that describe the user.
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="method-example">
-<pre>
-<code class="javascript">React::User.create(
-    :name => "John McClane",
-    :email => "john_mcclane@awesome.com",
-    :country => "US",
-    :some_key => "yey_JA390094AWPIWWN435",
-    :age => 53
-    )
-</code>
-<code class="javascript always-visible"># Object Response
-    {
-    "object": "User",
-    "name": "John McClane",
-    "email": "john_mcclane@awesome.com",
-    "country": "US",
-    "some_key": "yey_JA390094AWPIWWN435",
-    "age": 53
-    "address": {
-    "address_line1": null,
-    "address_line2": null,
-    "address_city": null,
-    "address_state": null,
-    "address_zip": null,
-    "address_country": null
-    }
-    "valid": true,
-    "description": null
-    }
-</code>
-</pre>
-        </div>
-    </div>
-</div>
-<div class="method" id="orders">
-    <div class="method-section clearfix">
-        <div class="method-description">
-            <h3>Orders</h3>
-            <p>
-                It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
-        </div>
-        <div class="method-example">
-<pre>
-<code class="javascript">React::Order.create(
-    :item => "React Bootstrap Theme",
-    :price => 1500,
-    :name => "John McClane",
-    :email => "john_mcclane@awesome.com",
-    :country => "US",
-    :some_key => "yey_JA390094AWPIWWN435",
-    :age => 53
-    )
-</code>
-<code class="javascript always-visible"># Object Response
-    {
-    "object": "Order",
-    "item": "React Bootstrap Theme",
-    "price": 1500,
-    "name": "John McClane",
-    "email": "john_mcclane@awesome.com",
-    "country": "US",
-    "some_key": "yey_JA390094AWPIWWN435",
-    "age": 53
-    "address": {
-    "address_line1": null,
-    "address_line2": null,
-    "address_city": null,
-    "address_state": null,
-    "address_zip": null,
-    "address_country": null
-    }
-    "valid": true,
-    "description": null
-    }
-</code>
-</pre>
-        </div>
-    </div>
-</div>
-<div class="method" id="errors">
-    <div class="method-section clearfix">
-        <div class="method-description">
-            <h3>Errors</h3>
-            <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            </p>
-            <div class="info">
-                <h4>Attributes</h4>
-                <div class="field clearfix">
-                    <div class="key">code:</div>
-                    <div class="desc">
-                        <strong>string</strong>
-                        Code of the error
-                    </div>
-                </div>
-                <div class="field clearfix">
-                    <div class="key">message:</div>
-                    <div class="desc">
-                        <strong>string</strong>
-                        A complete message with details about the error to show users.
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="method-example">
-<pre>
-<code class="http always-visible">200 OK - Everything worked.
-
-    400 Bad Request - The request was badly built
-
-    401 Unauthorized - Some other message
-
-    402 Request Failed - The request failed
-
-    404 Not Found - Doesn't exist
-
-    500, 502, 503, 504 Server errors
-</code>
-</pre>
-        </div>
-    </div>
-</div>
 </div>
 </div>
 <script type="text/javascript">
@@ -358,18 +68,5 @@ bodyid: docs
             classPrefix: ''
         })
         hljs.initHighlightingOnLoad();
-
-
-        // language toggle
-        var $languages = $(".languages .language");
-        $languages.click(function (e) {
-            e.preventDefault();
-            var lang = $(this).data("lang");
-            $languages.removeClass("selected");
-            $(this).addClass("selected");
-
-            $("pre code").hide();
-            $("pre code." + lang).css("display", "block");
-        });
     });
 </script>

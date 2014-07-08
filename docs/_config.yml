@@ -9,7 +9,17 @@ url: "http://yourdomain.com"
 markdown: kramdown
 permalink: pretty
 collections:
+  core:
+    output: true
+  api:
+      output: true
+  admin:
+      output: true
+  recipes:
+      output: true
   documentation:
     output: true
   gettingstarted:
+    output: true
+  concepts:
     output: true

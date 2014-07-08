@@ -147,12 +147,28 @@
 							margin-bottom: 20px;
 						}
 
+                        h4 {
+                          margin-top: 0;
+                          margin-bottom: 20px;
+                        }
+
 						p {
 							font-size: 13px;
 							color: #666;
 							line-height: 21px;
 							margin-bottom: 20px;
 						}
+
+                        img {
+                          max-width:100%;
+                        }
+
+                        li {
+                          color:#666;
+                          font-size:13px;
+                          line-height:21px;
+                          margin-bottom:10px;
+                        }
 
 						.info {
 							margin-top: 45px;
@@ -208,12 +224,20 @@
 							margin: 0;
 							padding: 0;
 
+                            word-break: normal;
+                            word-wrap: break-word;                 /* IE 5.5+ and up */
+                            /* overflow-x: auto; */                /* Firefox 2 only */
+
 							code {
 								background: none;
 								font-family: Monaco, Consolas, Menlo;
 								font-size: 12px;
-
+                                white-space: normal;
                                 display: block;
+
+                                a {
+                                  color: #33cccc;
+                                }
 
 								&.always-visible {
 									display: block !important;
@@ -229,6 +253,7 @@
 
 							.javascript {
 								color: #DAE4F2;
+                                white-space: pre-wrap;
 
 								> * {
 									color: #DAE4F2;
@@ -275,6 +300,78 @@
 									color: #9ECBEE;
 								}
 							}
+                            .json {
+                                color: #DAE4F2;
+
+                                > * {
+                                  color: #DAE4F2;
+                                  line-height: 20px;
+                                }
+
+                                [class*=keyword] {
+                                  color: #9AB4DB;
+                                }
+                                [class*=string] {
+                                  color: #DAD0C6;
+                                }
+                                [class*=comment] {
+                                  color: #B4B4B4;
+                                }
+                                [class*=class] {
+                                  color: #FFDF9D;
+                                }
+                                [class*=params] {
+                                  color: #9ECBEE;
+                                }
+                            }
+                            .ascidoc {
+                              color: #DAE4F2;
+
+                              > * {
+                                color: #DAE4F2;
+                                line-height: 20px;
+                              }
+
+                              [class*=keyword] {
+                                color: #9AB4DB;
+                              }
+                              [class*=string] {
+                                color: #DAD0C6;
+                              }
+                              [class*=comment] {
+                                color: #B4B4B4;
+                              }
+                              [class*=class] {
+                                color: #FFDF9D;
+                              }
+                              [class*=params] {
+                                color: #9ECBEE;
+                              }
+                            }
+                            .bash {
+                              color: #DAE4F2;
+
+                              > * {
+                                color: #DAE4F2;
+                                line-height: 20px;
+                              }
+
+                              [class*=keyword] {
+                                color: #9AB4DB;
+                              }
+                              [class*=string] {
+                                color: #DAD0C6;
+                              }
+                              [class*=comment] {
+                                color: #B4B4B4;
+                              }
+                              [class*=class] {
+                                color: #FFDF9D;
+                              }
+                              [class*=params] {
+                                color: #9ECBEE;
+                              }
+                            }
 							.php {
 								color: #DAE4F2;
 
