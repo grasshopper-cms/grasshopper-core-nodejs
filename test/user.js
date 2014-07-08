@@ -715,7 +715,6 @@ describe('Grasshopper core - users', function(){
 
             before(function (done) {
                 function getTestUser(next){
-                    console.log('1');
                     grasshopper.request(adminToken).users.getById(testReaderUserId)
                         .then(function(payload){
                             next(null, payload);
