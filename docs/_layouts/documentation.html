@@ -9,13 +9,16 @@
     <h1 class="logo">
         <a href="/index.html">Grasshopper</a>
     </h1>
-    <ul class="menu nav">{% for post in site.documentation %}
+    <ul class="menu nav">{% for post in site.documentation %}{% if post.uuid contains '-example' %}{% else %}
         <li>
             <a href="#{{ post.uuid }}">{{ post.title }}</a>{% if site[post.uuid].size > 0  %}
-            <ul class="nav">{% for subpost in site[post.uuid] %}{% if subpost.uuid contains '-example' %}{% else %}
+            <ul class="nav">
+                {% for subpost in site[post.uuid] %}
+                {% if subpost.uuid contains '-example' %}
+                {% else %}
                 <li><a href="#{{subpost.uuid}}">{{subpost.title}}</a></li>{% endif %}{% endfor %}
             </ul>{% endif %}
-        </li>{% endfor %}
+        </li>{% endif %}{% endfor %}
     </ul>
 </div>
 
