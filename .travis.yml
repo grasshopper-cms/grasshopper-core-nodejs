@@ -4,8 +4,7 @@ node_js:
 services:
   - mongodb
 before_script:
-  - npm install -g grunt-cli
-  - ./grunt/tasks/importdb.sh
+  - npm install -g grunt-cli && grunt test
 notifications:
   email:
     - travis.mchattie@thinksolid.com
