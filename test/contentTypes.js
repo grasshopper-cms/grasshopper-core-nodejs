@@ -158,7 +158,6 @@ describe('Grasshopper core - contentTypes', function () {
                 function () {
                     grasshopper.request(adminToken).contentTypes.list().then(
                         function (payload) {
-                            console.log(payload.results);
                             payload.results[0].label.should.equal(label);
                         },
                         function (err) {
