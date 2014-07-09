@@ -15,6 +15,7 @@ module.exports = function(ObjectID) {
                     hash: '885f59a76ea44e1d264f9da45ca83574fbe55e3e7e6c51afe681730b45c7bb03'
                 }
             },
+            displayName : 'admin',
             linkedIdentities : ['basic'],
             email: 'apitestuser@thinksolid.com'
         },
@@ -31,6 +32,7 @@ module.exports = function(ObjectID) {
                     hash: '885f59a76ea44e1d264f9da45ca83574fbe55e3e7e6c51afe681730b45c7bb03'
                 }
             },
+            displayName: 'apitestuseradmin',
             linkedIdentities : ['basic'],
             email: 'apitestuser@thinksolid.com'
         },
@@ -47,6 +49,7 @@ module.exports = function(ObjectID) {
                     hash: '885f59a76ea44e1d264f9da45ca83574fbe55e3e7e6c51afe681730b45c7bb03'
                 }
             },
+            displayName : 'apitestuserreader',
             linkedIdentities : ['basic'],
             email: 'apitestuser@thinksolid.com',
             permissions: [
@@ -69,6 +72,7 @@ module.exports = function(ObjectID) {
                     hash: '885f59a76ea44e1d264f9da45ca83574fbe55e3e7e6c51afe681730b45c7bb03'
                 }
             },
+            displayName : 'apitestuserreader_1',
             linkedIdentities : ['basic'],
             email: 'apitestuser_1@thinksolid.com',
             permissions: [
@@ -91,6 +95,7 @@ module.exports = function(ObjectID) {
                     hash: '885f59a76ea44e1d264f9da45ca83574fbe55e3e7e6c51afe681730b45c7bb03'
                 }
             },
+            displayName : 'apitestusereditor',
             linkedIdentities : ['basic'],
             email: 'apitestusereditor@thinksolid.com'
         },
@@ -107,6 +112,7 @@ module.exports = function(ObjectID) {
                     hash: '885f59a76ea44e1d264f9da45ca83574fbe55e3e7e6c51afe681730b45c7bb03'
                 }
             },
+            displayName : 'apitestusereditor_restricted',
             linkedIdentities : ['basic'],
             email: 'apitestusereditor_1@thinksolid.com',
             permissions: [
@@ -134,6 +140,7 @@ module.exports = function(ObjectID) {
                     hash: '885f59a76ea44e1d264f9da45ca83574fbe55e3e7e6c51afe681730b45c7bb03'
                 }
             },
+            displayName : 'apitestuser',
             linkedIdentities : ['basic'],
             enabled: true,
             role: 'reader',
