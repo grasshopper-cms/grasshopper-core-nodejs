@@ -300,12 +300,87 @@ describe('Grasshopper core - users', function(){
         });
 
         describe('displayName', function() {
-            xit('should set the displayName on a user when inserting', function() {
+            it('should set the displayName on a user when inserting', function(done) {
+                var newUser = {
+                    role: 'admin',
+                    identities: {
+                        basic: {
+                            login: 'UncleBob',
+                            password: 'TestPassword'
+                        }
+                    },
+                    enabled: true,
+                    displayName : 'UncleBob',
+                    email: 'newtestuser1@thinksolid.com',
+                    firstname: 'Test',
+                    lastname: 'User'
+                };
 
+                grasshopper.request(adminToken).users.insert(newUser)
+                    .then(function(payload){
+                        payload.should.have.property('displayName');
+                        payload.displayName.should.equal('UncleBob');
+                    })
+                    .fail(function(err){
+                        should.not.exist(err);
+                    })
+                    .done(done);
             });
 
-            xit('should set a default displayName if one is not sent', function() {
+            describe('should set a default displayName if one is not sent', function() {
+                it('BASIC, should use the login.', function(done) {
+                    var newUser = {
+                        role: 'admin',
+                        identities: {
+                            basic: {
+                                login: 'CooperHilscher',
+                                password: 'TestPassword'
+                            }
+                        },
+                        enabled: true,
+                        email: 'newtestuser1@thinksolid.com',
+                        firstname: 'Test',
+                        lastname: 'User'
+                    };
 
+                    grasshopper.request(adminToken).users.insert(newUser)
+                        .then(function(payload){
+                            payload.should.have.property('displayName');
+                            payload.displayName.should.equal('CooperHilscher');
+                        })
+                        .fail(function(err){
+                            should.not.exist(err);
+                        })
+                        .done(done);
+
+                });
+
+                it('GOOGLE, should use the email address.', function(done) {
+                    var newUser = {
+                        role: 'admin',
+                        identities: {
+                            google: {
+                                something: 'NateDog',
+                                somethingElse: 'TestPassword'
+                            }
+                        },
+                        enabled: true,
+                        email: 'newtestuser1@thinksolid.com',
+                        firstname: 'Test',
+                        lastname: 'User'
+                    };
+
+                    grasshopper.request(adminToken).users.insert(newUser)
+                        .then(function(payload){
+                            payload.should.have.property('displayName');
+                            payload.displayName.should.equal('newtestuser1@thinksolid.com');
+                        })
+                        .fail(function(err){
+                            should.not.exist(err);
+                        })
+                        .done(done);
+
+                });
             });
         });
 
