@@ -245,7 +245,7 @@ describe('Grasshopper core - users', function(){
                 role: 'reader',
                 identities: {
                     basic: {
-                        login: 'newtestuser1',
+                        username: 'newtestuser1',
                         password: 'TestPassword'
                     }
                 },
@@ -277,7 +277,7 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 identities: {
                     basic: {
-                        login: 'newtestuser2',
+                        username: 'newtestuser2',
                         password: 'TestPassword'
                     }
                 },
@@ -305,7 +305,7 @@ describe('Grasshopper core - users', function(){
                     role: 'admin',
                     identities: {
                         basic: {
-                            login: 'UncleBob',
+                            username: 'UncleBob',
                             password: 'TestPassword'
                         }
                     },
@@ -328,12 +328,12 @@ describe('Grasshopper core - users', function(){
             });
 
             describe('should set a default displayName if one is not sent', function() {
-                it('BASIC, should use the login.', function(done) {
+                it('BASIC, should use the username.', function(done) {
                     var newUser = {
                         role: 'admin',
                         identities: {
                             basic: {
-                                login: 'CooperHilscher',
+                                username: 'CooperHilscher',
                                 password: 'TestPassword'
                             }
                         },
@@ -393,7 +393,7 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 identities: {
                     basic: {
-                        login: 'somePerson',
+                        username: 'somePerson',
                         password: 'TestPassword'
                     }
                 },
@@ -422,7 +422,7 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 identities: {
                     basic: {
-                        login: 'someOtherPerson',
+                        username: 'someOtherPerson',
                         password: 'TestPassword'
                     }
                 },
@@ -452,7 +452,7 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 identities: {
                     basic: {
-                        login: 'newtestuser11111',
+                        username: 'newtestuser11111',
                         password: 'TestPassword'
                     }
                 }
@@ -478,7 +478,7 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 identities: {
                     basic: {
-                        login: 'newtestuser1',
+                        username: 'newtestuser1',
                         password: 'TestPassword'
                     }
                 }
@@ -489,7 +489,7 @@ describe('Grasshopper core - users', function(){
                 },
                 function(err){
                     err.code.should.equal(400);
-                    err.message.should.equal('This login is already in use.');
+                    err.message.should.equal('This username is already in use.');
                 }
             ).done(done);
         });
@@ -513,12 +513,12 @@ describe('Grasshopper core - users', function(){
                 },
                 function(err){
                     err.code.should.equal(400);
-                    err.message.should.equal('login is required.');
+                    err.message.should.equal('username is required.');
                 }
             ).done(done);
         });
 
-        it('should return error if an empty login is provided.', function(done){
+        it('should return error if an empty username is provided.', function(done){
             var newUser = {
                 role: 'reader',
                 enabled: true,
@@ -527,7 +527,7 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 identities: {
                     basic: {
-                        login: '',
+                        username: '',
                         password: 'TestPassword'
                     }
                 }
@@ -538,12 +538,12 @@ describe('Grasshopper core - users', function(){
                 },
                 function(err){
                     err.code.should.equal(400);
-                    err.message.should.equal('login is required.');
+                    err.message.should.equal('username is required.');
                 }
             ).done(done);
         });
 
-        it('should return error if an null login is provided.', function(done){
+        it('should return error if an null username is provided.', function(done){
             var newUser = {
                 role: 'reader',
                 enabled: true,
@@ -552,7 +552,7 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 identities: {
                     basic: {
-                        login: null,
+                        username: null,
                         password: 'TestPassword'
                     }
                 }
@@ -563,12 +563,12 @@ describe('Grasshopper core - users', function(){
                 },
                 function(err){
                     err.code.should.equal(400);
-                    err.message.should.equal('login is required.');
+                    err.message.should.equal('username is required.');
                 }
             ).done(done);
         });
 
-        it('should return error if a login is too short.', function(done){
+        it('should return error if a username is too short.', function(done){
             var newUser = {
                 role: 'reader',
                 enabled: true,
@@ -577,7 +577,7 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 identities: {
                     basic: {
-                        login: 'sho',
+                        username: 'sho',
                         password: 'TestPassword'
                     }
                 }
@@ -588,7 +588,7 @@ describe('Grasshopper core - users', function(){
                 },
                 function(err){
                     err.code.should.equal(400);
-                    err.message.should.equal('Your login is too short.');
+                    err.message.should.equal('Your username is too short.');
                 }
             ).done(done);
         });
@@ -602,7 +602,7 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 identities: {
                     basic: {
-                        login: 'newtestuserunique',
+                        username: 'newtestuserunique',
                         password: null
                     }
                 }
@@ -627,7 +627,7 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 identities: {
                     basic: {
-                        login: 'newtestuserunique',
+                        username: 'newtestuserunique',
                         password: 'sho'
                     }
                 }
@@ -652,7 +652,7 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User',
                 identities: {
                     basic: {
-                        login: 'newtestuserunique',
+                        username: 'newtestuserunique',
                         password: 'TestPassword'
                     }
                 }
@@ -686,7 +686,7 @@ describe('Grasshopper core - users', function(){
                 _id: testCreatedUserId,
                 identities: {
                     basic: {
-                        login: 'newtestuser1',
+                        username: 'newtestuser1',
                         password: 'TestPassword'
                     }
                 },
@@ -714,7 +714,7 @@ describe('Grasshopper core - users', function(){
                 _id: testCreatedUserId,
                 identities: {
                     basic: {
-                        login: 'newtestuser1_updated'
+                        username: 'newtestuser1_updated'
                     }
                 },
                 role: 'reader',
@@ -726,7 +726,7 @@ describe('Grasshopper core - users', function(){
             };
             grasshopper.request(adminToken).users.update(newUser).then(
                 function(payload){
-                    payload.identities.basic.login.should.equal(newUser.identities.basic.login);
+                    payload.identities.basic.username.should.equal(newUser.identities.basic.username);
                 },
                 function(err){
                     should.not.exist(err);
@@ -850,7 +850,7 @@ describe('Grasshopper core - users', function(){
                 should.not.exist(error);
             });
 
-            it('should return a valid token for new login',function() {
+            it('should return a valid token for new username',function() {
                 token.length.should.be.greaterThan(0);
             });
         });
@@ -878,7 +878,7 @@ describe('Grasshopper core - users', function(){
             var newUser = {
                 identities: {
                     basic: {
-                        login: 'newtestuser1_updated',
+                        username: 'newtestuser1_updated',
                         password: 'TestPassword'
                     }
                 },
@@ -901,12 +901,12 @@ describe('Grasshopper core - users', function(){
             ).done(done);
         });
 
-        it('should return error if login is too short.', function(done){
+        it('should return error if username is too short.', function(done){
             var newUser = {
                 _id: testCreatedUserId,
                 identities: {
                     basic: {
-                        login: 'sho',
+                        username: 'sho',
                         password: 'TestPassword'
                     }
                 },
@@ -923,7 +923,7 @@ describe('Grasshopper core - users', function(){
                 },
                 function(err){
                     err.code.should.equal(400);
-                    err.message.should.equal('Your login is too short.');
+                    err.message.should.equal('Your username is too short.');
                 }
             ).done(done);
         });
@@ -933,7 +933,7 @@ describe('Grasshopper core - users', function(){
                 _id: testCreatedUserId,
                 identities: {
                     basic: {
-                        login: 'newtestuesr1',
+                        username: 'newtestuesr1',
                         password: 'TestPassword'
                     }
                 },
@@ -955,12 +955,12 @@ describe('Grasshopper core - users', function(){
             ).done(done);
         });
 
-        it('should return error if user login is null.', function(done){
+        it('should return error if user username is null.', function(done){
             var newUser = {
                 _id: testCreatedUserId,
                 identities:{
                     basic:{
-                        login: null,
+                        username: null,
                         password: 'TestPassword'
                     }
                 },
@@ -983,12 +983,12 @@ describe('Grasshopper core - users', function(){
                 .done(done);
         });
 
-        it('should return error if user login is empty.', function(done){
+        it('should return error if user username is empty.', function(done){
             var newUser = {
                 _id: testCreatedUserId,
                 identities:{
                     basic: {
-                        login: '',
+                        username: '',
                         password: 'TestPassword'
                     }
                 },
@@ -1010,12 +1010,12 @@ describe('Grasshopper core - users', function(){
             ).done(done);
         });
 
-        it('should return error if the user login changed and is now a duplicate.', function(done){
+        it('should return error if the user username changed and is now a duplicate.', function(done){
             var newUser = {
                 _id: testCreatedUserId,
                 identities: {
                     basic: {
-                        login: 'apitestuserreader',
+                        username: 'apitestuserreader',
                         password: 'TestPassword'
                     }
                 },
@@ -1032,7 +1032,7 @@ describe('Grasshopper core - users', function(){
                 },
                 function(err){
                     err.code.should.equal(400);
-                    err.message.should.equal('This login is already in use.');
+                    err.message.should.equal('This username is already in use.');
                 }
             ).done(done);
         });
@@ -1042,7 +1042,7 @@ describe('Grasshopper core - users', function(){
                 _id: testReaderUserId,
                 identities: {
                     basic: {
-                        login: 'apitestuserreader',
+                        username: 'apitestuserreader',
                         password: 'TestPassword'
                     }
                 },
@@ -1066,7 +1066,7 @@ describe('Grasshopper core - users', function(){
             var newUser = {
                 _id: testUserId,
                 identities: {
-                    login: 'apitestuserreader',
+                    username: 'apitestuserreader',
                     password: 'TestPassword'
                 },
                 linkedIdentities: [ 'basic' ],
@@ -1192,7 +1192,7 @@ describe('Grasshopper core - users', function(){
                     email: 'newtestuser1@thinksolid.com',
                     identities: {
                         basic: {
-                            login: 'futurerevokee',
+                            username: 'futurerevokee',
                             password: 'TestPassword'
                         }
                     },
