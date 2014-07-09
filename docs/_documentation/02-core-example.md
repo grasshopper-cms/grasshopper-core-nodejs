@@ -33,13 +33,3 @@ grasshopper.request( token ).content.query( {
         // Handle err here
       }
     ).done();
-
-
-// Standardized Error Responses
-{ code: 400, message: '[Reason request was bad]' } // Invalid function arguments
-{ code: 401, message: 'Unauthorized' } // Auth info not provided
-{ code: 403, message: 'Forbidden' } // Not enough priviledges
-{ code: 500, message: '[Exception reason]' } // Unhandled server exception
-{ code: 404, message: 'Resource could not be found.' }
-{ code: 408, message: 'Service Timeout' }
-{ code: 503, message: 'Service Unavailable.' }
