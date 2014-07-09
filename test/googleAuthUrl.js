@@ -101,7 +101,6 @@ describe('Grasshopper utils - googleAuthUrl', function(){
     it('should return a google auth url', function(done){
         grasshopper.googleAuthUrl()
             .then(function(url) {
-                console.log(url);
                 url.should.be.a.string;
             })
             .fail(function() {
