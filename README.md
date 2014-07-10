@@ -74,6 +74,18 @@ grasshopper.configure(function(){
                     'urlbase' : 'http://YOUR URL'
                 }
             }
+        },
+        'identities' : {
+            'google' : {
+                'appId' : 'blahBlahBlackSheep',
+                'secret' : 'ohhSooSecret',
+                'redirectUrl' : '/this/that',
+                'scopes' : [
+                    'https://www.googleapis.com/auth/userinfo.profile',
+                    'https://www.googleapis.com/auth/userinfo.email'
+                ],
+                'tokenEndpoint' : 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='
+            }
         }
     };
 ```
