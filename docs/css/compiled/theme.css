@@ -5960,6 +5960,9 @@ html.bg {
           font-size: 13px;
           line-height: 21px;
           margin-bottom: 10px; }
+        #docs #api-docs #methods .method .method-section .method-description pre {
+          font-size: 12px;
+          margin-bottom: 25px; }
         #docs #api-docs #methods .method .method-section .method-description .info {
           margin-top: 45px;
           margin-bottom: 40px; }

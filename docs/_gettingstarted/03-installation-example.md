@@ -10,6 +10,4 @@ cd myproject
 
 npm init #set properties as needed for your Node.js application
 
-npm install grasshopper-api --save
-
-npm install grasshopper-admin --save
+grasshopper setup #follow instructions

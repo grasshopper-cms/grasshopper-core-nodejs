@@ -4,7 +4,25 @@ uuid: core
 ---
 ### Grasshopper Core
 
-Core is responsible for all the heavy lifting of the framework. Core includes methods for managing users (data and access), content types, content, nodes (or folders) and assets.
+Core is responsible for all the heavy lifting of the framework. Core includes methods for managing users, permissions, content types, content, nodes (or folders) and assets.
+
+##### Requests
+
+The main entry point into Grasshopper Core is through a `request` function. The `request` function expects a logged in user's `token` and returns an object that contains all of the available entities. The `token` argument is used to establish a user's permissions.
+
+    grasshopper.request(token).auth.<function>(<args>);
+    grasshopper.request(token).content.<function>(<args>);
+    grasshopper.request(token).contentTypes.<function>(<args>);
+    grasshopper.request(token).nodes.<function>(<args>);
+    grasshopper.request(token).assets.<function>(<args>);
+    grasshopper.request(token).tokens.<function>(<args>);
+    grasshopper.request(token).users.<function>(<args>);
+
+##### Permissions
+
+By default most functions require the user to identify themselves before they can be called. Core functions will validate if a user has a high enough user role to perform a task. [Authentication](#core-auth) is covered in more detail below.
+
+Currently supported roles are (ADMIN, EDITOR, AUTHOR, READER, EXTERNAL, NONE)
 
 ##### Promises
 
@@ -16,30 +34,10 @@ All functions in core return [promises](https://www.promisejs.org/). The idea be
 
 Once a promise is fulfilled or rejected, it is immutable (i.e. it can never change again). To learn more about promises visit [https://www.promisejs.org/](https://www.promisejs.org/).
 
-##### Permissions
 
-By default most functions require the user to identify themselves before they can be called. Core functions will validate if a user has a high enough user role to perform a task. [Authentication](#core-auth) is covered in more detail below.
+###### Rejected Responses
 
-Currently supported roles are (ADMIN, EDITOR, AUTHOR, READER, EXTERNAL, NONE)
-
-
-##### Requests
-
-The main entry point into Grasshopper Core is through a `request` function. The `request` function expects a logged in user's `token` and returns an object that contains all of the available entities.
-
-    grasshopper.request(token).auth.<function>(<args>);
-    grasshopper.request(token).content.<function>(<args>);
-    grasshopper.request(token).contentTypes.<function>(<args>);
-    grasshopper.request(token).nodes.<function>(<args>);
-    grasshopper.request(token).assets.<function>(<args>);
-    grasshopper.request(token).tokens.<function>(<args>);
-    grasshopper.request(token).users.<function>(<args>);
-
-
-
-##### Responses
-
-All Grasshopper function calls return responses. It will either return the resource that you intended, of some sort of error.
+If a function fails for any reason and the promise is rejected. You can expect an error object like the ones below:
 
     // Standardized Error Responses
     { code: 400, message: ‘[Reason request was bad]’ } // Invalid function arguments
