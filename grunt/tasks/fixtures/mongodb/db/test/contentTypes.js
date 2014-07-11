@@ -16,11 +16,23 @@ module.exports = function(ObjectID) {
                     label: 'Title',
                     validation: [
                         {
-                            _id : 'alpha',
+                            type : 'alpha',
                             options : {
                                 min : 5,
                                 max : 10
                             }
+                        }
+                    ]
+                },
+                {
+                    _id: 'coopersfield',
+                    required: true,
+                    instancing: 1,
+                    type: 'textbox',
+                    label: 'CoopersField',
+                    validation: [
+                        {
+                            type : 'number'
                         }
                     ]
                 },
@@ -32,7 +44,7 @@ module.exports = function(ObjectID) {
                     label: 'Num Field',
                     validation: [
                         {
-                            _id : 'number',
+                            type : 'number',
                             options : {
                                 min : 5,
                                 max : 10
@@ -48,7 +60,7 @@ module.exports = function(ObjectID) {
                     label: 'AlphaNum Field',
                     validation: [
                         {
-                            _id : 'alpha_numeric',
+                            type : 'alpha_numeric',
                             options : {
                                 min : 5,
                                 max : 10
@@ -62,7 +74,7 @@ module.exports = function(ObjectID) {
                     label: 'Email Field',
                     validation: [
                         {
-                            _id : 'email'
+                            type : 'email'
                         }
                     ]
                 },{
@@ -71,7 +83,7 @@ module.exports = function(ObjectID) {
                     label: 'Globally Unique Field',
                     validation: [
                         {
-                            _id : 'unique',
+                            type : 'unique',
                             options: {
                                 property: 'fields.uniquefield1'
                             }
@@ -83,7 +95,7 @@ module.exports = function(ObjectID) {
                     label: 'Unique Field For Specific Content Type',
                     validation: [
                         {
-                            _id : 'unique',
+                            type : 'unique',
                             options: {
                                 property: 'fields.uniquefield2',
                                 contentTypes: ['524362aa56c02c0703000001']
@@ -116,7 +128,7 @@ module.exports = function(ObjectID) {
                     type: 'textbox',
                     validation: [
                         {
-                            _id : 'unique',
+                            type : 'unique',
                             options: {
                                 property: 'login',
                                 contentTypes: ['5254908d56c02c076e000001']

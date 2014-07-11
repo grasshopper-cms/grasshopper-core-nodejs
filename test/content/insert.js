@@ -149,7 +149,6 @@ describe('Grasshopper core - content', function(){
             ).done(done);
         });
 
-
         it('should successfully insert content and also convert multis that are strings ' +
                 'that are valid native dates to a date object.',
             function(done) {
@@ -428,21 +427,76 @@ describe('Grasshopper core - content', function(){
                     fields: {
                         label: 'Generated title',
                         testfield: 'testtest',
-                        numfield: -1
+                        numfield: 4
                     }
                 };
 
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj)
+                    .then(function(payload){
                         should.not.exist(payload);
-                    },
-                    function(err){
+                    })
+                    .fail(function(err){
                         err.code.should.equal(400);
                         err.message.should.equal(
                             '"Num Field" is not valid. Please check your validation rules and try again.');
-                    }
-                ).done(done);
+                    })
+                    .done(done);
             });
+
+            it('Should throw 400 because is not a number.', function(done) {
+                var obj = {
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
+                    },
+                    fields: {
+                        label: 'Generated title',
+                        testfield: 'testtest',
+                        numfield: 'string'
+                    }
+                };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj)
+                    .then(function(payload){
+                        should.not.exist(payload);
+                    })
+                    .fail(function(err){
+                        err.code.should.equal(400);
+                        err.message.should.equal(
+                            '"Num Field" is not valid. Please check your validation rules and try again.');
+                    })
+                    .done(done);
+            });
+
+            describe('without a min and max', function() {
+                it('Should throw 200 even without a min or a max.', function(done) {
+                    var obj = {
+                        meta: {
+                            type: '524362aa56c02c0703000001',
+                            node : '526d5179966a883540000006',
+                            labelfield: 'testfield'
+                        },
+                        fields: {
+                            label: 'Generated title',
+                            testfield: 'testtest',
+                            numfield: 6,
+                            coopersfield : 2
+                        }
+                    };
+
+                    grasshopper.request(tokens.globalEditorToken).content.insert(obj)
+                        .then(function(payload){
+                            payload.should.have.property('_id');
+                            payload.fields.coopersfield.should.equal(2);
+                        })
+                        .fail(function(err){
+                            should.not.exist(err);
+                        })
+                        .done(done);
+                });
+            });
+
 
             it('Should throw 400 because num is too high.', function(done) {
                 var obj = {
