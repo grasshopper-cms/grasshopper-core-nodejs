@@ -21,7 +21,8 @@ function getConfig() {
                     "https://www.googleapis.com/auth/userinfo.profile",
                     "https://www.googleapis.com/auth/userinfo.email"
                 ],
-                tokenEndpoint : 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='
+                tokenEndpoint : 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=',
+                oauthCallback : 'http://localhost:2000'
             }
         }
     };
