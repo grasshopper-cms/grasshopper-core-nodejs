@@ -202,36 +202,36 @@ describe('Grasshopper core - content', function(){
         });
 
         it('return valid results even if sortBy is not valid', function(done) {
-            grasshopper.request(tokens.globalReaderToken).content.query(query5).then(
-                function(payload){
+            grasshopper.request(tokens.globalReaderToken).content.query(query5)
+                .then(function(payload){
                     payload.results.length.should.equal(1);
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done();
+                })
+                .catch(doneError.bind(null, done))
+                .fail(doneError.bind(null, done))
+                .done();
         });
 
         it('return valid results even if options is an empty array', function(done) {
-            grasshopper.request(tokens.globalReaderToken).content.query(query6).then(
-                function(payload){
+            grasshopper.request(tokens.globalReaderToken).content.query(query6)
+                .then(function(payload){
                     payload.results.length.should.equal(1);
-                },
-                function(err){
+                })
+                .fail(function(err){
                     should.not.exist(err);
-                }
-            ).done(done);
+                })
+                .done(done);
         });
 
         it('return valid results for everything within a node', function(done) {
-            grasshopper.request(tokens.globalReaderToken).content.query(query7).then(
-                function(payload){
+            grasshopper.request(tokens.globalReaderToken).content.query(query7)
+                .then(function(payload){
                     payload.total.should.be.greaterThan(0);
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done();
+                })
+                .catch(doneError.bind(null, done))
+                .fail(doneError.bind(null, done))
+                .done();
         });
 
         it('returns distinct values within a find', function(done) {
@@ -242,26 +242,24 @@ describe('Grasshopper core - content', function(){
                     options: {
                         distinct : 'fields.label'
                     }
-                }).then(function(payload){
-                    payload.results.should.deep.equal([
+                })
+                .then(function(payload){
+                    var ary = [
                         'Generated title',
                         'search test1',
                         'search test2',
                         'search test3',
                         'search test4',
                         'search test5'
-                        ]);
-                },
-                function(err){
-                    should.not.exist(err);
+                    ];
+
+                    _.difference(payload.results, ary).should.deep.equal([]);
+
+                    done();
                 })
-                .catch(function(error) {
-                    done(error);
-                })
-                .fail(function(error) {
-                    done(error);
-                })
-                .done(done);
+                .catch(doneError.bind(null, done))
+                .fail(doneError.bind(null, done))
+                .done();
         });
 
         it('distinct works with types', function(done) {
@@ -272,21 +270,30 @@ describe('Grasshopper core - content', function(){
                     options: {
                         distinct : 'fields.label'
                     }
-                }).then(function(payload){
-                    payload.results.should.deep.equal([
+                })
+                .then(function(payload){
+                    var ary = [
                         'Generated title',
                         'search test1',
                         'search test2',
                         'search test3',
                         'search test4',
                         'search test5'
-                        ]);
-                },
-                function(err){
-                    should.not.exist(err);
-                }).done(done);
+                    ];
+
+                    _.difference(payload.results, ary).should.deep.equal([]);
+
+                    done();
+                })
+                .catch(doneError.bind(null, done))
+                .fail(doneError.bind(null, done))
+                .done();
         });
     });
+
+    function doneError(done, err) {
+        done(err);
+    }
 
     function createGetToken(username, password, storage) {
         return {
