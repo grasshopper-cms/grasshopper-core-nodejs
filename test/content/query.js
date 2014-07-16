@@ -235,6 +235,7 @@ describe('Grasshopper core - content', function(){
         });
 
         it('returns distinct values within a find', function(done) {
+            console.log('\n\n\n\n\n\n\n\n\n\nThis is THE test.... begin failure:');
             grasshopper
                 .request(tokens.globalReaderToken)
                 .content.query({
@@ -243,17 +244,29 @@ describe('Grasshopper core - content', function(){
                         distinct : 'fields.label'
                     }
                 }).then(function(payload){
+                    console.log('inside');
+                    console.log(JSON.stringify(payload,null,1));
                     payload.results.should.deep.equal([
                         'Generated title',
+                        'search test1',
                         'search test2',
                         'search test3',
                         'search test4',
-                        'search test5',
-                        'search test1']);
+                        'search test5'
+                        ]);
                 },
                 function(err){
                     should.not.exist(err);
-                }).done(done);
+                })
+                .catch(function(error) {
+                    console.log(error);
+                    done(error);
+                })
+                .fail(function(error) {
+                    console.log(error);
+                    done(error);
+                })
+                .done(done);
         });
 
         it('distinct works with types', function(done) {
@@ -267,11 +280,12 @@ describe('Grasshopper core - content', function(){
                 }).then(function(payload){
                     payload.results.should.deep.equal([
                         'Generated title',
+                        'search test1',
                         'search test2',
                         'search test3',
                         'search test4',
-                        'search test5',
-                        'search test1']);
+                        'search test5'
+                        ]);
                 },
                 function(err){
                     should.not.exist(err);
