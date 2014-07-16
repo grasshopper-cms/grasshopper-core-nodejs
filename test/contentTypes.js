@@ -38,11 +38,11 @@ describe('Grasshopper core - contentTypes', function () {
         });
 
 
-        grasshopper.auth('apitestuseradmin', 'TestPassword')
-            .then(function (token) {
+        grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
+            .then(function(token){
                 adminToken = token;
-                grasshopper.auth('apitestuserreader', 'TestPassword')
-                    .then(function (token) {
+                grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' })
+                    .then(function(token){
                         readerToken = token;
                         done();
                     },
@@ -171,7 +171,6 @@ describe('Grasshopper core - contentTypes', function () {
             );
         });
 
-
         it('should return a 401 because user is not authenticated', function (done) {
             grasshopper.request().contentTypes.list().then(
                 function (payload) {
@@ -185,7 +184,6 @@ describe('Grasshopper core - contentTypes', function () {
     });
 
     describe('insert', function () {
-
 
         it('should insert a new contentType with the new schema', function (done) {
             var newContentType = {
@@ -373,7 +371,7 @@ describe('Grasshopper core - contentTypes', function () {
                     alphanumfield: 'tes123fdsfafsdafdsafsdafasfdsaest'
                 }
             }).then(
-                function (payload) {
+                function () {
                     done();
                 });
         });

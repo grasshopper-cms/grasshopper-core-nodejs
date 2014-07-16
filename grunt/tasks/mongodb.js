@@ -11,7 +11,7 @@ module.exports = function (grunt) {
             data = require(this.data.data);
 
         host = this.data.host;
-
+        console.log(collections);
         grunt.log.writeln("Cleaning up test database, starting from clean slate.");
 
         async.series([
@@ -55,7 +55,7 @@ module.exports = function (grunt) {
                 });
             },
             function(callback){
-                async.each(data.hookEvents, importHookEvents, function(err){
+                async.each(data.hookevents, importHookEvents, function(err){
                     if(err){ grunt.log.error(err); }
 
                     grunt.log.writeln("Test `hookevents` imported.");
@@ -77,7 +77,9 @@ module.exports = function (grunt) {
         client.connect(host, function(err, db) {
             if (err) grunt.log.errorlns(err);
             db.collection(col, function(err, collection){
+                if (err) grunt.log.errorlns(err);
                 collection.remove({}, function(err, numRemovedDocs){
+                    if (err) grunt.log.errorlns(err);
                     grunt.log.writeln(numRemovedDocs + " documents removed from " + col + " collection.");
                     db.close();
                     callback();
@@ -90,7 +92,9 @@ module.exports = function (grunt) {
         client.connect(host, function(err, db) {
             if (err) grunt.log.errorlns(err);
             db.collection(col, function(err, collection){
+                if (err) grunt.log.errorlns(err);
                 collection.insert(obj, function(err){
+                    if (err) grunt.log.errorlns(err);
                     db.close();
                     callback();
                 });

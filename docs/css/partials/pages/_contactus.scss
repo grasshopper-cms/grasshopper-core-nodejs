@@ -1,0 +1,238 @@
+#contact-us {
+
+	#map {
+		-webkit-font-smoothing: antialiased;
+		position: relative;
+		top: -20px;
+		box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.35);
+
+		#directions {
+			position: absolute;
+			top: 50px;
+			left: 13%;
+			text-align: center;
+			width: 270px;
+			background: rgba(255, 255, 255, 0.96);
+			border-radius: 5px;
+			box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.36);
+			padding: 25px 25px 20px 25px;
+
+			@media(max-width: 767px) {
+				display: none;
+			}
+
+			p {
+				font-family: $myriad;
+				font-size: 19px;
+				color: #333;
+			}
+			button {
+				margin-top: 12px;
+			}
+		}
+	}
+
+	#info {
+		-webkit-font-smoothing: antialiased;
+		margin-top: 15px;
+		margin-bottom: 100px;
+
+		@media(max-width: 991px) {
+
+		}
+
+		.message {
+			h3 {
+				font-family: $myriad;
+				color: #444;
+				font-size: 26px;
+				font-weight: 600;
+			}
+			p {
+				font-size: 15px;
+				font-weight: 400;
+				color: #777;
+			}
+			form {
+				margin-top: 35px;
+				width: 80%;
+
+				@media(max-width: 767px) {
+					width: 100%;
+				}
+				
+				input[type="text"],
+				input[type="email"] {
+					width: 70%;
+
+					@media(max-width: 767px) {
+						width: 100%;
+					}
+				}
+
+				label {
+					color: #555;
+					font-weight: 500;
+					margin-bottom: 7px;
+				}
+				.button {
+					margin-top: 20px;
+				}
+
+				/* error messages from jquery validate */
+				label.error {
+					position: relative !important;
+					display: inline-block !important;
+					margin-top: -2px !important;
+					margin-bottom: -8px !important;
+					color: #fff !important;
+					font-weight: normal !important;
+					font-size: 15px !important;
+					padding: 5px 7px !important;
+					background: #4B9FCF !important;
+					border-radius: 4px !important;
+					
+					&.valid {
+						display: none !important;
+					}
+					
+					&:after {
+						bottom: 100%;
+						border: solid transparent;
+						content: " ";
+						height: 0;
+						width: 0;
+						position: absolute;
+						pointer-events: none;
+						border-bottom-color: #4B9FCF;
+						border-width: 5px;
+						left: 30px;
+						margin-left: -5px;
+					}
+				}
+			}
+		}
+
+		.contact {
+
+			@media(max-width: 991px) {
+				margin-top: 50px;
+			}
+
+			.address {
+				margin-bottom: 30px;
+			}
+			h3 {
+				font-family: $myriad;
+				color: #252525;
+				font-size: 18px;
+				font-weight: 500;
+			}
+			p {
+				font-size: 14px;
+				font-weight: 400;
+				color: #777;
+			}
+			.online-support {
+				background: #f8fdfe;
+				border: 1px solid #bee1f3;
+				margin-top: 40px;
+				border-radius: 6px;
+				padding: 20px 22px 18px 22px;
+				width: 70%;
+				strong {
+					font-weight: 500;
+					color: #333;
+					font-size: 15px;
+				}
+				p {
+					color: #1f95d0;
+					margin-top: 14px;
+					line-height: 18px;
+				}
+			}
+			.social {
+				margin-top: 25px;
+				a {
+					border: 0px;
+					@include transition(all 0.2s linear);
+					
+					&.tw {
+						position: relative;
+						top: 2px;
+					}
+					&:hover {
+						opacity: 0.8;
+						filter: alpha(opacity=80);
+					}
+				}				
+			}
+		}
+	}
+
+}
+
+/* marker pulse */
+.marker-wrapper {
+	position: absolute;
+	top: 170px;
+	left: 53%;
+
+	.marker-icon {
+		position: relative;
+		top: 32px;
+		left: 32px;
+
+		width: 25px;
+		height: 25px;
+		display: block;
+		border-radius: 50%;
+		background: #5A9FFF;
+		box-shadow: 0px 1px 9px 2px rgba(0, 0, 0, 0.39);
+		border: 3px solid #FFFFFF;
+	}
+
+	.marker {
+		position: absolute;
+		top: 0px;
+		width: 89px;
+		height: 89px;
+		background-color: #ffffff;
+		background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #ffffff), color-stop(100%, rgba(255, 255, 255, 0.8)));
+		background: -webkit-radial-gradient(center, ellipse cover, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+		background: -moz-radial-gradient(center, ellipse cover, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+		background: -ms-radial-gradient(center, ellipse cover, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+		background: -o-radial-gradient(center, ellipse cover, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+		background: radial-gradient(ellipse at center, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+		border: 3px solid #7fa5da;
+		border-radius: 50%;
+		-moz-background-clip: padding;
+		-webkit-background-clip: padding-box;
+		background-clip: padding-box;
+		-webkit-box-shadow: 0 0 20px rgba(117, 170, 242, 0.5), inset 0 0 10px rgba(117, 170, 242, 0.8);
+		-moz-box-shadow: 0 0 20px rgba(117, 170, 242, 0.5), inset 0 0 10px rgba(117, 170, 242, 0.8);
+		box-shadow: 0 0 20px rgba(117, 170, 242, 0.5), inset 0 0 10px rgba(117, 170, 242, 0.8);
+		color: 0 0 20px rgba(117, 170, 242, 0.5) inset 0 0 10px rgba(117, 170, 242, 0.8);
+		
+		@include animation(map 2s infinite linear);
+	}
+}
+
+@include keyFrame(map) {
+	0% {
+		@include transform(scale(0));
+		opacity: 0;
+		filter: alpha(opacity=0);
+	}
+	50% {
+		opacity: 1;
+		filter: alpha(opacity=100);
+	}
+	100% {
+		@include transform(scale(1));
+		opacity: 0;
+		filter: alpha(opacity=0);
+	}
+}
+
+

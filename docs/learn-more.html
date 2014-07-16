@@ -1,0 +1,377 @@
+---
+layout: page
+permalink: /learn-more.html
+bodyid: services
+navtype: normal
+---
+
+<div id="hero">
+    <div class="container">
+        <div class="row" style="overflow:hidden;">
+            <div class="col-md-6 image">
+                <img src="images/services1.png" class="img-responsive animated fadeInUp" alt="services1" />
+            </div>
+            <div class="col-md-6 info">
+                <h3>Leverage the platform</h3>
+                <h4>Reap the rewards</h4>
+                <p>
+                    You will find that many concepts that modern applications need are built right into Grasshopper.
+
+                    When you use the framework to the fullest extent, you are only limited by your own creativity.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="grid-second" class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 style="margin-bottom: 15px;">Fast, scalable platform written in JavaScript for Node.js</h3>
+            <p>
+                The Grasshopper stack is modular and built on top of modern web developement technologies. It was written entirely in JavaScript and it
+                uses a NoSQL database system. File storage can either be local or in the cloud on a CDN.
+            </p>
+            <p>
+                Grasshopper will run in any environment that supports <a href="http://nodejs.org" target="_blank">Node.js</a> and <a href="http://www.mongodb.org/" target="_blank">MongoDB</a>. This is great news for users
+                hosting the application themselves or using services like <a href="http://heroku.com" target="_blank">Heroku</a>, <a href="https://www.engineyard.com/" target="_blank">Engine Yard</a> or any other <a href="http://en.wikipedia.org/wiki/Platform_as_a_service" target="_blank">PaaS</a> (Platform as a Service).
+            </p>
+            <p>Every implementation of the system is different but keep reading and you will start to get a sense of how the project is organized.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3 style="margin-bottom: 15px;"><a name="stack"></a>Grasshopper Stack</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <img src="/images/stack.png" style="width:600px;" />
+        </div>
+        <div class="col-md-4">
+            <img src="/images/nodejs.png" />
+            <img src="/images/mongo-logo.png" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3 style="margin-bottom: 15px;"><a name="requirements"></a>Requirements</h3>
+            <ul>
+                <li>
+                    Environment that can run <a href="http://nodejs.org" target="_blank">Node.js</a>.
+                    Node.js is released under the <a href="https://raw.github.com/joyent/node/v0.10.29/LICENSE" target="_blank">MIT license</a> and
+                    has <a href="http://nodejs.org/download/" target="_blank">installation packages</a> available for Linux, Windows and Macintosh.
+                </li>
+                <li>
+                    Instance of <a href="http://gruntjs.com/">Grunt</a> (JavaScript Task Runner) installed. This application is used for compiling the application.
+                </li>
+                <li>Access to a running instance of <a href="http://www.mongodb.org/" target="_blank">MongoDB</a>.
+                    You can host this yourself or use services like <a href="https://mongolab.com/welcome/" target="_blank">MongoLab</a>.</li>
+                <li>Access to local file system or CDN like <a href="http://aws.amazon.com/s3/" target="_blank">Amazon S3</a>.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3 style="margin-bottom: 15px;">Components</h3>
+            <p>
+                The Grasshopper system includes 3 parts, Core, API and Admin. Most deployments include all 3 of these parts and they build on top of each other. Core can run by itself, API is an HTTP wrapper of core and the admin uses the API. You can read more detail about each of these parts in the tabs below.
+            </p>
+            <p>&nbsp;</p>
+        </div>
+    </div>
+
+    <div class="col-md-12 tabs-wrapper">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#core" data-toggle="tab">Grasshopper Core</a></li>
+            <li><a href="#api" data-toggle="tab">Grasshopper API</a></li>
+            <li><a href="#admin" data-toggle="tab">Grasshopper Admin</a></li>
+            <li><a href="#proxy" data-toggle="tab">Customer Proxy</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="core">
+                <p>&nbsp;</p>
+                <p>
+                    Core is responsible for all the heavy lifting of the framework. Core includes methods for managing users
+                    (data and access), content types, content, nodes (or folders) and assets.
+                </p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 style="margin-bottom: 15px;">Users</h5>
+                            <p>
+                                Membership is a critical component to almost all applications. Grasshopper has the concept of membership built-in. Not only
+                                does Grasshopper handle logins and user data (fully extensible), but it contains a robust permissions mechanism that allows you
+                                to protect data based off of the application's requirements.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row features">
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info">
+                                <p>Support for basic authentication as well as 3rd party logins like Google and others.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info">
+                                <p>User roles and permissions (global and folder level)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row features">
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info">
+                                <p>Manages custom user profile data</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info">
+                                <p>Emitting events when actions are taken on users</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 style="margin-bottom: 15px;">Content Types === Schema</h5>
+                            <p>
+                                All content in Grasshopper is <code>typed</code>, meaning that it has a definition. Think of content types
+                                like a database table schema, more or less, that is what they are. All <code>content types</code> contain a
+                                a few metadata elements and a collection of <code>fields</code>. Fields are specific containers that you want to
+                                store data (think of a database column). Values for fields can be a single value (number, string), a collection of values
+                                (one-to-many), embeded content type, or a collection of embeded content types. IMPORTANT: <code>Content Types</code> define the
+                                types of data that you can store in your application, they are NOT the actual data.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row features">
+                        <div class="col-md-6 feature">
+                            <img src="/images/checkmark.png" />
+                            <div class="info">
+                                <p>Leverage the power of NoSQL, fully supports "one-to-many" and nested objects</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 feature">
+                            <img src="/images/checkmark.png" />
+                            <div class="info">
+                                <p>Fields can have default values and can also be required</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row features">
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info"><p>Fields can contain validation</p></div>
+                        </div>
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info"><p>Fields can nest other content types</p></div>
+                        </div>
+                    </div>
+                    <div class="row features">
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info"><p>Fields can support a collection of values</p></div>
+                        </div>
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info"><p>Fields can reference other content objects</p></div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 style="margin-bottom: 15px;">Nodes === Folders</h5>
+                            <p>
+                                Nodes provide you the ability to organize your content into logical groups. Grouping content
+                                into these collections does a couple of things for you. #1 content can be queried based off of the
+                                node it belongs to. #2 it makes it really nice to work with the data within the admin.
+                                Many CMSs just list out all of the content that matches a content type but Grasshopper allows you to take
+                                control of how many folders you can create and what kind of content will be stored within those folders.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row features">
+                        <div class="col-md-6 feature">
+                            <img src="/images/checkmark.png" />
+                            <div class="info">
+                                <p>Organize your data so that it makes sense for the content administrators, not just the DBA</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 feature">
+                            <img src="/images/checkmark.png" />
+                            <div class="info">
+                                <p>Each node can be assigned permissions, perfect for sandboxing data in your application</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row features">
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info"><p>Content can be queried by node</p></div>
+                        </div>
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info"><p>Unlimited amount of nodes allowed</p></div>
+                        </div>
+                    </div>
+                    <div class="row features">
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info"><p>Nodes can store more than one type of content</p></div>
+                        </div>
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info"><p>Assets can be assigned to a node</p></div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 style="margin-bottom: 15px;">Content === Data</h5>
+                            <p>
+                                Content is what Grasshopper is all about. At the heart of it all, Grasshopper stores, manipulates, organizes and queries content.
+                                A content's schema is determined by which <code>Content Type</code> that is associated with it.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row features">
+                        <div class="col-md-6 feature">
+                            <img src="/images/checkmark.png" />
+                            <div class="info">
+                                <p>New content schemas can be created without writing any code</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 feature">
+                            <img src="/images/checkmark.png" />
+                            <div class="info">
+                                <p>Content can be organized into groups without writing any code</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row features">
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info"><p>The SDK contains a very easy query API that gives you a super intuitive method of retrieving content</p></div>
+                        </div>
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info"><p>Content can contain references to other content</p></div>
+                        </div>
+                    </div>
+                    <div class="row features">
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info"><p>Content can be a very complex object, think infinitely nestable</p></div>
+                        </div>
+                        <div class="col-md-6 feature">
+                            <img src="images/checkmark.png" alt="globe">
+                            <div class="info"><p>Content can contain collections, single values, </p></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 style="margin-bottom: 15px;">Assets</h5>
+                            <p>Data is great, but many applications require binary assets. Grasshopper allows you to fully
+                            manage the assets that your application uses.</p>
+                        </div>
+                    </div>
+                    <div class="row features">
+                        <div class="col-md-6 feature">
+                            <img src="/images/checkmark.png" />
+                            <div class="info">
+                                <p>
+                                    Grasshopper allows you to store assets in nodes. You can either query out the assets that
+                                    are in a node, or you can link an asset to a piece of content.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 feature">
+                            <img src="/images/checkmark.png" />
+                            <div class="info">
+                                <p>Store your files either locally or publish to a CDN. Amazon S3 integration is included and any CDN that provides an API is fully compatible.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="api">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 style="margin-bottom: 15px;">Grasshopper API</h4>
+                            <p>
+                                Grasshopper API is an HTTP wrapper of core designed to run on HTTP or HTTPS protocols.
+                                The API is required if you intend on using Grasshopper Admin
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="admin">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 style="margin-bottom: 15px;">Grasshopper Admin</h4>
+                            <div class="container">
+                                <div class="row features">
+                                    <div class="col-md-12 feature">
+                                        <img src="images/checkmark.png" alt="globe">
+                                        <div class="info">
+                                            <p>Fully functional administration application without running scaffolding commands or writting any code. Flexible and extensible environment.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row features">
+                                    <div class="col-md-12 feature">
+                                        <img src="images/checkmark.png" alt="globe">
+                                        <div class="info">
+                                            <p>Manage your content types and data entry forms using the provided application without writing any code. Quickly change the way your application works and the data-schema easily and effectively.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row features">
+                                    <div class="col-md-12 feature">
+                                        <img src="images/checkmark.png" alt="globe">
+                                        <div class="info">
+                                            <p>Easily extend the administration application to your project's needs without modifying the core source code.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="proxy">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>&nbsp;</p>
+                            <p>
+                                The default Grasshopper end points that come out of the box are great, but most of us know that when you are creating a large
+                                application default functionality doesn't cut it.
+                            </p>
+                            <p>
+                                There are external demands that force us to write many hacks and work-arounds in most CMSs. Grasshopper handles customization a bit
+                                differently. If you need custom end points for your application, it's super easy to create them. We let you "proxy" the Grasshopper API.
+                            </p>
+                            <p>
+                                Since the API is built using the <a href="http://expressjs.com/" target="_blank">express</a> web application framework for node. Sharing routes
+                                between your custom application and Grasshopper is trivial.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

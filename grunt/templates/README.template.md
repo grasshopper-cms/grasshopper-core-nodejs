@@ -63,7 +63,8 @@ grasshopper.configure(function(){
             'database': '{YOUR DB}',
             'username': '{YOUR USERNAME}',
             'password': '{YOUR PASSWORD}',
-            'debug': false
+            'debug': false,
+            'defaultPageSize': {default num of results you want returned per page of data}
         },
         'assets': {
             'default' : 'local',

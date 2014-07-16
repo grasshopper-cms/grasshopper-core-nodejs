@@ -11,7 +11,7 @@ describe('configuration', function(){
             grasshopper.configure(function(core){
                 core.config = configObj();
             });
-            grasshopper.auth('admin', 'TestPassword')
+            grasshopper.auth('Basic', { username: 'admin', password: 'TestPassword' })
                 .then(function(obj){
                     should.exist(obj);
                 })
@@ -27,7 +27,7 @@ describe('configuration', function(){
                 this.config = configObj();
             });
 
-            grasshopper.auth('admin', 'TestPassword')
+            grasshopper.auth('Basic', { username: 'admin', password: 'TestPassword' })
                 .then(function(obj){
                     should.exist(obj);
                 })
