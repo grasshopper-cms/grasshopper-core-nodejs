@@ -122,7 +122,7 @@ grasshopper.configure(function(){
 Grasshopper core includes a base set of data to get you started.  To seed the data into the database defined in configuration.json, run the following command:
 
 ```
-grunt db:seed
+grunt mongodb:dev
 ```
 
 ### Tests

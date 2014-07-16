@@ -122,7 +122,7 @@ grasshopper.configure(function(){
 Grasshopper core includes a base set of data to get you started.  To seed the data into the database defined in configuration.json, run the following command:
 
 ```
-grunt db:seed
+grunt mongodb:dev
 ```
 
 ### Tests
@@ -210,4 +210,4 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 To create the readme, update the release notes dir and package.json.version at a minimum. If needed update README.template.md.
 Then run `grunt readme`.
 
-_Compiled file. Do not modify directly. Created: 2014-07-16 10:55:22_
+_Compiled file. Do not modify directly. Created: 2014-07-16 11:09:50_
