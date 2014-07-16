@@ -17,7 +17,7 @@
     "loopfunc": false,
 //    "onevar": true,
     "strict": true,
-//    "undef": true,
+    "undef": true,
 //    "unused": true,
 //    "maxlen": 121,
     "newcap": false,

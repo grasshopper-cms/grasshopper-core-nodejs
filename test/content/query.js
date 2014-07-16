@@ -235,7 +235,6 @@ describe('Grasshopper core - content', function(){
         });
 
         it('returns distinct values within a find', function(done) {
-            console.log('\n\n\n\n\n\n\n\n\n\nThis is THE test.... begin failure:');
             grasshopper
                 .request(tokens.globalReaderToken)
                 .content.query({
@@ -244,8 +243,6 @@ describe('Grasshopper core - content', function(){
                         distinct : 'fields.label'
                     }
                 }).then(function(payload){
-                    console.log('inside');
-                    console.log(JSON.stringify(payload,null,1));
                     payload.results.should.deep.equal([
                         'Generated title',
                         'search test1',
@@ -259,11 +256,9 @@ describe('Grasshopper core - content', function(){
                     should.not.exist(err);
                 })
                 .catch(function(error) {
-                    console.log(error);
                     done(error);
                 })
                 .fail(function(error) {
-                    console.log(error);
                     done(error);
                 })
                 .done(done);
