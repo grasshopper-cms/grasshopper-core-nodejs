@@ -6,4 +6,6 @@ uuid: requirements-example
 
 * npm install -g grunt-cli
 
+* npm install -g bower
+
 * [http://www.mongodb.org/downloads](http://www.mongodb.org/downloads)
