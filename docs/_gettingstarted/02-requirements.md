@@ -4,9 +4,22 @@ uuid: requirements
 ---
 #### Requirements
 
+To build a project you will have to install the following:
+
 * [Git](http://git-scm.com/) version control system.
-* Environment that can run [Node.js](http://nodejs.org/download/). Node.js is released under the MIT license and has installation packages available for Linux, Windows and Macintosh.
-* Instance of [Grunt](http://gruntjs.com/) (JavaScript Task Runner) installed.
-* [Bower](https://github.com/bower/bower) package manager for the web.
-* Access to a running instance of [MongoDB](http://www.mongodb.org/). You can host this yourself or use services like [MongoLab](https://mongolab.com/welcome/).
+
+* [Node.js](http://nodejs.org/download/), a platform for easily building fast, scalable network applications.
+
+* [MongoDB](http://www.mongodb.org/), an open-source document database that Grasshopper uses for data storage.
+
+* [Grunt](http://gruntjs.com/), the JavaScript task runner
+
+* [bower](http://bower.io/), a package manager for the web
+
+* [Sass](http://sass-lang.com), Syntactically Awesome Style Sheets.
+
+* Sass Globbing Plugin (used to compile the admin), Sass globbing allows you to import many sass or scss files in a single import statement.
+
+* Sass CSS Importer (used to compile the admin): The Sass CSS Importer allows you to import a CSS file into Sass.
+
 * Access to local file system or CDN like [Amazon S3](http://aws.amazon.com/s3/).
