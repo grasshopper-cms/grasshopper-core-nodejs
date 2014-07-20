@@ -4,16 +4,8 @@ uuid: installation
 ---
 #### Installation
 
-Grasshopper components are installed and managed via npm, the Node.js package manager. Before setting up Grasshopper ensure that your npm is up-to-date by running `npm update -g npm` (this might require sudo on certain systems).
+Installing Grasshopper is super simple. Once your machine is configured, creating a new project is as easy as typing `grasshopper fly`.
 
-The Grasshopper system includes 3 components (most deployments include all 3) and each can be installed separately.
+The installation process fully configures working instances of [core](https://github.com/Solid-Interactive/grasshopper-core-nodejs), [api](https://github.com/Solid-Interactive/grasshopper-api-js) and [admin](https://github.com/Solid-Interactive/grasshopper-admin) for you.
 
-* [Core](https://github.com/Solid-Interactive/grasshopper-core-nodejs)
-* [API](https://github.com/Solid-Interactive/grasshopper-api-js)
-* [Admin](https://github.com/Solid-Interactive/grasshopper-admin)
-
-Now we don't want you to have to worry about configuring these separately so we created a handy [NPM](https://www.npmjs.org/package/grasshopper-cli) that helps you get going.
-
-Just install the [grasshopper-cli](https://github.com/Solid-Interactive/grasshopper-cli) npm and follow the provided instructions.
-
-    npm install -g grasshopper-cli
+See the example of how to install the NPM and setup a new project. We assume that all of the prerequisite software is already installed.

@@ -4,10 +4,12 @@ uuid: installation-example
 language: bash
 ---
 
+npm install -g grasshopper-cli
+
 mkdir myproject
 
 cd myproject
 
-npm init #set properties as needed for your Node.js application
+grasshopper fly
 
-grasshopper setup #follow instructions
+-- That's it, you have a working site. Just make whatever configuration changes you need to the project and you are on your way.
