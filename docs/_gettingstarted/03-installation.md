@@ -19,6 +19,6 @@ Watch a video of an installation (less than a minute):
  flashplayer: "/js/vendor/jwplayer/player.swf",
  file: "http://s3.amazonaws.com/SolidInteractive/images/grasshopper/grasshopper-cli-fly.mp4",
  height: 270,
- poster: "https://s3.amazonaws.com/SolidInteractive/images/grasshopper/grasshopper-cli-fly.png",
+ poster: "http://s3.amazonaws.com/SolidInteractive/images/grasshopper/grasshopper-cli-fly.png",
  width: 480 });
 </script>
