@@ -168,7 +168,7 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 * Peter Ajtai
 * Greg Larrenaga
 * Eric Beringer
-
+* Cooper Hilscher
 
 ## Dev Notes
 
