@@ -174,19 +174,21 @@ navtype: hero
         <div class="row">
             <div class="col-md-12 info">
                 <h2>What's Next?</h2>
-                <p>
-                    Drink the koolaid yet? You can go a few different directions from here. The <a href="/learn-more.html">Learn More</a> page will give you a more in-depth explanation of the system, or you can go right to the <a href="/documentation.html">Developer Documentation</a> and get started.
-                    <br /><br /><br />
-                </p>
-            </div>
-        </div>
+                <h3>Drink the koolaid? Take it for a test drive!</h3>
+                <p>See how easy it is to get up and running with Grasshopper. Here is a video showing the installation  of a new Grasshopper application.</p>
 
-        <div class="row">
-            <div class="col-md-12 info">
-                <a href="/documentation.html">
-                    <img src="/images/circle-icons/full-color/document.png" alt="Documentation" /><br />
-                    Documentation
-                </a>
+                <video
+                        src="http://s3.amazonaws.com/SolidInteractive/images/grasshopper/grasshopper-cli-fly.mp4"
+                        id="container"
+                        poster="http://s3.amazonaws.com/SolidInteractive/images/grasshopper/grasshopper-cli-fly.png"
+                        width="100%"> </video>
+
+
+                <script type="text/javascript">
+                    jwplayer("container").setup({
+                        flashplayer: "/js/vendor/jwplayer/player.swf"
+                    });
+                </script>
             </div>
         </div>
     </div>
