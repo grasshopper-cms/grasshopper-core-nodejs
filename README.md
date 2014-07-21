@@ -63,7 +63,8 @@ grasshopper.configure(function(){
             'database': '{YOUR DB}',
             'username': '{YOUR USERNAME}',
             'password': '{YOUR PASSWORD}',
-            'debug': false
+            'debug': false,
+            'defaultPageSize': {default num of results you want returned per page of data}
         },
         'assets': {
             'default' : 'local',
@@ -73,19 +74,6 @@ grasshopper.configure(function(){
                     'path' : '/absolute path to public directory',
                     'urlbase' : 'http://YOUR URL'
                 }
-            }
-        },
-        'identities' : {
-            'google' : {
-                'appId' : 'blahBlahBlackSheep',
-                'secret' : 'ohhSooSecret',
-                'redirectUrl' : '/this/that',
-                'scopes' : [
-                    'https://www.googleapis.com/auth/userinfo.profile',
-                    'https://www.googleapis.com/auth/userinfo.email'
-                ],
-                'tokenEndpoint' : 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=',
-                'oauthCallback' : 'http://localhost:3000/oauth2callback'
             }
         }
     };
@@ -158,21 +146,46 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 * 0.12.2 - 2014-06-11 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.12.2_2014-06-11.md)
 * 0.13.0 - 2014-06-24 - [features](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.0_2014-06-24.md)
 * 0.13.1 - 2014-06-24 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.1_2014-06-24.md)
-* 0.13.2 - 2014-06-25 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.2_2014-06-25.md)
+* 0.13.2 - 2014-06-24 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.2_2014-06-24.md)
+* 0.13.2 - 2014-06-25 - [initial release](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.2_2014-06-25.md)
 * 0.13.3 - 2014-06-26 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.3_2014-06-26.md)
+* 0.13.4 - 2014-06-30 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.4_2014-06-30.md)
+* 0.13.5 - 2014-07-01 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.5_2014-07-01.md)
+* 0.13.6 - 2014-07-01 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.6_2014-07-01.md)
+* 0.13.7 - 2014-07-01 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.7_2014-07-01.md)
+* 0.13.8 - 2014-07-01 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.8_2014-07-01.md)
+* 0.13.9 - 2014-07-01 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.9_2014-07-01.md)
+* 0.13.10 - 2014-07-02 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.10_2014-07-02.md)
+* 0.13.11 - 2014-07-03 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.11_2014-07-03.md)
+* 0.13.12 - 2014-07-08 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.12_2014-07-08.md)
+* 0.13.13 - 2014-07-08 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.13_2014-07-08.md)
+* 0.13.14 - 2014-07-09 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.14_2014-07-09.md)
+* 0.13.15 - 2014-07-08 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.15_2014-07-08.md)
+* 0.13.16 - 2014-07-09 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.16_2014-07-09.md)
+* 0.13.17 - 2014-07-10 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.17_2014-07-10.md)
+* 0.13.18 - 2014-07-10 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.18_2014-07-10.md)
+* 0.13.19 - 2014-07-10 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.19_2014-07-10.md)
+* 0.13.20 - 2014-07-14 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.20_2014-07-14.md)
+* 0.13.21 - 2014-07-14 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.21_2014-07-14.md)
+* 0.13.22 - 2014-07-14 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.22_2014-07-14.md)
+* 0.13.23 - 2014-07-15 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.23_2014-07-15.md)
+* 0.13.24 - 2014-07-15 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.24_2014-07-15.md)
+* 0.13.25 - 2014-07-21 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.25_2014-07-21.md)
+* 0.13.26 - 2014-07-21 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.26_2014-07-21.md)
 
 
 ## Contributors (`git shortlog -s -n`)
 
 * Travis McHattie
-* Peter Ajtai
 * Greg Larrenaga
-* Eric Beringer
+* Peter Ajtai
 * Cooper Hilscher
+* Eric Beringer
+
 
 ## Dev Notes
 
 To create the readme, update the release notes dir and package.json.version at a minimum. If needed update README.template.md.
 Then run `grunt readme`.
 
-_Compiled file. Do not modify directly. Created: 2014-06-26 02:32:41_
+_Compiled file. Do not modify directly. Created: 2014-07-21 02:30:32_
