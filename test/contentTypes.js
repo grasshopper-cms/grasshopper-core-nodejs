@@ -121,7 +121,7 @@ describe('Grasshopper core - contentTypes', function () {
 
         it('should return the results sorted alphabetically by label', function (done) {
 
-            var label = "AAAAAA",
+            var label = "aaaaaa",
                 newContentType = {
                     "label": label,
                     "fields": [
