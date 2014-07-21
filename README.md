@@ -24,31 +24,49 @@ The most common implementation of grasshopper includes the admin project (dynami
 
 
 
-### Core concepts
+### Overview
 
-------------------------------------------------------------------
+Core concepts
 
-*Users* - most applications need the concept of users, grasshopper provides a standard way to create and extend user data. It also supports roles and node based permissions.
-
-*Content Types* - or virtual schemas, since you are most likely using a NoSQL database you are not bound to any specific schema. Most applications still require data to be predictable so grasshopper allows the developer to create virtual schemas to accomplish data consistency.
-
-*Nodes* - or directories, nodes can be created to organize content into buckets of your choosing.
-
-*Content* - or an implementation of a content type. Many types of content make up an application.
+1. Authentication
+2. Users
+3. Content
+4. Content Types
+5. Nodes
 
 
-### How would you use me?
+### Authentication
+Authentication in Grasshopper is managed using tokens. A token can be retrieved by sending a username and password to the ```auth``` method. 
 
-------------------------------------------------------------------
+```
+grasshopper
+    .auth('user', 'password')
+    .done(function (token) {
+        console.log(token);
+    });
+```
+This token should be maintained by your application and sent with subsequent grasshopper calls.
 
-Install
+### Users
+Most applications need the concept of users, grasshopper provides a standard way to create and extend user data. It also supports roles and node based permissions.  Currently Grasshopper provides user and admin level authentication mechanisms, each providing it's own level of access to the system.
+
+### Content
+The central concept behind grasshopper is to manage content that's structure is buit in a format that follows a predefined schema defined by a content type. Many types of content make up an application.
+
+### Content Types
+Content types are used to define the schema of a particular piece of content. Think of them as virtual schemas, since you are most likely using a NoSQL database you are not bound to any specific schema. Most applications still require data to be predictable so grasshopper allows the developer to create virtual schemas to accomplish data consistency.
+
+### Nodes
+Nodes are like folders. You can associate content to a node. Nodes can be created to organize content into buckets of your choosing.
+
+
+## Usage
+
+### Installation
 ```
 npm install grasshopper-core --save
 ```
-
-
-Usage
-
+### Configuration
 ```
 var grasshopper = require('grasshopper-core');
 
@@ -90,14 +108,42 @@ grasshopper.configure(function(){
         }
     };
 ```
+#### Configuration Definitions
 
+------------------------------------------------------------------
 
+* cache: Set path the cached files/data are going to live. (Default is cache directoy in root of project).
+* crypto: Set a unique secret_passphrase that can be used to encrypt data.
+* DB settings
+    * type: mongodb (right now only backend supported)
+    * host: URL to database
+    * database: Name of the database
+    * username: User name of the database
+    * password: password for the database
+    * degug: bool (do you want output into the console)
+* logger: Module used to capture logs from the API/SDK
+    * type: file
+    * path: Location that the file will be saved to
+    * application: Name of your application
+    * machine: Identifyable name of your server
+* assets: Where are your file attachments going to get stored
+    * default: which provider are you going to use (local or amazon)
+    * tmpdir: temp file directory
+    * engines: collections of engines that will be used. NOTE: all engines get files saved to them, only the default returns results
 
-### Running Tests
+### Data
+Grasshopper core includes a base set of data to get you started.  To seed the data into the database defined in configuration.json, run the following command:
 
--------------------------------------------------------
+```
+grunt mongodb:dev
+```
 
-* $: ```grunt test```
+### Tests
+Grasshopper contains an extensive set of tests. These can be run from the root directory by running the following command:
+
+```
+grunt test
+```
 
 
 ### Upcoming Features
@@ -160,6 +206,7 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 * 0.13.1 - 2014-06-24 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.1_2014-06-24.md)
 * 0.13.2 - 2014-06-25 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.2_2014-06-25.md)
 * 0.13.3 - 2014-06-26 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.3_2014-06-26.md)
+* 0.13.4 - 2014-07-08 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.4_2014-07-08.md)
 
 
 ## Contributors (`git shortlog -s -n`)
@@ -167,6 +214,7 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 * Travis McHattie
 * Peter Ajtai
 * Greg Larrenaga
+* Cooper Hilscher
 * Eric Beringer
 
 
@@ -175,4 +223,4 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 To create the readme, update the release notes dir and package.json.version at a minimum. If needed update README.template.md.
 Then run `grunt readme`.
 
-_Compiled file. Do not modify directly. Created: 2014-06-26 02:32:41_
+_Compiled file. Do not modify directly. Created: 2014-07-16 11:09:50_
