@@ -5,4 +5,4 @@ uuid: stack
 #### Grasshopper Stack
 
 Typical Grasshopper Application Stack
-![Stack](/images/stack.png)
+![Stack](images/stack.png)

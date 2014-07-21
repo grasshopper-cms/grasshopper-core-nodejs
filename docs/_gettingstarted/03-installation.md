@@ -16,7 +16,7 @@ Watch a video of an installation (less than a minute):
 
 <script type="text/javascript">
  jwplayer("container").setup({
- flashplayer: "/js/vendor/jwplayer/player.swf",
+ flashplayer: "js/vendor/jwplayer/player.swf",
  file: "http://s3.amazonaws.com/SolidInteractive/images/grasshopper/grasshopper-cli-fly.mp4",
  height: 270,
  poster: "http://s3.amazonaws.com/SolidInteractive/images/grasshopper/grasshopper-cli-fly.png",
