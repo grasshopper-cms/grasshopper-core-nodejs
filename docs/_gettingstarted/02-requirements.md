@@ -4,7 +4,7 @@ uuid: requirements
 ---
 #### Requirements
 
-To build a project you will have to install the following:
+The Grasshopper framework uses all of the below software/services:
 
 * [Git](http://git-scm.com/) version control system.
 
