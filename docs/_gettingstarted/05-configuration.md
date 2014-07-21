@@ -8,5 +8,57 @@ uuid: projectconfiguration
 
 When you run the `grasshopper fly` command, you get a fully functional application, but you may want to change some of the configuration values.
 
-git pus
-Configuring your project requires that the `grasshopper-cli` npm be installed. If you have not done this yet then, please set it up before continuing.
+
+##### Api / Core
+
+Once you have a `ghapi.json` file in the root of your project you can change any of the values that you like.
+
+Here is an example file:
+
+
+    {
+        "server": {
+            "https":{
+                "key":"{full path to key}",
+                "cert":"{full path to cert}"
+            }
+        },
+        "crypto": {
+           "secret_passphrase" : "{unique term per project}"
+        },
+        "db": {
+           "type": "mongodb",
+           "host": "mongodb://localhost/{database name}",
+           "shorthost":"localhost",
+           "database": "{database name}",
+           "username": "",
+           "password": "",
+           "defaultPageSize" : "10000",
+           "debug": false
+        },
+        "assets": {
+           "default" : "local",
+           "tmpdir" : "{absolute path to tmp directory}",
+           "engines": {
+                "local":{
+                    "path":"{absolute path to public asset folder}",
+                    "urlbase":"{full url base to serve files from}"
+                }
+           }
+        },
+        "logger" : {
+           "adapters": [{
+                "type":"console",
+                "application":"{application name}",
+                "machine":"{machine name}"
+           }]
+        },
+        "identities" : {
+            "google" : {
+                "appId" : "{ your google app id }",
+                "secret" : "{ your google secret id }",
+                "scopes" : [ "{ array of scopes you want to authorize }" ],
+                "redirectUrl" : "{ the url you want to redirect to after successful auth, the users token will be appended to this route ex. '/login' entered here will send the user to '/login/googleToken' }"
+            }
+        }
+    }
