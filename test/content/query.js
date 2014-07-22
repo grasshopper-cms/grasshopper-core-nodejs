@@ -86,6 +86,19 @@ describe('Grasshopper core - content', function(){
             query7 = {
                 filters: [],
                 nodes: ['526d5179966a883540000006']
+            },
+            query8 = {
+                filters: [{key: 'fields.label', cmp: '=', value: 'search test6'}],
+                options : {
+                    limit : 1
+                }
+            },
+            query9 = {
+                filters: [{key: 'fields.label', cmp: '=', value: 'search test7'}],
+                options : {
+                    limit : 1,
+                    skip : 2
+                }
             };
 
         before(function(done){
@@ -105,39 +118,87 @@ describe('Grasshopper core - content', function(){
                 }, base))
                 .then(function(){
                     return grasshopper.request(tokens.globalEditorToken).content.insert(_.extend({
-                            fields:{
-                                label:'search test2',
-                                testfield: 'testvalue',
-                                newColumn: 'testvalue'
-                            }
-                        }, base));
+                        fields:{
+                            label:'search test2',
+                            testfield: 'testvalue',
+                            newColumn: 'testvalue'
+                        }
+                    }, base));
                 })
                 .then(function() {
                     return grasshopper.request(tokens.globalEditorToken).content.insert(_.extend({
-                                fields:{
-                                    label:'search test3',
-                                    testfield: 'testvalue',
-                                    newColumn: 'testvalue'
-                                }
-                            }, base));
+                        fields:{
+                            label:'search test3',
+                            testfield: 'testvalue',
+                            newColumn: 'testvalue'
+                        }
+                    }, base));
                 })
                 .then(function() {
-                        return grasshopper.request(tokens.globalEditorToken).content.insert(_.extend({
-                            fields:{
-                                label:'search test4',
-                                testfield: 'testvalue',
-                                newColumn: 'testvalue'
-                            }
-                        }, base));
+                    return grasshopper.request(tokens.globalEditorToken).content.insert(_.extend({
+                        fields:{
+                            label:'search test4',
+                            testfield: 'testvalue',
+                            newColumn: 'testvalue'
+                        }
+                    }, base));
                 })
                 .then(function() {
-                        return grasshopper.request(tokens.globalEditorToken).content.insert(_.extend({
-                            fields:{
-                                label:'search test5',
-                                testfield: 'testvalue',
-                                newColumn: 'testvalue'
-                            }
-                        }, base));
+                    return grasshopper.request(tokens.globalEditorToken).content.insert(_.extend({
+                        fields:{
+                            label:'search test5',
+                            testfield: 'testvalue',
+                            newColumn: 'testvalue'
+                        }
+                    }, base));
+                })
+                .then(function() {
+                    return grasshopper.request(tokens.globalAdminToken).content.insert(_.extend({
+                        fields:{
+                            label:'search test6',
+                            testfield: 'testvalue',
+                            newColumn: 'testvalue'
+                        }
+                    }, base));
+                })
+                .then(function() {
+                    return grasshopper.request(tokens.globalAdminToken).content.insert(_.extend({
+                        fields:{
+                            label:'search test6',
+                            testfield: 'testvalue',
+                            newColumn: 'testvalue'
+                        }
+                    }, base));
+                })
+                .then(function() {
+                    return grasshopper.request(tokens.globalAdminToken).content.insert(_.extend({
+                        fields:{
+                            label:'search test7',
+                            testfield: 'testvalue',
+                            newColumn: 'testvalue',
+                            thisShouldBeOnOneOfThese : true
+                        }
+                    }, base));
+                })
+                .then(function() {
+                    return grasshopper.request(tokens.globalAdminToken).content.insert(_.extend({
+                        fields:{
+                            label:'search test7',
+                            testfield: 'testvalue',
+                            newColumn: 'testvalue',
+                            thisShouldBeOnOneOfThese : true
+                        }
+                    }, base));
+                })
+                .then(function() {
+                    return grasshopper.request(tokens.globalAdminToken).content.insert(_.extend({
+                        fields:{
+                            label:'search test7',
+                            testfield: 'testvalue',
+                            newColumn: 'testvalue',
+                            thisShouldBeOnOneOfThese : true
+                        }
+                    }, base));
                 })
                 .done(done.bind(done, undefined));
         });
@@ -250,7 +311,9 @@ describe('Grasshopper core - content', function(){
                         'search test2',
                         'search test3',
                         'search test4',
-                        'search test5'
+                        'search test5',
+                        'search test6',
+                        'search test7'
                     ];
 
                     _.difference(payload.results, ary).should.deep.equal([]);
@@ -278,7 +341,9 @@ describe('Grasshopper core - content', function(){
                         'search test2',
                         'search test3',
                         'search test4',
-                        'search test5'
+                        'search test5',
+                        'search test6',
+                        'search test7'
                     ];
 
                     _.difference(payload.results, ary).should.deep.equal([]);
@@ -288,6 +353,35 @@ describe('Grasshopper core - content', function(){
                 .catch(doneError.bind(null, done))
                 .fail(doneError.bind(null, done))
                 .done();
+        });
+
+        describe('options.limit', function() {
+            it('should limit the results, based on the options.limit', function(done) {
+                grasshopper.request(tokens.globalAdminToken).content.query(query8)
+                    .then(function(payload){
+                        payload.results.length.should.equal(1);
+
+                        done();
+                    })
+                    .fail(doneError.bind(null, done))
+                    .catch(doneError.bind(null, done))
+                    .done();
+            });
+        });
+
+        describe('options.skip', function() {
+            it('should skip the results, based on the options.limit and options.skip', function(done) {
+                grasshopper.request(tokens.globalAdminToken).content.query(query9)
+                    .then(function(payload){
+                        payload.results.length.should.equal(1);
+                        payload.results[0].fields.should.have.property('thisShouldBeOnOneOfThese');
+
+                        done();
+                    })
+                    .fail(doneError.bind(null, done))
+                    .catch(doneError.bind(null, done))
+                    .done();
+            });
         });
     });
 
