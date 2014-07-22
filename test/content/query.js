@@ -94,10 +94,36 @@ describe('Grasshopper core - content', function(){
                 }
             },
             query9 = {
+                filters: [{key: 'fields.label', cmp: '=', value: 'search test6'}],
+                options : {
+                    limit : '1'
+                }
+            },
+            query10 = {
+                filters: [{key: 'fields.label', cmp: '=', value: 'search test6'}],
+                options : {
+                    limit : 'string'
+                }
+            },
+            query11 = {
                 filters: [{key: 'fields.label', cmp: '=', value: 'search test7'}],
                 options : {
                     limit : 1,
                     skip : 2
+                }
+            },
+            query12 = {
+                filters: [{key: 'fields.label', cmp: '=', value: 'search test7'}],
+                options : {
+                    limit : 1,
+                    skip : '2'
+                }
+            },
+            query13 = {
+                filters: [{key: 'fields.label', cmp: '=', value: 'search test7'}],
+                options : {
+                    limit : 1,
+                    skip : 'string'
                 }
             };
 
@@ -355,7 +381,7 @@ describe('Grasshopper core - content', function(){
                 .done();
         });
 
-        describe('options.limit', function() {
+        describe('options.limit eq number', function() {
             it('should limit the results, based on the options.limit', function(done) {
                 grasshopper.request(tokens.globalAdminToken).content.query(query8)
                     .then(function(payload){
@@ -369,12 +395,69 @@ describe('Grasshopper core - content', function(){
             });
         });
 
-        describe('options.skip', function() {
-            it('should skip the results, based on the options.limit and options.skip', function(done) {
+        describe('options.limit eq string parsed to number', function() {
+            it('should limit the results, based on the options.limit', function(done) {
                 grasshopper.request(tokens.globalAdminToken).content.query(query9)
                     .then(function(payload){
                         payload.results.length.should.equal(1);
+
+                        done();
+                    })
+                    .fail(doneError.bind(null, done))
+                    .catch(doneError.bind(null, done))
+                    .done();
+            });
+        });
+
+        describe('options.limit eq string', function() {
+            it('should use default if options.limit has a string value', function(done) {
+                grasshopper.request(tokens.globalAdminToken).content.query(query10)
+                    .then(function(payload){
+                        payload.limit.should.eq(100000);
+
+                        done();
+                    })
+                    .fail(doneError.bind(null, done))
+                    .catch(doneError.bind(null, done))
+                    .done();
+            });
+        });
+
+        describe('options.skip eq number', function() {
+            it('should skip the results, based on the options.limit and options.skip', function(done) {
+                grasshopper.request(tokens.globalAdminToken).content.query(query11)
+                    .then(function(payload){
+                        payload.results.length.should.equal(1);
                         payload.results[0].fields.should.have.property('thisShouldBeOnOneOfThese');
+
+                        done();
+                    })
+                    .fail(doneError.bind(null, done))
+                    .catch(doneError.bind(null, done))
+                    .done();
+            });
+        });
+
+        describe('options.skip eq string parsed to number', function() {
+            it('should skip the results, based on the options.limit and options.skip', function(done) {
+                grasshopper.request(tokens.globalAdminToken).content.query(query12)
+                    .then(function(payload){
+                        payload.results.length.should.equal(1);
+                        payload.results[0].fields.should.have.property('thisShouldBeOnOneOfThese');
+
+                        done();
+                    })
+                    .fail(doneError.bind(null, done))
+                    .catch(doneError.bind(null, done))
+                    .done();
+            });
+        });
+
+        describe('options.skip eq string', function() {
+            it('should use default if options.skip has a string value', function(done) {
+                grasshopper.request(tokens.globalAdminToken).content.query(query13)
+                    .then(function(payload){
+                        payload.skip.should.eq(0);
 
                         done();
                     })
