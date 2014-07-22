@@ -10,7 +10,7 @@
 
 A CMS for the people, a great experience for developers, users and customers. Use Grasshopper to drastically speed up development for distributed systems. Support your clients better.
 
----------------------------------------------------------------------------------
+![Create, Share, Present](http://solid-interactive.github.io/grasshopper-core-nodejs/images/create-share-present.png)
 
 By standardizing your development workflow, you can spend more time building your public facing applications and less time building backend systems, APIs and administrations.
 
@@ -199,4 +199,4 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 To create the readme, update the release notes dir and package.json.version at a minimum. If needed update README.template.md.
 Then run `grunt readme`.
 
-_Compiled file. Do not modify directly. Created: 2014-07-22 11:49:08_
+_Compiled file. Do not modify directly. Created: 2014-07-22 02:14:45_
