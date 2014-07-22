@@ -449,6 +449,29 @@ describe('Grasshopper core - contentTypes', function () {
             ).done(done);
         });
 
+        describe('updating the fields array on a content type', function() {
+
+            it('should remove a field from a content type when you do a PUT without that field', function(done) {
+                var updatedContentType = {
+                    _id: testCreatedContentTypeId,
+                    label: 'updatedlabel',
+                    fields: [], // Empty the fields Obj
+                    helpText: '',
+                    description: ''
+                };
+
+                grasshopper.request(adminToken).contentTypes.update(updatedContentType)
+                    .then(function (payload) {
+                        payload.fields.length.should.equal(0);
+                        done();
+                    })
+                    .fail(doneError.bind(null, done))
+                    .catch(doneError.bind(null, done))
+                    .done();
+            });
+
+        });
+
     });
 
     describe('deleteById', function () {
@@ -506,4 +529,11 @@ describe('Grasshopper core - contentTypes', function () {
             ).done(done);
         });
     });
+
+
 });
+
+function doneError(done, err) {
+    'use strict';
+    done(err);
+}
