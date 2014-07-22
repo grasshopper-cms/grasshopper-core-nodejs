@@ -2,8 +2,8 @@
 title: Grasshopper Core Documentation
 email: your-email@domain.com
 description: "A CMS for the people, a great experience for developers, users and customers. Use Grasshopper to drastically speed up development for distributed systems. Support your clients better."
-baseurl: "http://solid-interactive.github.io/grasshopper-core-nodejs/"
-url: "http://solid-interactive.github.io/grasshopper-core-nodejs"
+baseurl: "/grasshopper-core-nodejs"
+url: "http://solid-interactive.github.io"
 
 # Build settings
 markdown: kramdown
