@@ -8,7 +8,9 @@
 
 ### Grasshopper is an everybody friendly, flexible, extensible CMS.
 
-#### A CMS for the people, a great experience for developers, users and customers. Use Grasshopper to drastically speed up development for distributed systems. Support your clients better.
+A CMS for the people, a great experience for developers, users and customers. Use Grasshopper to drastically speed up development for distributed systems. Support your clients better.
+
+---------------------------------------------------------------------------------
 
 By standardizing your development workflow, you can spend more time building your public facing applications and less time building backend systems, APIs and administrations.
 
