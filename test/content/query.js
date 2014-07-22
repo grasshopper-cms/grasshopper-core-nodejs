@@ -92,6 +92,13 @@ describe('Grasshopper core - content', function(){
                 options : {
                     limit : 1
                 }
+            },
+            query9 = {
+                filters: [{key: 'fields.label', cmp: '=', value: 'search test7'}],
+                options : {
+                    limit : 1,
+                    skip : 2
+                }
             };
 
         before(function(done){
@@ -160,6 +167,36 @@ describe('Grasshopper core - content', function(){
                             label:'search test6',
                             testfield: 'testvalue',
                             newColumn: 'testvalue'
+                        }
+                    }, base));
+                })
+                .then(function() {
+                    return grasshopper.request(tokens.globalAdminToken).content.insert(_.extend({
+                        fields:{
+                            label:'search test7',
+                            testfield: 'testvalue',
+                            newColumn: 'testvalue',
+                            thisShouldBeOnOneOfThese : true
+                        }
+                    }, base));
+                })
+                .then(function() {
+                    return grasshopper.request(tokens.globalAdminToken).content.insert(_.extend({
+                        fields:{
+                            label:'search test7',
+                            testfield: 'testvalue',
+                            newColumn: 'testvalue',
+                            thisShouldBeOnOneOfThese : true
+                        }
+                    }, base));
+                })
+                .then(function() {
+                    return grasshopper.request(tokens.globalAdminToken).content.insert(_.extend({
+                        fields:{
+                            label:'search test7',
+                            testfield: 'testvalue',
+                            newColumn: 'testvalue',
+                            thisShouldBeOnOneOfThese : true
                         }
                     }, base));
                 })
@@ -275,7 +312,8 @@ describe('Grasshopper core - content', function(){
                         'search test3',
                         'search test4',
                         'search test5',
-                        'search test6'
+                        'search test6',
+                        'search test7'
                     ];
 
                     _.difference(payload.results, ary).should.deep.equal([]);
@@ -304,7 +342,8 @@ describe('Grasshopper core - content', function(){
                         'search test3',
                         'search test4',
                         'search test5',
-                        'search test6'
+                        'search test6',
+                        'search test7'
                     ];
 
                     _.difference(payload.results, ary).should.deep.equal([]);
@@ -316,11 +355,26 @@ describe('Grasshopper core - content', function(){
                 .done();
         });
 
-        describe('limit', function() {
+        describe('options.limit', function() {
             it('should limit the results, based on the options.limit', function(done) {
                 grasshopper.request(tokens.globalAdminToken).content.query(query8)
                     .then(function(payload){
                         payload.results.length.should.equal(1);
+
+                        done();
+                    })
+                    .fail(doneError.bind(null, done))
+                    .catch(doneError.bind(null, done))
+                    .done();
+            });
+        });
+
+        describe('options.skip', function() {
+            it('should skip the results, based on the options.limit and options.skip', function(done) {
+                grasshopper.request(tokens.globalAdminToken).content.query(query9)
+                    .then(function(payload){
+                        payload.results.length.should.equal(1);
+                        payload.results[0].fields.should.have.property('thisShouldBeOnOneOfThese');
 
                         done();
                     })
