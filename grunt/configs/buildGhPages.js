@@ -5,7 +5,7 @@ module.exports = function (grunt) {
         website : {
             options: {
                 build_branch: "gh-pages",
-                dist: "./docs/_site",
+                dist: "docs/_site",
                 pull: true
             }
         }
