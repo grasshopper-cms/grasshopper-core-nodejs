@@ -3,7 +3,7 @@
   "description": "Core modules for the grasshopper data management system. A DMS is a layer that sits on top of a database that makes working with the data easier for both administrators and developers.",
   "main": "./lib/grasshopper",
   "author": "Travis McHattie",
-  "version": "0.13.28",
+  "version": "0.13.29",
   "repository": {
     "type": "git",
     "url": "https://github.com/Solid-Interactive/grasshopper-core-nodejs.git"
@@ -49,7 +49,10 @@
     "grunt-concurrent": "~0.4.0",
     "grunt-shell": "~0.6.4",
     "grunt-release-notes": "^0.1.1",
-    "validator": "~3.5.1"
+    "validator": "~3.5.1",
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-build-gh-pages": "^1.0.3"
   },
   "jam": {
     "main": "lib/grasshopper.js",

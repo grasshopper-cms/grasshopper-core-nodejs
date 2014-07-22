@@ -17,6 +17,13 @@ module.exports = function (grunt) {
                 stderr : true
             }
         },
+        'jekyllBuild': {
+            command : 'cd docs && jekyll build && cd ../',
+            options : {
+                stdout : true,
+                stderr : true
+            }
+        },
         'shortlog' : {
             options : {
                 stderr : true,
