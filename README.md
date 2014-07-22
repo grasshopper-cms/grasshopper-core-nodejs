@@ -14,16 +14,16 @@ A CMS for the people, a great experience for developers, users and customers. Us
 
 By standardizing your development workflow, you can spend more time building your public facing applications and less time building backend systems, APIs and administrations.
 
-Grasshopper focuses on USER happiness, not just developer happiness. Grasshopper provides tools for everyone involved in a project, developers, content managers, clients and customers alike.
+Grasshopper focuses on user happiness, not just developer happiness. Grasshopper provides tools for everyone involved in a project, developers, content managers, clients and customers alike.
 
-Using Grasshopper, developers get
+**Using Grasshopper, developers get**
 
 * An easy to use SDK, a ready to go REST API, built in concepts like user management and permissions, an open system that is both flexible and extensible.
 * High performance application stack built on Node.js. Hooks and events into the system to completely customize the handling of data and unlocking it's potential.
 * Consistent tools will that help you save time and delight your users. Using Grasshopper will elimiate much of the boring, boilerplate code that you have to write for every project.
 * The Grasshopper system can be run anywhere and has native cloud support that keeps growing. You can use services like Heroku or host on your own systems.
 
-Using Grasshopper, managers get
+**Using Grasshopper, managers get**
 
 * A ready to go environment to start working right away. No more technology black holes where you have to wait until the end of the project to do your job.
 * Faster access to the tools you need. When developers don't have to write code to give you what you want, you will get it faster.
@@ -37,7 +37,7 @@ Using Grasshopper, managers get
 
 Core is responsible for all the heavy lifting of the framework. Core includes methods for managing users (data and access), content types, content, nodes (or folders) and assets.
 
-For more documentation see our [official documentation](http://solid-interactive.github.io/grasshopper-core-nodejs/documentation.html#gettingstarted).
+For more information see our [official documentation](http://solid-interactive.github.io/grasshopper-core-nodejs/documentation.html#gettingstarted).
 
 
 ### Grasshopper Components
@@ -46,9 +46,9 @@ For more documentation see our [official documentation](http://solid-interactive
 
 ![Stack](http://solid-interactive.github.io/grasshopper-core-nodejs/images/stack.png)
 
+* [GRASSHOPPER CLI](https://github.com/Solid-Interactive/grasshopper-cli)
 * [GRASSHOPPER API](https://github.com/Solid-Interactive/grasshopper-api-js)
 * [GRASSHOPPER ADMIN](https://github.com/Solid-Interactive/grasshopper-admin)
-* [GRASSHOPPER CLI](https://github.com/Solid-Interactive/grasshopper-cli)
 
 
 ### Getting Started
@@ -57,24 +57,9 @@ For more documentation see our [official documentation](http://solid-interactive
 
 The best thing to do is review the [Grasshopper website](http://solid-interactive.github.io/grasshopper-core-nodejs) and review the [documentation]([official documentation](http://solid-interactive.github.io/grasshopper-core-nodejs/documentation.html)).
 
-If you want to install grasshopper right away you should use the CLI. Installing Grasshopper is super simple. Once your machine is configured, creating a new project is as easy as typing `grasshopper fly`.
+If you want to install grasshopper right away you should use the [CLI](https://github.com/Solid-Interactive/grasshopper-cli). Installing Grasshopper is super simple. Once your machine is configured, creating a new project is as easy as typing `grasshopper fly`.
 
 The installation process fully configures working instances of [core](https://github.com/Solid-Interactive/grasshopper-core-nodejs), [api](https://github.com/Solid-Interactive/grasshopper-api-js) and [admin](https://github.com/Solid-Interactive/grasshopper-admin) for you.
-
-See the example of how to install the NPM and setup a new project. We assume that all of the prerequisite software is already installed.
-
-Watch a video of an installation (less than a minute):
-
-<div id="container">Loading the player ...</div>
-
-<script type="text/javascript">
- jwplayer("container").setup({
- flashplayer: "js/vendor/jwplayer/player.swf",
- file: "http://s3.amazonaws.com/SolidInteractive/images/grasshopper/grasshopper-cli-fly.mp4",
- height: 270,
- poster: "http://s3.amazonaws.com/SolidInteractive/images/grasshopper/grasshopper-cli-fly.png",
- width: 480 });
-</script>
 
 
 ### Running Tests
@@ -192,6 +177,7 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 * Greg Larrenaga
 * Peter Ajtai
 * Cooper Hilscher
+* Valentine Nesterov
 * Eric Beringer
 
 
@@ -200,4 +186,4 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 To create the readme, update the release notes dir and package.json.version at a minimum. If needed update README.template.md.
 Then run `grunt readme`.
 
-_Compiled file. Do not modify directly. Created: 2014-07-22 02:15:37_
+_Compiled file. Do not modify directly. Created: 2014-07-22 02:21:08_
