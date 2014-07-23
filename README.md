@@ -6,79 +6,60 @@
 
 [![Build Status](https://travis-ci.org/Solid-Interactive/grasshopper-core-nodejs.png?branch=master)](https://travis-ci.org/Solid-Interactive/grasshopper-core-nodejs)
 
+### Grasshopper is an everybody friendly, flexible, extensible CMS.
 
-### What am I?
+A CMS for the people, a great experience for developers, users and customers. Use Grasshopper to drastically speed up development for distributed systems. Support your clients better.
+
+![Create, Share, Present](http://solid-interactive.github.io/grasshopper-core-nodejs/images/create-share-present.png)
+
+By standardizing your development workflow, you can spend more time building your public facing applications and less time building backend systems, APIs and administrations.
+
+Grasshopper focuses on user happiness, not just developer happiness. Grasshopper provides tools for everyone involved in a project, developers, content managers, clients and customers alike.
+
+**Using Grasshopper, developers get**
+
+* An easy to use SDK, a ready to go REST API, built in concepts like user management and permissions, an open system that is both flexible and extensible.
+* High performance application stack built on Node.js. Hooks and events into the system to completely customize the handling of data and unlocking it's potential.
+* Consistent tools will that help you save time and delight your users. Using Grasshopper will elimiate much of the boring, boilerplate code that you have to write for every project.
+* The Grasshopper system can be run anywhere and has native cloud support that keeps growing. You can use services like Heroku or host on your own systems.
+
+**Using Grasshopper, managers get**
+
+* A ready to go environment to start working right away. No more technology black holes where you have to wait until the end of the project to do your job.
+* Faster access to the tools you need. When developers don't have to write code to give you what you want, you will get it faster.
+* Intuitive and useful content management screens that can have any definition. Any type of content can be defined, organized and managed without a developer having to write any code.
+* Piece of mind knowing that you can increase client engagement by giving them something to work on sooner and give them less time to think about changes.
+
+
+### Grasshopper Core
+
+---------------------------------------------------------------------------------
+
+Core is responsible for all the heavy lifting of the framework. Core includes methods for managing users (data and access), content types, content, nodes (or folders) and assets.
+
+For more information see our [official documentation](http://solid-interactive.github.io/grasshopper-core-nodejs/documentation.html#gettingstarted).
+
+
+### Grasshopper Components
+
+---------------------------------------------------------------------------------
+
+![Stack](http://solid-interactive.github.io/grasshopper-core-nodejs/images/stack.png)
+
+* [GRASSHOPPER CLI](https://github.com/Solid-Interactive/grasshopper-cli)
+* [GRASSHOPPER API](https://github.com/Solid-Interactive/grasshopper-api-js)
+* [GRASSHOPPER ADMIN](https://github.com/Solid-Interactive/grasshopper-admin)
+
+
+### Getting Started
 
 ------------------------------------------------------------------
 
-Grasshopper is a Data Management System (DMS). A DMS is a layer that sits on top of a database that makes working with the data easier for both administrators and developers. Grasshopper knows about data, schemas, data organization and permissions/roles. Since these concepts are core to grasshopper you will not have to figure them out for each of your applications.
+The best thing to do is review the [Grasshopper website](http://solid-interactive.github.io/grasshopper-core-nodejs) and review the [documentation]([official documentation](http://solid-interactive.github.io/grasshopper-core-nodejs/documentation.html)).
 
-Standardizing data management is very important if you are developing a lot of applications. The grasshopper project is a NodeJS library that can be used as part of your solution.
+If you want to install grasshopper right away you should use the [CLI](https://github.com/Solid-Interactive/grasshopper-cli). Installing Grasshopper is super simple. Once your machine is configured, creating a new project is as easy as typing `grasshopper fly`.
 
-The most common implementation of grasshopper includes the admin project (dynamic UI that manages grasshopper data) and grasshopper-api (HTTP wrapper for core). If you are building a NodeJS project then grasshopper-core could be used natively in your application as well.
-
-
-[GRASSHOPPER API](https://github.com/Solid-Interactive/grasshopper-api-js)
-
-[GRASSHOPPER ADMIN](https://github.com/Solid-Interactive/grasshopper-admin)
-
-
-
-### Core concepts
-
-------------------------------------------------------------------
-
-*Users* - most applications need the concept of users, grasshopper provides a standard way to create and extend user data. It also supports roles and node based permissions.
-
-*Content Types* - or virtual schemas, since you are most likely using a NoSQL database you are not bound to any specific schema. Most applications still require data to be predictable so grasshopper allows the developer to create virtual schemas to accomplish data consistency.
-
-*Nodes* - or directories, nodes can be created to organize content into buckets of your choosing.
-
-*Content* - or an implementation of a content type. Many types of content make up an application.
-
-
-### How would you use me?
-
-------------------------------------------------------------------
-
-Install
-```
-npm install grasshopper-core --save
-```
-
-
-Usage
-
-```
-var grasshopper = require('grasshopper-core');
-
-grasshopper.configure(function(){
-    this.config = {
-        'crypto': {
-            'secret_passphrase' : '{UNIQUE PASSPHRASE}'
-        },
-        'db': {
-            'type': 'mongodb',
-            'host': 'mongodb://localhost:27017/{YOUR DB}',
-            'database': '{YOUR DB}',
-            'username': '{YOUR USERNAME}',
-            'password': '{YOUR PASSWORD}',
-            'debug': false,
-            'defaultPageSize': {default num of results you want returned per page of data}
-        },
-        'assets': {
-            'default' : 'local',
-            'tmpdir' : '/absolute path to temp directory',
-            'engines': {
-                'local' : {
-                    'path' : '/absolute path to public directory',
-                    'urlbase' : 'http://YOUR URL'
-                }
-            }
-        }
-    };
-```
-
+The installation process fully configures working instances of [core](https://github.com/Solid-Interactive/grasshopper-core-nodejs), [api](https://github.com/Solid-Interactive/grasshopper-api-js) and [admin](https://github.com/Solid-Interactive/grasshopper-admin) for you.
 
 
 ### Running Tests
@@ -87,6 +68,18 @@ grasshopper.configure(function(){
 
 * $: ```grunt test```
 
+### Building Documentation
+
+-------------------------------------------------------
+
+* $: ```grunt docs```
+
+
+### Compiling Readme
+
+-------------------------------------------------------
+
+* $: ```grunt readme```
 
 ### Upcoming Features
 
@@ -174,6 +167,8 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 * 0.13.26 - 2014-07-21 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.26_2014-07-21.md)
 * 0.13.27 - 2014-07-21 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.27_2014-07-21.md)
 * 0.13.28 - 2014-07-21 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.28_2014-07-21.md)
+* 0.13.29 - 2014-07-22 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.29_2014-07-22.md)
+* 0.13.30 - 2014-07-22 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.30_2014-07-22.md)
 
 
 ## Contributors (`git shortlog -s -n`)
@@ -182,6 +177,7 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 * Greg Larrenaga
 * Peter Ajtai
 * Cooper Hilscher
+* Valentine Nesterov
 * Eric Beringer
 
 
@@ -190,4 +186,4 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 To create the readme, update the release notes dir and package.json.version at a minimum. If needed update README.template.md.
 Then run `grunt readme`.
 
-_Compiled file. Do not modify directly. Created: 2014-07-21 05:27:24_
+_Compiled file. Do not modify directly. Created: 2014-07-22 02:21:08_
