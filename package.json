@@ -33,7 +33,6 @@
     "node-uuid": "~1.4.1",
     "q": "~1.0.1",
     "solid-logger-js": "~0.3.9",
-    "underscore": "~1.5.2",
     "validator": "~3.5.1"
   },
   "devDependencies": {

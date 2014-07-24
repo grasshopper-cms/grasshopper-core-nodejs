@@ -7,7 +7,7 @@ describe('Grasshopper core - testing nodes', function(){
 
     var async = require('async'),
         fs = require('fs'),
-        grasshopper = require('../lib/grasshopper'),
+        grasshopper = require('./config/grasshopper'),
         globalAdminToken  = '',
         globalReaderToken = '',
         globalEditorToken = '',
@@ -28,34 +28,6 @@ describe('Grasshopper core - testing nodes', function(){
     before(function(done){
         async.parallel(
             [
-                function(cb){
-                    grasshopper.configure(function(){
-                        this.config = {
-                            'crypto': {
-                                'secret_passphrase' : '223fdsaad-ffc8-4acb-9c9d-1fdaf824af8c'
-                            },
-                            'db': {
-                                'type': 'mongodb',
-                                'host': 'mongodb://localhost:27017/test',
-                                'database': 'test',
-                                'username': '',
-                                'password': '',
-                                'debug': false
-                            },
-                            'assets': {
-                                'default' : 'local',
-                                'tmpdir' : path.join(__dirname, 'tmp'),
-                                'engines': {
-                                    'local' : {
-                                        'path' : path.join(__dirname, 'public'),
-                                        'urlbase' : 'http://localhost'
-                                    }
-                                }
-                            }
-                        };
-                    });
-                    cb();
-                },
                 function(cb){
                     grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' }).then(function(token){
                         globalAdminToken = token;

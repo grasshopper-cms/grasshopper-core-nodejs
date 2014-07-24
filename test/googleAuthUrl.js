@@ -1,7 +1,8 @@
 require('chai').should();
 
-var grasshopper = require('../lib/grasshopper'),
+var grasshopperLib = require('../lib/grasshopper'),
     grasshopperConfig = require('../lib/config'),
+    grasshopper,
     config;
 
 function getConfig() {
@@ -35,9 +36,7 @@ describe('Grasshopper utils - googleAuthUrl', function(){
     beforeEach(function() {
         config = getConfig();
 
-        grasshopper.configure(function () {
-            this.config = config;
-        });
+        grasshopper = grasshopperLib(config);
     });
 
     describe('should return a friendly error message', function() {

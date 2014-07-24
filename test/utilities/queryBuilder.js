@@ -1,6 +1,6 @@
 'use strict';
 
-var queryBuilder    = require('../../lib/grasshopper').utilities.queryBuilder;
+var queryBuilder    = require('../config/grasshopper').utilities.queryBuilder;
 
 require('chai').should();
 

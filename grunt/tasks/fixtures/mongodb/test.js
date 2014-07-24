@@ -3,7 +3,7 @@
 
     var data = {},
         ObjectID = require('mongodb').ObjectID,
-        _ = require('underscore');
+        _ = require('lodash');
 
     _.each([
         'hookevents',

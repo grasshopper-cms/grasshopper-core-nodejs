@@ -5,8 +5,8 @@ describe('Grasshopper core - content', function(){
 
     var async = require('async'),
         path = require('path'),
-        _ = require('underscore'),
-        grasshopper = require('../../lib/grasshopper'),
+        _ = require('lodash'),
+        grasshopper = require('../config/grasshopper'),
         testContentId  = '5261781556c02c072a000007',
         tokens = {},
         restrictedContentId = '5254908d56c02c076e000001',
@@ -23,32 +23,6 @@ describe('Grasshopper core - content', function(){
         parallelTokenRequests = [];
 
     before(function(done){
-        grasshopper.configure(function(){
-            this.config = {
-                'crypto': {
-                    'secret_passphrase' : '223fdsaad-ffc8-4acb-9c9d-1fdaf824af8c'
-                },
-                'db': {
-                    'type': 'mongodb',
-                    'host': 'mongodb://localhost:27017/test',
-                    'database': 'test',
-                    'username': '',
-                    'password': '',
-                    'debug': false
-                },
-                'assets': {
-                    'default' : 'local',
-                    'tmpdir' : path.join(__dirname, 'tmp'),
-                    'engines': {
-                        'local' : {
-                            'path' : path.join(__dirname, 'public'),
-                            'urlbase' : 'http://localhost'
-                        }
-                    }
-                }
-            };
-        });
-
         _.each(tokenRequests, function(theRequest) {
             parallelTokenRequests.push(createGetToken(theRequest[0], theRequest[1], theRequest[2]).closure);
         });
