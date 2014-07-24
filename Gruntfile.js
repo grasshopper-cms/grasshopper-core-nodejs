@@ -7,5 +7,7 @@ module.exports = function(grunt) {
 
     grunt.loadTasks('grunt/configs');
     grunt.loadTasks('grunt/tasks');
+    grunt.loadNpmTasks('grunt-build-gh-pages');
+
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 };
