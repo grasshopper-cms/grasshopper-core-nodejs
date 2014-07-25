@@ -117,6 +117,31 @@ module.exports = function(ObjectID) {
             ]
         },
         {
+            label: "This is another test content",
+            _id: ObjectID("524362aa56c02c0703000123"),
+            helpText: "",
+            meta: [],
+            description: "",
+            fields: [
+                {
+                    _id: "testfield",
+                    required: true,
+                    min : 1,
+                    max : 1,
+                    type: "textbox",
+                    label: "Title"
+                },
+                {
+                    _id: "testeroni",
+                    required: true,
+                    min : 1,
+                    max : 1,
+                    type: "textbox",
+                    label: "Title"
+                }
+            ]
+        },
+        {
             _id: ObjectID('5254908d56c02c076e000001'),
             label: 'Users',
             description: 'Protected content type that defines users in the system.',
