@@ -734,6 +734,44 @@ describe('Grasshopper core - users', function(){
             ).done(done);
         });
 
+        it('should update a user and drop a previously save profile value.', function(done){
+            var newUser = {
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User',
+                identities: {
+                    basic: {
+                        username: 'updateAndRemoveProfileValue',
+                        password: 'TestPassword'
+                    }
+                },
+                profile: {
+                    testval1: 'testval1',
+                    testval2: 'testval2'
+                }
+            };
+
+            grasshopper.request(adminToken).users.insert(newUser).then(
+                function(payload){
+                    delete payload.profile.testval1;
+
+                    grasshopper.request(adminToken).users.update(payload).then(
+                        function(payload){
+                            should.not.exist(payload.profile.testval1);
+                        },
+                        function(err){
+                            should.not.exist(err);
+                        }
+                    ).done(done);
+                },
+                function(err){
+                    should.not.exist(err);
+                }
+            ).done();
+        });
+
         describe('with changes in the identities', function() {
 
             it('should update the linked identities when linking a new identity', function(done) {
