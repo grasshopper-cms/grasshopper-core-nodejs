@@ -6,6 +6,7 @@ describe('Grasshopper core - contentTypes', function () {
     var grasshopper = require('../lib/grasshopper'),
         path = require('path'),
         testContentTypeId = '524362aa56c02c0703000001',
+        anotherTestContentTypeId = '524362aa56c02c0703000123',
         readerToken = '',
         adminToken = '',
         testCreatedContentTypeId = '';
@@ -90,7 +91,7 @@ describe('Grasshopper core - contentTypes', function () {
         it('should return a list of content types with the default page size', function (done) {
             grasshopper.request(adminToken).contentTypes.list().then(
                 function (payload) {
-                    payload.results.length.should.equal(2);
+                    payload.results.length.should.equal(3);
                 },
                 function (err) {
                     should.not.exist(err);
@@ -451,21 +452,88 @@ describe('Grasshopper core - contentTypes', function () {
 
         describe('updating the fields array on a content type', function() {
 
+            it('should update the meta.labelfield when the order of fields changed', function(done) {
+                var updatedContentType = {
+                    _id: anotherTestContentTypeId,
+                    label: 'updatedlabel',
+                    fields: [
+                        { // The order of these has been swapped.
+                            _id: "testeroni",
+                            required: true,
+                            instancing: 1,
+                            type: "textbox",
+                            label: "Title"
+                        },
+                        {
+                            _id: "testfield",
+                            required: true,
+                            instancing: 1,
+                            type: "textbox",
+                            label: "Title"
+                        }
+                    ],
+                    helpText: '',
+                    description: ''
+                };
+
+                grasshopper.request(adminToken).contentTypes.update(updatedContentType)
+                    .then(function () {
+                        grasshopper.request(adminToken).content.getById('5246e73d56c02c0744000001')
+                            .then(function(payload) {
+                                payload.meta.labelfield.should.equal('testeroni');
+                                done();
+                            })
+                            .fail(doneError.bind(null, done))
+                            .catch(doneError.bind(null, done))
+                            .done();
+                    })
+                    .fail(doneError.bind(null, done))
+                    .catch(doneError.bind(null, done))
+                    .done();
+            });
+
             it('should remove a field from a content type when you do a PUT without that field', function(done) {
                 var updatedContentType = {
-                    _id: testCreatedContentTypeId,
+                    _id: anotherTestContentTypeId,
                     label: 'updatedlabel',
-                    fields: [], // Empty the fields Obj
+                    fields: [
+                        {
+                            _id: "testfield",
+                            required: true,
+                            instancing: 1,
+                            type: "textbox",
+                            label: "Title"
+                        }
+                    ],
                     helpText: '',
                     description: ''
                 };
 
                 grasshopper.request(adminToken).contentTypes.update(updatedContentType)
                     .then(function (payload) {
-                        payload.fields.length.should.equal(0);
+                        payload.fields.length.should.equal(1);
                         done();
                     })
                     .fail(doneError.bind(null, done))
+                    .catch(doneError.bind(null, done))
+                    .done();
+            });
+
+            it('should throw an error when attempting to remove all of the fields with a PUT', function(done) {
+                var updatedContentType = {
+                    _id: anotherTestContentTypeId,
+                    label: 'updatedlabel',
+                    fields: [], //empty fields object
+                    helpText: '',
+                    description: ''
+                };
+
+                grasshopper.request(adminToken).contentTypes.update(updatedContentType)
+                    .then(doneError.bind(null, done))
+                    .fail(function(err) {
+                        err.code.should.equal(404);
+                        done();
+                    })
                     .catch(doneError.bind(null, done))
                     .done();
             });
