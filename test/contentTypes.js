@@ -90,7 +90,7 @@ describe('Grasshopper core - contentTypes', function () {
         it('should return a list of content types with the default page size', function (done) {
             grasshopper.request(adminToken).contentTypes.list().then(
                 function (payload) {
-                    payload.results.length.should.equal(2);
+                    payload.results.length.should.equal(8);
                 },
                 function (err) {
                     should.not.exist(err);
