@@ -202,7 +202,8 @@ describe('Grasshopper core - content', function(){
                             label:'search test7',
                             testfield: 'testvalue',
                             newColumn: 'testvalue',
-                            thisShouldBeOnOneOfThese : true
+                            thisShouldBeOnOneOfThese : true,
+                            first : true
                         }
                     }, base));
                 })
@@ -212,7 +213,8 @@ describe('Grasshopper core - content', function(){
                             label:'search test7',
                             testfield: 'testvalue',
                             newColumn: 'testvalue',
-                            thisShouldBeOnOneOfThese : true
+                            thisShouldBeOnOneOfThese : true,
+                            second : true
                         }
                     }, base));
                 })
@@ -222,7 +224,8 @@ describe('Grasshopper core - content', function(){
                             label:'search test7',
                             testfield: 'testvalue',
                             newColumn: 'testvalue',
-                            thisShouldBeOnOneOfThese : true
+                            thisShouldBeOnOneOfThese : true,
+                            third : true
                         }
                     }, base));
                 })
@@ -428,7 +431,8 @@ describe('Grasshopper core - content', function(){
                 grasshopper.request(tokens.globalAdminToken).content.query(query11)
                     .then(function(payload){
                         payload.results.length.should.equal(1);
-                        payload.results[0].fields.should.have.property('thisShouldBeOnOneOfThese');
+                        payload.results[0].fields.should.have.property('third');
+                        payload.results[0].fields.third.should.equal(true);
 
                         done();
                     })
