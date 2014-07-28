@@ -19,6 +19,8 @@ collections:
       output: true
   documentation:
     output: true
+  contributing:
+      output: true
   gettingstarted:
     output: true
   concepts:
