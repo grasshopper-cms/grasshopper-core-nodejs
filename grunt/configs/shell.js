@@ -1,7 +1,7 @@
 module.exports = function (grunt) {
     'use strict';
     var lineEnding = '\n',
-        _ = require('underscore');
+        _ = require('lodash');
     grunt.config('shell', {
         test : {
             command : 'mocha <%= debug %> --colors --recursive -R spec <%= test %>',

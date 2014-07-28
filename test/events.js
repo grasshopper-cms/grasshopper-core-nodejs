@@ -5,7 +5,7 @@ describe('Grasshopper core - testing event events', function(){
 
     var grasshopper = require('../lib/grasshopper'),
         path = require('path'),
-        _ = require('underscore');
+        _ = require('lodash');
 
     before(function(done){
 

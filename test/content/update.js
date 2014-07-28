@@ -5,7 +5,7 @@ describe('Grasshopper core - content', function(){
 
     var async = require('async'),
         path = require('path'),
-        _ = require('underscore'),
+        _ = require('lodash'),
         grasshopper = require('../../lib/grasshopper'),
         testContentId  = '5261781556c02c072a000007',
         tokens = {},

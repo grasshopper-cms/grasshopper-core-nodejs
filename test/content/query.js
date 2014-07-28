@@ -5,7 +5,7 @@ describe('Grasshopper core - content', function(){
 
     var async = require('async'),
         path = require('path'),
-        _ = require('underscore'),
+        _ = require('lodash'),
         grasshopper = require('../../lib/grasshopper'),
         tokens = {},
         tokenRequests = [
@@ -31,7 +31,7 @@ describe('Grasshopper core - content', function(){
                     'database': 'test',
                     'username': '',
                     'password': '',
-                    'debug': false
+                    'debug': true
                 },
                 'assets': {
                     'default' : 'local',
@@ -430,6 +430,7 @@ describe('Grasshopper core - content', function(){
             it('should skip the results, based on the options.limit and options.skip', function(done) {
                 grasshopper.request(tokens.globalAdminToken).content.query(query11)
                     .then(function(payload){
+                        //console.log(payload);
                         payload.results.length.should.equal(1);
                         payload.results[0].fields.should.have.property('third');
                         payload.results[0].fields.third.should.equal(true);
