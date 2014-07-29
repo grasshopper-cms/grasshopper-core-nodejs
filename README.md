@@ -188,4 +188,4 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 To create the readme, update the release notes dir and package.json.version at a minimum. If needed update README.template.md.
 Then run `grunt readme`.
 
-_Compiled file. Do not modify directly. Created: 2014-07-28 11:11:00_
+_Compiled file. Do not modify directly. Created: 2014-07-28 06:17:03_
