@@ -6,7 +6,7 @@ describe('Grasshopper core - content', function(){
     var async = require('async'),
         path = require('path'),
         _ = require('lodash'),
-        grasshopper = require('../../lib/grasshopper')(require('../fixtures/config')),
+        grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
         tokens = {},
         tokenRequests = [
             ['apitestuseradmin', 'TestPassword', 'globalAdminToken'],

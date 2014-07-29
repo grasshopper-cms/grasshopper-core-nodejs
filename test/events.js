@@ -3,7 +3,7 @@ var should = require('chai').should();
 describe('Grasshopper core - testing event events', function(){
     'use strict';
 
-    var grasshopper = require('../lib/grasshopper')(require('./fixtures/config')),
+    var grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
         path = require('path'),
         _ = require('lodash');
 

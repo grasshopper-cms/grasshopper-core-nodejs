@@ -4,7 +4,7 @@ describe('Grasshopper core - testing channels', function(){
     'use strict';
 
     var path = require('path'),
-        grasshopper = require('../lib/grasshopper')(require('./fixtures/config'));
+        grasshopper = require('../lib/grasshopper').init(require('./fixtures/config'));
 
     before(function(done){
         grasshopper.event.channel('/system/*').on('error', function(payload, next){

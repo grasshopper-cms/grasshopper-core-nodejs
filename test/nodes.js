@@ -7,7 +7,7 @@ describe('Grasshopper core - testing nodes', function(){
 
     var async = require('async'),
         fs = require('fs'),
-        grasshopper = require('../lib/grasshopper')(require('./fixtures/config')),
+        grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
         globalAdminToken  = '',
         globalReaderToken = '',
         globalEditorToken = '',

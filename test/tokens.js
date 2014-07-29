@@ -4,7 +4,7 @@ describe('Grasshopper core - testing tokens', function(){
     'use strict';
 
     var path = require('path'),
-        grasshopper = require('../lib/grasshopper')(require('./fixtures/config')),
+        grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
         adminToken = '',
         readerToken = '',
         readerToken2 = '',

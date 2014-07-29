@@ -4,7 +4,7 @@ var chai = require('chai'),
 describe('Grasshopper core - users', function(){
     'use strict';
 
-    var grasshopper = require('../lib/grasshopper')(require('./fixtures/config')),
+    var grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
         path = require('path'),
         async = require('async'),
         testUserId  = '5245ce1d56c02c066b000001',

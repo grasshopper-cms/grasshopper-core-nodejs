@@ -6,7 +6,7 @@ describe('Grasshopper core - content', function(){
     var async = require('async'),
         path = require('path'),
         _ = require('lodash'),
-        grasshopper = require('../../lib/grasshopper')(require('../fixtures/config')),
+        grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
         testContentId  = '5261781556c02c072a000007',
         tokens = {},
         restrictedContentId = '5254908d56c02c076e000001',

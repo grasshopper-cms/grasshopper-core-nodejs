@@ -3,7 +3,7 @@ var should = require('chai').should();
 describe('Grasshopper core - contentTypes', function () {
     'use strict';
 
-    var grasshopper = require('../lib/grasshopper')(require('./fixtures/config')),
+    var grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
         path = require('path'),
         testContentTypeId = '524362aa56c02c0703000001',
         anotherTestContentTypeId = '524362aa56c02c0703000123',

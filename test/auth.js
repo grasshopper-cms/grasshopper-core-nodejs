@@ -4,7 +4,7 @@ describe('Grasshopper core - testing authentications', function(){
     'use strict';
 
     var path = require('path'),
-        grasshopper = require('../lib/grasshopper')(require('./fixtures/config'));
+        grasshopper = require('../lib/grasshopper').init(require('./fixtures/config'));
 
     describe('Basic Authentication', function() {
         it('not authenticate because user doesn\'t exist', function(done) {

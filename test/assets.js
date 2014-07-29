@@ -8,7 +8,7 @@ describe('Grasshopper core - testing assets', function(){
     var async = require('async'),
         fs = require('fs'),
         path = require('path'),
-        grasshopper = require('../lib/grasshopper')(require('./fixtures/config')),
+        grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
         testNodeId = '5261781556c02c072a000007',
         globalAdminToken  = '',
         globalReaderToken = '',
