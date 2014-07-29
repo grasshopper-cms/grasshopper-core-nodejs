@@ -6,7 +6,7 @@ describe('Grasshopper core - content', function(){
     var async = require('async'),
         path = require('path'),
         _ = require('lodash'),
-        grasshopper = require('../../lib/grasshopper'),
+        grasshopper = require('../../lib/grasshopper')(require('../fixtures/config')),
         tokens = {},
         tokenRequests = [
             ['apitestuseradmin', 'TestPassword', 'globalAdminToken'],
@@ -20,32 +20,6 @@ describe('Grasshopper core - content', function(){
         parallelTokenRequests = [];
 
     before(function(done){
-        grasshopper.configure(function(){
-            this.config = {
-                'crypto': {
-                    'secret_passphrase' : '223fdsaad-ffc8-4acb-9c9d-1fdaf824af8c'
-                },
-                'db': {
-                    'type': 'mongodb',
-                    'host': 'mongodb://localhost:27017/test',
-                    'database': 'test',
-                    'username': '',
-                    'password': '',
-                    'debug': true
-                },
-                'assets': {
-                    'default' : 'local',
-                    'tmpdir' : path.join(__dirname, 'tmp'),
-                    'engines': {
-                        'local' : {
-                            'path' : path.join(__dirname, 'public'),
-                            'urlbase' : 'http://localhost'
-                        }
-                    }
-                }
-            };
-        });
-
         _.each(tokenRequests, function(theRequest) {
             parallelTokenRequests.push(createGetToken(theRequest[0], theRequest[1], theRequest[2]).closure);
         });
@@ -416,7 +390,7 @@ describe('Grasshopper core - content', function(){
             it('should use default if options.limit has a string value', function(done) {
                 grasshopper.request(tokens.globalAdminToken).content.query(query10)
                     .then(function(payload){
-                        payload.limit.should.eq(100000);
+                        payload.limit.should.eq(20);
 
                         done();
                     })

@@ -1,17 +1,12 @@
 require('chai').should();
 
-var grasshopper = require('../lib/grasshopper'),
+var grasshopper = require('../lib/grasshopper')(require('./fixtures/config')),
     grasshopperConfig = require('../lib/config'),
     config;
 
 function getConfig() {
     'use strict';
     return {
-        db: {},
-        crypto: {},
-        cache: {},
-        assets: {},
-        logger : {},
         identities : {
             google : {
                 appId : "blahBlahBlackSheep",
@@ -33,11 +28,7 @@ describe('Grasshopper utils - googleAuthUrl', function(){
     'use strict';
 
     beforeEach(function() {
-        config = getConfig();
-
-        grasshopper.configure(function () {
-            this.config = config;
-        });
+        grasshopperConfig.init(getConfig());
     });
 
     describe('should return a friendly error message', function() {

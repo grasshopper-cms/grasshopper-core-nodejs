@@ -4,7 +4,7 @@ var chai = require('chai'),
 describe('Grasshopper core - users', function(){
     'use strict';
 
-    var grasshopper = require('../lib/grasshopper'),
+    var grasshopper = require('../lib/grasshopper')(require('./fixtures/config')),
         path = require('path'),
         async = require('async'),
         testUserId  = '5245ce1d56c02c066b000001',
@@ -18,32 +18,6 @@ describe('Grasshopper core - users', function(){
         testCreatedUserIdCustomVerb = '';
 
     before(function(done){
-
-        grasshopper.configure(function(){
-            this.config = {
-                'crypto': {
-                    'secret_passphrase' : '223fdsaad-ffc8-4acb-9c9d-1fdaf824af8c'
-                },
-                'db': {
-                    'type': 'mongodb',
-                    'host': 'mongodb://localhost:27017/test',
-                    'database': 'test',
-                    'username': '',
-                    'password': '',
-                    'debug': false
-                },
-                'assets': {
-                    'default' : 'local',
-                    'tmpdir' : path.join(__dirname, 'tmp'),
-                    'engines': {
-                        'local' : {
-                            'path' : path.join(__dirname, 'public'),
-                            'urlbase' : 'http://localhost'
-                        }
-                    }
-                }
-            };
-        });
 
         grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
             .then(function(token){
