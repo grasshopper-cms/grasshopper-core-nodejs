@@ -390,7 +390,7 @@ describe('Grasshopper core - content', function(){
             it('should use default if options.limit has a string value', function(done) {
                 grasshopper.request(tokens.globalAdminToken).content.query(query10)
                     .then(function(payload){
-                        payload.limit.should.eq(20);
+                        payload.limit.should.eq(100000);
 
                         done();
                     })
