@@ -99,6 +99,13 @@ describe('Grasshopper core - content', function(){
                     limit : 1,
                     skip : 'string'
                 }
+            },
+            query14 = {
+                filters: [{key: 'fields.label', cmp: '=', value: 'search test7'}],
+                options : {
+                    limit : 1,
+                    skip : -1
+                }
             };
 
         before(function(done){
@@ -404,7 +411,6 @@ describe('Grasshopper core - content', function(){
             it('should skip the results, based on the options.limit and options.skip', function(done) {
                 grasshopper.request(tokens.globalAdminToken).content.query(query11)
                     .then(function(payload){
-                        //console.log(payload);
                         payload.results.length.should.equal(1);
                         payload.results[0].fields.should.have.property('third');
                         payload.results[0].fields.third.should.equal(true);
@@ -438,6 +444,19 @@ describe('Grasshopper core - content', function(){
                     .then(function(payload){
                         payload.skip.should.eq(0);
 
+                        done();
+                    })
+                    .fail(doneError.bind(null, done))
+                    .catch(doneError.bind(null, done))
+                    .done();
+            });
+        });
+
+        describe('options.skip eq string', function() {
+            it('should ignore negative values', function(done) {
+                grasshopper.request(tokens.globalAdminToken).content.query(query14)
+                    .then(function(payload){
+                        payload.should.be.ok;
                         done();
                     })
                     .fail(doneError.bind(null, done))
