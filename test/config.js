@@ -7,6 +7,10 @@ var should = require('chai').should(),
 
 describe('config', function(){
 
+    after(function(){
+        config.init({db:{defaultPageSize: 100000}});
+    });
+
     describe('using empty config options', function() {
         it('an empty config should return back the default object', function() {
             config.db.defaultPageSize.should.equal(100000);
