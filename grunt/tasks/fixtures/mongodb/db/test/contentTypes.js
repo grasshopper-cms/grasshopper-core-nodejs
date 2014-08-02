@@ -117,6 +117,31 @@ module.exports = function(ObjectID) {
             ]
         },
         {
+            label: "This is another test content",
+            _id: ObjectID("524362aa56c02c0703000123"),
+            helpText: "",
+            meta: [],
+            description: "",
+            fields: [
+                {
+                    _id: "testfield",
+                    required: true,
+                    min : 1,
+                    max : 1,
+                    type: "textbox",
+                    label: "Title"
+                },
+                {
+                    _id: "testeroni",
+                    required: true,
+                    min : 1,
+                    max : 1,
+                    type: "textbox",
+                    label: "Title"
+                }
+            ]
+        },
+        {
             _id: ObjectID('5254908d56c02c076e000001'),
             label: 'Users',
             description: 'Protected content type that defines users in the system.',
@@ -171,6 +196,193 @@ module.exports = function(ObjectID) {
                 }
             ],
             protected: true
+        },
+        // Checkbox Plugin
+        {
+            "__v" : 1,
+            "_id" : ObjectID("53d155b4ae9b9800003846e6"),
+            "fields" : [
+                {
+                    "dataType" : "string",
+                    "defaultValue" : "",
+                    "_id" : "title",
+                    "validation" : [],
+                    "type" : "textbox",
+                    "options" : false,
+                    "min" : 1,
+                    "max" : 1,
+                    "label" : "Title"
+                },
+                {
+                    "dataType" : "boolean",
+                    "_id" : "booleancheckbox",
+                    "validation" : [],
+                    "type" : "checkbox",
+                    "options" : [
+                        {
+                            "label" : "I agree",
+                            "_id" : "true"
+                        },
+                        {
+                            "label" : "Has Legs?",
+                            "_id" : "hasLegs"
+                        },
+                        {
+                            "label" : "Has Face",
+                            "_id" : "hasFace"
+                        }
+                    ],
+                    "min" : 1,
+                    "max" : 1,
+                    "label" : "Boolean Checkbox"
+                }
+            ],
+            "label" : "Test Checkbox"
+        },
+        // Boolean Plugin
+        {
+            "label" : "Test Boolean",
+            "fields" : [
+                {
+                    "dataType" : "string",
+                    "defaultValue" : "",
+                    "_id" : "title",
+                    "validation" : [],
+                    "type" : "textbox",
+                    "options" : false,
+                    "min" : 1,
+                    "max" : 1,
+                    "label" : "Title"
+                },
+                {
+                    "dataType" : "boolean",
+                    "_id" : "test",
+                    "validation" : [],
+                    "type" : "boolean",
+                    "options" : false,
+                    "min" : 1,
+                    "max" : 1,
+                    "label" : "This is a test"
+                }
+            ],
+            "_id" : ObjectID("53d18820ae9b9800003846ed"),
+            "__v" : 0
+        },
+        // Date Plugin
+        {
+            "label" : "Test Date",
+            "fields" : [
+                {
+                    "dataType" : "string",
+                    "defaultValue" : "",
+                    "_id" : "title",
+                    "validation" : [],
+                    "type" : "textbox",
+                    "options" : false,
+                    "min" : 1,
+                    "max" : 1,
+                    "label" : "Title"
+                },
+                {
+                    "dataType" : "date",
+                    "_id" : "a_date",
+                    "validation" : [],
+                    "type" : "date",
+                    "options" : false,
+                    "min" : 1,
+                    "max" : 1,
+                    "label" : "A Date"
+                }
+            ],
+            "_id" : ObjectID("53d15687ae9b9800003846e7"),
+            "__v" : 0
+        },
+        // Date-Time Plugin
+        {
+            "label" : "Test DateTime",
+            "fields" : [
+                {
+                    "dataType" : "string",
+                    "defaultValue" : "",
+                    "_id" : "title",
+                    "validation" : [],
+                    "type" : "textbox",
+                    "options" : false,
+                    "min" : 1,
+                    "max" : 1,
+                    "label" : "Title"
+                },
+                {
+                    "dataType" : "date",
+                    "_id" : "a_datetime",
+                    "validation" : [],
+                    "type" : "datetime",
+                    "options" : false,
+                    "min" : 1,
+                    "max" : 1,
+                    "label" : "A DateTime"
+                }
+            ],
+            "_id" : ObjectID("53d156e5ae9b9800003846e8"),
+            "__v" : 0
+        },
+        // Editorial Plugin
+        {
+            "label" : "Test Editorial",
+            "fields" : [
+                {
+                    "dataType" : "string",
+                    "defaultValue" : "",
+                    "_id" : "title",
+                    "validation" : [],
+                    "type" : "textbox",
+                    "options" : false,
+                    "min" : 1,
+                    "max" : 1,
+                    "label" : "Title"
+                },
+                {
+                    "dataType" : "date",
+                    "_id" : "an_editorial",
+                    "validation" : [],
+                    "type" : "editorialwindow",
+                    "options" : false,
+                    "min" : 1,
+                    "max" : 1,
+                    "label" : "An Editorial"
+                }
+            ],
+            "_id" : ObjectID("53cece81e1c9ff0b00e6b4a2"),
+            "__v" : 0
+        },
+        // Number Plugin
+        {
+            "label" : "Test Number",
+            "fields" : [
+                {
+                    "dataType" : "string",
+                    "defaultValue" : "",
+                    "_id" : "title",
+                    "validation" : [],
+                    "type" : "textbox",
+                    "options" : false,
+                    "min" : 1,
+                    "max" : 1,
+                    "label" : "Title"
+                },
+                {
+                    "dataType" : "object",
+                    "_id" : "shouldbenumber",
+                    "validation" : [],
+                    "type" : "number",
+                    "options" : false,
+                    "min" : 1,
+                    "max" : 1,
+                    "label" : "This is a number"
+                }
+            ],
+            "_id" : ObjectID("53d19248ae9b9800003846f0"),
+            "__v" : 0
         }
 
     ];

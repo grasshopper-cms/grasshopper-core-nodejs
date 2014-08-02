@@ -13,7 +13,8 @@ module.exports = function(ObjectID) {
             fields: {
                 testfield: 'testvalue'
             }
-        },{
+        },
+        {
             _id: ObjectID(ids[1]),
             meta: {
                 type: ObjectID('524362aa56c02c0703000001'),
@@ -22,6 +23,18 @@ module.exports = function(ObjectID) {
             },
             fields: {
                 testfield: 'testvalue'
+            }
+        },
+        {
+            _id: ObjectID(ids[2]),
+            meta: {
+                type: ObjectID('524362aa56c02c0703000123'),
+                node: ObjectID('526d5179966a883540000006'),
+                labelfield: 'testfield'
+            },
+            fields: {
+                testfield: 'testvalue',
+                testeroni: true
             }
         }
     ];

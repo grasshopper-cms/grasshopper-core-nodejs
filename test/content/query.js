@@ -5,8 +5,8 @@ describe('Grasshopper core - content', function(){
 
     var async = require('async'),
         path = require('path'),
-        _ = require('underscore'),
-        grasshopper = require('../../lib/grasshopper'),
+        _ = require('lodash'),
+        grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
         tokens = {},
         tokenRequests = [
             ['apitestuseradmin', 'TestPassword', 'globalAdminToken'],
@@ -20,32 +20,6 @@ describe('Grasshopper core - content', function(){
         parallelTokenRequests = [];
 
     before(function(done){
-        grasshopper.configure(function(){
-            this.config = {
-                'crypto': {
-                    'secret_passphrase' : '223fdsaad-ffc8-4acb-9c9d-1fdaf824af8c'
-                },
-                'db': {
-                    'type': 'mongodb',
-                    'host': 'mongodb://localhost:27017/test',
-                    'database': 'test',
-                    'username': '',
-                    'password': '',
-                    'debug': false
-                },
-                'assets': {
-                    'default' : 'local',
-                    'tmpdir' : path.join(__dirname, 'tmp'),
-                    'engines': {
-                        'local' : {
-                            'path' : path.join(__dirname, 'public'),
-                            'urlbase' : 'http://localhost'
-                        }
-                    }
-                }
-            };
-        });
-
         _.each(tokenRequests, function(theRequest) {
             parallelTokenRequests.push(createGetToken(theRequest[0], theRequest[1], theRequest[2]).closure);
         });
@@ -125,6 +99,13 @@ describe('Grasshopper core - content', function(){
                     limit : 1,
                     skip : 'string'
                 }
+            },
+            query14 = {
+                filters: [{key: 'fields.label', cmp: '=', value: 'search test7'}],
+                options : {
+                    limit : 1,
+                    skip : -1
+                }
             };
 
         before(function(done){
@@ -202,7 +183,8 @@ describe('Grasshopper core - content', function(){
                             label:'search test7',
                             testfield: 'testvalue',
                             newColumn: 'testvalue',
-                            thisShouldBeOnOneOfThese : true
+                            thisShouldBeOnOneOfThese : true,
+                            first : true
                         }
                     }, base));
                 })
@@ -212,7 +194,8 @@ describe('Grasshopper core - content', function(){
                             label:'search test7',
                             testfield: 'testvalue',
                             newColumn: 'testvalue',
-                            thisShouldBeOnOneOfThese : true
+                            thisShouldBeOnOneOfThese : true,
+                            second : true
                         }
                     }, base));
                 })
@@ -222,7 +205,8 @@ describe('Grasshopper core - content', function(){
                             label:'search test7',
                             testfield: 'testvalue',
                             newColumn: 'testvalue',
-                            thisShouldBeOnOneOfThese : true
+                            thisShouldBeOnOneOfThese : true,
+                            third : true
                         }
                     }, base));
                 })
@@ -428,7 +412,8 @@ describe('Grasshopper core - content', function(){
                 grasshopper.request(tokens.globalAdminToken).content.query(query11)
                     .then(function(payload){
                         payload.results.length.should.equal(1);
-                        payload.results[0].fields.should.have.property('thisShouldBeOnOneOfThese');
+                        payload.results[0].fields.should.have.property('third');
+                        payload.results[0].fields.third.should.equal(true);
 
                         done();
                     })
@@ -459,6 +444,19 @@ describe('Grasshopper core - content', function(){
                     .then(function(payload){
                         payload.skip.should.eq(0);
 
+                        done();
+                    })
+                    .fail(doneError.bind(null, done))
+                    .catch(doneError.bind(null, done))
+                    .done();
+            });
+        });
+
+        describe('options.skip eq string', function() {
+            it('should ignore negative values', function(done) {
+                grasshopper.request(tokens.globalAdminToken).content.query(query14)
+                    .then(function(payload){
+                        payload.should.be.ok;
                         done();
                     })
                     .fail(doneError.bind(null, done))

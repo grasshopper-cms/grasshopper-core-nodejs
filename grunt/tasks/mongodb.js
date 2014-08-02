@@ -5,7 +5,7 @@ module.exports = function (grunt) {
         async  = require('async'),
         client = require('mongodb').MongoClient;
 
-    grunt.registerMultiTask('mongodb', 'Runs a nodemon monitor of your node.js server.', function () {
+    grunt.registerMultiTask('mongodb', 'Imports test data into your db.', function () {
         var done = this.async(),
             collections = this.data.collections,
             data = require(this.data.data);

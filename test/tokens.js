@@ -3,8 +3,8 @@ var should = require('chai').should();
 describe('Grasshopper core - testing tokens', function(){
     'use strict';
 
-    var grasshopper = require('../lib/grasshopper'),
-        path = require('path'),
+    var path = require('path'),
+        grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
         adminToken = '',
         readerToken = '',
         readerToken2 = '',
@@ -13,45 +13,21 @@ describe('Grasshopper core - testing tokens', function(){
 
     before(function(done){
 
-        grasshopper.configure(function(){
-            this.config = {
-                'crypto': {
-                    'secret_passphrase' : '223fdsaad-ffc8-4acb-9c9d-1fdaf824af8c'
-                },
-                'db': {
-                    'type': 'mongodb',
-                    'host': 'mongodb://localhost:27017/test',
-                    'database': 'test',
-                    'username': '',
-                    'password': '',
-                    'debug': false
-                },
-                'assets': {
-                    'default' : 'local',
-                    'tmpdir' : path.join(__dirname, 'tmp'),
-                    'engines': {
-                        'local' : {
-                            'path' : path.join(__dirname, 'public'),
-                            'urlbase' : 'http://localhost'
-                        }
-                    }
-                }
-            };
-        });
 
-        grasshopper.auth('basic', { username: 'admin', password: 'TestPassword' }).then(function(token){
+            grasshopper.auth('basic', { username: 'admin', password: 'TestPassword' }).then(function(token){
                 adminToken = token;
                 grasshopper.auth('basic', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){
-                        readerToken = token;
+                    readerToken = token;
+                    grasshopper.auth('basic', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){
+                        readerToken2 = token;
                         grasshopper.auth('basic', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){
-                            readerToken2 = token;
-                            grasshopper.auth('basic', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){
-                                readerToken3 = token;
-                                done();
-                            });
+                            readerToken3 = token;
+                            done();
                         });
                     });
+                });
             });
+
     });
 
     describe('tokens.deleteById', function(){
@@ -181,4 +157,31 @@ describe('Grasshopper core - testing tokens', function(){
         });
 
     });
+
+    function getConfig(){
+        return {
+            'crypto': {
+                'secret_passphrase' : '223fdsaad-ffc8-4acb-9c9d-1fdaf824af8c'
+            },
+            'db': {
+                'type': 'mongodb',
+                'host': 'mongodb://localhost:27017/test',
+                'database': 'test',
+                'username': '',
+                'password': '',
+                'debug': false
+            },
+            'assets': {
+                'default' : 'local',
+                'tmpdir' : path.join(__dirname, 'tmp'),
+                'engines': {
+                    'local' : {
+                        'path' : path.join(__dirname, 'public'),
+                        'urlbase' : 'http://localhost'
+                    }
+                }
+            }
+        };
+    }
 });
+

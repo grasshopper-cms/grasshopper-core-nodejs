@@ -5,8 +5,8 @@ describe('Grasshopper core - content', function(){
 
     var async = require('async'),
         path = require('path'),
-        _ = require('underscore'),
-        grasshopper = require('../../lib/grasshopper'),
+        _ = require('lodash'),
+        grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
         tokens = {},
         tokenRequests = [
             ['apitestuseradmin', 'TestPassword', 'globalAdminToken'],
@@ -20,32 +20,6 @@ describe('Grasshopper core - content', function(){
         parallelTokenRequests = [];
 
     before(function(done){
-        grasshopper.configure(function(){
-            this.config = {
-                'crypto': {
-                    'secret_passphrase' : '223fdsaad-ffc8-4acb-9c9d-1fdaf824af8c'
-                },
-                'db': {
-                    'type': 'mongodb',
-                    'host': 'mongodb://localhost:27017/test',
-                    'database': 'test',
-                    'username': '',
-                    'password': '',
-                    'debug': false
-                },
-                'assets': {
-                    'default' : 'local',
-                    'tmpdir' : path.join(__dirname, 'tmp'),
-                    'engines': {
-                        'local' : {
-                            'path' : path.join(__dirname, 'public'),
-                            'urlbase' : 'http://localhost'
-                        }
-                    }
-                }
-            };
-        });
-
         _.each(tokenRequests, function(theRequest) {
             parallelTokenRequests.push(createGetToken(theRequest[0], theRequest[1], theRequest[2]).closure);
         });
@@ -392,6 +366,187 @@ describe('Grasshopper core - content', function(){
             });
         });
 
+        describe('Content type converters', function(){
+           it('should convert date types to date objects', function(done){
+              var obj = {
+                  "fields" : {
+                      "a_date" : "2014/07/30",
+                      "title" : "A Date"
+                  },
+                  "meta" : {
+                      "node" : "53cece8de1c9ff0b00e6b4a3",
+                      "type" : "53d15687ae9b9800003846e7",
+                      "labelfield" : "title",
+                      "typelabel" : "Test Date",
+                      "created" : "2014-07-24T21:42:09.486Z",
+                      "lastmodified" : "2014-07-24T21:42:09.486Z"
+                  },
+                  "__v" : 0
+              } ;
+
+               grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
+                   function(payload){
+                       (payload.fields.a_date instanceof Date).should.be.ok;
+                   },
+                   function(err){
+                       should.not.exist(err);
+                   }
+               ).done(done);
+
+           });
+
+            it('should convert datetime types to date objects', function(done){
+                var obj = {
+                    "fields" : {
+                        "a_datetime" : "2014/07/09 5:00 pm",
+                        "title" : "a datetime"
+                    },
+                    "meta" : {
+                        "node" : "53cece8de1c9ff0b00e6b4a3",
+                        "type" : "53d156e5ae9b9800003846e8",
+                        "labelfield" : "title",
+                        "typelabel" : "Test DateTime",
+                        "created" : "2014-07-24T22:02:10.937Z",
+                        "lastmodified" : "2014-07-24T22:02:10.937Z"
+                    },
+                    "__v" : 0
+                } ;
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
+                    function(payload){
+                        (payload.fields.a_datetime instanceof Date).should.be.ok;
+                    },
+                    function(err){
+                        should.not.exist(err);
+                    }
+                ).done(done);
+
+            });
+
+            it('should convert boolean types to boolean', function(done){
+                var obj ={
+                    "fields" : {
+                        "test" : true,
+                        "title" : "A Boolean"
+                    },
+                    "meta" : {
+                        "node" : "53cece8de1c9ff0b00e6b4a3",
+                        "type" : "53d18820ae9b9800003846ed",
+                        "labelfield" : "title",
+                        "typelabel" : "Test Boolean",
+                        "created" : "2014-07-24T22:27:37.246Z",
+                        "lastmodified" : "2014-07-24T22:27:37.246Z"
+                    },
+                    "__v" : 0
+                };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
+                    function(payload){
+                        (typeof payload.fields.test == 'boolean').should.be.ok;
+                    },
+                    function(err){
+                        should.not.exist(err);
+                    }
+                ).done(done);
+
+            });
+
+            it('should convert checkbox types to contain booleans', function(done){
+                var obj ={
+                    "__v" : 0,
+                    "fields" : {
+                        "booleancheckbox" : {
+                            "hasFace" : false,
+                            "hasLegs" : false,
+                            "true" : true
+                        },
+                        "title" : "a checkbox"
+                    },
+                    "meta" : {
+                        "node" : "53cece8de1c9ff0b00e6b4a3",
+                        "type" : "53d155b4ae9b9800003846e6",
+                        "labelfield" : "title",
+                        "typelabel" : "Test Checkbox",
+                        "created" : "2014-07-24T22:10:42.383Z",
+                        "lastmodified" : "2014-07-24T22:27:14.661Z"
+                    }
+                };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
+                    function(payload){
+                        (typeof payload.fields.booleancheckbox.hasFace == 'boolean').should.be.ok;
+                        (typeof payload.fields.booleancheckbox.hasLegs == 'boolean').should.be.ok;
+                        (typeof payload.fields.booleancheckbox.true == 'boolean').should.be.ok;
+                    },
+                    function(err){
+                        should.not.exist(err);
+                    }
+                ).done(done);
+
+            });
+
+            it('should convert editorial types to contain dates for validfrom and validto', function(done){
+                var obj ={
+                    "__v" : 0,
+                    "fields" : {
+                        "editorial" : {
+                            "validTo" : "2014-07-31T20:50:00.000Z",
+                            "validFrom" : "2014-07-01T20:50:00.000Z"
+                        },
+                        "title" : "Test Editorial"
+                    },
+                    "meta" : {
+                        "node" : "53cece8de1c9ff0b00e6b4a3",
+                        "type" : "53cece81e1c9ff0b00e6b4a2",
+                        "labelfield" : "title",
+                        "typelabel" : "Editorial",
+                        "created" : "2014-07-22T20:50:41.496Z",
+                        "lastmodified" : "2014-07-24T22:50:22.989Z"
+                    }
+                };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
+                    function(payload){
+                        (payload.fields.editorial.validTo instanceof Date).should.be.ok;
+                        (payload.fields.editorial.validFrom instanceof Date).should.be.ok;
+                    },
+                    function(err){
+                        should.not.exist(err);
+                    }
+                ).done(done);
+
+            });
+            
+            it('should convert number types to be numbers', function(done){
+               var obj= {
+                   "fields" : {
+                       "shouldbenumber" : "43.01",
+                       "title" : "Test NUmber"
+                   },
+                   "meta" : {
+                       "node" : "53cece8de1c9ff0b00e6b4a3",
+                       "type" : "53d19248ae9b9800003846f0",
+                       "labelfield" : "title",
+                       "typelabel" : "Test Number",
+                       "created" : "2014-07-24T23:10:54.080Z",
+                       "lastmodified" : "2014-07-24T23:10:54.080Z"
+                   },
+                   "__v" : 0
+               };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
+                    function(payload){
+                        (typeof payload.fields.shouldbenumber == "number").should.be.ok;
+                    },
+                    function(err){
+                        should.not.exist(err);
+                    }
+                ).done(done);
+
+            });
+
+        });
+
         describe('Number field validation testing for number value between 0-10',function(){
             it('Should pass', function(done) {
                 var obj = {
@@ -480,15 +635,15 @@ describe('Grasshopper core - content', function(){
                         fields: {
                             label: 'Generated title',
                             testfield: 'testtest',
-                            numfield: 6,
-                            coopersfield : 2
+                            numfield: "6",
+                            coopersfield :"2"
                         }
                     };
 
                     grasshopper.request(tokens.globalEditorToken).content.insert(obj)
                         .then(function(payload){
                             payload.should.have.property('_id');
-                            payload.fields.coopersfield.should.equal(2);
+                            payload.fields.coopersfield.should.equal('2');
                         })
                         .fail(function(err){
                             should.not.exist(err);

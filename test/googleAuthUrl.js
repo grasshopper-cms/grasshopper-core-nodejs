@@ -1,17 +1,11 @@
 require('chai').should();
 
-var grasshopper = require('../lib/grasshopper'),
-    grasshopperConfig = require('../lib/config'),
+var grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
     config;
 
 function getConfig() {
     'use strict';
     return {
-        db: {},
-        crypto: {},
-        cache: {},
-        assets: {},
-        logger : {},
         identities : {
             google : {
                 appId : "blahBlahBlackSheep",
@@ -33,18 +27,14 @@ describe('Grasshopper utils - googleAuthUrl', function(){
     'use strict';
 
     beforeEach(function() {
-        config = getConfig();
-
-        grasshopper.configure(function () {
-            this.config = config;
-        });
+        grasshopper.config.init(getConfig());
     });
 
     describe('should return a friendly error message', function() {
 
         it('if identities.google is not available on your ghapi config', function(done) {
 
-            delete grasshopperConfig.identities.google;
+            delete grasshopper.config.identities.google;
 
             grasshopper.googleAuthUrl()
                 .then()
@@ -55,7 +45,7 @@ describe('Grasshopper utils - googleAuthUrl', function(){
         });
 
         it('if identities.google.appId is not available on your ghapi config', function(done) {
-            delete grasshopperConfig.identities.google.appId;
+            delete grasshopper.config.identities.google.appId;
 
             grasshopper.googleAuthUrl()
                 .then()
@@ -66,7 +56,7 @@ describe('Grasshopper utils - googleAuthUrl', function(){
         });
 
         it('if identities.google.secret is not available on your ghapi config', function(done) {
-            delete grasshopperConfig.identities.google.secret;
+            delete grasshopper.config.identities.google.secret;
 
             grasshopper.googleAuthUrl()
                 .then()
@@ -77,7 +67,7 @@ describe('Grasshopper utils - googleAuthUrl', function(){
         });
 
         it('if identities.google.redirectUrl is not available on your ghapi config', function(done) {
-            delete grasshopperConfig.identities.google.redirectUrl;
+            delete grasshopper.config.identities.google.redirectUrl;
 
             grasshopper.googleAuthUrl()
                 .then()
@@ -88,7 +78,7 @@ describe('Grasshopper utils - googleAuthUrl', function(){
         });
 
         it('if identities.google.scopes is not available on your ghapi config', function(done) {
-            delete grasshopperConfig.identities.google.scopes;
+            delete grasshopper.config.identities.google.scopes;
 
             grasshopper.googleAuthUrl()
                 .then()
