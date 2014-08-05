@@ -25,3 +25,5 @@ collections:
     output: true
   concepts:
     output: true
+  content:
+      output: true
