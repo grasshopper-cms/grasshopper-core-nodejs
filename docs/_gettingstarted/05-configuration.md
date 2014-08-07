@@ -23,9 +23,9 @@ Here is an example file:
                 "cert":"{full path to cert}"
             },
             "proxy" : "{ defaults to false.  Boolean indicating whether you are going to proxy the api onto another express server. If False, when you initialize API, it will create a server for you. }",
-            maxFilesSize: "{ defaults to 2 megabytes.  The Maximum file size you are allowed to upload. In bytes. }",
-            maxFieldsSize: "{ defaults to 2 megabytes.  The maximum field size you are allowed to have. In bytes. }",
-            maxFields: "{ defaults to 1000. The maximum number of fields you are allowed to have. }"
+            "maxFilesSize": "{ defaults to 2 megabytes.  The Maximum file size you are allowed to upload. In bytes. }",
+            "maxFieldsSize": "{ defaults to 2 megabytes.  The maximum field size you are allowed to have. In bytes. }",
+            "maxFields": "{ defaults to 1000. The maximum number of fields you are allowed to have. }"
         },
         "crypto": {
            "secret_passphrase" : "{unique term per project}"
