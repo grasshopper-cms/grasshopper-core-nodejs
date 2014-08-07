@@ -63,6 +63,6 @@ Supported Authentication Methods
 
     Where the `()` signifies an optional param. Then a `/`. Then a `:token`.  The word 'token' in the example is important as this will be passed the the route function as a parameter.
 
-1. Once you have a handle on the grasshopper token, save it to local storage, prepended with 'Google '.
+1.  Once you have a handle on the grasshopper token, save it to local storage, prepended with 'Google '.
 
 Check out our sample projects for examples of both of these authentication methods in working applications.
