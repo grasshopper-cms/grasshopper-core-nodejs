@@ -1,4 +1,5 @@
 var chai = require('chai'),
+    config = require('../lib/config'),
     should = require('chai').should();
 
 describe('Grasshopper core - users', function(){
@@ -1113,6 +1114,17 @@ describe('Grasshopper core - users', function(){
                 options: {
                     //include: ['node','fields.testfield']
                 }
+            },
+            query3 = {
+                filters: [],
+                options: {
+                    skip: 0,
+                    limit: 1
+                }
+            },
+            query4 = {
+                filters: [],
+                options: {}
             };
 
         it('should return 401 because trying to access unauthenticated', function(done) {
@@ -1159,6 +1171,39 @@ describe('Grasshopper core - users', function(){
             ).done(done);
         });
 
+        describe('setting the query limit', function() {
+            describe('should respect the limit passed in', function() {
+                it('should return only one user when the limit is one', function(done) {
+                    grasshopper.request(adminToken).users.query(query3)
+                        .then(function(payload) {
+                            payload.results.length.should.equal(1);
+                            done();
+                        })
+                        .fail(function(err) {
+                            doneError(done, err);
+                        })
+                        .catch(function(err) {
+                            doneError(done, err);
+                        })
+                        .done();
+                });
+            });
+
+            it('should use a default if none is passed', function(done) {
+                grasshopper.request(adminToken).users.query(query4)
+                    .then(function(payload) {
+                        payload.limit.should.equal(config.db.defaultPageSize);
+                        done();
+                    })
+                    .fail(function(err) {
+                        doneError(done, err);
+                    })
+                    .catch(function(err) {
+                        doneError(done, err);
+                    })
+                    .done();
+            });
+        });
     });
 
     describe('Delete Users', function() {
@@ -1308,3 +1353,9 @@ describe('Grasshopper core - users', function(){
         });
     });
 });
+
+function doneError(done, err) {
+    'use strict';
+    done(err);
+}
+
