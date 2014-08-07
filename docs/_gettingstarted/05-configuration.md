@@ -21,7 +21,8 @@ Here is an example file:
             "https":{
                 "key":"{full path to key}",
                 "cert":"{full path to cert}"
-            }
+            },
+            "proxy" : "{ boolean indicating whether you are going to proxy the api onto another express server. If False, when you initialize API, it will create a server for you. }"
         },
         "crypto": {
            "secret_passphrase" : "{unique term per project}"
