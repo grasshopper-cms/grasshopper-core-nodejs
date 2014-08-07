@@ -40,14 +40,15 @@ Supported Authentication Methods
     * This endpoint is not authenticated.
     * This endpoint can also take an override redirect url. If you use this override, it will redirect the user back to that url with the grasshopper token in the url after all auth work is done.
 
-            ```javascript
-            $.ajax({
-                    dataType : 'json',
-                    url : yourApiEndpoint + '/googleurl',
-                    type : 'GET',
-                    headers : {'redirectUrl' : '/someOtherPage'}
-                })
-            ```
+    ```javascript
+    $.ajax({
+            dataType : 'json',
+            url : yourApiEndpoint + '/googleurl',
+            type : 'GET',
+            headers : {'redirectUrl' : '/someOtherPage'}
+        })
+    ```
+
 1. Modify your applications routes to collect the grasshopper token from the redirected route.
     Grasshopper API will redirect the user back to your app with the grasshopper token appended to the redirectUrl you specified in your config. If you overrode this by passing it as a header in the `/geturl` request, then it will be appended to that url.
 
