@@ -15,7 +15,7 @@ Supported Authentication Methods
 
 
 1. Ensure that the [identities.google object on your ghapi.json](http://solid-interactive.github.io/grasshopper-core-nodejs/documentation.html#projectconfiguration) is correctly setup.
-1. Ensure that you have added both a a redirect uri and a javascript origin to your google developer console OAuth configuration.
+2. Ensure that you have added both a a redirect uri and a javascript origin to your google developer console OAuth configuration.
     * The javascript origin is the root of your website. For example:
         * `http://localhost:3000`
         * `https://www.grasshopper-admin-sample.herokuapp.com`
@@ -23,7 +23,7 @@ Supported Authentication Methods
     This would create the following url's from the examples mentioned above:
         * `http://localhost:3000/auth2Callback`
         * `https://www.grasshopper-admin-sample.herokuapp.com/oauth2callback`
-1. Setup the methods to get the googleAuthUrl from API then send the user there. This might look like:
+3. Setup the methods to get the googleAuthUrl from API then send the user there. This might look like:
 
     ```javascript
     $.ajax({
@@ -49,7 +49,7 @@ Supported Authentication Methods
         })
     ```
 
-1. Modify your applications routes to collect the grasshopper token from the redirected route.
+4. Modify your applications routes to collect the grasshopper token from the redirected route.
     Grasshopper API will redirect the user back to your app with the grasshopper token appended to the redirectUrl you specified in your config. If you overrode this by passing it as a header in the `/geturl` request, then it will be appended to that url.
 
     * If your redirectUrl in your config was: `/login`, then the user is redirected to `/login/{ grasshopperToken }`.
@@ -63,6 +63,6 @@ Supported Authentication Methods
 
     Where the `()` signifies an optional param. Then a `/`. Then a `:token`.  The word 'token' in the example is important as this will be passed the the route function as a parameter.
 
-1. Once you have a handle on the grasshopper token, save it to local storage, prepended with 'Google '.
+5. Once you have a handle on the grasshopper token, save it to local storage, prepended with 'Google '.
 
 Check out our sample projects for examples of both of these authentication methods in working applications.
