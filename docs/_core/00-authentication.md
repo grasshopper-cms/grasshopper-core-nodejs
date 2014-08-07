@@ -11,7 +11,8 @@ Supported Authentication Methods
 * Basic: This is the typical username and password method
 * Google: Allows you to authenticate with your Gmail account.
 
-### How To Setup Google Login
+##### How To Setup Google Login
+
 
 1. Ensure that the [identities.google object on your ghapi.json](http://solid-interactive.github.io/grasshopper-core-nodejs/documentation.html#projectconfiguration) is correctly setup.
 1. Ensure that you have added both a a redirect uri and a javascript origin to your google developer console OAuth configuration.
