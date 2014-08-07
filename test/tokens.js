@@ -5,6 +5,7 @@ describe('Grasshopper core - testing tokens', function(){
 
     var path = require('path'),
         grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+        db = require('../lib/db'),
         adminToken = '',
         readerToken = '',
         readerToken2 = '',
@@ -129,6 +130,42 @@ describe('Grasshopper core - testing tokens', function(){
                 }
             ).done(done);
         });
+
+        it('should add the type onto the token', function(done){
+            grasshopper.request(adminToken).tokens.getNew('google')
+                .then(function(payload){
+                    db.tokens.getById(payload)
+                        .then(function(tokenObj){
+                                tokenObj.should.have.property('type');
+                                tokenObj.type.should.equal('google');
+                                done();
+                            })
+                        .fail(doneError.bind(done))
+                        .catch(doneError.bind(done))
+                        .done();
+                })
+                .fail(doneError.bind(done))
+                .catch(doneError.bind(done))
+                .done();
+        });
+
+        it('should default to basic if no type is passed in', function(done){
+            grasshopper.request(adminToken).tokens.getNew()
+                .then(function(payload){
+                    db.tokens.getById(payload)
+                        .then(function(tokenObj){
+                            tokenObj.should.have.property('type');
+                            tokenObj.type.should.equal('basic');
+                            done();
+                        })
+                        .fail(doneError.bind(done))
+                        .catch(doneError.bind(done))
+                        .done();
+                })
+                .fail(doneError.bind(done))
+                .catch(doneError.bind(done))
+                .done();
+        });
     });
 
 
@@ -183,5 +220,10 @@ describe('Grasshopper core - testing tokens', function(){
             }
         };
     }
+
+    function doneError(done, err) {
+        done(err);
+    }
+
 });
 
