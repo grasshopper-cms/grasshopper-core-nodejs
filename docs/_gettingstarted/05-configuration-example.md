@@ -10,6 +10,10 @@ Definitions for all possible config values
     * *https*: If you need to run the API over https then you should include the server configuration
         * *key*: Absolute path to SSL private key
         * *cert* Absolute path to SSL certificate
+    * *proxy*: Defaults to false.  Boolean indicating whether you are going to proxy the api onto another express server. If False, when you initialize API, it will create a server for you.
+    * *maxFilesSize*: Defaults to 2 megabytes.  The Maximum file size you are allowed to upload. In bytes.
+    * *maxFieldsSize*: Defaults to 2 megabytes.  The maximum field size you are allowed to have. In bytes.
+    * *maxFields*: Defaults to 1000. The maximum number of fields you are allowed to have.
 * crypto (required)
     * *secret_passphrase*: Unique key that will be used when encrypting/decrypting values using the utils/crypto module.
 

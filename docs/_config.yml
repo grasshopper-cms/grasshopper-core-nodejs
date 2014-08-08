@@ -27,3 +27,7 @@ collections:
     output: true
   content:
       output: true
+  authentication:
+      output: true
+  users:
+      output: true
