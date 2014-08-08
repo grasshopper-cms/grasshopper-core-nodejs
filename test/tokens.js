@@ -107,6 +107,73 @@ describe('Grasshopper core - testing tokens', function(){
         });
     });
 
+    describe('tokens.deleteByUserIdAndType', function(){
+        var testUser;
+
+        beforeEach(function(done) {
+            var newUser = {
+                role: 'reader',
+                identities: {
+                    basic: {
+                        username: 'newtestuserTOKEN',
+                        password: 'TestPassword'
+                    }
+                },
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User'
+            };
+
+            grasshopper.request(adminToken).users.insert(newUser)
+                .then(function(userObj){
+                    testUser = userObj;
+                    grasshopper.auth('basic', { username: 'newtestuserTOKEN', password: 'TestPassword' })
+                        .then(function(){
+                            db.tokens.insert({
+                                _id: '7236987623876243987623487964',
+                                uid: testUser._id,
+                                created: new Date().toISOString(),
+                                type:'google'
+                            })
+                            .done(function(){
+                                    done();
+                                });
+                        });
+                })
+                .fail(doneError.bind(done))
+                .done();
+        });
+
+        afterEach(function(done) {
+            grasshopper.request(adminToken).users.deleteById(testUser._id)
+                .done(function() {
+                    testUser = null;
+                    done();
+                });
+        });
+
+        describe('a user with a created token', function() {
+            it('should delete only the specified type of token', function(done){
+                db.tokens.deleteByUserIdAndType(testUser._id, 'basic')
+                    .then(function(){
+                        db.tokens.findByUserId(testUser._id)
+                            .then(function(payload){
+                                payload[0].type.should.equal('google');
+                                done();
+                            })
+                            .fail(doneError.bind(done))
+                            .catch(doneError.bind(done))
+                            .done();
+
+                    })
+                    .fail(doneError.bind(done))
+                    .catch(doneError.bind(done))
+                    .done();
+            });
+        });
+    });
+
     describe('tokens.getNew', function(){
 
         it('a user should be able to create a new version of their token that they can use elsewhere', function(done) {
