@@ -3,4 +3,4 @@ title: Queries
 uuid: queries
 ---
 
-Content
+Queries

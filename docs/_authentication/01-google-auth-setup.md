@@ -1,13 +1,13 @@
 ---
-title: Google Auth Setup
+title: Setup Google Login
 uuid: google-auth-setup
 ---
 
-##### How To Setup Google Login
+##### Setup Google Login
 
 
 1. Ensure that the [identities.google object on your ghapi.json](http://solid-interactive.github.io/grasshopper-core-nodejs/documentation.html#projectconfiguration) is correctly setup.
-2. Ensure that you have added both a a redirect uri and a javascript origin to your google developer console OAuth configuration.
+2. Ensure that you have added both a a redirect uri and a javascript origin to your [Google Developer Console OAuth configuration](https://developers.google.com/console).
     * The javascript origin is the root of your website. For example:
         * `http://localhost:3000`
         * `https://www.grasshopper-admin-sample.herokuapp.com`

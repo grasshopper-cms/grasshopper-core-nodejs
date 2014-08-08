@@ -1,6 +1,7 @@
 ---
 title: Google Auth Setup Example
 uuid: google-auth-setup-example
+language: javascript
 ---
 
 // Get Google Oauth Url Example
@@ -24,8 +25,14 @@ $.ajax({
         window.location.href = url;
     });
 
+// If Using Backbone, your router might look like
+Router.extend({
+    routes : {
+        'login(/:token)' : 'displayLogin'
+    }
+});
 
-// Accept the token.
+// Accept the token
 function doGoogleLogin(token) {
     // Do something with google token.
 };
