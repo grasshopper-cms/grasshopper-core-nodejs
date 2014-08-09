@@ -45,6 +45,7 @@ Definitions for all possible config values
             * *[region](http://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region)*: The region to send service requests to
             * *bucket*: Buckets partition the namespace of objects stored in Amazon S3 at the top level
             * *urlbase*: The base URL that will be serving the files (could be your own or amazon's)
+    * IMPORTANT : Each defined engine will run (saving, updating, etc), but the engine set to default will serve the files.
 
 * identities (optional)
     * *[google](https://developers.google.com/accounts/docs/OAuth2)* Google Oath integration
