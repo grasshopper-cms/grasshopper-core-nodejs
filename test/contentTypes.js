@@ -1,4 +1,5 @@
-var should = require('chai').should();
+var should = require('chai').should(),
+    _ = require('lodash');
 
 describe('Grasshopper core - contentTypes', function () {
     'use strict';
@@ -251,17 +252,17 @@ describe('Grasshopper core - contentTypes', function () {
             ).done(done);
         });
 
-        it('should return error when a malformed field id is passed in (id has a space).', function (done) {
+        it('should return error when a malformed key is passed in (key has a space).', function (done) {
             var newContentType = {
                 label: 'newtestsuitecontent',
-                fields: {
-                    'test id': {
-                        label: 'This is a test label',
+                fields: [
+                    {
+                        "la bel": 'This is a test label',
                         required: true,
                         instancing: 1,
                         type: 'textbox'
                     }
-                },
+                ],
                 helpText: '',
                 meta: [],
                 description: ''
@@ -281,13 +282,13 @@ describe('Grasshopper core - contentTypes', function () {
         it('should return error when a malformed field is passed in (missing label).', function (done) {
             var newContentType = {
                 label: 'newtestsuitecontent',
-                fields: {
-                    testid: {
+                fields: [
+                    {
                         required: true,
                         instancing: 1,
                         type: 'textbox'
                     }
-                },
+                ],
                 helpText: '',
                 meta: [],
                 description: ''
@@ -307,13 +308,13 @@ describe('Grasshopper core - contentTypes', function () {
         it('should return error when a malformed field is passed in (missing type).', function (done) {
             var newContentType = {
                 label: 'newtestsuitecontent',
-                fields: {
-                    testid: {
+                fields: [
+                    {
                         label: 'Test Field Label',
                         required: true,
                         instancing: 1
                     }
-                },
+                ],
                 helpText: '',
                 meta: [],
                 description: ''
@@ -328,6 +329,58 @@ describe('Grasshopper core - contentTypes', function () {
                     err.message.should.equal('Invalid Field Object');
                 }
             ).done(done);
+        });
+
+        it('should add a unique id to each field.', function(done){
+            var testContentType = {
+                "label" : "new test content type",
+                "fields" : [
+                    {
+                        "dataType" : "string",
+                        "defaultValue" : "",
+                        "_id" : "title",
+                        "validation" : [],
+                        "type" : "textbox",
+                        "options" : false,
+                        "min" : 1,
+                        "max" : 1,
+                        "label" : "Title"
+                    },
+                    {
+                        "dataType" : "date",
+                        "_id" : "a-date",
+                        "validation" : [],
+                        "type" : "date",
+                        "options" : false,
+                        "min" : 1,
+                        "max" : 1,
+                        "label" : "a date"
+                    },
+                    {
+                        "dataType" : "boolean",
+                        "_id" : "a-radio",
+                        "validation" : [],
+                        "type" : "radio",
+                        "options" : false,
+                        "min" : 1,
+                        "max" : 1,
+                        "label" : "a radio"
+                    }
+                ]
+            };
+            grasshopper.request(adminToken).contentTypes.insert(testContentType)
+                .then(
+                    function (payload) {
+                        _.each(payload.fields, function(field){
+                            field.should.have.ownProperty('_uid');
+                        });
+                        done();
+                    }
+                )
+                .catch(doneError.bind(null, done))
+                .fail(doneError.bind(null, done))
+                .done();
+
         });
     });
 
