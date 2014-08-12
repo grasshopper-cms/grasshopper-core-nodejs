@@ -409,6 +409,7 @@ describe('Grasshopper core - contentTypes', function () {
                 label: 'updatedlabel',
                 fields: [
                     {
+                        _id:'testfield',
                         required: true,
                         label: 'Title'
                     }
@@ -433,7 +434,7 @@ describe('Grasshopper core - contentTypes', function () {
                 label: 'updatedlabel',
                 fields: [
                     {
-                        _id: 'testfield',
+                        _id: 'balls',
                         label: 'Test Field Label',
                         type: 'textbox'
                     }
@@ -442,14 +443,16 @@ describe('Grasshopper core - contentTypes', function () {
                 description: ''
             };
 
-            grasshopper.request(adminToken).contentTypes.update(newContentType).then(
-                function (payload) {
-                    payload.label.should.equal(newContentType.label);
-                },
-                function (err) {
-                    should.not.exist(err);
-                }
-            ).done(done);
+            grasshopper.request(adminToken).contentTypes.update(newContentType)
+                .then(
+                    function (payload) {
+                        payload.label.should.equal(newContentType.label);
+                        done();
+                    }
+                )
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
         });
 
         it('should return error if content type is updated without a set "ID"', function (done) {
@@ -474,6 +477,100 @@ describe('Grasshopper core - contentTypes', function () {
                     err.code.should.equal(404);
                 }
             ).done(done);
+        });
+
+        it('should update content field ids on content if a contenttype field id is changed.', function(done){
+            var valueToLookFor = 'superfunky',
+                contentToQueryId = '',
+                testContentType = {
+                "label" : "new test content type",
+                "fields" : [
+                    {
+                        "dataType" : "string",
+                        "defaultValue" : "",
+                        "_id" : "title",
+                        "validation" : [],
+                        "type" : "textbox",
+                        "options" : false,
+                        "min" : 1,
+                        "max" : 1,
+                        "label" : "Title"
+                    },
+                    {
+                        "dataType" : "date",
+                        "_id" : "a-date",
+                        "validation" : [],
+                        "type" : "date",
+                        "options" : false,
+                        "min" : 1,
+                        "max" : 1,
+                        "label" : "a date"
+                    },
+                    {
+                        "dataType" : "boolean",
+                        "_id" : "a-radio",
+                        "validation" : [],
+                        "type" : "radio",
+                        "options" : false,
+                        "min" : 1,
+                        "max" : 1,
+                        "label" : "a radio"
+                    }
+                ]
+            };
+
+            grasshopper.request(adminToken).contentTypes.insert(testContentType)
+                .then(function (createdContentType) {
+
+                    var testContent = {
+                        "fields":{
+                            "a-radio":false,
+                            "a-date":"2014-02-22T08:00:00.000Z",
+                            "title":"jiggity"
+                        },
+                        "meta":{
+                            "node":"53cece8de1c9ff0b00e6b4a3",
+                            "type":createdContentType._id,
+                            "labelfield":"title",
+                            "typelabel":"new test content type",
+                            "created":"2014-08-11T19:24:54.138Z",
+                            "lastmodified":"2014-08-11T19:24:54.137Z"
+                        }
+                    };
+
+                    grasshopper.request(adminToken).content.insert(testContent)
+                        .then(function (createdContent) {
+                            contentToQueryId = createdContent._id;
+
+                            createdContentType.fields[0]._id = valueToLookFor;
+
+                            grasshopper.request(adminToken).contentTypes.update(createdContentType)
+                                .then(function () {
+
+                                    grasshopper.request(adminToken).content.getById(contentToQueryId)
+                                        .then(function (foundContent) {
+                                            _.has(foundContent.fields, valueToLookFor).should.be.ok;
+                                            done();
+                                        }
+                                    )
+                                    .catch(doneError.bind(null, done))
+                                    .fail(doneError.bind(null, done))
+                                    .done();
+                                }
+                            )
+                            .catch(doneError.bind(null, done))
+                            .fail(doneError.bind(null, done))
+                            .done();
+                        }
+                    )
+                    .catch(doneError.bind(null, done))
+                    .fail(doneError.bind(null, done))
+                    .done();
+                }
+            )
+            .catch(doneError.bind(null, done))
+            .fail(doneError.bind(null, done))
+            .done();
         });
 
         describe('updating the fields array on a content type', function() {
