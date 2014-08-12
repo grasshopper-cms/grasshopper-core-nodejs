@@ -434,7 +434,7 @@ describe('Grasshopper core - contentTypes', function () {
                 label: 'updatedlabel',
                 fields: [
                     {
-                        _id: 'balls',
+                        _id: 'testttt',
                         label: 'Test Field Label',
                         type: 'textbox'
                     }
@@ -450,6 +450,33 @@ describe('Grasshopper core - contentTypes', function () {
                         done();
                     }
                 )
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
+        });
+
+        it('should add a UID if any field is added or missing one.', function (done) {
+            var newContentType = {
+                _id: testCreatedContentTypeId,
+                label: 'updatedlabel',
+                fields: [
+                    {
+                        _id: 'testttt',
+                        label: 'Test Field Label',
+                        type: 'textbox'
+                    }
+                ],
+                helpText: '',
+                description: ''
+            };
+
+            grasshopper.request(adminToken).contentTypes.update(newContentType)
+                .then(
+                function (payload) {
+                    payload.fields[0].should.ownProperty('_uid');
+                    done();
+                }
+            )
                 .fail(doneError.bind(null, done))
                 .catch(doneError.bind(null, done))
                 .done();
@@ -481,6 +508,8 @@ describe('Grasshopper core - contentTypes', function () {
 
         it('should update content field ids on content if a contenttype field id is changed.', function(done){
             var valueToLookFor = 'superfunky',
+                valueToLookFor2 = 'wakka',
+                valueToLookFor3 = 'testtest',
                 contentToQueryId = '',
                 testContentType = {
                 "label" : "new test content type",
@@ -543,6 +572,9 @@ describe('Grasshopper core - contentTypes', function () {
                             contentToQueryId = createdContent._id;
 
                             createdContentType.fields[0]._id = valueToLookFor;
+                            createdContentType.fields[0].label = 'newLabel';
+                            createdContentType.fields[1]._id = valueToLookFor2;
+                            createdContentType.fields[2]._id = valueToLookFor3;
 
                             grasshopper.request(adminToken).contentTypes.update(createdContentType)
                                 .then(function () {
@@ -550,6 +582,8 @@ describe('Grasshopper core - contentTypes', function () {
                                     grasshopper.request(adminToken).content.getById(contentToQueryId)
                                         .then(function (foundContent) {
                                             _.has(foundContent.fields, valueToLookFor).should.be.ok;
+                                            _.has(foundContent.fields, valueToLookFor2).should.be.ok;
+                                            _.has(foundContent.fields, valueToLookFor3).should.be.ok;
                                             done();
                                         }
                                     )
