@@ -233,7 +233,7 @@ describe('Grasshopper core - users', function(){
             grasshopper.request(adminToken).users.insert(newUser).then(
                 function(payload){
                     payload.should.have.property('_id');
-                    payload.should.have.property('linkedIdentities');
+                    payload.should.have.property('linkedidentities');
                     payload.should.not.have.property('identities');
                     testCreatedUserId = payload._id;
                 },
@@ -379,8 +379,8 @@ describe('Grasshopper core - users', function(){
 
             grasshopper.request(adminToken).users.insert(newUser)
                 .then(function(payload){
-                    payload.should.have.property('linkedIdentities');
-                    payload.linkedIdentities[0].should.equal('basic');
+                    payload.should.have.property('linkedidentities');
+                    payload.linkedidentities[0].should.equal('basic');
                 },
                 function(err){
                     should.not.exist(err);
@@ -409,7 +409,7 @@ describe('Grasshopper core - users', function(){
             grasshopper.request(adminToken).users.insert(newUser)
                 .then(function(payload){
                     payload.should.not.have.property('identities');
-                    payload.linkedIdentities.should.deep.equal(['basic']);
+                    payload.linkedidentities.should.deep.equal(['basic']);
                 },
                 function(err){
                     should.not.exist(err);
@@ -665,7 +665,7 @@ describe('Grasshopper core - users', function(){
                         password: 'TestPassword'
                     }
                 },
-                linkedIdentities: [ 'basic' ],
+                linkedidentities: [ 'basic' ],
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
@@ -693,7 +693,7 @@ describe('Grasshopper core - users', function(){
                     }
                 },
                 role: 'reader',
-                linkedIdentities: ['basic'],
+                linkedidentities: ['basic'],
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
                 firstname: 'Test',
@@ -760,7 +760,7 @@ describe('Grasshopper core - users', function(){
 
                         grasshopper.request(adminToken).users.getById(testCreatedUserId)
                             .then(function(payload) {
-                                payload.linkedIdentities.should.deep.equal(['basic', 'google']);
+                                payload.linkedidentities.should.deep.equal(['basic', 'google']);
                             })
                             .fail(function(err) {
                                 should.not.exist(err);
@@ -781,7 +781,7 @@ describe('Grasshopper core - users', function(){
 
                         grasshopper.request(adminToken).users.getById(testCreatedUserId)
                             .then(function(payload) {
-                                payload.linkedIdentities.should.deep.equal(['basic']);
+                                payload.linkedidentities.should.deep.equal(['basic']);
                             })
                             .fail(function(err) {
                                 should.not.exist(err);
@@ -895,7 +895,7 @@ describe('Grasshopper core - users', function(){
                         password: 'TestPassword'
                     }
                 },
-                linkedIdentities: [ 'basic' ],
+                linkedidentities: [ 'basic' ],
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
@@ -923,7 +923,7 @@ describe('Grasshopper core - users', function(){
                         password: 'TestPassword'
                     }
                 },
-                linkedIdentities: [ 'basic' ],
+                linkedidentities: [ 'basic' ],
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
@@ -950,7 +950,7 @@ describe('Grasshopper core - users', function(){
                         password: 'TestPassword'
                     }
                 },
-                linkedIdentities: [ 'basic' ],
+                linkedidentities: [ 'basic' ],
                 role: 'reader_bad',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
@@ -977,7 +977,7 @@ describe('Grasshopper core - users', function(){
                         password: 'TestPassword'
                     }
                 },
-                linkedIdentities: [ 'basic' ],
+                linkedidentities: [ 'basic' ],
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
@@ -1005,7 +1005,7 @@ describe('Grasshopper core - users', function(){
                         password: 'TestPassword'
                     }
                 },
-                linkedIdentities: [ 'basic' ],
+                linkedidentities: [ 'basic' ],
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
@@ -1032,7 +1032,7 @@ describe('Grasshopper core - users', function(){
                         password: 'TestPassword'
                     }
                 },
-                linkedIdentities: [ 'basic' ],
+                linkedidentities: [ 'basic' ],
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
@@ -1059,7 +1059,7 @@ describe('Grasshopper core - users', function(){
                         password: 'TestPassword'
                     }
                 },
-                linkedIdentities: [ 'basic' ],
+                linkedidentities: [ 'basic' ],
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',
@@ -1082,7 +1082,7 @@ describe('Grasshopper core - users', function(){
                     username: 'apitestuserreader',
                     password: 'TestPassword'
                 },
-                linkedIdentities: [ 'basic' ],
+                linkedidentities: [ 'basic' ],
                 role: 'reader',
                 enabled: true,
                 email: 'newtestuser1@thinksolid.com',

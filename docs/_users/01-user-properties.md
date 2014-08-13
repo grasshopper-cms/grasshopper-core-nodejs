@@ -26,7 +26,7 @@ uuid: user-properties
             }
         },
         displayName : 'admin',
-        linkedIdentities : ['basic'],
+        linkedidentities : ['basic'],
         email: 'apitestuser@thinksolid.com',
         profile : {}
     }

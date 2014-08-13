@@ -20,6 +20,6 @@ language: asciidoc
         * *accessToken*: An access token used to auth the user for google services. This token expires.
         * *refreshToken*: A token given by google to refresh the users access token.
 * *displayName*: The users display name, if not set when creating a user, it will default to the login for basic auth, and the email address for google auth.
-* *linkedIdentities*: Array representing the identities the user has.
+* *linkedidentities*: Array representing the identities the user has.
 * *email*: The users email address.
 * *profile*: The users profile, This can be an object containing anything.

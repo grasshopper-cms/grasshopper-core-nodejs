@@ -16,7 +16,7 @@ module.exports = function(ObjectID) {
                 }
             },
             displayName : 'admin',
-            linkedIdentities : ['basic'],
+            linkedidentities : ['basic'],
             email: 'apitestuser@thinksolid.com'
         },
         {
@@ -33,7 +33,7 @@ module.exports = function(ObjectID) {
                 }
             },
             displayName: 'apitestuseradmin',
-            linkedIdentities : ['basic'],
+            linkedidentities : ['basic'],
             email: 'apitestuser@thinksolid.com'
         },
         {
@@ -50,7 +50,7 @@ module.exports = function(ObjectID) {
                 }
             },
             displayName : 'apitestuserreader',
-            linkedIdentities : ['basic'],
+            linkedidentities : ['basic'],
             email: 'apitestuser@thinksolid.com',
             permissions: [
                 {
@@ -73,7 +73,7 @@ module.exports = function(ObjectID) {
                 }
             },
             displayName : 'apitestuserreader_1',
-            linkedIdentities : ['basic'],
+            linkedidentities : ['basic'],
             email: 'apitestuser_1@thinksolid.com',
             permissions: [
                 {
@@ -96,7 +96,7 @@ module.exports = function(ObjectID) {
                 }
             },
             displayName : 'apitestusereditor',
-            linkedIdentities : ['basic'],
+            linkedidentities : ['basic'],
             email: 'apitestusereditor@thinksolid.com'
         },
         {
@@ -113,7 +113,7 @@ module.exports = function(ObjectID) {
                 }
             },
             displayName : 'apitestusereditor_restricted',
-            linkedIdentities : ['basic'],
+            linkedidentities : ['basic'],
             email: 'apitestusereditor_1@thinksolid.com',
             permissions: [
                 {
@@ -141,7 +141,7 @@ module.exports = function(ObjectID) {
                 }
             },
             displayName : 'apitestuser',
-            linkedIdentities : ['basic'],
+            linkedidentities : ['basic'],
             enabled: true,
             role: 'reader',
             firstname: 'Test',

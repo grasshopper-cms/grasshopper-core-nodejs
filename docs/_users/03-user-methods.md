@@ -16,7 +16,7 @@ uuid: user-methods
 * users.insert
     * middleware.identity,
     * middleware.role(roles.ADMIN),
-    * middleware.users.linkedIdentities.create,
+    * middleware.users.linkedidentities.create,
     * middleware.users.parse,
     * middleware.event('parse'),
     * middleware.event('validate'),
