@@ -25,7 +25,7 @@ uuid: user-properties
                 refreshToken: '4098409874'
             }
         },
-        displayName : 'admin',
+        displayname : 'admin',
         linkedidentities : ['basic'],
         email: 'apitestuser@thinksolid.com',
         profile : {}

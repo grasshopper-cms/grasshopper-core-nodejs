@@ -274,8 +274,8 @@ describe('Grasshopper core - users', function(){
             ).done(done);
         });
 
-        describe('displayName', function() {
-            it('should set the displayName on a user when inserting', function(done) {
+        describe('displayname', function() {
+            it('should set the displayname on a user when inserting', function(done) {
                 var newUser = {
                     role: 'admin',
                     identities: {
@@ -285,7 +285,7 @@ describe('Grasshopper core - users', function(){
                         }
                     },
                     enabled: true,
-                    displayName : 'UncleBob',
+                    displayname : 'UncleBob',
                     email: 'newtestuser1@thinksolid.com',
                     firstname: 'Test',
                     lastname: 'User'
@@ -293,8 +293,8 @@ describe('Grasshopper core - users', function(){
 
                 grasshopper.request(adminToken).users.insert(newUser)
                     .then(function(payload){
-                        payload.should.have.property('displayName');
-                        payload.displayName.should.equal('UncleBob');
+                        payload.should.have.property('displayname');
+                        payload.displayname.should.equal('UncleBob');
                     })
                     .fail(function(err){
                         should.not.exist(err);
@@ -302,7 +302,7 @@ describe('Grasshopper core - users', function(){
                     .done(done);
             });
 
-            describe('should set a default displayName if one is not sent', function() {
+            describe('should set a default displayname if one is not sent', function() {
                 it('BASIC, should use the username.', function(done) {
                     var newUser = {
                         role: 'admin',
@@ -320,8 +320,8 @@ describe('Grasshopper core - users', function(){
 
                     grasshopper.request(adminToken).users.insert(newUser)
                         .then(function(payload){
-                            payload.should.have.property('displayName');
-                            payload.displayName.should.equal('CooperHilscher');
+                            payload.should.have.property('displayname');
+                            payload.displayname.should.equal('CooperHilscher');
                         })
                         .fail(function(err){
                             should.not.exist(err);
@@ -347,8 +347,8 @@ describe('Grasshopper core - users', function(){
 
                     grasshopper.request(adminToken).users.insert(newUser)
                         .then(function(payload){
-                            payload.should.have.property('displayName');
-                            payload.displayName.should.equal('newtestuser1@thinksolid.com');
+                            payload.should.have.property('displayname');
+                            payload.displayname.should.equal('newtestuser1@thinksolid.com');
                         })
                         .fail(function(err){
                             should.not.exist(err);
