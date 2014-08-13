@@ -15,8 +15,8 @@ module.exports = function(ObjectID) {
                     hash: '885f59a76ea44e1d264f9da45ca83574fbe55e3e7e6c51afe681730b45c7bb03'
                 }
             },
-            displayName : 'admin',
-            linkedIdentities : ['basic'],
+            displayname : 'admin',
+            linkedidentities : ['basic'],
             email: 'apitestuser@thinksolid.com'
         },
         {
@@ -32,8 +32,8 @@ module.exports = function(ObjectID) {
                     hash: '885f59a76ea44e1d264f9da45ca83574fbe55e3e7e6c51afe681730b45c7bb03'
                 }
             },
-            displayName: 'apitestuseradmin',
-            linkedIdentities : ['basic'],
+            displayname: 'apitestuseradmin',
+            linkedidentities : ['basic'],
             email: 'apitestuser@thinksolid.com'
         },
         {
@@ -49,8 +49,8 @@ module.exports = function(ObjectID) {
                     hash: '885f59a76ea44e1d264f9da45ca83574fbe55e3e7e6c51afe681730b45c7bb03'
                 }
             },
-            displayName : 'apitestuserreader',
-            linkedIdentities : ['basic'],
+            displayname : 'apitestuserreader',
+            linkedidentities : ['basic'],
             email: 'apitestuser@thinksolid.com',
             permissions: [
                 {
@@ -72,8 +72,8 @@ module.exports = function(ObjectID) {
                     hash: '885f59a76ea44e1d264f9da45ca83574fbe55e3e7e6c51afe681730b45c7bb03'
                 }
             },
-            displayName : 'apitestuserreader_1',
-            linkedIdentities : ['basic'],
+            displayname : 'apitestuserreader_1',
+            linkedidentities : ['basic'],
             email: 'apitestuser_1@thinksolid.com',
             permissions: [
                 {
@@ -95,8 +95,8 @@ module.exports = function(ObjectID) {
                     hash: '885f59a76ea44e1d264f9da45ca83574fbe55e3e7e6c51afe681730b45c7bb03'
                 }
             },
-            displayName : 'apitestusereditor',
-            linkedIdentities : ['basic'],
+            displayname : 'apitestusereditor',
+            linkedidentities : ['basic'],
             email: 'apitestusereditor@thinksolid.com'
         },
         {
@@ -112,8 +112,8 @@ module.exports = function(ObjectID) {
                     hash: '885f59a76ea44e1d264f9da45ca83574fbe55e3e7e6c51afe681730b45c7bb03'
                 }
             },
-            displayName : 'apitestusereditor_restricted',
-            linkedIdentities : ['basic'],
+            displayname : 'apitestusereditor_restricted',
+            linkedidentities : ['basic'],
             email: 'apitestusereditor_1@thinksolid.com',
             permissions: [
                 {
@@ -140,8 +140,8 @@ module.exports = function(ObjectID) {
                     hash: '885f59a76ea44e1d264f9da45ca83574fbe55e3e7e6c51afe681730b45c7bb03'
                 }
             },
-            displayName : 'apitestuser',
-            linkedIdentities : ['basic'],
+            displayname : 'apitestuser',
+            linkedidentities : ['basic'],
             enabled: true,
             role: 'reader',
             firstname: 'Test',
