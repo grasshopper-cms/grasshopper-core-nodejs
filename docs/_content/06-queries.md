@@ -19,3 +19,5 @@ Example query object :
         distinct : 'fields.label'
       }
     }
+    
+The returned object is an array with limit, skip and total.  The total is the value of all content matched by query, not just returned objects.
