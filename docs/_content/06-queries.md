@@ -16,7 +16,9 @@ Example query object :
       options : {
         limit : 1,
         skip  : 2,
-        distinct : 'fields.label'
+        distinct : 'fields.label',
+        exclude : ['fields.newColumn'],
+        include : ['fields.testfield']
       }
     }
     

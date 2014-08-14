@@ -3,6 +3,7 @@ title: Queries
 uuid: queries-example
 language: asciidocs
 ---
+Definitions for all possible query parameters/options
 
 * *filters*: An array of optional filter objects for the query.
     * *key*: The key of the content being filtered.
@@ -25,6 +26,8 @@ language: asciidocs
 * *types*: An optional array of content type ids.  
 * *nodes*: An optional array of node ids.
 * *options*: Object.  Possible key/value pairs are: 
-    * * limit : limit number of results. 
-    * * skip : skip specified number of results.  (limit and skip support pagination)
-    * * distinct : limits results only with distinct value of specified field. 
+    * * limit : Limit number of results. String or number. 
+    * * skip : Skip specified number of results.  String or number. (limit and skip support pagination)
+    * * distinct : return distinct results within a find.  Can include types.
+    * * exclude : array of fields to be excluded from query. 
+    * * include : array of fields to be included in query. 
