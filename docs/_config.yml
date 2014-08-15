@@ -7,6 +7,8 @@ url: "http://solid-interactive.github.io"
 destination: ../_docs
 # Build settings
 markdown: kramdown
+kramdown:
+  use_coderay: true
 permalink: pretty
 collections:
   core:

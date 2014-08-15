@@ -1,33 +1,48 @@
 ---
 title: Queries
 uuid: queries-example
-language: asciidocs
----
-Definitions for all possible query parameters/options
+language: javascript
 
-* *filters*: An array of optional filter objects for the query.
-    * *key*: The key of the content being filtered.
-    * *cmp*: The comparison operator for the filter value.  Currently supported operators (Query accepts symbol or string value): 
-        * *'='*: equals
-        * *'!=' or 'not' or 'notequal' or 'notequals'*: not equal to
-        * *'>=' or 'gte'*: greater than or equals
-        * *'>' or 'gt'*: greater than
-        * *'<=' or 'lte'*: less than or equals
-        * *'<' or 'lt'*: less than
-        * *'in' or 'contains'*: contains
-        * *'!in' or 'notin' or 'notcontains'*: does not contain
-        * *'%' or 'like'*: like (Allows for 'fuzzy matching')
-        * *'!%' or 'notlike'*: not like (Allows for 'fuzzy matching')
-        * *'between'*: between 
-        * *'notbetween'*: not between
-        * *'size'*: size
-        * *'exists'*: exists
-    * *value*: Then value the filter will be compared with.
-* *types*: An optional array of content type ids.  
-* *nodes*: An optional array of node ids.
-* *options*: Object.  Possible key/value pairs are: 
-    * * limit : Limit number of results. String or number. 
-    * * skip : Skip specified number of results.  String or number. (limit and skip support pagination)
-    * * distinct : return distinct results within a find.  Can include types.
-    * * exclude : array of fields to be excluded from query. 
-    * * include : array of fields to be included in query. 
+---
+
+Query object examples:
+
+
+
+    { filters : [{ key : 'fields.label', cmp: '<', value: 'search test' }],
+      types : [],
+      nodes : [],
+      options : { limit : 1,
+                  skip  : 2,
+                  distinct : 'fields.label',
+                  exclude : ['fields.newColumn']
+                }
+    }
+
+
+- This object would return results  where 'fields.label' is less than the value 'search test.'
+  It would limit the result to 1 document and skip the first 2 results.  It would only return documents
+  where 'fields.label' is a distinct value.  It would also exclude
+
+***
+
+    { filters : [key : 'fields.slug' , cmp : 'equals', value: 'testValue'],
+      types : ['2389vj2jf8r', 'ssjkl932'],
+      options : {include : ['fields.label', 'fields.name', 'fields.description']}
+    }
+
+
+
+- This object would return results from content types '2389vj2jf8r' and 'ssjkl932' where 'fields.label',
+  'fields.name' or 'fields.description' match the value 'testValue'.
+
+***
+
+  { filters : [key : 'fields.slug', cmp : 'between', value: ['exampleValue1', 'exampleValue2'] ],
+    nodes : ['83h7hjks8fhh'],
+    options : {}
+  }
+
+
+- This object would return content with 'fields.slug' value between 'exampleValue1' and 'exampleValue2'
+  from node '83h7hjks8fhh'.  Note that even though the options object is empty, query executes normally.
