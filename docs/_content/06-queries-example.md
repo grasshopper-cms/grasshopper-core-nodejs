@@ -27,8 +27,8 @@ Query object examples:
 ***
 
     { filters : [key : 'fields.slug' , cmp : 'equals', value: 'testValue'],
-      types : ['2389vj2jf8r', 'ssjkl932'],
-      options : {include : ['fields.label', 'fields.name', 'fields.description']}
+    types : ['2389vj2jf8r', 'ssjkl932'],
+    options : {include : ['fields.label', 'fields.name', 'fields.description']}
     }
 
 

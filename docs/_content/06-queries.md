@@ -43,4 +43,4 @@ Definitions for all possible query parameters/options
 Important Notes:
 
 * The options object can have include or exclude parameters, but not both in the same query.
-*
+* When using 'options.distinct', filters can't be used.  This means paging is not available.
