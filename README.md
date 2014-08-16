@@ -139,8 +139,8 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 * 0.12.2 - 2014-06-11 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/kirby/release_notes/0.12.2_2014-06-11.md)
 * 0.13.0 - 2014-06-24 - [features](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/kirby/release_notes/0.13.0_2014-06-24.md)
 * 0.13.1 - 2014-06-24 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/kirby/release_notes/0.13.1_2014-06-24.md)
-* 0.13.2 - 2014-06-25 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/kirby/release_notes/0.13.2_2014-06-25.md)
-* 0.13.2 - 2014-06-24 - [initial release](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/kirby/release_notes/0.13.2_2014-06-24.md)
+* 0.13.2 - 2014-06-24 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/kirby/release_notes/0.13.2_2014-06-24.md)
+* 0.13.2 - 2014-06-25 - [initial release](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/kirby/release_notes/0.13.2_2014-06-25.md)
 * 0.13.3 - 2014-06-26 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/kirby/release_notes/0.13.3_2014-06-26.md)
 * 0.13.4 - 2014-06-30 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/kirby/release_notes/0.13.4_2014-06-30.md)
 * 0.13.5 - 2014-07-01 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/kirby/release_notes/0.13.5_2014-07-01.md)
@@ -177,6 +177,9 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 * 0.14.1 - 2014-07-29 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/kirby/release_notes/0.14.1_2014-07-29.md)
 * 0.14.2 - 2014-08-1 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/kirby/release_notes/0.14.2_2014-08-1.md)
 * 0.14.3 - 2014-08-01 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/kirby/release_notes/0.14.3_2014-08-01.md)
+* 0.15.0 - 2014-08-12 - [features](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/kirby/release_notes/0.15.0_2014-08-12.md)
+* 0.15.1 - 2014-08-13 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/kirby/release_notes/0.15.1_2014-08-13.md)
+* 0.15.2 - 2014-08-14 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/kirby/release_notes/0.15.2_2014-08-14.md)
 
 
 ## Contributors (`git shortlog -s -n`)
@@ -185,7 +188,9 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 * Greg Larrenaga
 * Peter Ajtai
 * Cooper Hilscher
+* kaijarayne
 * Valentine Nesterov
+* Andrew Gurinovich
 * Eric Beringer
 
 
@@ -194,4 +199,4 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 To create the readme, update the release notes dir and package.json.version at a minimum. If needed update README.template.md.
 Then run `grunt readme`.
 
-_Compiled file. Do not modify directly. Created: 2014-08-01 01:10:14_
+_Compiled file. Do not modify directly. Created: 2014-08-14 05:29:01_

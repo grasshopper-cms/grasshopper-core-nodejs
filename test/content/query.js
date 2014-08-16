@@ -106,6 +106,12 @@ describe('Grasshopper core - content', function(){
                     limit : 1,
                     skip : -1
                 }
+            },
+            query15 = {
+                filters: [ { key: ['fields.othertestfield', 'fields.testfield'], cmp: '=', value: 'customtestvalue'}],
+                options : {
+                    limit : 20
+                }
             };
 
         before(function(done){
@@ -457,6 +463,20 @@ describe('Grasshopper core - content', function(){
                 grasshopper.request(tokens.globalAdminToken).content.query(query14)
                     .then(function(payload){
                         payload.should.be.ok;
+                        done();
+                    })
+                    .fail(doneError.bind(null, done))
+                    .catch(doneError.bind(null, done))
+                    .done();
+            });
+        });
+
+        describe('search with an array of keys', function() {
+            it('should ignore negative values', function(done) {
+                grasshopper.request(tokens.globalAdminToken).content.query(query15)
+                    .then(function(payload){
+                        payload.should.be.ok;
+                        payload.total.should.equal(2);
                         done();
                     })
                     .fail(doneError.bind(null, done))

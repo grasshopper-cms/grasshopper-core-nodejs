@@ -10,6 +10,10 @@ Definitions for all possible config values
     * *https*: If you need to run the API over https then you should include the server configuration
         * *key*: Absolute path to SSL private key
         * *cert* Absolute path to SSL certificate
+    * *proxy*: Defaults to false.  Boolean indicating whether you are going to proxy the api onto another express server. If False, when you initialize API, it will create a server for you.
+    * *maxFilesSize*: Defaults to 2 megabytes.  The Maximum file size you are allowed to upload. In bytes.
+    * *maxFieldsSize*: Defaults to 2 megabytes.  The maximum field size you are allowed to have. In bytes.
+    * *maxFields*: Defaults to 1000. The maximum number of fields you are allowed to have.
 * crypto (required)
     * *secret_passphrase*: Unique key that will be used when encrypting/decrypting values using the utils/crypto module.
 
@@ -41,6 +45,7 @@ Definitions for all possible config values
             * *[region](http://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region)*: The region to send service requests to
             * *bucket*: Buckets partition the namespace of objects stored in Amazon S3 at the top level
             * *urlbase*: The base URL that will be serving the files (could be your own or amazon's)
+    * IMPORTANT : Each defined engine will run (saving, updating, etc), but the engine set to default will serve the files.
 
 * identities (optional)
     * *[google](https://developers.google.com/accounts/docs/OAuth2)* Google Oath integration

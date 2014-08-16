@@ -21,7 +21,11 @@ Here is an example file:
             "https":{
                 "key":"{full path to key}",
                 "cert":"{full path to cert}"
-            }
+            },
+            "proxy" : false,
+            "maxFilesSize": 2000000,
+            "maxFieldsSize": 2000000,
+            "maxFields": 1000
         },
         "crypto": {
            "secret_passphrase" : "{unique term per project}"

@@ -29,34 +29,39 @@ describe('Grasshopper core - testing nodes', function(){
         async.parallel(
             [
                 function(cb){
-                    grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' }).then(function(token){
-                        globalAdminToken = token;
-                        cb();
-                    });
+                    grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
+                        .then(function(token) {
+                            globalAdminToken = token;
+                            cb();
+                        });
                 },
                 function(cb){
-                    grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){
+                    grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' })
+                        .then(function(token){
                             globalReaderToken = token;
                             cb();
                         });
                 },
                 function(cb){
-                    grasshopper.auth('username', { username: 'apitestusereditor', password: 'TestPassword' }).then(function(token){
-                        globalEditorToken = token;
-                        cb();
-                    });
+                    grasshopper.auth('username', { username: 'apitestusereditor', password: 'TestPassword' })
+                        .then(function(token){
+                            globalEditorToken = token;
+                            cb();
+                        });
                 },
                 function(cb){
-                    grasshopper.auth('username', { username: 'apitestuserreader_1', password: 'TestPassword' }).then(function(token){
-                        nodeEditorToken = token;
-                        cb();
-                    });
+                    grasshopper.auth('username', { username: 'apitestuserreader_1', password: 'TestPassword' })
+                        .then(function(token){
+                            nodeEditorToken = token;
+                            cb();
+                        });
                 },
                 function(cb){
-                    grasshopper.auth('username', { username: 'apitestusereditor_restricted', password: 'TestPassword' }).then(function(token){
-                        restrictedEditorToken = token;
-                        cb();
-                    });
+                    grasshopper.auth('username', { username: 'apitestusereditor_restricted', password: 'TestPassword' })
+                        .then(function(token){
+                            restrictedEditorToken = token;
+                            cb();
+                        });
                 }
             ],function(){
                 done();
@@ -72,16 +77,15 @@ describe('Grasshopper core - testing nodes', function(){
                 parent: null
             };
 
-            grasshopper.request(globalEditorToken).nodes.insert(n).then(
-                function(payload){
+            grasshopper.request(globalEditorToken).nodes.insert(n)
+                .then(function(payload){
                     testNodeIdRoot_generated = payload._id.toString();
                     payload.label.should.equal('My Test Node');
-
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
         });
 
         it('should create a node (sub node of root)', function(done){
@@ -90,16 +94,17 @@ describe('Grasshopper core - testing nodes', function(){
                 parent: testNodeIdRoot_generated
             };
 
-            grasshopper.request(globalEditorToken).nodes.insert(n).then(
-                function(payload){
+            grasshopper.request(globalEditorToken).nodes.insert(n)
+                .then(function(payload){
                     var id = payload.parent._id.toString();
+
                     payload.label.should.equal('My Test Sub-Node');
                     id.should.equal(testNodeIdRoot_generated);
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
         });
 
         it('should return an error because we are missing a "label" field.', function(done){
@@ -107,15 +112,15 @@ describe('Grasshopper core - testing nodes', function(){
                 parent: testNodeIdRoot_generated
             };
 
-            grasshopper.request(globalEditorToken).nodes.insert(n).then(
-                function(payload){
-                    should.not.exist(payload);
-                },
-                function(err){
+            grasshopper.request(globalEditorToken).nodes.insert(n)
+                .then(doneError.bind(null, done))
+                .fail(function(err){
                     err.code.should.equal(400);
                     err.message.should.equal('"label" is a required field.');
-                }
-            ).done(done);
+                    done();
+                })
+                .catch(doneError.bind(null, done))
+                .done();
         });
 
         /* Requires Node Level Permissions
@@ -145,14 +150,14 @@ describe('Grasshopper core - testing nodes', function(){
                 parent: testNodeIdRoot_generated
             };
 
-            grasshopper.request(globalReaderToken).nodes.insert(n).then(
-                function(payload){
-                    should.not.exist(payload);
-                },
-                function(err){
+            grasshopper.request(globalReaderToken).nodes.insert(n)
+                .then(doneError.bind(null, done))
+                .fail(function(err){
                     err.code.should.equal(403);
-                }
-            ).done(done);
+                    done();
+                })
+                .catch(doneError.bind(null, done))
+                .done();
         });
 
         it('should return error when a reader tries to create a node', function(done){
@@ -161,28 +166,28 @@ describe('Grasshopper core - testing nodes', function(){
                 parent: testNodeId
             };
 
-            grasshopper.request(restrictedEditorToken).nodes.insert(n).then(
-                function(payload){
-                    should.not.exist(payload);
-                },
-                function(err){
+            grasshopper.request(restrictedEditorToken).nodes.insert(n)
+                .then(doneError.bind(null, done))
+                .fail(function(err){
                     err.code.should.equal(403);
-                }
-            ).done(done);
+                    done();
+                })
+                .catch(doneError.bind(null, done))
+                .done();
         });
     });
 
     describe('Add content types to a node.', function() {
 
         it('should add a content type to an existing node as the property allowedTypes sent as a single string value.', function(done){
-            grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, testContentTypeID).then(
-                function(payload){
+            grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, testContentTypeID)
+                .then(function(payload){
                     payload.should.equal('Success');
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
 
         });
 
@@ -190,79 +195,83 @@ describe('Grasshopper core - testing nodes', function(){
             var t = {
                 id: testContentTypeID
             };
-            grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, t).then(
-                function(payload){
+
+            grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, t)
+                .then(function(payload){
                     payload.should.equal('Success');
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
 
         });
 
         it('should add a content type to an existing node as the property allowedTypes sent as an array of objects.', function(done){
-            var t = [{
-                id: testContentTypeID
-            },{
-                id: testContentTypeID_Users
-            }];
-            grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, t).then(
-                function(payload){
-                    payload.should.equal('Success');
+            var t = [
+                {
+                    id: testContentTypeID
                 },
-                function(err){
-                    should.not.exist(err);
+                {
+                    id: testContentTypeID_Users
                 }
-            ).done(done);
+            ];
+
+            grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, t)
+                .then(function(payload){
+                    payload.should.equal('Success');
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
         });
 
         it('should add a content type to an existing node as the property allowedTypes sent as an array of strings.', function(done){
             var t = [testContentTypeID, testContentTypeID_Users];
-            grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, t).then(
-                function(payload){
+            grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, t)
+                .then(function(payload){
                     payload.should.equal('Success');
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
         });
 
         it('should replace a content type in an existing node with existing contenttypes.', function(done){
-            grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, testContentTypeID).then(
-                function(){
-                    grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, testContentTypeID_Users).then(
-                        function(){
-
-                            grasshopper.request(globalEditorToken).nodes.getById(testNodeId).then(
-                                function(payload){
+            grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, testContentTypeID)
+                .then(function() {
+                    grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, testContentTypeID_Users)
+                        .then(function(){
+                            grasshopper.request(globalEditorToken).nodes.getById(testNodeId)
+                                .then(function(payload){
                                     payload.allowedTypes[0].label.should.equal('Users');
-                                },
-                                function(err){
-                                    should.not.exist(err);
-                                }
-                            ).done(done);
+                                    done();
+                                })
+                                .fail(doneError.bind(null, done))
+                                .catch(doneError.bind(null, done))
+                                .done();
 
-                        },function(err){
-                            should.not.exist(err);
-                        }
-                    ).done();
-                },function(err){
-                    should.not.exist(err);
-                }
-            ).done();
+                        })
+                        .fail(doneError.bind(null, done))
+                        .catch(doneError.bind(null, done))
+                        .done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
         });
 
         it('should fail with 401 if the user is unauthenticated.', function(done){
-            grasshopper.request().nodes.saveContentTypes(testNodeId, testContentTypeID).then(
-                function(payload){
-                    should.not.exist(payload);
-                },
-                function(err){
+            grasshopper.request().nodes.saveContentTypes(testNodeId, testContentTypeID)
+                .then(doneError.bind(null, done))
+                .fail(function(err){
                     err.code.should.equal(401);
-                }
-            ).done(done);
+                    done();
+                })
+                .catch(doneError.bind(null, done))
+                .done();
         });
 
         /* Requires Node Level Permissions
@@ -278,60 +287,60 @@ describe('Grasshopper core - testing nodes', function(){
         });*/
 
         it('should fail with 500 if trying to save a content type to a node that doesn\'t exist.', function(done){
-            grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, badTestContentTypeID).then(
-                function(payload){
-                    should.not.exist(payload);
-                },
-                function(err){
+            grasshopper.request(globalEditorToken).nodes.saveContentTypes(testNodeId, badTestContentTypeID)
+                .then(doneError.bind(null, done))
+                .fail(function(err){
                     err.code.should.equal(404);
-                }
-            ).done(done);
+                    done();
+                })
+                .catch(doneError.bind(null, done))
+                .done();
         });
     });
 
     describe('getById', function() {
         it('should return 401 because trying to access unauthenticated', function(done) {
-            grasshopper.request().nodes.getById(testNodeId).then(
-                function(payload){
-                    should.not.exist(payload);
-                },
-                function(err){
+            grasshopper.request().nodes.getById(testNodeId)
+                .then(doneError.bind(null, done))
+                .fail(function(err) {
                     err.code.should.equal(401);
-                }
-            ).done(done);
+                    done();
+                })
+                .catch(doneError.bind(null, done))
+                .done();
         });
 
         it('should return a node when using a id', function(done) {
-            grasshopper.request(globalAdminToken).nodes.getById(testNodeId).then(
-                function(payload){
+            grasshopper.request(globalAdminToken).nodes.getById(testNodeId)
+                .then(function(payload){
                     payload._id.toString().should.equal(testNodeId);
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
         });
 
         it('should return a nodes allowedTypes when using a id', function(done) {
-            grasshopper.request(globalAdminToken).nodes.getById(testNodeId).then(
-                function(payload){
+            grasshopper.request(globalAdminToken).nodes.getById(testNodeId)
+                .then(function(payload){
                     payload.should.include.keys('allowedTypes');
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
         });
 
         it('should return a nodes allowedTypes with the fields (id, label, helptext) when using a id', function(done) {
-            grasshopper.request(globalEditorToken).nodes.getById(testNodeId).then(
-                function(payload){
+            grasshopper.request(globalEditorToken).nodes.getById(testNodeId)
+                .then(function(payload){
                     payload.should.include.keys('allowedTypes');
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
         });
 
         /* Requires Node Level Permissions
@@ -358,25 +367,25 @@ describe('Grasshopper core - testing nodes', function(){
         });*/
 
         it('an editor should return an existing node object', function(done) {
-            grasshopper.request(globalEditorToken).nodes.getById(testNodeId).then(
-                function(payload){
+            grasshopper.request(globalEditorToken).nodes.getById(testNodeId)
+                .then(function(payload){
                     payload._id.toString().should.equal(testNodeId);
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
         });
 
         it('a reader should return an existing node object', function(done) {
-            grasshopper.request(globalReaderToken).nodes.getById(testNodeId).then(
-                function(payload){
+            grasshopper.request(globalReaderToken).nodes.getById(testNodeId)
+                .then(function(payload){
                     payload._id.toString().should.equal(testNodeId);
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
         });
     });
 
@@ -436,25 +445,25 @@ describe('Grasshopper core - testing nodes', function(){
 
     describe('get node children', function() {
         it('should return a 401 because user is not authenticated', function(done) {
-            grasshopper.request().nodes.getChildren(testNodeId).then(
-                function(payload){
-                    should.not.exist(payload);
-                },
-                function(err){
+            grasshopper.request().nodes.getChildren(testNodeId)
+                .then(doneError.bind(null, done))
+                .fail(function(err){
                     err.code.should.equal(401);
-                }
-            ).done(done);
+                    done();
+                })
+                .catch(doneError.bind(null, done))
+                .done();
         });
 
         it('a reader with all valid permissions should get a node object back with a full collection of child nodes', function(done) {
-            grasshopper.request(globalReaderToken).nodes.getChildren(testNodeId).then(
-                function(payload){
+            grasshopper.request(globalReaderToken).nodes.getChildren(testNodeId)
+                .then(function(payload){
                     payload.length.should.equal(9);
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
         });
 
         /* Requires Node Level Permissions
@@ -469,14 +478,14 @@ describe('Grasshopper core - testing nodes', function(){
         });*/
 
         it('should return list of root level child nodes', function(done) {
-            grasshopper.request(globalReaderToken).nodes.getChildren(null).then(
-                function(payload){
+            grasshopper.request(globalReaderToken).nodes.getChildren(null)
+                .then(function(payload){
                     payload.length.should.equal(3);
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
         });
     });
 
@@ -502,14 +511,68 @@ describe('Grasshopper core - testing nodes', function(){
         });
 
         it('Should delete an node.', function(done) {
-            grasshopper.request(globalEditorToken).nodes.deleteById(testNodeId).then(
-                function(payload){
+            grasshopper.request(globalEditorToken).nodes.deleteById(testNodeId)
+                .then(function(payload){
                     payload.should.equal('Success');
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
+        });
+
+        it('should delete a node and all of the content in that node', function(done) {
+            var newNode = {
+                    label : 'New Test Node',
+                    parent: null
                 },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                newNodeId,
+                newContentId;
+
+            grasshopper.request(globalAdminToken).nodes.insert(newNode)
+                .then(function(payload){
+                    newNodeId = payload._id;
+
+                    var newContent = {
+                        meta: {
+                            type: '524362aa56c02c0703000001',
+                            node : newNodeId,
+                            labelfield: 'testfield'
+                        },
+                        fields: {
+                            testfield: 'testvalue'
+                        }
+                    };
+
+                    grasshopper.request(globalAdminToken).content.insert(newContent)
+                        .then(function(newContentPayload) {
+                            newContentId = newContentPayload._id;
+
+                            grasshopper.request(globalAdminToken).nodes.deleteById(newNodeId)
+                                .then(function(response){
+                                    response.should.equal('Success');
+
+                                    grasshopper.request(globalAdminToken).content.getById(newContentId)
+                                        .then(doneError.bind(null, done))
+                                        .fail(function(error) {
+                                            error.code.should.equal(404);
+                                            error.message.should.equal('Resource could not be found.');
+                                            done();
+                                        })
+                                        .catch(doneError.bind(null, done))
+                                        .done();
+                                })
+                                .fail(doneError.bind(null, done))
+                                .catch(doneError.bind(null, done))
+                                .done();
+                        })
+                        .fail(doneError.bind(null, done))
+                        .catch(doneError.bind(null, done))
+                        .done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
         });
 
         /* Requires Node Level Permissions
@@ -525,6 +588,10 @@ describe('Grasshopper core - testing nodes', function(){
         });
         */
     });
+
+    function doneError(done, err) {
+        done(err);
+    }
 
     after(function(done){
         function del(file, next){

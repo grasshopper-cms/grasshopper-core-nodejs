@@ -1,6 +1,6 @@
 ---
 title: Authentication Examples
-uuid: core-auth-example
+uuid: authentication-example
 ---
 // Basic Authentication Example
 grasshopper.auth( 'basic', { username: '', password: '' } ).then( function( token ) {

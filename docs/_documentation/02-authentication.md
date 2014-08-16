@@ -1,6 +1,6 @@
 ---
 title: Authentication
-uuid: core-auth
+uuid: authentication
 ---
 #### Authentication
 
@@ -9,6 +9,5 @@ Membership is a critical component to almost all applications. Grasshopper's aut
 Supported Authentication Methods
 
 * Basic: This is the typical username and password method
-* Google: Allows you to authenticate with your Gmail account, for more information on implementing Gmail Oath [click here](https://developers.google.com/gmail/oauth_overview).
+* Google: Allows you to authenticate with your Gmail account.
 
-Check out our sample projects for examples of both of these authenication methods in working applications.
