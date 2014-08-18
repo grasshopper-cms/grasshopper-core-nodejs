@@ -229,158 +229,193 @@ describe('Grasshopper core - contentTypes', function () {
 
         it('should return an error because we are missing a "label" field.', function (done) {
             var newContentType = {
-                fields: {
-                    testid: {
-                        required: true,
+                fields: [
+                    {
+                        _id : 'testid',
                         label: 'Title',
-                        instancing: 1,
                         type: 'textbox'
                     }
-                },
+                ],
                 helpText: '',
                 meta: [],
                 description: ''
             };
-            grasshopper.request(adminToken).contentTypes.insert(newContentType).then(
-                function (payload) {
-                    should.not.exist(payload);
-                },
-                function (err) {
+            grasshopper.request(adminToken).contentTypes.insert(newContentType)
+                .then(doneError.bind(null, done))
+                .fail(function (err) {
                     err.code.should.equal(400);
                     err.message.should.equal('"label" is a required field.');
-                }
-            ).done(done);
-        });
-
-        it('should return error when a malformed key is passed in (key has a space).', function (done) {
-            var newContentType = {
-                label: 'newtestsuitecontent',
-                fields: [
-                    {
-                        "la bel": 'This is a test label',
-                        required: true,
-                        instancing: 1,
-                        type: 'textbox'
-                    }
-                ],
-                helpText: '',
-                meta: [],
-                description: ''
-            };
-
-            grasshopper.request(adminToken).contentTypes.insert(newContentType).then(
-                function (payload) {
-                    should.not.exist(payload);
-                },
-                function (err) {
-                    err.code.should.equal(400);
-                    err.message.should.equal('Invalid Field Object');
-                }
-            ).done(done);
-        });
-
-        it('should return error when a malformed field is passed in (missing label).', function (done) {
-            var newContentType = {
-                label: 'newtestsuitecontent',
-                fields: [
-                    {
-                        required: true,
-                        instancing: 1,
-                        type: 'textbox'
-                    }
-                ],
-                helpText: '',
-                meta: [],
-                description: ''
-            };
-
-            grasshopper.request(adminToken).contentTypes.insert(newContentType).then(
-                function (payload) {
-                    should.not.exist(payload);
-                },
-                function (err) {
-                    err.code.should.equal(400);
-                    err.message.should.equal('Invalid Field Object');
-                }
-            ).done(done);
-        });
-
-        it('should return error when a malformed field is passed in (missing type).', function (done) {
-            var newContentType = {
-                label: 'newtestsuitecontent',
-                fields: [
-                    {
-                        label: 'Test Field Label',
-                        required: true,
-                        instancing: 1
-                    }
-                ],
-                helpText: '',
-                meta: [],
-                description: ''
-            };
-
-            grasshopper.request(adminToken).contentTypes.insert(newContentType).then(
-                function (payload) {
-                    should.not.exist(payload);
-                },
-                function (err) {
-                    err.code.should.equal(400);
-                    err.message.should.equal('Invalid Field Object');
-                }
-            ).done(done);
-        });
-
-        it('should add a unique id to each field.', function (done) {
-            var testContentType = {
-                "label": "new test content type",
-                "fields": [
-                    {
-                        "dataType": "string",
-                        "defaultValue": "",
-                        "_id": "title",
-                        "validation": [],
-                        "type": "textbox",
-                        "options": false,
-                        "min": 1,
-                        "max": 1,
-                        "label": "Title"
-                    },
-                    {
-                        "dataType": "date",
-                        "_id": "a-date",
-                        "validation": [],
-                        "type": "date",
-                        "options": false,
-                        "min": 1,
-                        "max": 1,
-                        "label": "a date"
-                    },
-                    {
-                        "dataType": "boolean",
-                        "_id": "a-radio",
-                        "validation": [],
-                        "type": "radio",
-                        "options": false,
-                        "min": 1,
-                        "max": 1,
-                        "label": "a radio"
-                    }
-                ]
-            };
-            grasshopper.request(adminToken).contentTypes.insert(testContentType)
-                .then(
-                function (payload) {
-                    _.each(payload.fields, function (field) {
-                        field.should.have.ownProperty('_uid');
-                    });
                     done();
-                }
-            )
+                })
                 .catch(doneError.bind(null, done))
-                .fail(doneError.bind(null, done))
                 .done();
+        });
 
+        describe('the fields collection', function() {
+            it('should return an error when fields is not an array', function(done) {
+                var newContentType = {
+                    label: 'newtestsuitecontent',
+                    fields: {
+                        yourMomma : true
+                    },
+                    helpText: '',
+                    meta: [],
+                    description: ''
+                };
+
+                grasshopper.request(adminToken).contentTypes.insert(newContentType)
+                    .then(doneError.bind(null, done))
+                    .fail(function (err) {
+                        err.code.should.equal(400);
+                        err.message.should.equal('Invalid Field Object');
+                        done();
+                    })
+                    .catch(doneError.bind(null, done))
+                    .done();
+            });
+
+            it('should turn an empty fields object into an arry, so it does not break everything says Kaija', function(done) {
+                var newContentType = {
+                    label: 'newtestsuitecontent',
+                    fields: {},
+                    helpText: '',
+                    meta: [],
+                    description: ''
+                };
+
+                grasshopper.request(adminToken).contentTypes.insert(newContentType)
+                    .then(function(response) {
+                        _.isArray(response.fields).should.be.ok;
+                        done();
+                    })
+                    .fail(doneError.bind(null, done))
+                    .catch(doneError.bind(null, done))
+                    .done();
+            });
+
+            it('should return error when a malformed field id is passed in (_id has a space).', function (done) {
+                var newContentType = {
+                    label: 'newtestsuitecontent',
+                    fields: [
+                        {
+                            _id : 'this has a space',
+                            type: 'textbox'
+                        }
+                    ],
+                    helpText: '',
+                    meta: [],
+                    description: ''
+                };
+
+                grasshopper.request(adminToken).contentTypes.insert(newContentType)
+                    .then(doneError.bind(null, done))
+                    .fail(function (err) {
+                        err.code.should.equal(400);
+                        err.message.should.equal('Invalid Field Object');
+                        done();
+                    })
+                    .catch(doneError.bind(null, done))
+                    .done();
+            });
+
+            it('should return error when a malformed field is passed in (missing _id).', function (done) {
+                var newContentType = {
+                    label: 'newtestsuitecontent',
+                    fields: [
+                        {
+                            type: 'textbox'
+                        }
+                    ],
+                    helpText: '',
+                    meta: [],
+                    description: ''
+                };
+
+                grasshopper.request(adminToken).contentTypes.insert(newContentType)
+                    .then(doneError.bind(null, done))
+                    .fail(function (err) {
+                        err.code.should.equal(400);
+                        err.message.should.equal('Invalid Field Object');
+                        done();
+                    })
+                    .catch(doneError.bind(null, done))
+                    .done();
+            });
+
+            it('should return error when a malformed field is passed in (missing type).', function (done) {
+                var newContentType = {
+                    label: 'newtestsuitecontent',
+                    fields: [
+                        {
+                            _id: 'ThisIsOk'
+                        }
+                    ],
+                    helpText: '',
+                    meta: [],
+                    description: ''
+                };
+
+                grasshopper.request(adminToken).contentTypes.insert(newContentType)
+                    .then(doneError.bind(null, done))
+                    .fail(function (err) {
+                        err.code.should.equal(400);
+                        err.message.should.equal('Invalid Field Object');
+                        done();
+                    })
+                    .catch(doneError.bind(null, done))
+                    .done();
+            });
+
+            it('should add a unique id to each field.', function (done) {
+                var testContentType = {
+                    "label": "new test content type",
+                    "fields": [
+                        {
+                            "dataType": "string",
+                            "defaultValue": "",
+                            "_id": "title",
+                            "validation": [],
+                            "type": "textbox",
+                            "options": false,
+                            "min": 1,
+                            "max": 1,
+                            "label": "Title"
+                        },
+                        {
+                            "dataType": "date",
+                            "_id": "a-date",
+                            "validation": [],
+                            "type": "date",
+                            "options": false,
+                            "min": 1,
+                            "max": 1,
+                            "label": "a date"
+                        },
+                        {
+                            "dataType": "boolean",
+                            "_id": "a-radio",
+                            "validation": [],
+                            "type": "radio",
+                            "options": false,
+                            "min": 1,
+                            "max": 1,
+                            "label": "a radio"
+                        }
+                    ]
+                };
+                grasshopper.request(adminToken).contentTypes.insert(testContentType)
+                    .then(function (payload) {
+                        _.each(payload.fields, function (field) {
+                            field.should.have.ownProperty('_uid');
+                        });
+
+                        done();
+                    })
+                    .catch(doneError.bind(null, done))
+                    .fail(doneError.bind(null, done))
+                    .done();
+
+            });
         });
     });
 
@@ -592,7 +627,7 @@ describe('Grasshopper core - contentTypes', function () {
 
             });
 
-            it('should update content field ids on embedded content if a contenttype field id is changed on an embedded type.', function (done) {
+        it('should update content field ids on embedded content if a contenttype field id is changed on an embedded type.', function (done) {
                 var originalId = "origId",
                     typeToEmbed = {
                         "label": "cooperembeddeep",
@@ -762,7 +797,7 @@ describe('Grasshopper core - contentTypes', function () {
 
             });
 
-            describe('updating the fields array on a content type', function () {
+        describe('updating the fields array on a content type', function () {
 
                 it('should update the meta.labelfield when the order of fields changed', function (done) {
                     var updatedContentType = {
@@ -854,7 +889,7 @@ describe('Grasshopper core - contentTypes', function () {
 
         });
 
-        describe('deleteById', function () {
+    describe('deleteById', function () {
             before(function (done) {
                 grasshopper.request(adminToken).content.insert({
                     "label": "Future deletee",
@@ -911,9 +946,9 @@ describe('Grasshopper core - contentTypes', function () {
         });
 
 
-    });
+});
 
-    function doneError (done, err) {
-        'use strict';
-        done(err);
-    }
+function doneError (done, err) {
+    'use strict';
+    done(err);
+}
