@@ -719,12 +719,12 @@ describe('Grasshopper core - contentTypes', function () {
                 grasshopper.request(adminToken).contentTypes.insert(typeToEmbed)
                     .then(function (createdContentType) {
                         typeToEmbed = createdContentType;
-                        typeWithEmbed.fields[1].options = typeToEmbed._id;
+                        typeWithEmbed.fields[1].options = String(typeToEmbed._id).valueOf();
                         return grasshopper.request(adminToken).contentTypes.insert(typeWithEmbed);
                     })
                     .then(function (secondaryContentType) {
                         typeWithEmbed = secondaryContentType;
-                        typeWithEmbedShallow.fields[1].options = typeWithEmbed._id;
+                        typeWithEmbedShallow.fields[1].options = String(typeWithEmbed._id).valueOf();
                         return grasshopper.request(adminToken).contentTypes.insert(typeWithEmbedShallow);
                     })
                     .then(function(typeWithEmbedShallow){
