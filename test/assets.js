@@ -320,6 +320,20 @@ describe('Grasshopper core - testing assets', function(){
             ).done(done);
         });
 
+        it('Getting root node should work', function(done) {
+            grasshopper.request(globalEditorToken).assets.list({
+                nodeid: 0
+            })
+                .then(
+                    function(payload) {
+                        payload.should.exist;
+                        done();
+                    }
+                )
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
+        });
 
         /** Deferred until later
         it('an editor should return a DEEP list of files in a node and it\'s children', function(done) {
@@ -372,4 +386,8 @@ describe('Grasshopper core - testing assets', function(){
         });
          */
     });
+
+    function doneError(done, err) {
+        done(err);
+    }
 });
