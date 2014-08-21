@@ -383,6 +383,58 @@ module.exports = function(ObjectID) {
             ],
             "_id" : ObjectID("53d19248ae9b9800003846f0"),
             "__v" : 0
+        },
+        // Get full test
+        {
+            "label": "Page Home",
+            "__v": 6,
+            "_id": ObjectID("53f4e58e0126074f95d22288"),
+            "fields": [
+                {
+                    "dataType": "string",
+                    "defaultValue": "",
+                    "_id": "title",
+                    "validation": [],
+                    "type": "textbox",
+                    "options": false,
+                    "min": 1,
+                    "max": 1,
+                    "label": "Title"
+                },
+                {
+                    "dataType": "ref",
+                    "_id": "main-background-image",
+                    "validation": [],
+                    "type": "contentreference",
+                    "options": {
+                        "allowedTypes": [
+                            "53f5295551c4e08f29bf096b"
+                        ],
+                        "defaultNode": "0"
+                    },
+                    "min": 1,
+                    "max": 1,
+                    "label": "Main Background Image"
+                }
+            ]
+        },
+        {
+            "label": "Image",
+            "fields": [
+                {
+                    "dataType": "string",
+                    "defaultValue": "",
+                    "_id": "alt-tag",
+                    "validation": [],
+                    "type": "textbox",
+                    "options": false,
+                    "min": 1,
+                    "max": 1,
+                    "label": "Alt Tag"
+                }
+            ],
+            "_id": ObjectID("53f5295551c4e08f29bf096b"),
+            "__v": 0
         }
 
     ];
