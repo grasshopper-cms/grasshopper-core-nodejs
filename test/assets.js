@@ -76,15 +76,12 @@ describe('Grasshopper core - testing assets', function(){
             grasshopper.request(globalEditorToken).assets.save({
                     nodeid: testNodeId,
                     filename: 'artwork.png',
-                    path: path.join(__dirname, 'tmp/artwork.png')
-                }).then(
-                    function(payload) {
-                        payload.message.should.equal('Success');
-                    },
-                    function(err){
-                        should.not.exist(err);
-                    }
-                ).done(done);
+                    path: path.join(__dirname, 'tmp/artwork.png')})
+                .then(function(payload) {
+                    payload.message.should.equal('Success');
+                    done(); })
+                .fail(done)
+                .done();
         });
     });
 
@@ -98,89 +95,83 @@ describe('Grasshopper core - testing assets', function(){
             }).then(
                 function(payload) {
                     payload.message.should.equal('Success');
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done(); })
+                .fail(done)
+                .done();
         });
 
         it('should fail because asset does not exist.', function(done) {
-            grasshopper.request(globalEditorToken).assets.rename({
-                nodeid: testNodeId,
-                original: 'artwork_doesntexist.png',
-                updated: 'testimage.png'
-            }).then(
-                function(payload) {
-                    should.not.exist(payload);
-                },
-                function(err){
+            grasshopper
+                .request(globalEditorToken).assets.rename({
+                    nodeid: testNodeId,
+                    original: 'artwork_doesntexist.png',
+                    updated: 'testimage.png' })
+                .then(function() {
+                    done(new Error('Should not succeed')); })
+                .fail(function(err){
                     err.code.should.equal(404);
-                }
-            ).done(done);
+                    done(); })
+                .done();
         });
 
         it('should fail because the user does not have permissions.', function(done) {
-            grasshopper.request(globalReaderToken).assets.rename({
-                nodeid: testNodeId,
-                original: 'artwork.png',
-                updated: 'testimage.png'
-            }).then(
-                function(payload) {
-                    should.not.exist(payload);
-                },
-                function(err){
+            grasshopper
+                .request(globalReaderToken).assets.rename({
+                    nodeid: testNodeId,
+                    original: 'artwork.png',
+                    updated: 'testimage.png' })
+                .then(function() {
+                    done(new Error('Should not succeed')); })
+                .fail(function(err){
                     err.code.should.equal(403);
-                }
-            ).done(done);
+                    done(); })
+                .done();
         });
     });
 
     describe('copy asset', function() {
         it('should copy an asset from one node to another.', function(done) {
-            grasshopper.request(globalEditorToken).assets.copy({
-                nodeid: testNodeId,
-                newnodeid: '5246e73d56c02c0744000001',
-                filename: 'testimage.png'
-            }).then(
-                function(payload) {
+            grasshopper
+                .request(globalEditorToken)
+                .assets.copy({
+                    nodeid: testNodeId,
+                    newnodeid: '5246e73d56c02c0744000001',
+                    filename: 'testimage.png' })
+                .then(function(payload) {
                     payload.message.should.equal('Success');
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done(); })
+                .fail(done)
+                .done();
         });
 
     });
 
     describe('Get the details of one file', function() {
         it('should get a file from a node specified by the filename.', function(done) {
-            grasshopper.request(globalEditorToken).assets.find({
-                nodeid: testNodeId,
-                filename: 'testimage.png'
-            }).then(
-                function(payload) {
+            grasshopper
+                .request(globalEditorToken)
+                .assets.find({
+                    nodeid: testNodeId,
+                    filename: 'testimage.png' })
+                .then(function(payload) {
                     payload.should.be.an.object;
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done(); })
+                .fail(done)
+                .done();
         });
 
         it('should return a 404 when it could not find the file.', function(done) {
-            grasshopper.request(globalEditorToken).assets.find({
-                nodeid: testNodeId,
-                filename: 'gobledigook.png'
-            }).then(
-                function(payload) {
-                    should.not.exist(payload);
-                },
-                function(err){
+            grasshopper
+                .request(globalEditorToken)
+                .assets.find({
+                    nodeid: testNodeId,
+                    filename: 'gobledigook.png' })
+                .then(function() {
+                    done(new Error('Should not succeed')); })
+                .fail(function(err){
                     err.code.should.equal(404);
-                }
-            ).done(done);
+                    done(); })
+                .done();
         });
     });
 
@@ -198,33 +189,32 @@ describe('Grasshopper core - testing assets', function(){
         });
 
         it('should move a file to a new location', function(done) {
-            grasshopper.request(globalEditorToken).assets.move({
-                nodeid: testNodeId,
-                filename: '36.png',
-                newnodeid: '5246e73d56c02c0744000001'
-            }).then(
-                function(payload) {
+            grasshopper
+                .request(globalEditorToken)
+                .assets.move({
+                    nodeid: testNodeId,
+                    filename: '36.png',
+                    newnodeid: '5246e73d56c02c0744000001' })
+                .then(function(payload) {
                     payload.should.be.an.object;
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done(); })
+                .fail(done)
+                .done();
         });
 
         it('should return a 404 when it could not find the file.', function(done) {
-            grasshopper.request(globalEditorToken).assets.find({
-                nodeid: testNodeId,
-                filename: 'gobledigook.png',
-                newnodeid: '5246e73d56c02c0744000001'
-            }).then(
-                function(payload) {
-                    should.not.exist(payload);
-                },
-                function(err){
+            grasshopper
+                .request(globalEditorToken)
+                .assets.find({
+                    nodeid: testNodeId,
+                    filename: 'gobledigook.png',
+                    newnodeid: '5246e73d56c02c0744000001' })
+                .then(function() {
+                    done(new Error('Should not succeed')); })
+                .fail(function(err){
                     err.code.should.equal(404);
-                }
-            ).done(done);
+                    done(); })
+                .done();
         });
     });
 
@@ -246,31 +236,30 @@ describe('Grasshopper core - testing assets', function(){
         });
 
         it('should delete asset with a specific name', function(done) {
-            grasshopper.request(globalEditorToken).assets.delete({
-                nodeid: testNodeId,
-                filename: 'assetfordeletion.png'
-            }).then(
-                function(payload) {
+            grasshopper
+                .request(globalEditorToken)
+                .assets.delete({
+                    nodeid: testNodeId,
+                    filename: 'assetfordeletion.png' })
+                .then(function(payload) {
                     payload.message.should.equal('Success');
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done(); })
+                .fail(done)
+                .done();
         });
 
         it('should fail because the user does not have permissions.', function(done) {
-            grasshopper.request(globalReaderToken).assets.delete({
-                nodeid: testNodeId,
-                filename: 'assetfordeletion.png'
-            }).then(
-                function(payload) {
-                    should.not.exist(payload);
-                },
-                function(err){
+            grasshopper
+                .request(globalReaderToken)
+                .assets.delete({
+                    nodeid: testNodeId,
+                    filename: 'assetfordeletion.png' })
+                .then(function() {
+                    done(new Error('Should not succeed')); })
+                .fail(function(err){
                     err.code.should.equal(403);
-                }
-            ).done(done);
+                    done(); })
+                .done();
         });
 
         /** Requires node level permissions
@@ -283,16 +272,16 @@ describe('Grasshopper core - testing assets', function(){
 
     describe('get all the assets in a node.', function() {
         it('should return 401 because trying to access unauthenticated', function(done) {
-            grasshopper.request().assets.list({
-                nodeid: testNodeId
-            }).then(
-                function(payload) {
-                    should.not.exist(payload);
-                },
-                function(err){
+            grasshopper
+                .request()
+                .assets.list({
+                    nodeid: testNodeId })
+                .then(function() {
+                    done(new Error('Should not succeed')); })
+                .fail(function(err){
                     err.code.should.equal(401);
-                }
-            ).done(done);
+                    done(); })
+                .done();
         });
 
         /* Requires Node Level Permissions
@@ -308,16 +297,15 @@ describe('Grasshopper core - testing assets', function(){
          */
 
         it('an editor should return a list of files in a node', function(done) {
-            grasshopper.request(globalEditorToken).assets.list({
-                nodeid: testNodeId
-            }).then(
-                function(payload) {
+            grasshopper
+                .request(globalEditorToken)
+                .assets.list({
+                    nodeid: testNodeId })
+                .then(function(payload) {
                     payload.length.should.equal(5);
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done(); })
+                .fail(done)
+                .done();
         });
 
         it('Getting root node should work', function(done) {
@@ -354,29 +342,28 @@ describe('Grasshopper core - testing assets', function(){
 
     describe('delete assets', function() {
         it('should delete all files in a node.', function(done) {
-            grasshopper.request(globalEditorToken).assets.deleteAll({
-                nodeid: testNodeId
-            }).then(
-                function(payload) {
+            grasshopper
+                .request(globalEditorToken)
+                .assets.deleteAll({
+                    nodeid: testNodeId })
+                .then(function(payload) {
                     payload.message.should.equal('Success');
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done(); })
+                .fail(done)
+                .done();
         });
 
         it('should fail because the user does not have permissions.', function(done) {
-           grasshopper.request(globalReaderToken).assets.deleteAll({
-                nodeid: testNodeId
-            }).then(
-                function(payload) {
-                    should.not.exist(payload);
-                },
-                function(err){
-                    err.code.should.equal(403);
-                }
-            ).done(done);
+           grasshopper
+               .request(globalReaderToken)
+               .assets.deleteAll({
+                    nodeid: testNodeId })
+               .then(function() {
+                    done(new Error('Should not succeed')); })
+               .fail(function(err){
+                   err.code.should.equal(403);
+                   done(); })
+               .done();
         });
 
         /** Requires node level permissions

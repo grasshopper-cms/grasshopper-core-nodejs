@@ -63,14 +63,12 @@ describe('Grasshopper core - contentTypes', function () {
 
     describe('get list', function () {
         it('should return a list of content types with the default page size', function (done) {
-            grasshopper.request(adminToken).contentTypes.list().then(
+            grasshopper
+                .request(adminToken).contentTypes.list().then(
                 function (payload) {
                     payload.results.length.should.equal(9);
-                },
-                function (err) {
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done();
+                }).fail(done).done();
         });
         it('should a list of content types with the specified page size', function (done) {
             grasshopper.request(adminToken).contentTypes.list({limit: 1}).then(
