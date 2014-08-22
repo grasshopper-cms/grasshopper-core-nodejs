@@ -4,10 +4,15 @@
         "$oid": "53f6f57e7cec50a2b14728e2"
     },
     "fields": {
-        "title": "Nested 2",
+        "embedded-array": [],
+        "simple-embedded": {
+            "main-background-image": "",
+            "title": ""
+        },
         "refs": [
             "53f6f58a7cec50a2b14728e3"
-        ]
+        ],
+        "title": "Nested 2"
     },
     "meta": {
         "node": {
@@ -22,7 +27,7 @@
             "$date": 1408693630321
         },
         "lastmodified": {
-            "$date": 1408693730794
+            "$date": 1408702345438
         }
     }
 }

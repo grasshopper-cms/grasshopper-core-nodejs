@@ -4,11 +4,16 @@
         "$oid": "53f6f5537cec50a2b14728e0"
     },
     "fields": {
-        "title": "Deep Nest",
+        "embedded-array": [],
+        "simple-embedded": {
+            "main-background-image": "",
+            "title": ""
+        },
         "refs": [
             "53f6f56d7cec50a2b14728e1",
             "53f6f57e7cec50a2b14728e2"
-        ]
+        ],
+        "title": "Deep Nest"
     },
     "meta": {
         "node": {
@@ -23,7 +28,7 @@
             "$date": 1408693587306
         },
         "lastmodified": {
-            "$date": 1408693707300
+            "$date": 1408702338626
         }
     }
 }

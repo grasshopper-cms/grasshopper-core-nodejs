@@ -1,10 +1,21 @@
 {
-    "fields": {
-        "refs": [],
-        "title": "Nested 3"
-    },
+    "__v": 0,
     "_id": {
         "$oid": "53f6f58a7cec50a2b14728e3"
+    },
+    "fields": {
+        "embedded-array": [
+            {
+                "main-background-image": "53f63bcd79409eb0541a4a40",
+                "title": "Nested Array"
+            }
+        ],
+        "simple-embedded": {
+            "main-background-image": "53f63bcd79409eb0541a4a40",
+            "title": "Nested Image"
+        },
+        "title": "Nested 3",
+        "refs": []
     },
     "meta": {
         "node": {
@@ -19,8 +30,7 @@
             "$date": 1408693642282
         },
         "lastmodified": {
-            "$date": 1408693642282
+            "$date": 1408702384455
         }
-    },
-    "__v": 0
+    }
 }
