@@ -23,7 +23,7 @@ module.exports = function (grunt) {
             grunt.config.set('debug', 'debug');
         }
 
-        grunt.task.run(['jshint', 'db:test', 'shell:' + testCommand]);
+        grunt.task.run(['jshint', 'data:load', 'shell:' + testCommand]);
     });
 
     grunt.registerTask('debugTest', 'Shortcut for using the node-inspector. Tests to run can be supplied as the first ' +

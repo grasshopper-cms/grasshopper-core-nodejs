@@ -1,0 +1,20 @@
+{
+    "_id": {
+        "$oid": "5320ed3fb9c9cb6364e23031"
+    },
+    "label": "Sample Sub Sub Sub-Node 1",
+    "parent": {
+        "$oid": "52712a3e2eacd5a714000006"
+    },
+    "ancestors": [
+        {
+            "$oid": "5261781556c02c072a000007"
+        },
+        {
+            "$oid": "5254908d56c02c076e000001"
+        },
+        {
+            "$oid": "52712a3e2eacd5a714000006"
+        }
+    ]
+}
