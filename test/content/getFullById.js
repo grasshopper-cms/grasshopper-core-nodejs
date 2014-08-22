@@ -90,16 +90,13 @@ describe('Grasshopper core - content', function(){
                 grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' })
                     .then(function (token) {
                         readerToken = token;
-                        done();
-                    },
-                    function (err) {
-                        console.log(err);
-                    });
+                        done(); })
+                    .catch(done);
             });
     });
 
     describe('getFullById', function() {
-        xit('simple: should return an object with content references filled in', function (done) {
+        it('simple: should return an object with content references filled in', function (done) {
             grasshopper
                 .request(adminToken)
                 .content.getFullById('53f63bea79409eb0541a4a41')
