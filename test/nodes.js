@@ -74,7 +74,8 @@ describe('Grasshopper core - testing nodes', function(){
             grasshopper.request(globalEditorToken).nodes.insert(n)
                 .then(function(payload){
                     testNodeIdRoot_generated = payload._id.toString();
-                    payload.label.should.equal('My Test Node'); })
+                    payload.label.should.equal('My Test Node');
+                    done(); })
                 .fail(doneError.bind(null, done))
                 .catch(doneError.bind(null, done))
                 .done();
