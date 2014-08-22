@@ -780,12 +780,12 @@ describe('Grasshopper core - users', function(){
                             should.exist(payload.createdby);
                             done();
                         })
-                        .fail(doneError.bind(null, done))
-                        .catch(doneError.bind(null, done))
+                        .fail(done)
+                        .catch(done)
                         .done();
                 })
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
+                .fail(done)
+                .catch(done)
                 .done();
         });
 
@@ -818,12 +818,12 @@ describe('Grasshopper core - users', function(){
                             should.exist(payload.updatedby);
                             done();
                         })
-                        .fail(doneError.bind(null, done))
-                        .catch(doneError.bind(null, done))
+                        .fail(done)
+                        .catch(done)
                         .done();
                 })
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
+                .fail(done)
+                .catch(done)
                 .done();
         });
 
