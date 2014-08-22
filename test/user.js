@@ -749,6 +749,85 @@ describe('Grasshopper core - users', function(){
                 .catch(doneError.bind(null, done))
                 .done();
         });
+        describe('updatedby and createdby', function() {
+
+        it('should add a createdby property on user update if one does not already exist.', function(done){
+            var newUser = {
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User',
+                identities: {
+                    basic: {
+                        username: 'updateProfileValue',
+                        password: 'TestPassword'
+                    }
+                },
+                profile: {
+                    testval1: 'testval2',
+                    testval2: 'testval1'
+                }
+            };
+
+            grasshopper.request(adminToken).users.insert(newUser)
+                .then(function(payload){
+                    should.not.exist(payload.createdby);
+                    delete payload.profile.testval1;
+
+                    grasshopper.request(adminToken).users.update(payload)
+                        .then(function(payload){
+                            should.exist(payload.createdby);
+                            done();
+                        })
+                        .fail(doneError.bind(null, done))
+                        .catch(doneError.bind(null, done))
+                        .done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
+        });
+
+        it('should add an updatedby property on user update.', function(done) {
+            var newUser = {
+                role: 'reader',
+                enabled: true,
+                email: 'newtestuser1@thinksolid.com',
+                firstname: 'Test',
+                lastname: 'User',
+                identities: {
+                    basic: {
+                        username: 'updatedbyTest',
+                        password: 'TestPassword'
+                    }
+                },
+                profile: {
+                    testval1: 'testval1',
+                    testval2: 'testval2'
+                }
+            };
+
+            grasshopper.request(adminToken).users.insert(newUser)
+                .then(function(payload){
+                    should.not.exist(payload.updatedby);
+                    delete payload.profile.testval2;
+
+                    grasshopper.request(adminToken).users.update(payload)
+                        .then(function(payload){
+                            should.exist(payload.updatedby);
+                            done();
+                        })
+                        .fail(doneError.bind(null, done))
+                        .catch(doneError.bind(null, done))
+                        .done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
+        });
+
+        });
 
         describe('with changes in the identities', function() {
 
