@@ -31,7 +31,7 @@
     "mongoose": "~3.8.9",
     "mongoose-validator": "~0.2.2",
     "node-uuid": "^1.4.1",
-    "q": "~1.0.1",
+    "q": "^1.0.1",
     "request": "^2.39.0",
     "solid-logger-js": "~0.3.9",
     "validator": "~3.5.1"

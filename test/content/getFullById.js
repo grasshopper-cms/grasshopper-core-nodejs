@@ -51,15 +51,16 @@ describe('Grasshopper core - content', function(){
             });
     });
 
-    describe('getById', function() {
+    describe('getFullById', function() {
         it('should return a list of content types with the default page size', function (done) {
             grasshopper
                 .request(adminToken)
-                .content.getById('53f63bea79409eb0541a4a41')
+                .content.getFullById('53f63bea79409eb0541a4a41')
                 .then(function (payload) {
                     payload.should.equal(expectedHome);
                     done(); })
                 .fail(done)
+                .catch(done)
                 .done();
         });
     });
