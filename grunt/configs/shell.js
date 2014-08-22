@@ -24,6 +24,13 @@ module.exports = function (grunt) {
                 stderr : true
             }
         },
+        'server': {
+            command : 'node dev/server',
+            options : {
+                stdout : true,
+                stderr : true
+            }
+        },
         'shortlog' : {
             options : {
                 stderr : true,

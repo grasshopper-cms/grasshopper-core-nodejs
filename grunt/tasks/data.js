@@ -13,7 +13,7 @@ module.exports = function (grunt) {
     // Load
     grunt.registerTask('data:load', 'Load the data from JSON to the server. This will wipe out all existing data.',
         function () {
-            grunt.task.run(['prompt:environmentNoStaging', 'data:load:continue']);
+            grunt.task.run(['data:load:continue']);
         });
     grunt.registerTask('data:load:continue', 'Helper task', function () {
         grunt.task.run('data:load:write:test');

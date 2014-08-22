@@ -1,4 +1,5 @@
 {
+    "__v": 0,
     "_id": {
         "$oid": "53f63bcd79409eb0541a4a40"
     },
@@ -7,13 +8,15 @@
     },
     "meta": {
         "node": {
-            "$oid": "53f4e3d90126074f95d22285"
+            "$oid": "53f6f3967cec50a2b14728de"
         },
         "type": {
             "$oid": "53f5295551c4e08f29bf096b"
         },
         "labelfield": "alt-tag",
-        "typelabel": "Image"
-    },
-    "__v": 0
+        "typelabel": "Image",
+        "lastmodified": {
+            "$date": 1408693518446
+        }
+    }
 }

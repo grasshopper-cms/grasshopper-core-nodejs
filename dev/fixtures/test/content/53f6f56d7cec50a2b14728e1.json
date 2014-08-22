@@ -1,0 +1,26 @@
+{
+    "fields": {
+        "refs": [],
+        "title": "Nested 1"
+    },
+    "_id": {
+        "$oid": "53f6f56d7cec50a2b14728e1"
+    },
+    "meta": {
+        "node": {
+            "$oid": "53f6f3967cec50a2b14728de"
+        },
+        "type": {
+            "$oid": "53f6f4177cec50a2b14728df"
+        },
+        "labelfield": "title",
+        "typelabel": "Nested References",
+        "created": {
+            "$date": 1408693613757
+        },
+        "lastmodified": {
+            "$date": 1408693617727
+        }
+    },
+    "__v": 0
+}
