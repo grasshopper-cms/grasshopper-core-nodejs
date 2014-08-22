@@ -1,0 +1,7 @@
+{
+    "_id": {
+        "$oid": "5261777656c02c072a000001"
+    },
+    "name": "BeforeAuthentication",
+    "description": "Hook gets fired before a user gets authenticated in the system."
+}
