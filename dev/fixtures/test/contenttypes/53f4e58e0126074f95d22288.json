@@ -1,6 +1,5 @@
 {
-    "label": "Page Home",
-    "__v": 6,
+    "__v": 8,
     "_id": {
         "$oid": "53f4e58e0126074f95d22288"
     },
@@ -8,6 +7,7 @@
         {
             "dataType": "string",
             "defaultValue": "",
+            "_uid": "28b61800-29d6-11e4-8e6c-3588cc1ac434",
             "_id": "title",
             "validation": [],
             "type": "textbox",
@@ -18,6 +18,7 @@
         },
         {
             "dataType": "ref",
+            "_uid": "28b61801-29d6-11e4-8e6c-3588cc1ac434",
             "_id": "main-background-image",
             "validation": [],
             "type": "contentreference",
@@ -29,7 +30,8 @@
             },
             "min": 1,
             "max": 1,
-            "label": "Main Background Image"
+            "label": "Ref"
         }
-    ]
+    ],
+    "label": "Page Home"
 }

@@ -4,9 +4,9 @@
         "$oid": "53f63bea79409eb0541a4a41"
     },
     "fields": {
-        "main-background-image": "",
+        "ref": "53f63bcd79409eb0541a4a40",
         "title": "Home example",
-        "ref": "53f63bcd79409eb0541a4a40"
+        "main-background-image": "53f63bcd79409eb0541a4a40"
     },
     "meta": {
         "node": {
@@ -18,7 +18,7 @@
         "labelfield": "title",
         "typelabel": "Page Home",
         "lastmodified": {
-            "$date": 1408693526656
+            "$date": 1408696093713
         }
     }
 }
