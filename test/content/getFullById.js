@@ -34,6 +34,24 @@ describe('Grasshopper core - content', function(){
                 'typelabel': 'Page Home'
             },
             '__v': 0
+        },
+        expectedNested = {
+            "title": "Deep Nest",
+            "refs": [
+                {
+                    "refs": [],
+                    "title": "Nested 1"
+                },
+                {
+                    "title": "Nested 2",
+                    "refs": [
+                        {
+                            "refs": [],
+                            "title": "Nested 3"
+                        }
+                    ]
+                }
+            ]
         };
 
     before(function (done) {
@@ -52,12 +70,24 @@ describe('Grasshopper core - content', function(){
     });
 
     describe('getFullById', function() {
-        it('should return a list of content types with the default page size', function (done) {
+        xit('simple: should return an object with content references filled in', function (done) {
             grasshopper
                 .request(adminToken)
                 .content.getFullById('53f63bea79409eb0541a4a41')
                 .then(function (payload) {
-                    //payload.fields.should.deep.equal(expectedHome.fields);
+                    payload.fields.should.deep.equal(expectedHome.fields);
+                    done(); })
+                .fail(done)
+                .catch(done)
+                .done();
+        });
+
+        it('nested: should return an object with content references filled in', function (done) {
+            grasshopper
+                .request(adminToken)
+                .content.getFullById('53f6f5537cec50a2b14728e0')
+                .then(function (payload) {
+                    payload.fields.should.deep.equal(expectedNested);
                     done(); })
                 .fail(done)
                 .catch(done)
