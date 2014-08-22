@@ -37,17 +37,46 @@ describe('Grasshopper core - content', function(){
         },
         expectedNested = {
             "title": "Deep Nest",
+            "embedded-array": [],
+            "simple-embedded": {
+                "main-background-image": "",
+                "title": ""
+            },
             "refs": [
                 {
+                    "embedded-array": [],
+                    "simple-embedded": {
+                        "main-background-image": "",
+                        "title": ""
+                    },
                     "refs": [],
                     "title": "Nested 1"
                 },
                 {
+                    "embedded-array": [],
+                    "simple-embedded": {
+                        "main-background-image": "",
+                        "title": ""
+                    },
                     "title": "Nested 2",
                     "refs": [
                         {
                             "refs": [],
-                            "title": "Nested 3"
+                            "title": "Nested 3",
+                            "embedded-array": [
+                                {
+                                    "main-background-image": {
+                                        "alt-tag": "Image"
+                                    },
+                                    "title": "Nested Array"
+                                }
+                            ],
+                            "simple-embedded": {
+                                "main-background-image": {
+                                    "alt-tag": "Image"
+                                },
+                                "title": "Nested Image"
+                            }
                         }
                     ]
                 }
