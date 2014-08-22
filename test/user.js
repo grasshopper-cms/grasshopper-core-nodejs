@@ -421,6 +421,34 @@ describe('Grasshopper core - users', function(){
                 .done();
         });
 
+        it('should insert a user with a createdby property', function(done) {
+            var newUser = {
+                role: 'reader',
+                enabled: true,
+                email: 'anothertestuser@thinksolid.com',
+                firstname: 'Anotherfirstname',
+                lastname: 'Anotherlastname',
+                identities: {
+                    basic: {
+                        username: 'anotherPerson',
+                        password: 'anotherPassword'
+                    }
+                },
+                profile: {
+                    linkedid: 'tjmchattie'
+                }
+            };
+
+            grasshopper.request(adminToken).users.insert(newUser)
+                .then(function(payload){
+                    console.log(payload);
+                    should.exist(payload.updatedby);
+                })
+                .fail(done)
+                .catch(done)
+                .done();
+        });
+
         it('should return error if a an existing user id is sent with the request.', function(done){
             var newUser = {
                 _id: testCreatedUserId,
