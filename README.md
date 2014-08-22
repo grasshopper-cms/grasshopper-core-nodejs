@@ -206,4 +206,20 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 To create the readme, update the release notes dir and package.json.version at a minimum. If needed update README.template.md.
 Then run `grunt readme`.
 
-_Compiled file. Do not modify directly. Created: 2014-08-20 04:12:38_
+Test data is loaded from `dev/fixtures`. There is a bundled grasshopper admin that can be used to modify test data.
+
+The procedure to edit test data is:
+
+```bash
+# This will clear the db and load from fixtures
+grunt data:load
+
+# this will server admin at http://localhost/admin
+grunt server
+
+# now edit using admin
+# once finished save the data back to fixtures with:
+grunt data:save
+```
+
+_Compiled file. Do not modify directly. Created: 2014-08-22 01:25:38_
