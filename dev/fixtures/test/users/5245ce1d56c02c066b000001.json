@@ -1,0 +1,21 @@
+{
+    "_id": {
+        "$oid": "5245ce1d56c02c066b000001"
+    },
+    "email": "apitestuser@thinksolid.com",
+    "identities": {
+        "basic": {
+            "username": "apitestuser",
+            "salt": "225384010328",
+            "hash": "885f59a76ea44e1d264f9da45ca83574fbe55e3e7e6c51afe681730b45c7bb03"
+        }
+    },
+    "displayname": "apitestuser",
+    "linkedidentities": [
+        "basic"
+    ],
+    "enabled": true,
+    "role": "reader",
+    "firstname": "Test",
+    "lastname": "User"
+}

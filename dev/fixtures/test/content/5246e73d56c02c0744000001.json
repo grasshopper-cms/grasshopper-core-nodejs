@@ -1,0 +1,18 @@
+{
+    "_id": {
+        "$oid": "5246e73d56c02c0744000001"
+    },
+    "meta": {
+        "type": {
+            "$oid": "524362aa56c02c0703000123"
+        },
+        "node": {
+            "$oid": "526d5179966a883540000006"
+        },
+        "labelfield": "testfield"
+    },
+    "fields": {
+        "testfield": "customtestvalue",
+        "testeroni": true
+    }
+}

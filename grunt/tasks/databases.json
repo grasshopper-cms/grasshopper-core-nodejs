@@ -1,0 +1,12 @@
+{
+    "test": {
+        "collections" : [
+            "content",
+            "contenttypes",
+            "hookevents",
+            "nodes",
+            "tokens",
+            "users"
+        ]
+    }
+}

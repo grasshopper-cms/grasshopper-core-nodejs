@@ -24,6 +24,13 @@ module.exports = function (grunt) {
                 stderr : true
             }
         },
+        'server': {
+            command : 'node dev/server',
+            options : {
+                stdout : true,
+                stderr : true
+            }
+        },
         'shortlog' : {
             options : {
                 stderr : true,
@@ -39,6 +46,30 @@ module.exports = function (grunt) {
                 }
             },
             command : 'git --no-pager shortlog -ns HEAD'
+        },
+        'mongoExport' : {
+            options : {
+                stdout : true,
+                stderr : true,
+                failOnError : true,
+                execOptions: {
+                    cwd: './'
+                }
+            },
+            command : 'mongoexport --jsonArray --db test -c <%= collection %> --host localhost:27017 ' +
+            '--out .data/<%= fixtureFolder %>/<%= collection %>.json'
+        },
+        'mongoImport' :{
+            options : {
+                stdout : true,
+                stderr : true,
+                failOnError : true,
+                execOptions: {
+                    cwd: './'
+                }
+            },
+            command : 'mongoimport --drop --jsonArray --db test -c <%= collection %> --host localhost:27017 ' +
+            '--file .data/<%= fixtureFolder %>/<%= collection %>.json'
         }
     });
 };

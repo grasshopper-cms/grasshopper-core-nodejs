@@ -1,0 +1,30 @@
+{
+    "label": "Test DateTime",
+    "fields": [
+        {
+            "dataType": "string",
+            "defaultValue": "",
+            "_id": "title",
+            "validation": [],
+            "type": "textbox",
+            "options": false,
+            "min": 1,
+            "max": 1,
+            "label": "Title"
+        },
+        {
+            "dataType": "date",
+            "_id": "a_datetime",
+            "validation": [],
+            "type": "datetime",
+            "options": false,
+            "min": 1,
+            "max": 1,
+            "label": "A DateTime"
+        }
+    ],
+    "_id": {
+        "$oid": "53d156e5ae9b9800003846e8"
+    },
+    "__v": 0
+}

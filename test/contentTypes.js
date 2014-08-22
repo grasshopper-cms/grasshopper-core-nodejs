@@ -66,7 +66,7 @@ describe('Grasshopper core - contentTypes', function () {
             grasshopper
                 .request(adminToken).contentTypes.list().then(
                 function (payload) {
-                    payload.results.length.should.equal(9);
+                    payload.results.length.should.equal(12);
                     done();
                 }).fail(done).done();
         });

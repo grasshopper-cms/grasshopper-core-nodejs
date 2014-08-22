@@ -28,8 +28,8 @@ describe('Grasshopper core - users', function(){
                         readerToken = token;
                         done();
                     })
-                    .fail(doneError.bind(null, done))
-                    .catch(doneError.bind(null, done))
+                    .fail(done)
+                    .catch(done)
                     .done();
             });
     });
@@ -37,12 +37,12 @@ describe('Grasshopper core - users', function(){
     describe('Get a user by email', function(){
         it('Make sure that a reader cannot call getByEmail method (only admins can)', function(done) {
             grasshopper.request(readerToken).users.getByEmail('apitestuser_1@thinksolid.com')
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(403);
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -52,30 +52,30 @@ describe('Grasshopper core - users', function(){
                     payload.email.should.equal('apitestuser_1@thinksolid.com');
                     done();
                 })
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
+                .fail(done)
+                .catch(done)
                 .done();
         });
 
         it('should return 401 because trying to access unauthenticated', function(done) {
             grasshopper.request().users.getByEmail('test@test.com')
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(401);
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
         it('should return 404 because test user id does not exist', function(done) {
             grasshopper.request(adminToken).users.getByEmail('test@test.com')
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(404);
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
     });
@@ -83,12 +83,12 @@ describe('Grasshopper core - users', function(){
     describe('Get a user by id', function() {
         it('Make sure that a reader cannot call getById method (only admins can)', function(done) {
             grasshopper.request(readerToken).users.getById('5246e73d56c02c0744000004')
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(403);
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -98,30 +98,30 @@ describe('Grasshopper core - users', function(){
                     payload.email.should.equal('apitestuser@thinksolid.com');
                     done();
                 })
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
+                .fail(done)
+                .catch(done)
                 .done();
         });
 
         it('should return 401 because trying to access unauthenticated', function(done) {
             grasshopper.request().users.getById('5246e73d56c02c0744000004')
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(401);
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
         it('should return 404 because test user id does not exist', function(done) {
             grasshopper.request(adminToken).users.getById('526417710658fc1f0a00000b')
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(404);
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
     });
@@ -133,19 +133,19 @@ describe('Grasshopper core - users', function(){
                     payload.email.should.equal('apitestuser@thinksolid.com');
                     done();
                 })
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
+                .fail(done)
+                .catch(done)
                 .done();
         });
 
         it('should return a 401 because user is not authenticated', function(done) {
             grasshopper.request().users.current()
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(401);
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
     });
@@ -157,8 +157,8 @@ describe('Grasshopper core - users', function(){
                     payload.results.length.should.equal(7);
                     done();
                 })
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
+                .fail(done)
+                .catch(done)
                 .done();
         });
 
@@ -168,19 +168,19 @@ describe('Grasshopper core - users', function(){
                     payload.results.length.should.equal(1);
                     done();
                 })
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
+                .fail(done)
+                .catch(done)
                 .done();
         });
 
         it('should return a 403 because user does not have permissions to access users', function(done) {
             grasshopper.request(readerToken).users.list()
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err) {
                     err.code.should.equal(403);
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -190,19 +190,19 @@ describe('Grasshopper core - users', function(){
                     payload.results.length.should.equal(0);
                     done();
                 })
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
+                .fail(done)
+                .catch(done)
                 .done();
         });
 
         it('should return a 401 because user is not authenticated', function(done) {
             grasshopper.request().users.list()
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(401);
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
     });
@@ -210,12 +210,12 @@ describe('Grasshopper core - users', function(){
     describe('insert a new user', function() {
         it('should error out because user does not have enough permissions to insert a user.', function(done){
             grasshopper.request(readerToken).users.insert({})
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(403);
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -242,8 +242,8 @@ describe('Grasshopper core - users', function(){
                     testCreatedUserId = payload._id;
                     done();
                 })
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
+                .fail(done)
+                .catch(done)
                 .done();
         });
 
@@ -273,8 +273,8 @@ describe('Grasshopper core - users', function(){
                     testCreatedUserIdCustomVerb = payload._id;
                     done();
                 })
-                .catch(doneError.bind(null, done))
-                .fail(doneError.bind(null, done))
+                .catch(done)
+                .fail(done)
                 .done();
         });
 
@@ -301,8 +301,8 @@ describe('Grasshopper core - users', function(){
                         payload.displayname.should.equal('UncleBob');
                         done();
                     })
-                    .fail(doneError.bind(null, done))
-                    .catch(doneError.bind(null, done))
+                    .fail(done)
+                    .catch(done)
                     .done();
             });
 
@@ -328,8 +328,8 @@ describe('Grasshopper core - users', function(){
                             payload.displayname.should.equal('CooperHilscher');
                             done();
                         })
-                        .fail(doneError.bind(null, done))
-                        .catch(doneError.bind(null, done))
+                        .fail(done)
+                        .catch(done)
                         .done();
 
                 });
@@ -355,8 +355,8 @@ describe('Grasshopper core - users', function(){
                             payload.displayname.should.equal('newtestuser1@thinksolid.com');
                             done();
                         })
-                        .fail(doneError.bind(null, done))
-                        .catch(doneError.bind(null, done))
+                        .fail(done)
+                        .catch(done)
                         .done();
 
                 });
@@ -387,8 +387,8 @@ describe('Grasshopper core - users', function(){
                     payload.linkedidentities[0].should.equal('basic');
                     done();
                 })
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
+                .fail(done)
+                .catch(done)
                 .done();
         });
 
@@ -416,8 +416,8 @@ describe('Grasshopper core - users', function(){
                     payload.linkedidentities.should.deep.equal(['basic']);
                     done();
                 })
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
+                .fail(done)
+                .catch(done)
                 .done();
         });
 
@@ -438,13 +438,13 @@ describe('Grasshopper core - users', function(){
             };
 
             grasshopper.request(adminToken).users.insert(newUser)
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(400);
                     err.message.should.equal('Duplicate key already exists.');
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -463,13 +463,13 @@ describe('Grasshopper core - users', function(){
                 }
             };
             grasshopper.request(adminToken).users.insert(newUser)
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(400);
                     err.message.should.equal('This username is already in use.');
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -487,13 +487,13 @@ describe('Grasshopper core - users', function(){
                 }
             };
             grasshopper.request(adminToken).users.insert(newUser)
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(400);
                     err.message.should.equal('username is required.');
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -512,13 +512,13 @@ describe('Grasshopper core - users', function(){
                 }
             };
             grasshopper.request(adminToken).users.insert(newUser)
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(400);
                     err.message.should.equal('username is required.');
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -537,13 +537,13 @@ describe('Grasshopper core - users', function(){
                 }
             };
             grasshopper.request(adminToken).users.insert(newUser)
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(400);
                     err.message.should.equal('username is required.');
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -562,13 +562,13 @@ describe('Grasshopper core - users', function(){
                 }
             };
             grasshopper.request(adminToken).users.insert(newUser)
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(400);
                     err.message.should.equal('Your username is too short.');
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -587,13 +587,13 @@ describe('Grasshopper core - users', function(){
                 }
             };
             grasshopper.request(adminToken).users.insert(newUser)
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(400);
                     err.message.should.equal('Password must be at least 6 characters.');
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -612,13 +612,13 @@ describe('Grasshopper core - users', function(){
                 }
             };
             grasshopper.request(adminToken).users.insert(newUser)
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(400);
                     err.message.should.equal('Password must be at least 6 characters.');
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -637,13 +637,13 @@ describe('Grasshopper core - users', function(){
                 }
             };
             grasshopper.request(adminToken).users.insert(newUser)
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(400);
                     err.message.should.equal('User\'s role is invalid.');
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
     });
@@ -651,12 +651,12 @@ describe('Grasshopper core - users', function(){
     describe('Update a user', function() {
         it('should return a 401 because user is not authenticated.', function(done){
             grasshopper.request().users.update({})
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(401);
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -677,13 +677,13 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User'
             };
             grasshopper.request(readerToken).users.update(newUser)
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(403);
                     err.message.should.equal('User does not have enough privileges.');
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -708,8 +708,8 @@ describe('Grasshopper core - users', function(){
                     payload.identities.basic.username.should.equal(newUser.identities.basic.username);
                     done();
                 })
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
+                .fail(done)
+                .catch(done)
                 .done();
         });
 
@@ -741,12 +741,12 @@ describe('Grasshopper core - users', function(){
                             should.not.exist(payload.profile.testval1);
                             done();
                         })
-                        .fail(doneError.bind(null, done))
-                        .catch(doneError.bind(null, done))
+                        .fail(done)
+                        .catch(done)
                         .done();
                 })
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
+                .fail(done)
+                .catch(done)
                 .done();
         });
         describe('updatedby and createdby', function() {
@@ -845,13 +845,13 @@ describe('Grasshopper core - users', function(){
                                 payload.linkedidentities.should.deep.equal(['basic', 'google']);
                                 done();
                             })
-                            .fail(doneError.bind(null, done))
-                            .catch(doneError.bind(null, done))
+                            .fail(done)
+                            .catch(done)
                             .done();
 
                     })
-                    .fail(doneError.bind(null, done))
-                    .catch(doneError.bind(null, done))
+                    .fail(done)
+                    .catch(done)
                     .done();
             });
 
@@ -865,12 +865,12 @@ describe('Grasshopper core - users', function(){
                                 payload.linkedidentities.should.deep.equal(['basic']);
                                 done();
                             })
-                            .fail(doneError.bind(null, done))
-                            .catch(doneError.bind(null, done))
+                            .fail(done)
+                            .catch(done)
                             .done();
                     })
-                    .fail(doneError.bind(null, done))
-                    .catch(doneError.bind(null, done))
+                    .fail(done)
+                    .catch(done)
                     .done();
             });
 
@@ -958,8 +958,8 @@ describe('Grasshopper core - users', function(){
                             payload.role.should.equal('reader');
                             done();
                         })
-                        .fail(doneError.bind(null, done))
-                        .catch(doneError.bind(null, done))
+                        .fail(done)
+                        .catch(done)
                         .done();
                 })
                 .done();
@@ -982,13 +982,13 @@ describe('Grasshopper core - users', function(){
             };
 
             grasshopper.request(adminToken).users.update(newUser)
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(404);
                     err.message.should.equal('Resource could not be found.');
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -1009,13 +1009,13 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User'
             };
             grasshopper.request(adminToken).users.update(newUser)
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(400);
                     err.message.should.equal('Your username is too short.');
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -1036,13 +1036,13 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User'
             };
             grasshopper.request(adminToken).users.update(newUser)
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.message.should.equal('User\'s role is invalid.');
                     err.code.should.equal(400);
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -1063,13 +1063,13 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User'
             };
             grasshopper.request(adminToken).users.update(newUser)
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(400);
                     err.message.should.equal('Password, when supplied, cannot be empty.');
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -1090,13 +1090,13 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User'
             };
             grasshopper.request(adminToken).users.update(newUser)
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(400);
                     err.message.should.equal('Password, when supplied, cannot be empty.');
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -1117,13 +1117,13 @@ describe('Grasshopper core - users', function(){
                 lastname: 'User'
             };
             grasshopper.request(adminToken).users.update(newUser)
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(400);
                     err.message.should.equal('This username is already in use.');
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -1147,8 +1147,8 @@ describe('Grasshopper core - users', function(){
                     payload._id.toString().should.equal('5246e80c56c02c0744000002');
                     done();
                 })
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
+                .fail(done)
+                .catch(done)
                 .done();
         });
 
@@ -1167,13 +1167,13 @@ describe('Grasshopper core - users', function(){
                 lastname: 'Last'
             };
             grasshopper.request(readerToken).users.update(newUser)
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(403);
                     err.message.should.equal('User does not have enough privileges.');
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -1206,23 +1206,23 @@ describe('Grasshopper core - users', function(){
 
         it('should return 401 because trying to access unauthenticated', function(done) {
             grasshopper.request().users.query(query)
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(401);
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
         it('should return a 403 because a user does not have user access.', function(done){
             grasshopper.request(readerToken).users.query(query)
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(403);
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -1232,8 +1232,8 @@ describe('Grasshopper core - users', function(){
                     payload.total.should.equal(2);
                     done();
                 })
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
+                .fail(done)
+                .catch(done)
                 .done();
         });
 
@@ -1243,8 +1243,8 @@ describe('Grasshopper core - users', function(){
                     payload.total.should.equal(0);
                     done();
                 })
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
+                .fail(done)
+                .catch(done)
                 .done();
         });
 
@@ -1256,8 +1256,8 @@ describe('Grasshopper core - users', function(){
                             payload.results.length.should.equal(1);
                             done();
                         })
-                        .fail(doneError.bind(null, done))
-                        .catch(doneError.bind(null, done))
+                        .fail(done)
+                        .catch(done)
                         .done();
                 });
             });
@@ -1268,8 +1268,8 @@ describe('Grasshopper core - users', function(){
                         payload.limit.should.equal(config.db.defaultPageSize);
                         done();
                     })
-                    .fail(doneError.bind(null, done))
-                    .catch(doneError.bind(null, done))
+                    .fail(done)
+                    .catch(done)
                     .done();
             });
         });
@@ -1278,12 +1278,12 @@ describe('Grasshopper core - users', function(){
     describe('Delete Users', function() {
         it('should return a 403 because user does not have permissions to access users', function(done) {
             grasshopper.request(readerToken).users.deleteById(testUserId)
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(403);
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
@@ -1293,8 +1293,8 @@ describe('Grasshopper core - users', function(){
                     payload.should.equal('Success');
                     done();
                 })
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
+                .fail(done)
+                .catch(done)
                 .done();
         });
 
@@ -1304,8 +1304,8 @@ describe('Grasshopper core - users', function(){
                     payload.should.equal('Success');
                     done();
                 })
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
+                .fail(done)
+                .catch(done)
                 .done();
         });
     });
@@ -1345,12 +1345,12 @@ describe('Grasshopper core - users', function(){
 
             function loadInactiveUser(payload){
                 grasshopper.request(mytoken).users.current()
-                    .then(doneError.bind(null, done))
+                    .then(done)
                     .fail(function(err){
                         err.code.should.equal(401);
                         done();
                     })
-                    .catch(doneError.bind(null, done))
+                    .catch(done)
                     .done();
             }
 
@@ -1366,8 +1366,8 @@ describe('Grasshopper core - users', function(){
                     payload.should.equal('Success');
                     done();
                 })
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
+                .fail(done)
+                .catch(done)
                 .done();
         });
 
@@ -1377,8 +1377,8 @@ describe('Grasshopper core - users', function(){
                     payload.should.equal('Success');
                     done();
                 })
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
+                .fail(done)
+                .catch(done)
                 .done();
         });
 
@@ -1388,37 +1388,32 @@ describe('Grasshopper core - users', function(){
                     payload.should.equal('Success');
                     done();
                 })
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
+                .fail(done)
+                .catch(done)
                 .done();
         });
 
         it('try to add permissions unathenticated should result in a 401.', function(done) {
             grasshopper.request().users.savePermissions(testReaderUserId,testSubNodeForPermissions,'editor')
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err) {
                     err.code.should.equal(401);
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
 
         it('try to add permissions without the correct permissions. Should result in a 403.', function(done) {
             grasshopper.request(readerToken).users.savePermissions(testReaderUserId,testSubNodeForPermissions,'editor')
-                .then(doneError.bind(null, done))
+                .then(done)
                 .fail(function(err){
                     err.code.should.equal(403);
                     done();
                 })
-                .catch(doneError.bind(null, done))
+                .catch(done)
                 .done();
         });
     });
 });
-
-function doneError(done, err) {
-    'use strict';
-    done(err);
-}
 

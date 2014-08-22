@@ -1,0 +1,7 @@
+{
+    "_id": {
+        "$oid": "5246e73d56c02c0744000001"
+    },
+    "name": "NodeCreated",
+    "description": "Hook gets fired after a node gets created."
+}

@@ -1,0 +1,29 @@
+{
+    "_id": {
+        "$oid": "52619b3dabc0ca310d000003"
+    },
+    "role": "reader",
+    "enabled": true,
+    "firstname": "Test",
+    "lastname": "User With Editing permisions on a node",
+    "identities": {
+        "basic": {
+            "username": "apitestuserreader_1",
+            "salt": "225384010328",
+            "hash": "885f59a76ea44e1d264f9da45ca83574fbe55e3e7e6c51afe681730b45c7bb03"
+        }
+    },
+    "displayname": "apitestuserreader_1",
+    "linkedidentities": [
+        "basic"
+    ],
+    "email": "apitestuser_1@thinksolid.com",
+    "permissions": [
+        {
+            "nodeid": {
+                "$oid": "52712a3e2eacd5a714000006"
+            },
+            "role": "none"
+        }
+    ]
+}
