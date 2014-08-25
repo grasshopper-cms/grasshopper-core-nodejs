@@ -29,35 +29,38 @@ describe('Grasshopper core - contentTypes', function () {
 
     describe('getById', function () {
         it('should return 401 because trying to access unauthenticated', function (done) {
-            grasshopper.request().contentTypes.getById(testContentTypeId).then(
-                function (payload) {
-                    should.not.exist(payload);
-                },
-                function (err) {
+            grasshopper.request()
+                .contentTypes.getById(testContentTypeId)
+                .then(done)
+                .fail(function (err) {
                     err.code.should.equal(401);
-                }
-            ).done(done);
+                    done();
+                })
+                .catch(done)
+                .done();
         });
 
         it('should return an existing content type', function (done) {
-            grasshopper.request(adminToken).contentTypes.getById(testContentTypeId).then(
-                function (payload) {
+            grasshopper.request(adminToken)
+                .contentTypes.getById(testContentTypeId)
+                .then(function (payload) {
                     payload._id.toString().should.equal(testContentTypeId);
-                },
-                function (err) {
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done();
+                })
+                .fail(done)
+                .catch(done)
+                .done();
         });
         it('should return 404 because test user id does not exist', function (done) {
-            grasshopper.request(adminToken).contentTypes.getById('5246e73d56c02c0744000004').then(
-                function (payload) {
-                    should.not.exist(payload);
-                },
-                function (err) {
+            grasshopper.request(adminToken)
+                .contentTypes.getById('5246e73d56c02c0744000004')
+                .then(done)
+                .fail(function (err) {
                     err.code.should.equal(404);
-                }
-            ).done(done);
+                    done();
+                })
+                .catch(done)
+                .done();
         });
     });
 
@@ -71,25 +74,27 @@ describe('Grasshopper core - contentTypes', function () {
                 }).fail(done).done();
         });
         it('should a list of content types with the specified page size', function (done) {
-            grasshopper.request(adminToken).contentTypes.list({limit: 1}).then(
-                function (payload) {
+            grasshopper.request(adminToken)
+                .contentTypes.list({limit: 1})
+                .then(function (payload) {
                     payload.results.length.should.equal(1);
-                },
-                function (err) {
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done();
+                })
+                .fail(done)
+                .catch(done)
+                .done();
         });
 
         it('should return an empty list if the page size and current requested items are out of bounds.', function (done) {
-            grasshopper.request(adminToken).contentTypes.list({limit: 20, skip: 100}).then(
-                function (payload) {
+            grasshopper.request(adminToken)
+                .contentTypes.list({limit: 20, skip: 100})
+                .then(function (payload) {
                     payload.results.length.should.equal(0);
-                },
-                function (err) {
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done();
+                })
+                .fail(done)
+                .catch(done)
+                .done();
         });
 
         it('should return the results sorted alphabetically by label', function (done) {
@@ -129,14 +134,15 @@ describe('Grasshopper core - contentTypes', function () {
 
             grasshopper.request(adminToken).contentTypes.insert(newContentType).then(
                 function () {
-                    grasshopper.request(adminToken).contentTypes.list().then(
-                        function (payload) {
+                    grasshopper.request(adminToken)
+                        .contentTypes.list()
+                        .then(function (payload) {
                             payload.results[0].label.should.equal(label);
-                        },
-                        function (err) {
-                            should.not.exist(err);
-                        }
-                    ).done(done);
+                            done();
+                        })
+                        .fail(done)
+                        .catch(done)
+                        .done();
                 },
                 function (err) {
                     should.not.exist(err);
@@ -145,14 +151,15 @@ describe('Grasshopper core - contentTypes', function () {
         });
 
         it('should return a 401 because user is not authenticated', function (done) {
-            grasshopper.request().contentTypes.list().then(
-                function (payload) {
-                    should.not.exist(payload);
-                },
-                function (err) {
+            grasshopper.request()
+                .contentTypes.list()
+                .then(done)
+                .fail(function (err) {
                     err.code.should.equal(401);
-                }
-            ).done(done);
+                    done();
+                })
+                .catch(done)
+                .done();
         });
     });
 
@@ -191,14 +198,15 @@ describe('Grasshopper core - contentTypes', function () {
                 ]
             };
 
-            grasshopper.request(adminToken).contentTypes.insert(newContentType).then(
-                function (payload) {
+            grasshopper.request(adminToken)
+                .contentTypes.insert(newContentType)
+                .then(function (payload) {
                     payload.label.should.equal(newContentType.label);
-                },
-                function (err) {
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done();
+                })
+                .fail(done)
+                .catch(done)
+                .done();
         });
 
         it('should insert a content type', function (done) {
@@ -214,15 +222,16 @@ describe('Grasshopper core - contentTypes', function () {
                 helpText: '',
                 description: ''
             };
-            grasshopper.request(adminToken).contentTypes.insert(newContentType).then(
-                function (payload) {
+            grasshopper.request(adminToken)
+                .contentTypes.insert(newContentType)
+                .then(function (payload) {
                     payload.label.should.equal(newContentType.label);
                     testCreatedContentTypeId = payload._id;
-                },
-                function (err) {
-                    should.not.exist(err);
-                }
-            ).done(done);
+                    done();
+                })
+                .fail(done)
+                .catch(done)
+                .done();
         });
 
         it('should return an error because we are missing a "label" field.', function (done) {
@@ -451,14 +460,15 @@ describe('Grasshopper core - contentTypes', function () {
                 description: ''
             };
 
-            grasshopper.request(readerToken).contentTypes.update(newContentType).then(
-                function (payload) {
-                    should.not.exist(payload);
-                },
-                function (err) {
+            grasshopper.request(readerToken)
+                .contentTypes.update(newContentType)
+                .then(done)
+                .fail(function (err) {
                     err.code.should.equal(403);
-                }
-            ).done(done);
+                    done();
+                })
+                .catch(done)
+                .done();
         });
 
         it('should update a content type', function (done) {
@@ -529,14 +539,15 @@ describe('Grasshopper core - contentTypes', function () {
                 description: ''
             };
 
-            grasshopper.request(adminToken).contentTypes.update(newContentType).then(
-                function (payload) {
-                    payload.should.not.exist(payload);
-                },
-                function (err) {
+            grasshopper.request(adminToken)
+                .contentTypes.update(newContentType)
+                .then(done)
+                .fail(function (err) {
                     err.code.should.equal(404);
-                }
-            ).done(done);
+                    done();
+                })
+                .catch(done)
+                .done();
         });
 
         it('should update content field ids on content if a contenttype field id is changed.', function (done) {
@@ -910,36 +921,39 @@ describe('Grasshopper core - contentTypes', function () {
             });
 
             it('should return a 403 because user does not have permissions to access content types', function (done) {
-                grasshopper.request(readerToken).contentTypes.deleteById(testCreatedContentTypeId).then(
-                    function (payload) {
-                        should.not.exist(payload);
-                    },
-                    function (err) {
+                grasshopper.request(readerToken)
+                    .contentTypes.deleteById(testCreatedContentTypeId)
+                    .then(done)
+                    .fail(function (err) {
                         err.code.should.equal(403);
-                    }
-                ).done(done);
+                        done();
+                    })
+                    .catch(done)
+                    .done();
             });
 
             it('should delete a content type', function (done) {
-                grasshopper.request(adminToken).contentTypes.deleteById(testCreatedContentTypeId).then(
-                    function (payload) {
+                grasshopper.request(adminToken)
+                    .contentTypes.deleteById(testCreatedContentTypeId)
+                    .then(function (payload) {
                         payload.should.equal('Success');
-                    },
-                    function (err) {
-                        should.not.exist(err);
-                    }
-                ).done(done);
+                        done();
+                    })
+                    .fail(done)
+                    .catch(done)
+                    .done();
             });
 
             it('should return 200 when we try to delete a content type that doesn\'t exist', function (done) {
-                grasshopper.request(adminToken).contentTypes.deleteById(testCreatedContentTypeId).then(
-                    function (payload) {
+                grasshopper.request(adminToken)
+                    .contentTypes.deleteById(testCreatedContentTypeId)
+                    .then(function (payload) {
                         payload.should.equal('Success');
-                    },
-                    function (err) {
-                        should.not.exist(err);
-                    }
-                ).done(done);
+                        done();
+                    })
+                    .fail(done)
+                    .catch(done)
+                    .done();
             });
         });
 
