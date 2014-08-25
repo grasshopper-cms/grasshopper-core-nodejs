@@ -98,6 +98,20 @@ describe('Grasshopper core - content', function(){
     });
 
     describe('getFullById', function() {
+        it('existing: should return unchanged object if there are no content references', function(done) {
+            grasshopper
+                .request(adminToken)
+                .content.getFullById('53f63bcd79409eb0541a4a40')
+                .then(function (payload) {
+                    payload.fields.should.deep.equal({
+                        'alt-tag': 'Image'
+                    });
+                    done(); })
+                .fail(done)
+                .catch(done)
+                .done();
+        });
+
         it('simple: should return an object with content references filled in', function (done) {
             grasshopper
                 .request(adminToken)
