@@ -21,7 +21,7 @@ describe('Grasshopper core - content', function(){
     });
 
     describe('query', function() {
-        var expected = {
+        var expected1 = {
                 'embedded-array': [],
                 'simple-embedded': {
                     'main-background-image': {
@@ -43,20 +43,32 @@ describe('Grasshopper core - content', function(){
                     }
                 ],
                 'title': 'Query for this'
+            },
+            expected2 = {
+                'embedded-array': [],
+                'simple-embedded': {
+                    'main-background-image': {
+                        'alt-tag': 'Image'
+                    },
+                    'title': 'Boom'
+                },
+                'refs': [],
+                'title': 'Query for this'
             };
 
 
         it('should return array of search results.', function (done) {
             grasshopper
                 .request(tokens.globalAdminToken)
-                .content.query(grasshopper.utilities.queryBuilder
+                .content.queryFull(grasshopper.utilities.queryBuilder
                     .create()
                     .equals('fields.title', 'Query for this')
                     .build())
                 .then(function (payload) {
-                    console.log(JSON.stringify(payload.results,null,4));
-                    payload.results.length.should.equal(1);
-                    payload.results[0].fields.should.deep.equal(expected);
+                    payload.results.length.should.equal(2);
+                    // Unsure if this order is guaranteed? Could this come back reversed?
+                    payload.results[0].fields.should.deep.equal(expected1);
+                    payload.results[1].fields.should.deep.equal(expected2);
                     done();
                 })
                 .catch(done)
