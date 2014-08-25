@@ -46,10 +46,12 @@ describe('Grasshopper core - content', function(){
                 {
                     "embedded-array": [],
                     "simple-embedded": {
-                        "main-background-image": "",
-                        "title": ""
+                        "main-background-image": {
+                            "alt-tag":"Image"
+                        },
+                        "title": "Something"
                     },
-                    "refs": [],
+                    "refs": [""],
                     "title": "Nested 1"
                 },
                 {
