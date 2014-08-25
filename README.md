@@ -188,6 +188,7 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 * 0.15.9 - 2014-08-18 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/metroid/release_notes/0.15.9_2014-08-18.md)
 * 0.15.10 - 2014-08-20 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/metroid/release_notes/0.15.10_2014-08-20.md)
 * 0.16.0 - 2014-08-22 - [features](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/metroid/release_notes/0.16.0_2014-08-22.md)
+* 0.16.2 - 2014-08-22 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/metroid/release_notes/0.16.2_2014-08-22.md)
 
 
 ## Contributors (`git shortlog -s -n`)
@@ -196,8 +197,8 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 * Greg Larrenaga
 * Peter Ajtai
 * Cooper Hilscher
-* Andrew Gurinovich
 * kaijarayne
+* Andrew Gurinovich
 * Valentine Nesterov
 * Eric Beringer
 
@@ -223,4 +224,4 @@ grunt server
 grunt data:save
 ```
 
-_Compiled file. Do not modify directly. Created: 2014-08-22 09:06:40_
+_Compiled file. Do not modify directly. Created: 2014-08-24 08:37:17_
