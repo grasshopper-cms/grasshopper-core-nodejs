@@ -97,11 +97,11 @@ describe('Grasshopper core - content', function(){
             });
     });
 
-    describe('getFullById', function() {
+    describe('populateAll', function() {
         it('existing: should return unchanged object if there are no content references', function(done) {
             grasshopper
                 .request(adminToken)
-                .content.getFullById('53f63bcd79409eb0541a4a40')
+                .content.populateAll('53f63bcd79409eb0541a4a40')
                 .then(function (payload) {
                     payload.fields.should.deep.equal({
                         'alt-tag': 'Image'
@@ -112,10 +112,23 @@ describe('Grasshopper core - content', function(){
                 .done();
         });
 
+        it('existing: should return 404 if no object found', function(done) {
+            grasshopper
+                .request(adminToken)
+                .content.populateAll('aaaaaaaaaaaaaaaaaaaaaaaa')
+                .then(done)
+                .fail(function(result) {
+                    result.code.should.equal(404);
+                    done();
+                })
+                .catch(done)
+                .done();
+        });
+
         it('simple: should return an object with content references filled in', function (done) {
             grasshopper
                 .request(adminToken)
-                .content.getFullById('53f63bea79409eb0541a4a41')
+                .content.populateAll('53f63bea79409eb0541a4a41')
                 .then(function (payload) {
                     payload.fields.should.deep.equal(expectedHome.fields);
                     done(); })
@@ -127,7 +140,7 @@ describe('Grasshopper core - content', function(){
         it('nested: should return an object with content references filled in', function (done) {
             grasshopper
                 .request(adminToken)
-                .content.getFullById('53f6f5537cec50a2b14728e0')
+                .content.populateAll('53f6f5537cec50a2b14728e0')
                 .then(function (payload) {
                     payload.fields.should.deep.equal(expectedNested);
                     done(); })

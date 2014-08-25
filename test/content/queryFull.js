@@ -75,6 +75,23 @@ describe('Grasshopper core - content', function(){
                 .fail(done)
                 .done();
         });
+
+        it('nothing found should return and empty array of search results.', function (done) {
+            grasshopper
+                .request(tokens.globalAdminToken)
+                .content.queryFull(grasshopper.utilities.queryBuilder
+                    .create()
+                    .equals('fields.title', 'Query for this but you will not find it, hahahahahahaha')
+                    .build())
+                .then(function (payload) {
+                    payload.results.should.be.an('array');
+                    payload.results.length.should.equal(0);
+                    done();
+                })
+                .catch(done)
+                .fail(done)
+                .done();
+        });
     });
 
 
