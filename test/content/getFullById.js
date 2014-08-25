@@ -51,7 +51,7 @@ describe('Grasshopper core - content', function(){
                         },
                         "title": "Something"
                     },
-                    "refs": [""],
+                    "refs": [],
                     "title": "Nested 1"
                 },
                 {
