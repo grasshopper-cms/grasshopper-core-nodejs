@@ -510,21 +510,21 @@ describe('Grasshopper core - content', function(){
             });
 
             it('should convert number types to be numbers', function(done){
-               var obj= {
-                   "fields" : {
-                       "shouldbenumber" : "43.01",
-                       "title" : "Test NUmber"
-                   },
-                   "meta" : {
-                       "node" : "53cece8de1c9ff0b00e6b4a3",
-                       "type" : "53d19248ae9b9800003846f0",
-                       "labelfield" : "title",
-                       "typelabel" : "Test Number",
-                       "created" : "2014-07-24T23:10:54.080Z",
-                       "lastmodified" : "2014-07-24T23:10:54.080Z"
-                   },
-                   "__v" : 0
-               };
+                var obj= {
+                    "fields" : {
+                        "shouldbenumber" : "43.01",
+                        "title" : "Test NUmber"
+                    },
+                    "meta" : {
+                        "node" : "53cece8de1c9ff0b00e6b4a3",
+                        "type" : "53d19248ae9b9800003846f0",
+                        "labelfield" : "title",
+                        "typelabel" : "Test Number",
+                        "created" : "2014-07-24T23:10:54.080Z",
+                        "lastmodified" : "2014-07-24T23:10:54.080Z"
+                    },
+                    "__v" : 0
+                };
 
                 grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
                     function(payload){
@@ -534,6 +534,36 @@ describe('Grasshopper core - content', function(){
                         should.not.exist(err);
                     })
                     .done(done);
+            });
+
+            it('should not convert an array of strings to a single string', function(done) {
+                var obj= {
+                    "fields" : {
+                        "title" : "Test Multi",
+                        "richie" : [
+                            '<p>One</p>',
+                            '<p>Two</p>',
+                            '<p>Three</p>'
+                        ]
+                    },
+                    "meta" : {
+                        "node" : "53fd0c829cc459747101b022",
+                        "type" : "53fd0c619cc459747101b021",
+                        "labelfield" : "title",
+                        "typelabel" : "Test Number",
+                        "created" : "2014-07-24T23:10:54.080Z",
+                        "lastmodified" : "2014-07-24T23:10:54.080Z"
+                    },
+                    "__v" : 0
+                };
+
+                grasshopper.request(tokens.globalAdminToken).content.insert(obj)
+                    .then(function(payload){
+                        _.isArray(payload.fields.richie).should.be.ok;
+                        done();
+                    })
+                    .catch(done)
+                    .done();
             });
 
         });
