@@ -46,8 +46,8 @@ describe('Grasshopper core - content', function(){
                 },
                 function(err){
                     err.code.should.equal(401);
-                }
-            ).done(done);
+                })
+                .done(done);
         });
 
         it('should return 403 because I am am only a reader of content.', function(done) {
@@ -68,8 +68,8 @@ describe('Grasshopper core - content', function(){
                 },
                 function(err){
                     err.code.should.equal(403);
-                }
-            ).done(done);
+                })
+                .done(done);
         });
 
         it('should successfully insert content because I have the correct permissions.', function(done) {
@@ -91,156 +91,8 @@ describe('Grasshopper core - content', function(){
                 },
                 function(err){
                     should.not.exist(err);
-                }
-            ).done(done);
-        });
-
-        it('should successfully insert content and also convert strings that are valid native dates to a date object.',
-            function(done) {
-            var obj = {
-                meta: {
-                    type: '524362aa56c02c0703000001',
-                    node : '526d5179966a883540000006',
-                    labelfield: 'testfield'
-                },
-                fields: {
-                    label: 'Generated title',
-                    testfield: 'testvalue',
-                    testDateField: '2014-04-30T20:00:00.000Z',
-                    testNested: {
-                        dateField: '2014-04-30T20:00:00.000Z'
-                    }
-                }
-            };
-
-            grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                function(payload){
-                    payload.fields.label.should.equal(obj.fields.label);
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
-        });
-
-        it('should successfully insert content and also convert multis that are strings ' +
-                'that are valid native dates to a date object.',
-            function(done) {
-                var obj = {
-                    meta: {
-                        type: '524362aa56c02c0703000001',
-                        node : '526d5179966a883540000006',
-                        labelfield: 'testfield'
-                    },
-                    fields: {
-                        label: 'Generated title',
-                        testfield: 'testvalue',
-                        testDateField: '2014-04-30T20:00:00.000Z',
-                        multi : [
-                            {
-                                testNested : {
-                                    dateField : '2014-04-30T20:00:00.000Z'
-                                }
-                            }
-                        ]
-                    }
-                };
-
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
-                        _.isDate(payload.fields.multi[0].testNested.dateField).should.equal(true);
-                    },
-                    function(err){
-                        should.not.exist(err);
-                    }
-                ).done(done);
-            });
-
-        it('should successfully insert content and not convert booleans to a date object.', function(done) {
-            var obj = {
-                meta: {
-                    type: '5254908d56c02c076e000001',
-                    node : '526d5179966a883540000006',
-                    labelfield: 'testfield'
-                },
-                fields: {
-                    label: 'Generated title',
-                    testfield: 'testvalue',
-                    testDateField: '2014-04-30T20:00:00.000Z',
-                    testNested: {
-                        dateField: '2014-04-30T20:00:00.000Z'
-                    },
-                    booleanfield : true
-                }
-            };
-
-            grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                function(payload){
-                    payload.fields.booleanfield.should.equal(true);
-                    done();
-                },
-                function(err){
-                    should.not.exist(err);
-                    done();
-                }
-            ).done();
-        });
-
-        it('should successfully insert content and not convert strings that end in numbers to a date object.',
-            function(done) {
-                var obj = {
-                    meta: {
-                        type: '5254908d56c02c076e000001',
-                        node : '526d5179966a883540000006',
-                        labelfield: 'testfield'
-                    },
-                    fields: {
-                        label: 'Generated title',
-                        testfield: 'testvalue',
-                        testDateField: '2014-04-30T20:00:00.000Z',
-                        testNested: {
-                            dateField: '2014-04-30T20:00:00.000Z'
-                        },
-                        stringnumfield : 'Step 2'
-                    }
-                };
-
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
-                        payload.fields.stringnumfield.should.equal('Step 2');
-                    },
-                    function(err){
-                        should.not.exist(err);
-                    }
-                ).done(done);
-            });
-
-        it('should successfully insert content and not convert string numbers to a date object.', function(done) {
-            var obj = {
-                meta: {
-                    type: '5254908d56c02c076e000001',
-                    node : '526d5179966a883540000006',
-                    labelfield: 'testfield'
-                },
-                fields: {
-                    label: 'Generated title',
-                    testfield: 'testvalue',
-                    testDateField: '2014-04-30T20:00:00.000Z',
-                    testNested: {
-                        dateField: '2014-04-30T20:00:00.000Z'
-                    },
-                    stringnumfield : '42'
-                }
-            };
-
-            grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                function(payload){
-                    payload.fields.stringnumfield.should.equal('42');
-                },
-                function(err){
-                    should.not.exist(err);
-                }
-            ).done(done);
+                })
+                .done(done);
         });
 
         it('should return 403 because I am trying to insert content in a node that is restricted to me.',
@@ -367,33 +219,177 @@ describe('Grasshopper core - content', function(){
         });
 
         describe('Content type converters', function(){
-           it('should convert date types to date objects', function(done){
-              var obj = {
-                  "fields" : {
-                      "a_date" : "2014/07/30",
-                      "title" : "A Date"
-                  },
-                  "meta" : {
-                      "node" : "53cece8de1c9ff0b00e6b4a3",
-                      "type" : "53d15687ae9b9800003846e7",
-                      "labelfield" : "title",
-                      "typelabel" : "Test Date",
-                      "created" : "2014-07-24T21:42:09.486Z",
-                      "lastmodified" : "2014-07-24T21:42:09.486Z"
-                  },
-                  "__v" : 0
-              } ;
+            it('should successfully insert content and also convert strings that are valid native dates to a date object.',
+                function(done) {
+                var obj = {
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
+                    },
+                    fields: {
+                        label: 'Generated title',
+                        testfield: 'testvalue',
+                        testDateField: '2014-04-30T20:00:00.000Z',
+                        testNested: {
+                            dateField: '2014-04-30T20:00:00.000Z'
+                        }
+                    }
+                };
 
-               grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                   function(payload){
-                       (payload.fields.a_date instanceof Date).should.be.ok;
-                   },
-                   function(err){
-                       should.not.exist(err);
-                   }
-               ).done(done);
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
+                    function(payload){
+                        payload.fields.label.should.equal(obj.fields.label);
+                    },
+                    function(err){
+                        should.not.exist(err);
+                    })
+                    .done(done);
+            });
 
-           });
+            it('should successfully insert content and also convert multis that are strings that are valid native dates to a date object.', function(done) {
+                var obj = {
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
+                    },
+                    fields: {
+                        label: 'Generated title',
+                        testfield: 'testvalue',
+                        testDateField: '2014-04-30T20:00:00.000Z',
+                        multi : [
+                            {
+                                testNested : {
+                                    dateField : '2014-04-30T20:00:00.000Z'
+                                }
+                            }
+                        ]
+                    }
+                };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
+                    function(payload){
+                        _.isDate(payload.fields.multi[0].testNested.dateField).should.equal(true);
+                    },
+                    function(err){
+                        should.not.exist(err);
+                    })
+                    .done(done);
+            });
+
+            it('should successfully insert content and not convert booleans to a date object.', function(done) {
+                var obj = {
+                    meta: {
+                        type: '5254908d56c02c076e000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
+                    },
+                    fields: {
+                        label: 'Generated title',
+                        testfield: 'testvalue',
+                        testDateField: '2014-04-30T20:00:00.000Z',
+                        testNested: {
+                            dateField: '2014-04-30T20:00:00.000Z'
+                        },
+                        booleanfield : true
+                    }
+                };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
+                    function(payload){
+                        payload.fields.booleanfield.should.equal(true);
+                        done();
+                    },
+                    function(err){
+                        should.not.exist(err);
+                        done();
+                    })
+                    .done();
+            });
+
+            it('should successfully insert content and not convert strings that end in numbers to a date object.', function(done) {
+                var obj = {
+                    meta: {
+                        type: '5254908d56c02c076e000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
+                    },
+                    fields: {
+                        label: 'Generated title',
+                        testfield: 'testvalue',
+                        testDateField: '2014-04-30T20:00:00.000Z',
+                        testNested: {
+                            dateField: '2014-04-30T20:00:00.000Z'
+                        },
+                        stringnumfield : 'Step 2'
+                    }
+                };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
+                    function(payload){
+                        payload.fields.stringnumfield.should.equal('Step 2');
+                    },
+                    function(err){
+                        should.not.exist(err);
+                    }
+                ).done(done);
+            });
+
+            it('should successfully insert content and not convert string numbers to a date object.', function(done) {
+                var obj = {
+                    meta: {
+                        type: '5254908d56c02c076e000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
+                    },
+                    fields: {
+                        label: 'Generated title',
+                        testfield: 'testvalue',
+                        testDateField: '2014-04-30T20:00:00.000Z',
+                        testNested: {
+                            dateField: '2014-04-30T20:00:00.000Z'
+                        },
+                        stringnumfield : '42'
+                    }
+                };
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
+                    function(payload){
+                        payload.fields.stringnumfield.should.equal('42');
+                    },
+                    function(err){
+                        should.not.exist(err);
+                    }
+                ).done(done);
+            });
+
+            it('should convert date types to date objects', function(done){
+                var obj = {
+                    "fields" : {
+                        "a_date" : "2014/07/30",
+                        "title" : "A Date"
+                    },
+                    "meta" : {
+                        "node" : "53cece8de1c9ff0b00e6b4a3",
+                        "type" : "53d15687ae9b9800003846e7",
+                        "labelfield" : "title",
+                        "typelabel" : "Test Date",
+                        "created" : "2014-07-24T21:42:09.486Z",
+                        "lastmodified" : "2014-07-24T21:42:09.486Z"
+                    },
+                    "__v" : 0
+                } ;
+
+                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
+                    function(payload){
+                        (payload.fields.a_date instanceof Date).should.be.ok;
+                        },
+                    function(err){
+                        should.not.exist(err);
+                    })
+                   .done(done);
+            });
 
             it('should convert datetime types to date objects', function(done){
                 var obj = {
@@ -418,9 +414,8 @@ describe('Grasshopper core - content', function(){
                     },
                     function(err){
                         should.not.exist(err);
-                    }
-                ).done(done);
-
+                    })
+                    .done(done);
             });
 
             it('should convert boolean types to boolean', function(done){
@@ -446,9 +441,8 @@ describe('Grasshopper core - content', function(){
                     },
                     function(err){
                         should.not.exist(err);
-                    }
-                ).done(done);
-
+                    })
+                    .done(done);
             });
 
             it('should convert checkbox types to contain booleans', function(done){
@@ -480,9 +474,8 @@ describe('Grasshopper core - content', function(){
                     },
                     function(err){
                         should.not.exist(err);
-                    }
-                ).done(done);
-
+                    })
+                    .done(done);
             });
 
             it('should convert editorial types to contain dates for validfrom and validto', function(done){
@@ -512,11 +505,10 @@ describe('Grasshopper core - content', function(){
                     },
                     function(err){
                         should.not.exist(err);
-                    }
-                ).done(done);
-
+                    })
+                    .done(done);
             });
-            
+
             it('should convert number types to be numbers', function(done){
                var obj= {
                    "fields" : {
@@ -540,9 +532,8 @@ describe('Grasshopper core - content', function(){
                     },
                     function(err){
                         should.not.exist(err);
-                    }
-                ).done(done);
-
+                    })
+                    .done(done);
             });
 
         });
@@ -568,8 +559,8 @@ describe('Grasshopper core - content', function(){
                     },
                     function(err){
                         should.not.exist(err);
-                    }
-                ).done(done);
+                    })
+                    .done(done);
             });
 
             it('Should throw 400 because num is too low.', function(done) {
@@ -752,8 +743,8 @@ describe('Grasshopper core - content', function(){
                     },
                     function(err){
                         should.not.exist(err);
-                    }
-                ).done(done);
+                    })
+                    .done(done);
             });
 
             it('Should throw 400 because alphanum is too short.', function(done) {
@@ -830,8 +821,8 @@ describe('Grasshopper core - content', function(){
                     },
                     function(err){
                         should.not.exist(err);
-                    }
-                ).done(done);
+                    })
+                    .done(done);
             });
 
             it('Should fail because we just created a record that will conflict.', function(done) {
@@ -854,8 +845,8 @@ describe('Grasshopper core - content', function(){
                     },
                     function(err){
                         err.code.should.equal(400);
-                    }
-                ).done(done);
+                    })
+                    .done(done);
             });
         });
     });
