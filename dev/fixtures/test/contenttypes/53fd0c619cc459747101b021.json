@@ -1,10 +1,11 @@
 {
     "_id": {
-        "$oid": "53d156e5ae9b9800003846e8"
+        "$oid": "53fd0c619cc459747101b021"
     },
-    "label": "Test DateTime",
+    "label": "Min Zero Max 3 Rich Text",
     "fields": [
         {
+            "_uid": "b132fa60-2d71-11e4-818e-89669c51f9fe",
             "dataType": "string",
             "defaultValue": "",
             "_id": "title",
@@ -16,14 +17,15 @@
             "label": "Title"
         },
         {
-            "dataType": "date",
-            "_id": "a_datetime",
+            "_uid": "b132fa61-2d71-11e4-818e-89669c51f9fe",
+            "dataType": "string",
+            "_id": "richie",
             "validation": [],
-            "type": "datetime",
+            "type": "richtext",
             "options": false,
-            "min": 1,
-            "max": 1,
-            "label": "A DateTime"
+            "min": 0,
+            "max": 3,
+            "label": "Richie"
         }
     ],
     "__v": 0

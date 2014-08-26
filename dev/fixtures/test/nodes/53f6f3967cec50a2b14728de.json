@@ -1,8 +1,8 @@
 {
-    "__v": 1,
     "_id": {
         "$oid": "53f6f3967cec50a2b14728de"
     },
+    "__v": 1,
     "allowedTypes": [
         {
             "$oid": "53f5295551c4e08f29bf096b"

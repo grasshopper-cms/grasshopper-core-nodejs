@@ -1,4 +1,7 @@
 {
+    "_id": {
+        "$oid": "53faa791bcb61aed0dbb993f"
+    },
     "fields": {
         "embedded-array": [],
         "simple-embedded": {
@@ -7,9 +10,6 @@
         },
         "refs": [],
         "title": "Query for this"
-    },
-    "_id": {
-        "$oid": "53faa791bcb61aed0dbb993f"
     },
     "meta": {
         "node": {

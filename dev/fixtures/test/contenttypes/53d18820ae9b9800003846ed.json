@@ -1,4 +1,7 @@
 {
+    "_id": {
+        "$oid": "53d18820ae9b9800003846ed"
+    },
     "label": "Test Boolean",
     "fields": [
         {
@@ -23,8 +26,5 @@
             "label": "This is a test"
         }
     ],
-    "_id": {
-        "$oid": "53d18820ae9b9800003846ed"
-    },
     "__v": 0
 }

@@ -1,4 +1,7 @@
 {
+    "_id": {
+        "$oid": "53d19248ae9b9800003846f0"
+    },
     "label": "Test Number",
     "fields": [
         {
@@ -23,8 +26,5 @@
             "label": "This is a number"
         }
     ],
-    "_id": {
-        "$oid": "53d19248ae9b9800003846f0"
-    },
     "__v": 0
 }

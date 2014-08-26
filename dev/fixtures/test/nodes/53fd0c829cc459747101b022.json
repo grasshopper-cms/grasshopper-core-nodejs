@@ -1,0 +1,10 @@
+{
+    "_id": {
+        "$oid": "53fd0c829cc459747101b022"
+    },
+    "label": "Content Insert Tests",
+    "parent": null,
+    "ancestors": [],
+    "allowedTypes": [],
+    "__v": 0
+}

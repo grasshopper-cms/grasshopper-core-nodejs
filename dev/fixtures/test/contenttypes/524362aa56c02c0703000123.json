@@ -1,8 +1,8 @@
 {
-    "label": "This is another test content",
     "_id": {
         "$oid": "524362aa56c02c0703000123"
     },
+    "label": "This is another test content",
     "helpText": "",
     "meta": [],
     "description": "",
