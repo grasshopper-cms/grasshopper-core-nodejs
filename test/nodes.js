@@ -473,8 +473,8 @@ describe('Grasshopper core - testing nodes', function(){
         it('should return list of root level child nodes', function(done) {
             grasshopper.request(globalReaderToken).nodes.getChildren(null)
                 .then(function(payload){
-                    // 3 nodes in fixtures + 1 generated
-                    payload.length.should.equal(3 + 1);
+                    // 4 nodes in fixtures + 1 generated
+                    payload.length.should.equal(4 + 1);
                     done();
                 })
                 .fail(doneError.bind(null, done))
