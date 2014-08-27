@@ -28,7 +28,7 @@ describe('Grasshopper core - content', function(){
     });
 
     describe('insert', function() {
-        /*it('should return 401 because trying to access unauthenticated', function(done) {
+        it('should return 401 because trying to access unauthenticated', function(done) {
             var obj = {
                 meta: {
                     type: '524362aa56c02c0703000001',
@@ -40,14 +40,15 @@ describe('Grasshopper core - content', function(){
                 }
             };
 
-            grasshopper.request().content.insert(obj).then(
-                function(payload){
-                    should.not.exist(payload);
-                },
-                function(err){
+            grasshopper
+                .request().content.insert(obj)
+                .then(done)
+                .fail(function(err){
                     err.code.should.equal(401);
+                    done();
                 })
-                .done(done);
+                .catch(done)
+                .done();
         });
 
         it('should return 403 because I am am only a reader of content.', function(done) {
@@ -62,14 +63,16 @@ describe('Grasshopper core - content', function(){
                 }
             };
 
-            grasshopper.request(tokens.globalReaderToken).content.insert(obj).then(
-                function(payload){
-                    should.not.exist(payload);
-                },
-                function(err){
+            grasshopper
+                .request(tokens.globalReaderToken)
+                .content.insert(obj)
+                .then(done)
+                .fail(function(err){
                     err.code.should.equal(403);
+                    done();
                 })
-                .done(done);
+                .catch(done)
+                .done();
         });
 
         it('should successfully insert content because I have the correct permissions.', function(done) {
@@ -85,18 +88,21 @@ describe('Grasshopper core - content', function(){
                 }
             };
 
-            grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                function(payload){
+            grasshopper
+                .request(tokens.globalEditorToken)
+                .content.insert(obj)
+                .then(function(payload){
                     payload.fields.label.should.equal(obj.fields.label);
-                },
-                function(err){
-                    should.not.exist(err);
+                    return payload._id;
                 })
-                .done(done);
+                .then(deleteAfterInsertion)
+                .then(done)
+                .fail(done)
+                .catch(done)
+                .done();
         });
 
-        it('should return 403 because I am trying to insert content in a node that is restricted to me.',
-            function(done) {
+        it('should return 403 because I am trying to insert content in a node that is restricted to me.', function(done) {
             var obj = {
                 meta: {
                     type: '524362aa56c02c0703000001',
@@ -109,14 +115,17 @@ describe('Grasshopper core - content', function(){
                 }
             };
 
-            grasshopper.request(tokens.restrictedEditorToken).content.insert(obj).then(
-                function(payload){
-                    should.not.exist(payload);
-                },
-                function(err){
+            grasshopper
+                .request(tokens.restrictedEditorToken)
+                .content.insert(obj)
+                .then(done)
+                .fail(function(err){
+                    err.message.should.equal('User does not have enough privileges.');
                     err.code.should.equal(403);
-                }
-            ).done(done);
+                    done();
+                })
+                .catch(done)
+                .done();
         });
 
         it('should return 400 because the content type we are using is invalid.', function(done) {
@@ -132,15 +141,17 @@ describe('Grasshopper core - content', function(){
                 }
             };
 
-            grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                function(payload){
-                    should.not.exist(payload);
-                },
-                function(err){
+            grasshopper
+                .request(tokens.globalEditorToken)
+                .content.insert(obj)
+                .then(done)
+                .fail(function(err){
                     err.code.should.equal(400);
                     err.message.should.equal('The content type referenced is invalid.');
-                }
-            ).done(done);
+                    done();
+                })
+                .catch(done)
+                .done();
         });
 
         describe('Alpha field validation testing for alpha value between 5-10 chars.',function(){
@@ -157,14 +168,18 @@ describe('Grasshopper core - content', function(){
                     }
                 };
 
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(function(payload){
                         payload.fields.label.should.equal('Generated title');
-                    },
-                    function(err){
-                        should.not.exist(err);
-                    }
-                ).done(done);
+                        return payload._id;
+                    })
+                    .then(deleteAfterInsertion)
+                    .then(done)
+                    .fail(done)
+                    .catch(done)
+                    .done();
             });
 
             it('Should throw 400 because alpha is too short.', function(done) {
@@ -205,21 +220,22 @@ describe('Grasshopper core - content', function(){
                     }
                 };
 
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
-                        should.not.exist(payload);
-                    },
-                    function(err){
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(done)
+                    .fail(function(err){
                         err.code.should.equal(400);
-                        err.message.should.equal(
-                            '"Title" is not valid. Please check your validation rules and try again.');
-                    }
-                ).done(done);
+                        err.message.should.equal('"Title" is not valid. Please check your validation rules and try again.');
+                        done();
+                    })
+                    .catch(done)
+                    .done();
             });
-        });*/
+        });
 
         describe('Content type converters', function(){
-            /*xit('should successfully insert content and also convert strings that are valid native dates to a date object.',
+            it('should successfully insert content and also convert strings that are valid native dates to a date object.',
                 function(done) {
                 var obj = {
                     meta: {
@@ -237,17 +253,21 @@ describe('Grasshopper core - content', function(){
                     }
                 };
 
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(function(payload){
                         payload.fields.label.should.equal(obj.fields.label);
-                    },
-                    function(err){
-                        should.not.exist(err);
+                        return payload._id;
                     })
-                    .done(done);
-            });*/
+                    .then(deleteAfterInsertion)
+                    .then(done)
+                    .fail(done)
+                    .catch(done)
+                    .done();
+            });
 
-            /*xit('should successfully insert content and also convert multis that are strings that are valid native dates to a date object.', function(done) {
+            it('should successfully insert content and also convert multis that are strings that are valid native dates to a date object.', function(done) {
                 var obj = {
                     meta: {
                         type: '524362aa56c02c0703000001',
@@ -268,17 +288,21 @@ describe('Grasshopper core - content', function(){
                     }
                 };
 
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(function(payload){
                         _.isDate(payload.fields.multi[0].testNested.dateField).should.equal(true);
-                    },
-                    function(err){
-                        should.not.exist(err);
+                        return payload._id;
                     })
-                    .done(done);
+                    .then(deleteAfterInsertion)
+                    .then(done)
+                    .fail(done)
+                    .catch(done)
+                    .done();
             });
 
-            xit('should successfully insert content and not convert booleans to a date object.', function(done) {
+            it('should successfully insert content and not convert booleans to a date object.', function(done) {
                 var obj = {
                     meta: {
                         type: '5254908d56c02c076e000001',
@@ -296,19 +320,21 @@ describe('Grasshopper core - content', function(){
                     }
                 };
 
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(function(payload){
                         payload.fields.booleanfield.should.equal(true);
-                        done();
-                    },
-                    function(err){
-                        should.not.exist(err);
-                        done();
+                        payload._id;
                     })
+                    .then(deleteAfterInsertion)
+                    .then(done)
+                    .fail(done)
+                    .catch(done)
                     .done();
             });
 
-            xit('should successfully insert content and not convert strings that end in numbers to a date object.', function(done) {
+            it('should successfully insert content and not convert strings that end in numbers to a date object.', function(done) {
                 var obj = {
                     meta: {
                         type: '5254908d56c02c076e000001',
@@ -326,17 +352,21 @@ describe('Grasshopper core - content', function(){
                     }
                 };
 
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(function(payload){
                         payload.fields.stringnumfield.should.equal('Step 2');
-                    },
-                    function(err){
-                        should.not.exist(err);
-                    }
-                ).done(done);
-            });*/
+                        return payload._id;
+                    })
+                    .then(deleteAfterInsertion)
+                    .then(done)
+                    .fail(done)
+                    .catch(done)
+                    .done();
+            });
 
-            /*xit('should successfully insert content and not convert string numbers to a date object.', function(done) {
+            it('should successfully insert content and not convert string numbers to a date object.', function(done) {
                 var obj = {
                     meta: {
                         type: '5254908d56c02c076e000001',
@@ -354,17 +384,21 @@ describe('Grasshopper core - content', function(){
                     }
                 };
 
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(function(payload){
                         payload.fields.stringnumfield.should.equal('42');
-                    },
-                    function(err){
-                        should.not.exist(err);
-                    }
-                ).done(done);
+                        return payload._id;
+                    })
+                    .then(deleteAfterInsertion)
+                    .then(done)
+                    .fail(done)
+                    .catch(done)
+                    .done();
             });
 
-            xit('should convert date types to date objects', function(done){
+            it('should convert date types to date objects', function(done){
                 var obj = {
                     "fields" : {
                         "a_date" : "2014/07/30",
@@ -381,17 +415,21 @@ describe('Grasshopper core - content', function(){
                     "__v" : 0
                 } ;
 
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(function(payload){
                         (payload.fields.a_date instanceof Date).should.be.ok;
-                        },
-                    function(err){
-                        should.not.exist(err);
+                        return payload._id;
                     })
-                   .done(done);
-            });*/
+                    .then(deleteAfterInsertion)
+                    .then(done)
+                    .fail(done)
+                    .catch(done)
+                    .done();
+            });
 
-            /*it('should convert datetime types to date objects', function(done){
+            it('should convert datetime types to date objects', function(done){
                 var obj = {
                     "fields" : {
                         "a_datetime" : "2014/07/09 5:00 pm",
@@ -408,14 +446,18 @@ describe('Grasshopper core - content', function(){
                     "__v" : 0
                 } ;
 
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(function(payload){
                         (payload.fields.a_datetime instanceof Date).should.be.ok;
-                    },
-                    function(err){
-                        should.not.exist(err);
+                        return payload._id;
                     })
-                    .done(done);
+                    .then(deleteAfterInsertion)
+                    .then(done)
+                    .fail(done)
+                    .catch(done)
+                    .done();
             });
 
             it('should convert boolean types to boolean', function(done){
@@ -435,14 +477,18 @@ describe('Grasshopper core - content', function(){
                     "__v" : 0
                 };
 
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(function(payload){
                         (typeof payload.fields.test == 'boolean').should.be.ok;
-                    },
-                    function(err){
-                        should.not.exist(err);
+                        return payload._id;
                     })
-                    .done(done);
+                    .then(deleteAfterInsertion)
+                    .then(done)
+                    .fail(done)
+                    .catch(done)
+                    .done();
             });
 
             it('should convert checkbox types to contain booleans', function(done){
@@ -471,11 +517,13 @@ describe('Grasshopper core - content', function(){
                         (typeof payload.fields.booleancheckbox.hasFace == 'boolean').should.be.ok;
                         (typeof payload.fields.booleancheckbox.hasLegs == 'boolean').should.be.ok;
                         (typeof payload.fields.booleancheckbox.true == 'boolean').should.be.ok;
-                    },
-                    function(err){
-                        should.not.exist(err);
+                        return payload._id;
                     })
-                    .done(done);
+                    .then(deleteAfterInsertion)
+                    .then(done)
+                    .fail(done)
+                    .catch(done)
+                    .done();
             });
 
             it('should convert editorial types to contain dates for validfrom and validto', function(done){
@@ -498,15 +546,19 @@ describe('Grasshopper core - content', function(){
                     }
                 };
 
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(function(payload){
                         (payload.fields.editorial.validTo instanceof Date).should.be.ok;
                         (payload.fields.editorial.validFrom instanceof Date).should.be.ok;
-                    },
-                    function(err){
-                        should.not.exist(err);
+                        return payload._id;
                     })
-                    .done(done);
+                    .then(deleteAfterInsertion)
+                    .then(done)
+                    .fail(done)
+                    .catch(done)
+                    .done();
             });
 
             it('should convert number types to be numbers', function(done){
@@ -526,15 +578,19 @@ describe('Grasshopper core - content', function(){
                     "__v" : 0
                 };
 
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(function(payload){
                         (typeof payload.fields.shouldbenumber == "number").should.be.ok;
-                    },
-                    function(err){
-                        should.not.exist(err);
+                        return payload._id;
                     })
-                    .done(done);
-            });*/
+                    .then(deleteAfterInsertion)
+                    .then(done)
+                    .fail(done)
+                    .catch(done)
+                    .done();
+            });
 
             it('should not convert an array of strings to a single string', function(done) {
                 var obj= {
@@ -570,10 +626,9 @@ describe('Grasshopper core - content', function(){
                     .catch(done)
                     .done();
             });
-
         });
 
-        /*describe('Number field validation testing for number value between 0-10',function(){
+        describe('Number field validation testing for number value between 0-10',function(){
             it('Should pass', function(done) {
                 var obj = {
                     meta: {
@@ -588,14 +643,18 @@ describe('Grasshopper core - content', function(){
                     }
                 };
 
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(function(payload){
                         payload.fields.label.should.equal('Generated title');
-                    },
-                    function(err){
-                        should.not.exist(err);
+                        return payload._id;
                     })
-                    .done(done);
+                    .then(deleteAfterInsertion)
+                    .then(done)
+                    .fail(done)
+                    .catch(done)
+                    .done();
             });
 
             it('Should throw 400 because num is too low.', function(done) {
@@ -612,16 +671,17 @@ describe('Grasshopper core - content', function(){
                     }
                 };
 
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj)
-                    .then(function(payload){
-                        should.not.exist(payload);
-                    })
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(done)
                     .fail(function(err){
                         err.code.should.equal(400);
-                        err.message.should.equal(
-                            '"Num Field" is not valid. Please check your validation rules and try again.');
+                        err.message.should.equal('"Num Field" is not valid. Please check your validation rules and try again.');
+                        done();
                     })
-                    .done(done);
+                    .catch(done)
+                    .done();
             });
 
             it('Should throw 400 because is not a number.', function(done) {
@@ -638,16 +698,97 @@ describe('Grasshopper core - content', function(){
                     }
                 };
 
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj)
-                    .then(function(payload){
-                        should.not.exist(payload);
-                    })
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(done)
                     .fail(function(err){
                         err.code.should.equal(400);
-                        err.message.should.equal(
-                            '"Num Field" is not valid. Please check your validation rules and try again.');
+                        err.message.should.equal('"Num Field" is not valid. Please check your validation rules and try again.');
+                        done();
                     })
-                    .done(done);
+                    .catch(done)
+                    .done();
+            });
+
+            it('Should throw 400 because num is too high.', function(done) {
+                var obj = {
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
+                    },
+                    fields: {
+                        label: 'Generated title',
+                        testfield: 'testtest',
+                        numfield: 1000
+                    }
+                };
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(done)
+                    .fail(function(err){
+                        err.code.should.equal(400);
+                        err.message.should.equal('"Num Field" is not valid. Please check your validation rules and try again.');
+                        done();
+                    })
+                    .catch(done)
+                    .done();
+            });
+
+            it('Should throw 400 because number is a string.', function(done) {
+                var obj = {
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
+                    },
+                    fields: {
+                        label: 'Generated title',
+                        testfield: 'testtest',
+                        numfield: '1a'
+                    }
+                };
+
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(done)
+                    .fail(function(err){
+                        err.code.should.equal(400);
+                        err.message.should.equal('"Num Field" is not valid. Please check your validation rules and try again.');
+                        done();
+                    })
+                    .catch(done)
+                    .done();
+            });
+
+            it('Should throw 400 because number is a string with a number in the string.', function(done) {
+                var obj = {
+                    meta: {
+                        type: '524362aa56c02c0703000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
+                    },
+                    fields: {
+                        label: 'Generated title',
+                        testfield: 'testtest',
+                        numfield: '1'
+                    }
+                };
+
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(done)
+                    .fail(function(err){
+                        err.code.should.equal(400);
+                        err.message.should.equal('"Num Field" is not valid. Please check your validation rules and try again.');
+                        done();
+                    })
+                    .catch(done)
+                    .done();
             });
 
             describe('without a min and max', function() {
@@ -666,94 +807,20 @@ describe('Grasshopper core - content', function(){
                         }
                     };
 
-                    grasshopper.request(tokens.globalEditorToken).content.insert(obj)
+                    grasshopper
+                        .request(tokens.globalEditorToken)
+                        .content.insert(obj)
                         .then(function(payload){
                             payload.should.have.property('_id');
                             payload.fields.coopersfield.should.equal('2');
+                            return payload._id;
                         })
-                        .fail(function(err){
-                            should.not.exist(err);
-                        })
-                        .done(done);
+                        .then(deleteAfterInsertion)
+                        .then(done)
+                        .fail(done)
+                        .catch(done)
+                        .done();
                 });
-            });
-
-
-            it('Should throw 400 because num is too high.', function(done) {
-                var obj = {
-                    meta: {
-                        type: '524362aa56c02c0703000001',
-                        node : '526d5179966a883540000006',
-                        labelfield: 'testfield'
-                    },
-                    fields: {
-                        label: 'Generated title',
-                        testfield: 'testtest',
-                        numfield: 1000
-                    }
-                };
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
-                        should.not.exist(payload);
-                    },
-                    function(err){
-                        err.code.should.equal(400);
-                        err.message.should.equal(
-                            '"Num Field" is not valid. Please check your validation rules and try again.');
-                    }
-                ).done(done);
-            });
-
-            it('Should throw 400 because number is a string.', function(done) {
-                var obj = {
-                    meta: {
-                        type: '524362aa56c02c0703000001',
-                        node : '526d5179966a883540000006',
-                        labelfield: 'testfield'
-                    },
-                    fields: {
-                        label: 'Generated title',
-                        testfield: 'testtest',
-                        numfield: '1a'
-                    }
-                };
-
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
-                        should.not.exist(payload);
-                    },
-                    function(err){
-                        err.code.should.equal(400);
-                        err.message.should.equal(
-                            '"Num Field" is not valid. Please check your validation rules and try again.');
-                    }
-                ).done(done);
-            });
-
-            it('Should throw 400 because number is a string with a number in the string.', function(done) {
-                var obj = {
-                    meta: {
-                        type: '524362aa56c02c0703000001',
-                        node : '526d5179966a883540000006',
-                        labelfield: 'testfield'
-                    },
-                    fields: {
-                        label: 'Generated title',
-                        testfield: 'testtest',
-                        numfield: '1'
-                    }
-                };
-
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
-                        should.not.exist(payload);
-                    },
-                    function(err){
-                        err.code.should.equal(400);
-                        err.message.should.equal(
-                            '"Num Field" is not valid. Please check your validation rules and try again.');
-                    }
-                ).done(done);
             });
         });
 
@@ -772,14 +839,18 @@ describe('Grasshopper core - content', function(){
                     }
                 };
 
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(function(payload){
                         payload.fields.label.should.equal('Generated title');
-                    },
-                    function(err){
-                        should.not.exist(err);
+                        return payload._id;
                     })
-                    .done(done);
+                    .then(deleteAfterInsertion)
+                    .then(done)
+                    .fail(done)
+                    .catch(done)
+                    .done();
             });
 
             it('Should throw 400 because alphanum is too short.', function(done) {
@@ -796,16 +867,17 @@ describe('Grasshopper core - content', function(){
                     }
                 };
 
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
-                        should.not.exist(payload);
-                    },
-                    function(err){
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(done)
+                    .fail(function(err){
                         err.code.should.equal(400);
-                        err.message.should.equal(
-                            '"AlphaNum Field" is not valid. Please check your validation rules and try again.');
-                    }
-                ).done(done);
+                        err.message.should.equal('"AlphaNum Field" is not valid. Please check your validation rules and try again.');
+                        done();
+                    })
+                    .catch(done)
+                    .done();
             });
 
             it('Should throw 400 because alphanum is too long.', function(done) {
@@ -822,16 +894,17 @@ describe('Grasshopper core - content', function(){
                     }
                 };
 
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
-                        should.not.exist(payload);
-                    },
-                    function(err){
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(done)
+                    .fail(function(err){
                         err.code.should.equal(400);
-                        err.message.should.equal(
-                            '"AlphaNum Field" is not valid. Please check your validation rules and try again.');
-                    }
-                ).done(done);
+                        err.message.should.equal('"AlphaNum Field" is not valid. Please check your validation rules and try again.');
+                        done();
+                    })
+                    .catch(done)
+                    .done();
             });
         });
 
@@ -850,18 +923,22 @@ describe('Grasshopper core - content', function(){
                     }
                 };
 
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(function(payload){
                         payload.fields.uniquefield1.should.equal('test');
-                    },
-                    function(err){
-                        should.not.exist(err);
+                        return payload._id;
                     })
-                    .done(done);
+                    .then(deleteAfterInsertion)
+                    .then(done)
+                    .fail(done)
+                    .catch(done)
+                    .done();
             });
 
             it('Should fail because we just created a record that will conflict.', function(done) {
-                var obj = {
+                var first = {
                     meta: {
                         type: '524362aa56c02c0703000001',
                         node : '526d5179966a883540000006',
@@ -874,32 +951,61 @@ describe('Grasshopper core - content', function(){
                     }
                 };
 
-                grasshopper.request(tokens.globalEditorToken).content.insert(obj).then(
-                    function(payload){
-                        should.not.exist(payload);
-                    },
-                    function(err){
-                        err.code.should.equal(400);
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(first)
+                    .then(function(payload){
+                        var firstId = payload._id,
+                            second = {
+                                meta: {
+                                    type: '524362aa56c02c0703000001',
+                                    node : '526d5179966a883540000006',
+                                    labelfield: 'testfield'
+                                },
+                                fields: {
+                                    label: 'Generated title',
+                                    testfield: 'testtest',
+                                    uniquefield1: 'test'
+                                }
+                            };
+
+                        grasshopper
+                            .request(tokens.globalEditorToken)
+                            .content.insert(second)
+                            .then(done)
+                            .fail(function(err){
+                                err.code.should.equal(400);
+                                deleteAfterInsertion(firstId)
+                                    .then(done);
+                            })
+                            .catch(done)
+                            .done();
                     })
-                    .done(done);
+                    .fail(done)
+                    .catch(done)
+                    .done();
             });
-        });*/
+        });
     });
 
     function deleteAfterInsertion(contentId) {
         return grasshopper
             .request(tokens.globalAdminToken)
             .content.deleteById(contentId)
-            .then(function() {});
+            .then(function() {})
+            .fail(function() {});
     }
 
     function createGetToken(username, password, storage) {
         return {
             closure : function getToken(cb){
-                grasshopper.auth('basic', { username: username, password: password }).then(function(token){
-                    tokens[storage] = token;
-                    cb();
-                }).done();
+                grasshopper
+                    .auth('basic', { username: username, password: password })
+                    .then(function(token){
+                        tokens[storage] = token;
+                        cb();
+                    })
+                    .done();
             }
         };
     }
