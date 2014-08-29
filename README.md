@@ -139,8 +139,8 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 * 0.12.2 - 2014-06-11 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/metroid/release_notes/0.12.2_2014-06-11.md)
 * 0.13.0 - 2014-06-24 - [features](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/metroid/release_notes/0.13.0_2014-06-24.md)
 * 0.13.1 - 2014-06-24 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/metroid/release_notes/0.13.1_2014-06-24.md)
-* 0.13.2 - 2014-06-25 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/metroid/release_notes/0.13.2_2014-06-25.md)
-* 0.13.2 - 2014-06-24 - [initial release](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/metroid/release_notes/0.13.2_2014-06-24.md)
+* 0.13.2 - 2014-06-24 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/metroid/release_notes/0.13.2_2014-06-24.md)
+* 0.13.2 - 2014-06-25 - [initial release](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/metroid/release_notes/0.13.2_2014-06-25.md)
 * 0.13.3 - 2014-06-26 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/metroid/release_notes/0.13.3_2014-06-26.md)
 * 0.13.4 - 2014-06-30 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/metroid/release_notes/0.13.4_2014-06-30.md)
 * 0.13.5 - 2014-07-01 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/metroid/release_notes/0.13.5_2014-07-01.md)
@@ -194,6 +194,7 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 * 0.16.5 - 2014-08-25 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/metroid/release_notes/0.16.5_2014-08-25.md)
 * 0.16.6 - 2014-08-26 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/metroid/release_notes/0.16.6_2014-08-26.md)
 * 0.16.7 - 2014-08-26 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/metroid/release_notes/0.16.7_2014-08-26.md)
+* 0.16.8 - 14-08-29 - [patches](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/metroid/release_notes/0.16.8_14-08-29.md)
 
 
 ## Contributors (`git shortlog -s -n`)
@@ -229,4 +230,4 @@ grunt server
 grunt data:save
 ```
 
-_Compiled file. Do not modify directly. Created: 2014-08-26 05:21:53_
+_Compiled file. Do not modify directly. Created: 2014-08-29 04:00:17_
