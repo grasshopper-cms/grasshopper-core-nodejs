@@ -1,0 +1,31 @@
+{
+    "_id": {
+        "$oid": "53faa791bcb61aed0dbb993f"
+    },
+    "fields": {
+        "embedded-array": [],
+        "simple-embedded": {
+            "main-background-image": "53f63bcd79409eb0541a4a40",
+            "title": "Boom"
+        },
+        "refs": [],
+        "title": "Query for this"
+    },
+    "meta": {
+        "node": {
+            "$oid": "53f6f3967cec50a2b14728de"
+        },
+        "type": {
+            "$oid": "53f6f4177cec50a2b14728df"
+        },
+        "labelfield": "title",
+        "typelabel": "Nested References",
+        "created": {
+            "$date": 1408935825223
+        },
+        "lastmodified": {
+            "$date": 1408935825223
+        }
+    },
+    "__v": 0
+}

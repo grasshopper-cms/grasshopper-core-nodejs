@@ -1,0 +1,7 @@
+{
+    "_id": {
+        "$oid": "52712a3e2eacd5a714000001"
+    },
+    "name": "RetrieveIdentity",
+    "description": "Hook for working around the default user authentication. A 3rd party system could be added as a proxy to verify the identities of users."
+}

@@ -1,0 +1,43 @@
+{
+    "_id": {
+        "$oid": "53d155b4ae9b9800003846e6"
+    },
+    "__v": 1,
+    "fields": [
+        {
+            "dataType": "string",
+            "defaultValue": "",
+            "_id": "title",
+            "validation": [],
+            "type": "textbox",
+            "options": false,
+            "min": 1,
+            "max": 1,
+            "label": "Title"
+        },
+        {
+            "dataType": "boolean",
+            "_id": "booleancheckbox",
+            "validation": [],
+            "type": "checkbox",
+            "options": [
+                {
+                    "label": "I agree",
+                    "_id": "true"
+                },
+                {
+                    "label": "Has Legs?",
+                    "_id": "hasLegs"
+                },
+                {
+                    "label": "Has Face",
+                    "_id": "hasFace"
+                }
+            ],
+            "min": 1,
+            "max": 1,
+            "label": "Boolean Checkbox"
+        }
+    ],
+    "label": "Test Checkbox"
+}

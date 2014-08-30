@@ -1,0 +1,59 @@
+{
+    "_id": {
+        "$oid": "53f6f4177cec50a2b14728df"
+    },
+    "__v": 6,
+    "fields": [
+        {
+            "dataType": "string",
+            "defaultValue": "",
+            "_uid": "c3a1d6d0-29cf-11e4-836d-7977989a6a2f",
+            "_id": "title",
+            "validation": [],
+            "type": "textbox",
+            "options": false,
+            "min": 1,
+            "max": 1,
+            "label": "Title"
+        },
+        {
+            "dataType": "ref",
+            "_uid": "c3a1d6d1-29cf-11e4-836d-7977989a6a2f",
+            "_id": "refs",
+            "validation": [],
+            "type": "contentreference",
+            "options": {
+                "defaultNode": "0",
+                "allowedTypes": [
+                    "53f6f4177cec50a2b14728df"
+                ]
+            },
+            "min": 0,
+            "max": 3,
+            "label": "Refs"
+        },
+        {
+            "dataType": "ref",
+            "_uid": "77624a10-29e4-11e4-8951-0b508edb563e",
+            "_id": "simple-embedded",
+            "validation": [],
+            "type": "embeddedtype",
+            "options": "53f4e58e0126074f95d22288",
+            "min": 1,
+            "max": 1,
+            "label": "Simple Embedded"
+        },
+        {
+            "dataType": "ref",
+            "_uid": "77624a11-29e4-11e4-8951-0b508edb563e",
+            "_id": "embedded-array",
+            "validation": [],
+            "type": "embeddedtype",
+            "options": "53f4e58e0126074f95d22288",
+            "min": 0,
+            "max": 2,
+            "label": "Embedded Array"
+        }
+    ],
+    "label": "Nested References"
+}

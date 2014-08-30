@@ -14,16 +14,10 @@ describe('Grasshopper core - testing nodes', function(){
         nodeEditorToken = '',
         restrictedEditorToken = '',
         testNodeId = '5261781556c02c072a000007',
-        testLockedDownNodeId = '526d5179966a883540000006',
-        testSubSubWithLockedParent = '5320ed3fb9c9cb6364e23031',
-        testNodeWithNoSubNodes = '5246e73d56c02c0744000001',
         testNodeIdRoot_generated = '',
-        testNodeIdSubNode_generated = '',
-        testNodeIdSubSub_generated = '',
         testContentTypeID = '524362aa56c02c0703000001',
         testContentTypeID_Users = '5254908d56c02c076e000001',
-        badTestContentTypeID = '52698a0033e248a360000006',
-        badTestNodeId = '526d545623c0ff9442000006';
+        badTestContentTypeID = '52698a0033e248a360000006';
 
     before(function(done){
         async.parallel(
@@ -81,8 +75,7 @@ describe('Grasshopper core - testing nodes', function(){
                 .then(function(payload){
                     testNodeIdRoot_generated = payload._id.toString();
                     payload.label.should.equal('My Test Node');
-                    done();
-                })
+                    done(); })
                 .fail(doneError.bind(null, done))
                 .catch(doneError.bind(null, done))
                 .done();
@@ -480,7 +473,8 @@ describe('Grasshopper core - testing nodes', function(){
         it('should return list of root level child nodes', function(done) {
             grasshopper.request(globalReaderToken).nodes.getChildren(null)
                 .then(function(payload){
-                    payload.length.should.equal(3);
+                    // 4 nodes in fixtures + 1 generated
+                    payload.length.should.equal(4 + 1);
                     done();
                 })
                 .fail(doneError.bind(null, done))

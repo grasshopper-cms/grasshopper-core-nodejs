@@ -1,0 +1,121 @@
+{
+    "_id": {
+        "$oid": "524362aa56c02c0703000001"
+    },
+    "label": "This is my test content type",
+    "helpText": "",
+    "description": "",
+    "fields": [
+        {
+            "_id": "testfield",
+            "required": true,
+            "instancing": 1,
+            "type": "textbox",
+            "label": "Title",
+            "validation": [
+                {
+                    "type": "alpha",
+                    "options": {
+                        "min": 5,
+                        "max": 10
+                    }
+                }
+            ]
+        },
+        {
+            "_id": "coopersfield",
+            "required": true,
+            "instancing": 1,
+            "type": "textbox",
+            "label": "CoopersField",
+            "validation": [
+                {
+                    "type": "number"
+                }
+            ]
+        },
+        {
+            "_id": "numfield",
+            "required": false,
+            "instancing": 1,
+            "type": "textbox",
+            "label": "Num Field",
+            "validation": [
+                {
+                    "type": "number",
+                    "options": {
+                        "min": 5,
+                        "max": 10
+                    }
+                }
+            ]
+        },
+        {
+            "_id": "alphanumfield",
+            "required": false,
+            "instancing": 1,
+            "type": "textbox",
+            "label": "AlphaNum Field",
+            "validation": [
+                {
+                    "type": "alpha_numeric",
+                    "options": {
+                        "min": 5,
+                        "max": 10
+                    }
+                }
+            ]
+        },
+        {
+            "_id": "emailfield",
+            "type": "textbox",
+            "label": "Email Field",
+            "validation": [
+                {
+                    "type": "email"
+                }
+            ]
+        },
+        {
+            "_id": "uniquefield1",
+            "type": "textbox",
+            "label": "Globally Unique Field",
+            "validation": [
+                {
+                    "type": "unique",
+                    "options": {
+                        "property": "fields.uniquefield1"
+                    }
+                }
+            ]
+        },
+        {
+            "_id": "uniquefield2",
+            "type": "textbox",
+            "label": "Unique Field For Specific Content Type",
+            "validation": [
+                {
+                    "type": "unique",
+                    "options": {
+                        "property": "fields.uniquefield2",
+                        "contentTypes": [
+                            "524362aa56c02c0703000001"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "_id": "booleanfield",
+            "required": false,
+            "label": "BooleanField",
+            "type": "checkbox"
+        },
+        {
+            "_id": "stringnumfield",
+            "required": false,
+            "type": "textbox",
+            "label": "String Num Field"
+        }
+    ]
+}

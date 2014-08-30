@@ -1,0 +1,30 @@
+{
+    "_id": {
+        "$oid": "53d18820ae9b9800003846ed"
+    },
+    "label": "Test Boolean",
+    "fields": [
+        {
+            "dataType": "string",
+            "defaultValue": "",
+            "_id": "title",
+            "validation": [],
+            "type": "textbox",
+            "options": false,
+            "min": 1,
+            "max": 1,
+            "label": "Title"
+        },
+        {
+            "dataType": "boolean",
+            "_id": "test",
+            "validation": [],
+            "type": "boolean",
+            "options": false,
+            "min": 1,
+            "max": 1,
+            "label": "This is a test"
+        }
+    ],
+    "__v": 0
+}

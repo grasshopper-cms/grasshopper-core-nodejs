@@ -32,23 +32,26 @@ describe('Grasshopper core - content', function(){
 
     describe('getById', function() {
         it('should return 401 because trying to access unauthenticated', function(done) {
-            grasshopper.request().content.getById(testContentId).then(
-                function(payload){
-                    should.not.exist(payload);
-                },
-                function(err){
+            grasshopper
+                .request()
+                .content.getById(testContentId)
+                .then(function(){
+                    done(new Error('Should not succeed')); })
+                .fail(function(err){
                     err.code.should.equal(401);
-                }).done(done);
+                    done(); })
+                .done();
         });
 
         it('should return content from a non-protected node unauthenticated', function(done) {
-            grasshopper.request(tokens.globalReaderToken).content.getById(testContentId).then(
-                function(payload){
+            grasshopper
+                .request(tokens.globalReaderToken)
+                .content.getById(testContentId)
+                .then(function(payload){
                     payload._id.toString().should.equal(testContentId);
-                },
-                function(err){
-                    err.should.not.exist();
-                }).done(done);
+                    done(); })
+                .fail(done)
+                .done();
         });
         /*
         it('should return 401 because trying to access content from a protected node unauthenticated', function(done) {
@@ -63,14 +66,16 @@ describe('Grasshopper core - content', function(){
 
 
         it('should return 403 because getting content from a node that is restricted to me.', function(done) {
-            grasshopper.request(tokens.restrictedEditorToken).content.getById(restrictedContentId).then(
-                function(payload){
+            grasshopper
+                .request(tokens.restrictedEditorToken)
+                .content.getById(restrictedContentId)
+                .then(function(payload){
                     console.log(payload);
-                    should.not.exist(payload);
-                },
-                function(err){
+                    done(new Error('Should not succeed')); })
+                .fail(function(err){
                     err.code.should.equal(403);
-                }).done(done);
+                    done(); })
+                .done();
         });
     });
 
@@ -101,6 +106,9 @@ describe('Grasshopper core - content', function(){
         grasshopper
             .request(tokens.globalEditorToken)
             .content.insert(obj)
-            .done(done.bind(done, undefined));
+            .then(function() {
+                done(); })
+            .fail(done)
+            .done();
     }
 });

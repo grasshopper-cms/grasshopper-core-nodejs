@@ -284,8 +284,8 @@ describe('Grasshopper core - content', function(){
                     payload.results.length.should.equal(1);
                     done();
                 })
-                .catch(doneError.bind(null, done))
-                .fail(doneError.bind(null, done))
+                .catch(done)
+                .fail(done)
                 .done();
         });
 
@@ -306,8 +306,8 @@ describe('Grasshopper core - content', function(){
                     payload.total.should.be.greaterThan(0);
                     done();
                 })
-                .catch(doneError.bind(null, done))
-                .fail(doneError.bind(null, done))
+                .catch(done)
+                .fail(done)
                 .done();
         });
 
@@ -336,8 +336,8 @@ describe('Grasshopper core - content', function(){
 
                     done();
                 })
-                .catch(doneError.bind(null, done))
-                .fail(doneError.bind(null, done))
+                .catch(done)
+                .fail(done)
                 .done();
         });
 
@@ -366,8 +366,8 @@ describe('Grasshopper core - content', function(){
 
                     done();
                 })
-                .catch(doneError.bind(null, done))
-                .fail(doneError.bind(null, done))
+                .catch(done)
+                .fail(done)
                 .done();
         });
 
@@ -379,8 +379,8 @@ describe('Grasshopper core - content', function(){
 
                         done();
                     })
-                    .fail(doneError.bind(null, done))
-                    .catch(doneError.bind(null, done))
+                    .fail(done)
+                    .catch(done)
                     .done();
             });
         });
@@ -393,8 +393,8 @@ describe('Grasshopper core - content', function(){
 
                         done();
                     })
-                    .fail(doneError.bind(null, done))
-                    .catch(doneError.bind(null, done))
+                    .fail(done)
+                    .catch(done)
                     .done();
             });
         });
@@ -407,8 +407,8 @@ describe('Grasshopper core - content', function(){
 
                         done();
                     })
-                    .fail(doneError.bind(null, done))
-                    .catch(doneError.bind(null, done))
+                    .fail(done)
+                    .catch(done)
                     .done();
             });
         });
@@ -423,8 +423,8 @@ describe('Grasshopper core - content', function(){
 
                         done();
                     })
-                    .fail(doneError.bind(null, done))
-                    .catch(doneError.bind(null, done))
+                    .fail(done)
+                    .catch(done)
                     .done();
             });
         });
@@ -438,8 +438,8 @@ describe('Grasshopper core - content', function(){
 
                         done();
                     })
-                    .fail(doneError.bind(null, done))
-                    .catch(doneError.bind(null, done))
+                    .fail(done)
+                    .catch(done)
                     .done();
             });
         });
@@ -452,8 +452,8 @@ describe('Grasshopper core - content', function(){
 
                         done();
                     })
-                    .fail(doneError.bind(null, done))
-                    .catch(doneError.bind(null, done))
+                    .fail(done)
+                    .catch(done)
                     .done();
             });
         });
@@ -465,8 +465,8 @@ describe('Grasshopper core - content', function(){
                         payload.should.be.ok;
                         done();
                     })
-                    .fail(doneError.bind(null, done))
-                    .catch(doneError.bind(null, done))
+                    .fail(done)
+                    .catch(done)
                     .done();
             });
         });
@@ -479,16 +479,12 @@ describe('Grasshopper core - content', function(){
                         payload.total.should.equal(2);
                         done();
                     })
-                    .fail(doneError.bind(null, done))
-                    .catch(doneError.bind(null, done))
+                    .fail(done)
+                    .catch(done)
                     .done();
             });
         });
     });
-
-    function doneError(done, err) {
-        done(err);
-    }
 
     function createGetToken(username, password, storage) {
         return {

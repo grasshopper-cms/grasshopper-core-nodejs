@@ -1,0 +1,23 @@
+{
+    "_id": {
+        "$oid": "53f63bea79409eb0541a4a41"
+    },
+    "__v": 0,
+    "fields": {
+        "ref": "53f63bcd79409eb0541a4a40",
+        "title": "Home example"
+    },
+    "meta": {
+        "node": {
+            "$oid": "53f6f3967cec50a2b14728de"
+        },
+        "type": {
+            "$oid": "53f4e58e0126074f95d22288"
+        },
+        "labelfield": "title",
+        "typelabel": "Page Home",
+        "lastmodified": {
+            "$date": 1408696093713
+        }
+    }
+}

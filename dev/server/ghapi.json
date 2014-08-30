@@ -1,0 +1,32 @@
+{
+    "server" : {
+        "proxy" : true
+    },
+    "cache": {
+        "path": "./cache"
+    },
+    "crypto": {
+        "secret_passphrase" : "22bb3980-29cc-11e4-8c21-0800200c9a66"
+    },
+    "db": {
+        "type": "mongodb",
+        "host": "mongodb://localhost:27017/test",
+        "database": "test",
+        "username": "",
+        "password": "",
+        "debug": false
+    },
+    "assets": {
+        "default" : "local",
+        "tmpdir" : "tmp/",
+        "engines": {
+            "local":{
+                "path":"/temp",
+                "urlbase":"http://localhost"
+            }
+        }
+    },
+    "logger" : {
+        "adapters": [{"type":"console","application":"grasshopper-api-for-core","machine":"dev-server"}]
+    }
+}

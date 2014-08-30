@@ -1,0 +1,30 @@
+{
+    "_id": {
+        "$oid": "53d19248ae9b9800003846f0"
+    },
+    "label": "Test Number",
+    "fields": [
+        {
+            "dataType": "string",
+            "defaultValue": "",
+            "_id": "title",
+            "validation": [],
+            "type": "textbox",
+            "options": false,
+            "min": 1,
+            "max": 1,
+            "label": "Title"
+        },
+        {
+            "dataType": "object",
+            "_id": "shouldbenumber",
+            "validation": [],
+            "type": "number",
+            "options": false,
+            "min": 1,
+            "max": 1,
+            "label": "This is a number"
+        }
+    ],
+    "__v": 0
+}

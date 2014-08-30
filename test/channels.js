@@ -25,13 +25,12 @@ describe('Grasshopper core - testing channels', function(){
                 next();
             });
 
-            grasshopper.event.emit('save', { type:'1' }, true).then(
-                function(){
-
-                },
-                function(err){
-                    should.not.exist(err);
-                }).done(done);
+            grasshopper
+                .event.emit('save', { type:'1' }, true)
+                .then(done.bind(null, null))
+                .fail(done)
+                .catch(done)
+                .done();
         });
     });
 
@@ -42,13 +41,12 @@ describe('Grasshopper core - testing channels', function(){
                 next();
             });
 
-            grasshopper.event.emit('validate', { type:'1' }, true).then(
-                function(){
-
-                },
-                function(err){
-                    should.not.exist(err);
-                }).done(done);
+            grasshopper
+                .event.emit('validate', { type:'1' }, true)
+                .then(done.bind(null, null))
+                .fail(done)
+                .catch(done)
+                .done();
         });
     });
 });

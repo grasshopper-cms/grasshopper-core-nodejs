@@ -1,0 +1,33 @@
+{
+    "_id": {
+        "$oid": "53fa8f743bb01b9d05b77464"
+    },
+    "fields": {
+        "embedded-array": [],
+        "simple-embedded": {
+            "main-background-image": "53f63bcd79409eb0541a4a40",
+            "title": "One in"
+        },
+        "refs": [
+            "53f6f56d7cec50a2b14728e1"
+        ],
+        "title": "Query for this"
+    },
+    "meta": {
+        "node": {
+            "$oid": "53f6f3967cec50a2b14728de"
+        },
+        "type": {
+            "$oid": "53f6f4177cec50a2b14728df"
+        },
+        "labelfield": "title",
+        "typelabel": "Nested References",
+        "created": {
+            "$date": 1408929652238
+        },
+        "lastmodified": {
+            "$date": 1408929652238
+        }
+    },
+    "__v": 0
+}

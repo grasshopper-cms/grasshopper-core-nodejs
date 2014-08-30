@@ -1,0 +1,20 @@
+{
+    "_id": {
+        "$oid": "53f5295551c4e08f29bf096b"
+    },
+    "label": "Image",
+    "fields": [
+        {
+            "dataType": "string",
+            "defaultValue": "",
+            "_id": "alt-tag",
+            "validation": [],
+            "type": "textbox",
+            "options": false,
+            "min": 1,
+            "max": 1,
+            "label": "Alt Tag"
+        }
+    ],
+    "__v": 0
+}

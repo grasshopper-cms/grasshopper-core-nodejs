@@ -1,0 +1,33 @@
+{
+    "_id": {
+        "$oid": "53f6f57e7cec50a2b14728e2"
+    },
+    "__v": 0,
+    "fields": {
+        "embedded-array": [],
+        "simple-embedded": {
+            "main-background-image": "",
+            "title": ""
+        },
+        "refs": [
+            "53f6f58a7cec50a2b14728e3"
+        ],
+        "title": "Nested 2"
+    },
+    "meta": {
+        "node": {
+            "$oid": "53f6f3967cec50a2b14728de"
+        },
+        "type": {
+            "$oid": "53f6f4177cec50a2b14728df"
+        },
+        "labelfield": "title",
+        "typelabel": "Nested References",
+        "created": {
+            "$date": 1408693630321
+        },
+        "lastmodified": {
+            "$date": 1408702345438
+        }
+    }
+}

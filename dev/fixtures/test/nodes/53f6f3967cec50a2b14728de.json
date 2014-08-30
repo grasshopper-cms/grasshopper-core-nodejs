@@ -1,0 +1,20 @@
+{
+    "_id": {
+        "$oid": "53f6f3967cec50a2b14728de"
+    },
+    "__v": 1,
+    "allowedTypes": [
+        {
+            "$oid": "53f5295551c4e08f29bf096b"
+        },
+        {
+            "$oid": "53f6f4177cec50a2b14728df"
+        },
+        {
+            "$oid": "53f4e58e0126074f95d22288"
+        }
+    ],
+    "ancestors": [],
+    "label": "Hydration Tests",
+    "parent": null
+}
