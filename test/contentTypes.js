@@ -351,7 +351,7 @@ describe('Grasshopper core - contentTypes', function () {
                     .catch(done);
             });
 
-            xit('should return error when a malformed field is passed in (missing type).', function (done) {
+            it('should return error when a malformed field is passed in (missing type).', function (done) {
                 var newContentType = {
                     label: 'newtestsuitecontent',
                     fields: [
@@ -365,17 +365,17 @@ describe('Grasshopper core - contentTypes', function () {
                 };
 
                 grasshopper.request(adminToken).contentTypes.insert(newContentType)
-                    .then(doneError.bind(null, done))
+                    .then(done)
                     .fail(function (err) {
                         err.code.should.equal(400);
-                        err.message.should.equal('Invalid Field Object');
+                        err.message.should.equal('"type" is a required field.');
                         done();
                     })
-                    .catch(doneError.bind(null, done))
+                    .catch(done)
                     .done();
             });
 
-            xit('should add a unique id to each field.', function (done) {
+            it('should add a unique id to each field.', function (done) {
                 var testContentType = {
                     "label": "new test content type",
                     "fields": [
@@ -414,14 +414,17 @@ describe('Grasshopper core - contentTypes', function () {
                 };
                 grasshopper.request(adminToken).contentTypes.insert(testContentType)
                     .then(function (payload) {
+                        console.log('#*#*#*#*#**#*#*#**#');
+                        console.log(payload);
+                        console.log('#*#*#*#*#**#*#*#**#');
                         _.each(payload.fields, function (field) {
                             field.should.have.ownProperty('_uid');
                         });
 
                         done();
                     })
-                    .catch(doneError.bind(null, done))
-                    .fail(doneError.bind(null, done))
+                    .catch(done)
+                    .fail(done)
                     .done();
 
             });
