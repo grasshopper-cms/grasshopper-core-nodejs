@@ -1,0 +1,41 @@
+<h5 id="setup-google-login">Setup Google Login</h5>
+
+<ol>
+  <li>Ensure that the <a href="http://solid-interactive.github.io/grasshopper-core-nodejs/documentation.html#projectconfiguration">identities.google object on your ghapi.json</a> is correctly setup.</li>
+  <li>Ensure that you have added both a a redirect uri and a javascript origin to your <a href="https://developers.google.com/console">Google Developer Console OAuth configuration</a>.
+    <ul>
+      <li>The javascript origin is the root of your website. For example:
+        <ul>
+          <li><code>http://localhost:3000</code></li>
+          <li><code>https://www.grasshopper-admin-sample.herokuapp.com</code></li>
+        </ul>
+      </li>
+      <li>The redirect uri should be the root of your website with the following append to the end <code>/oauth2callback</code>. This endpoint is where google will send the authenticated users temporary token. This endpoint already exists in Grasshopper-Api.
+ This would create the following url’s from the examples mentioned above:
+        <ul>
+          <li><code>http://localhost:3000/auth2Callback</code></li>
+          <li><code>https://www.grasshopper-admin-sample.herokuapp.com/oauth2callback</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Setup the methods to get the googleAuthUrl from API then send the user there.
+ The <code>GET /googleurl</code> endpoint is already available on Api.
+    <ul>
+      <li>This endpoint is not authenticated.</li>
+      <li>This endpoint can also take an override redirect url. If you use this override, it will redirect the user back to that url with the grasshopper token in the url after all auth work is done.</li>
+    </ul>
+  </li>
+  <li>Modify your applications routes to collect the grasshopper token from the redirected route.
+ Grasshopper API will redirect the user back to your app with the grasshopper token appended to the redirectUrl you specified in your config. If you overrode this by passing it as a header in the <code>/geturl</code> request, then it will be appended to that url.
+    <ul>
+      <li>If your redirectUrl in your config was: <code>/login</code>, then the user is redirected to <code>/login/{ grasshopperToken }</code>.</li>
+      <li>If you overrode your redirectUrl then you will see: <code>/someOtherPage/{ grasshopperToken }</code>.</li>
+      <li>Your route will need to be able to accept the returned url, in backbone, this might look like: <code>'login(/:token)'</code>.
+  Where the <code>()</code> signifies an optional param. Then a <code>/</code>. Then a <code>:token</code>.  The word ‘token’ in the example is important as this will be passed the the route function as a parameter.</li>
+    </ul>
+  </li>
+  <li>Once you have a handle on the grasshopper token, save it to local storage, prepended with ‘Google ‘.</li>
+</ol>
+
+<p>Check out our sample projects for examples of both of these authentication methods in working applications.</p>

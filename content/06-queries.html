@@ -1,0 +1,72 @@
+<h5 id="queries">Queries</h5>
+
+<p>Grasshopper’s query builder accepts a query object that contains several parameters, some optional.</p>
+
+<p>The returned object is an array with limit, skip and total.  The total is the value of all content matched by query, not just returned objects.</p>
+
+<p>Definitions for all possible query parameters/options</p>
+
+<ul>
+  <li><em>filters</em>: An array of optional filter objects for the query.
+    <ul>
+      <li><em>key</em>: The key of the content being filtered.</li>
+      <li><em>cmp</em>: The comparison operator for the filter value.  Currently supported operators (Query accepts symbol or string value):
+        <ul>
+          <li><em>’=’</em>: equals</li>
+          <li><em>’!=’ or ‘not’ or ‘notequal’ or ‘notequals’</em>: not equal to</li>
+          <li><em>’&gt;=’ or ‘gte’</em>: greater than or equals</li>
+          <li><em>’&gt;’ or ‘gt’</em>: greater than</li>
+          <li><em>’&lt;=’ or ‘lte’</em>: less than or equals</li>
+          <li><em>’&lt;’ or ‘lt’</em>: less than</li>
+          <li><em>‘in’ or ‘contains’</em>: contains</li>
+          <li><em>‘!in’ or ‘notin’ or ‘notcontains’</em>: does not contain</li>
+          <li><em>’%’ or ‘like’</em>: like (Allows for ‘fuzzy matching’)</li>
+          <li><em>’!%’ or ‘notlike’</em>: not like (Allows for ‘fuzzy matching’)</li>
+          <li><em>‘between’</em>: between</li>
+          <li><em>‘notbetween’</em>: not between</li>
+          <li><em>‘size’</em>: size</li>
+          <li><em>‘exists’</em>: exists</li>
+        </ul>
+      </li>
+      <li><em>value</em>: Then value the filter will be compared with.</li>
+    </ul>
+  </li>
+  <li><em>types</em>: An optional array of content type ids.</li>
+  <li><em>nodes</em>: An optional array of node ids.</li>
+  <li><em>options</em>: Object.  Possible key/value pairs are:
+    <ul>
+      <li>
+        <ul>
+          <li>limit : Limit number of results. String or number.</li>
+        </ul>
+      </li>
+      <li>
+        <ul>
+          <li>skip : Skip specified number of results.  String or number. (limit and skip support pagination)</li>
+        </ul>
+      </li>
+      <li>
+        <ul>
+          <li>distinct : return distinct results within a find.  Can include types.</li>
+        </ul>
+      </li>
+      <li>
+        <ul>
+          <li>exclude : array of fields to be excluded from query.</li>
+        </ul>
+      </li>
+      <li>
+        <ul>
+          <li>include : array of fields to be included in query.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>Important Notes:</p>
+
+<ul>
+  <li>The options object can have include or exclude parameters, but not both in the same query.</li>
+  <li>When using ‘options.distinct’, filters can’t be used.  This means paging is not available.</li>
+</ul>
