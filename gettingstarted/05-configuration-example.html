@@ -9,6 +9,10 @@
           <li><em>cert</em> Absolute path to SSL certificate</li>
         </ul>
       </li>
+      <li><em>proxy</em>: Defaults to false.  Boolean indicating whether you are going to proxy the api onto another express server. If False, when you initialize API, it will create a server for you.</li>
+      <li><em>maxFilesSize</em>: Defaults to 2 megabytes.  The Maximum file size you are allowed to upload. In bytes.</li>
+      <li><em>maxFieldsSize</em>: Defaults to 2 megabytes.  The maximum field size you are allowed to have. In bytes.</li>
+      <li><em>maxFields</em>: Defaults to 1000. The maximum number of fields you are allowed to have.</li>
     </ul>
   </li>
   <li>crypto (required)
@@ -57,6 +61,7 @@
           </li>
         </ul>
       </li>
+      <li>IMPORTANT : Each defined engine will run (saving, updating, etc), but the engine set to default will serve the files.</li>
     </ul>
   </li>
   <li>identities (optional)
