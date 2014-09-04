@@ -245,7 +245,6 @@ describe('Grasshopper core - contentTypes', function () {
                     }
                 ],
                 helpText: '',
-                meta: [],
                 description: ''
             };
             grasshopper.request(adminToken).contentTypes.insert(newContentType)
@@ -260,37 +259,31 @@ describe('Grasshopper core - contentTypes', function () {
         });
 
         describe('the fields collection', function() {
-            xit('should return an error when fields is not an array', function(done) {
+            it('should return an error when fields is not an array', function(done) {
                 var newContentType = {
                     label: 'newtestsuitecontent',
-                    fields: {
-                        yourMomma : 'blahhaha'
-                    },
+                    fields: [{
+                        yourMomma : 'true'
+                    }],
                     helpText: '',
-                    meta: [],
                     description: ''
                 };
 
                 grasshopper.request(adminToken).contentTypes.insert(newContentType)
-                    .then(function(thing) {
-                      console.log(thing);
-                      done();
-                    })
+                    .then(done)
                     .fail(function (err) {
                         console.log(err.message);
                         err.code.should.equal(400);
-                        err.message.should.equal('content type fields collection must be an array of field objects.');
                         done();
                     })
                     .catch(done);
             });
 
-            xit('should turn an empty fields object into an arry, so it does not break everything says Kaija', function(done) {
+            it('should turn an empty fields object into an array, so it does not break everything says Kaija', function(done) {
                 var newContentType = {
                     label: 'newtestsuitecontent',
                     fields: {},
                     helpText: '',
-                    meta: [],
                     description: ''
                 };
 
@@ -310,7 +303,10 @@ describe('Grasshopper core - contentTypes', function () {
                     fields: [
                         {
                             _id : 'this has a space',
-                            type: 'textbox'
+                            type: 'textbox',
+                            label: 'test',
+                            min: 1,
+                            max: 3
                         }
                     ],
                     helpText: '',
@@ -333,7 +329,10 @@ describe('Grasshopper core - contentTypes', function () {
                     label: 'newtestsuitecontent',
                     fields: [
                         {
-                            type: 'textbox'
+                            type: 'textbox',
+                            label: 'test',
+                            min: 1,
+                            max: 3
                         }
                     ],
                     helpText: '',
@@ -356,7 +355,10 @@ describe('Grasshopper core - contentTypes', function () {
                     label: 'newtestsuitecontent',
                     fields: [
                         {
-                            _id: 'ThisIsOk'
+                            _id: 'ThisIsOk',
+                            label: 'test',
+                            min: 1,
+                            max: 3
                         }
                     ],
                     helpText: '',
@@ -380,6 +382,7 @@ describe('Grasshopper core - contentTypes', function () {
                     "label": "new test content type",
                     "fields": [
                         {
+                            "label": "Title",
                             "dataType": "string",
                             "defaultValue": "",
                             "_id": "title",
@@ -387,28 +390,30 @@ describe('Grasshopper core - contentTypes', function () {
                             "type": "textbox",
                             "options": false,
                             "min": 1,
-                            "max": 1,
-                            "label": "Title"
+                            "max": 1
+
                         },
                         {
+                            "label": "a date",
                             "dataType": "date",
                             "_id": "a-date",
                             "validation": [],
                             "type": "date",
                             "options": false,
                             "min": 1,
-                            "max": 1,
-                            "label": "a date"
+                            "max": 1
+
                         },
                         {
+                            "label": "a radio",
                             "dataType": "boolean",
                             "_id": "a-radio",
                             "validation": [],
                             "type": "radio",
                             "options": false,
                             "min": 1,
-                            "max": 1,
-                            "label": "a radio"
+                            "max": 1
+
                         }
                     ]
                 };
