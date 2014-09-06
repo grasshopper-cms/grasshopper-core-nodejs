@@ -29,7 +29,7 @@ describe('Grasshopper core - contentTypes', function () {
     });
 
     describe('getById', function () {
-        xit('should return 401 because trying to access unauthenticated', function (done) {
+        it('should return 401 because trying to access unauthenticated', function (done) {
             grasshopper.request()
                 .contentTypes.getById(testContentTypeId)
                 .then(done)
@@ -41,7 +41,7 @@ describe('Grasshopper core - contentTypes', function () {
                 .done();
         });
 
-        xit('should return an existing content type', function (done) {
+        it('should return an existing content type', function (done) {
             grasshopper.request(adminToken)
                 .contentTypes.getById(testContentTypeId)
                 .then(function (payload) {
@@ -52,7 +52,7 @@ describe('Grasshopper core - contentTypes', function () {
                 .catch(done)
                 .done();
         });
-        xit('should return 404 because test user id does not exist', function (done) {
+        it('should return 404 because test user id does not exist', function (done) {
             grasshopper.request(adminToken)
                 .contentTypes.getById('5246e73d56c02c0744000004')
                 .then(done)
@@ -66,15 +66,17 @@ describe('Grasshopper core - contentTypes', function () {
     });
 
     describe('get list', function () {
-        xit('should return a list of content types with the default page size', function (done) {
+        it('should return a list of content types with the default page size', function (done) {
             grasshopper
                 .request(adminToken).contentTypes.list().then(
                 function (payload) {
                     payload.results.length.should.equal(13);
                     done();
-                }).fail(done).done();
+                })
+                .fail(done)
+                .catch(done);
         });
-        xit('should a list of content types with the specified page size', function (done) {
+        it('should a list of content types with the specified page size', function (done) {
             grasshopper.request(adminToken)
                 .contentTypes.list({limit: 1})
                 .then(function (payload) {
@@ -82,11 +84,10 @@ describe('Grasshopper core - contentTypes', function () {
                     done();
                 })
                 .fail(done)
-                .catch(done)
-                .done();
+                .catch(done);
         });
 
-        xit('should return an empty list if the page size and current requested items are out of bounds.', function (done) {
+        it('should return an empty list if the page size and current requested items are out of bounds.', function (done) {
             grasshopper.request(adminToken)
                 .contentTypes.list({limit: 20, skip: 100})
                 .then(function (payload) {
@@ -94,11 +95,10 @@ describe('Grasshopper core - contentTypes', function () {
                     done();
                 })
                 .fail(done)
-                .catch(done)
-                .done();
+                .catch(done);
         });
 
-        xit('should return the results sorted alphabetically by label', function (done) {
+        it('should return the results sorted alphabetically by label', function (done) {
 
             var label = "aaaaaa",
                 newContentType = {
@@ -142,16 +142,15 @@ describe('Grasshopper core - contentTypes', function () {
                             done();
                         })
                         .fail(done)
-                        .catch(done)
-                        .done();
-                },
-                function (err) {
-                    should.not.exist(err);
+                        .catch(function(err) {
+                            should.not.exist(err);
+                            done();
+                        });
                 }
             );
         });
 
-        xit('should return a 401 because user is not authenticated', function (done) {
+        it('should return a 401 because user is not authenticated', function (done) {
             grasshopper.request()
                 .contentTypes.list()
                 .then(done)
@@ -159,14 +158,13 @@ describe('Grasshopper core - contentTypes', function () {
                     err.code.should.equal(401);
                     done();
                 })
-                .catch(done)
-                .done();
+                .catch(done);
         });
     });
 
     describe('insert', function () {
 
-        xit('should insert a new contentType with the new schema', function (done) {
+        it('should insert a new contentType with the new schema', function (done) {
             var newContentType = {
                 "label": "Test Type",
                 "fields": [
@@ -206,18 +204,19 @@ describe('Grasshopper core - contentTypes', function () {
                     done();
                 })
                 .fail(done)
-                .catch(done)
-                .done();
+                .catch(done);
         });
 
-        xit('should insert a content type', function (done) {
+        it('should insert a content type', function (done) {
             var newContentType = {
                 label: 'newtestsuitecontent',
                 fields: [
                     {
                         _id: 'testfield',
                         label: 'Title',
-                        type: 'textbox'
+                        type: 'textbox',
+                        min: 1,
+                        max: 2
                     }
                 ],
                 helpText: '',
@@ -231,17 +230,18 @@ describe('Grasshopper core - contentTypes', function () {
                     done();
                 })
                 .fail(done)
-                .catch(done)
-                .done();
+                .catch(done);
         });
 
-        xit('should return an error because we are missing a "label" field.', function (done) {
+        it('should return an error because we are missing a "label" field.', function (done) {
             var newContentType = {
                 fields: [
                     {
                         _id : 'testid',
                         label: 'Title',
-                        type: 'textbox'
+                        type: 'textbox',
+                        min: 1,
+                        max: 2
                     }
                 ],
                 helpText: '',
@@ -292,9 +292,8 @@ describe('Grasshopper core - contentTypes', function () {
                         _.isArray(response.fields).should.be.ok;
                         done();
                     })
-                    .fail(doneError.bind(null, done))
-                    .catch(doneError.bind(null, done))
-                    .done();
+                    .fail(done)
+                    .catch(done);
             });
 
             it('should return error when a malformed field id is passed in (_id has a space).', function (done) {
@@ -373,8 +372,7 @@ describe('Grasshopper core - contentTypes', function () {
                         err.message.should.equal('"type" is a required field.');
                         done();
                     })
-                    .catch(done)
-                    .done();
+                    .catch(done);
             });
 
             it('should add a unique id to each field.', function (done) {
@@ -419,43 +417,38 @@ describe('Grasshopper core - contentTypes', function () {
                 };
                 grasshopper.request(adminToken).contentTypes.insert(testContentType)
                     .then(function (payload) {
-                        console.log('#*#*#*#*#**#*#*#**#');
-                        console.log(payload);
-                        console.log('#*#*#*#*#**#*#*#**#');
                         _.each(payload.fields, function (field) {
                             field.should.have.ownProperty('_uid');
                         });
 
                         done();
                     })
-                    .catch(done)
                     .fail(done)
-                    .done();
-
+                    .catch(done);
             });
         });
     });
 
     describe('update', function () {
-        // before(function (done) {
-        //     grasshopper.request(adminToken).content.insert({
-        //         meta: {
-        //             type: testCreatedContentTypeId,
-        //             node: '526d5179966a883540000006',
-        //             labelfield: 'label'
-        //         },
-        //         fields: {
-        //             label: 'Generated title',
-        //             testfield: 'testtest',
-        //             alphanumfield: 'tes123fdsfafsdafdsafsdafasfdsaest'
-        //         }
-        //     }).then(
-        //         function () {
-        //             done();
-        //         });
-        // });
+        before(function (done) {
+            grasshopper.request(adminToken).content.insert({
+                meta: {
+                    type: anotherTestContentTypeId,
+                    node: '526d5179966a883540000006',
+                    labelfield: 'label'
+                },
+                fields: {
+                    label: 'Generated title',
+                    testfield: 'testtest',
+                    alphanumfield: 'tes123fdsfafsdafdsafsdafasfdsaest'
+                }
+            }).then(
+                function () {
+                    done();
+                });
+        });
 
-        xit('should return a 403 because user does not have permissions to access users', function (done) {
+        it('should return a 403 because user does not have permissions to access users', function (done) {
             var newContentType = {
                 _id: testCreatedContentTypeId,
                 label: 'updatedlabel',
@@ -477,19 +470,20 @@ describe('Grasshopper core - contentTypes', function () {
                     err.code.should.equal(403);
                     done();
                 })
-                .catch(done)
-                .done();
+                .catch(done);
         });
 
-        xit('should update a content type', function (done) {
+        it('should update a content type', function (done) {
             var newContentType = {
-                _id: testCreatedContentTypeId,
+                _id: anotherTestContentTypeId,
                 label: 'updatedlabel',
                 fields: [
                     {
                         _id: 'testttt',
                         label: 'Test Field Label',
-                        type: 'textbox'
+                        type: 'textbox',
+                        min: 1,
+                        max: 3
                     }
                 ],
                 helpText: '',
@@ -503,14 +497,13 @@ describe('Grasshopper core - contentTypes', function () {
                     done();
                 }
             )
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
-                .done();
+                .fail(done)
+                .catch(done);
         });
 
-        xit('should add a UID if any field is added or missing one.', function (done) {
+        it('should add a UID if any field is added or missing one.', function (done) {
             var newContentType = {
-                _id: testCreatedContentTypeId,
+                _id: anotherTestContentTypeId,
                 label: 'updatedlabel',
                 fields: [
                     {
@@ -530,12 +523,11 @@ describe('Grasshopper core - contentTypes', function () {
                     done();
                 }
             )
-                .fail(doneError.bind(null, done))
-                .catch(doneError.bind(null, done))
-                .done();
+                .fail(done)
+                .catch(done);
         });
 
-        xit('should return error if content type is updated without a set "ID"', function (done) {
+        it('should return error if content type is updated without a set "ID"', function (done) {
             var newContentType = {
                 label: 'updatedlabel',
                 fields: [
@@ -556,11 +548,10 @@ describe('Grasshopper core - contentTypes', function () {
                     err.code.should.equal(404);
                     done();
                 })
-                .catch(done)
-                .done();
+                .catch(done);
         });
 
-        xit('should update content field ids on content if a contenttype field id is changed.', function (done) {
+        it('should update content field ids on content if a contenttype field id is changed.', function (done) {
             var valueToLookFor = 'superfunky',
                 valueToLookFor2 = 'wakka',
                 valueToLookFor3 = 'testtest',
@@ -640,13 +631,12 @@ describe('Grasshopper core - contentTypes', function () {
                     _.has(foundContent.fields, valueToLookFor3).should.be.ok;
                     done();
                 })
-                .catch(doneError.bind(null, done))
-                .fail(doneError.bind(null, done))
-                .done();
+                .fail(done)
+                .catch(done);
 
             });
 
-        xit('should update content field ids on embedded content if a contenttype field id is changed on an embedded type.', function (done) {
+        it('should update content field ids on embedded content if a contenttype field id is changed on an embedded type.', function (done) {
                 var originalId = "origId",
                     typeToEmbed = {
                         "label": "cooperembeddeep",
@@ -792,8 +782,17 @@ describe('Grasshopper core - contentTypes', function () {
                     })
                     .then(function (createdContent2) {
                         thecontent2 = createdContent2;
+                        console.log('@^@^@^@^@^@^@^@^@^@^@');
+                        console.log(typeToEmbed.fields[0]);
+                        console.log('@^@^@^@^@^@^@^@^@^@^@');
                         typeToEmbed.fields[0]._id = valueToLookFor;
+                        console.log(typeToEmbed.fields[0]);
                         return grasshopper.request(adminToken).contentTypes.update(typeToEmbed);
+                    })
+                    .then(function(result) {
+                        console.log('This is the updated typeToEmbed');
+                        console.log(result);
+                        console.log('This is the updated typeToEmbed');
                     })
                     .then(function () {
                         return grasshopper.request(adminToken).content.getById(thecontent._id);
@@ -803,22 +802,26 @@ describe('Grasshopper core - contentTypes', function () {
                         return grasshopper.request(adminToken).content.getById(thecontent2._id);
                     })
                     .then(function (document2) {
+                        console.log('&*&@(&*#(&*(@&*(&#&(#^#)))))');
+                        console.log(foundContent1.fields);
+                        console.log('-----------------------------');
+                        console.log(document2.fields);
+                        console.log('&*&@(&*#(&*(@&*(&#&(#^#)))))');
                         foundContent2 = document2;
-                        _.has(foundContent1.fields.theshallowembed.theembed, valueToLookFor).should.be.ok;
-                        _.has(foundContent1.fields.theshallowembed.theembed, originalId).should.not.be.ok;
+                        // _.has(foundContent1.fields.theshallowembed.theembed, valueToLookFor).should.be.ok;
+                        // _.has(foundContent1.fields.theshallowembed.theembed, originalId).should.not.be.ok;
                         _.has(foundContent2.fields.theshallowembed.theembed, valueToLookFor).should.be.ok;
                         _.has(foundContent2.fields.theshallowembed.theembed, originalId).should.not.be.ok;
                         done();
                     })
-                    .catch(doneError.bind(null, done))
-                    .fail(doneError.bind(null, done))
-                    .done();
+                    .fail(done)
+                    .catch(done);
 
             });
 
         describe('updating the fields array on a content type', function () {
 
-                xit('should update the meta.labelfield when the order of fields changed', function (done) {
+                it('should update the meta.labelfield when the order of fields changed', function (done) {
                     var updatedContentType = {
                         _id: anotherTestContentTypeId,
                         label: 'updatedlabel',
@@ -828,14 +831,18 @@ describe('Grasshopper core - contentTypes', function () {
                                 required: true,
                                 instancing: 1,
                                 type: "textbox",
-                                label: "Title"
+                                label: "Title",
+                                min: 1,
+                                max: 2
                             },
                             {
                                 _id: "testfield",
                                 required: true,
                                 instancing: 1,
                                 type: "textbox",
-                                label: "Title"
+                                label: "Title",
+                                min: 1,
+                                max:2
                             }
                         ],
                         helpText: '',
@@ -849,16 +856,14 @@ describe('Grasshopper core - contentTypes', function () {
                                     payload.meta.labelfield.should.equal('testeroni');
                                     done();
                                 })
-                                .fail(doneError.bind(null, done))
-                                .catch(doneError.bind(null, done))
-                                .done();
+                                .fail(done)
+                                .catch(done);
                         })
-                        .fail(doneError.bind(null, done))
-                        .catch(doneError.bind(null, done))
-                        .done();
+                        .fail(done)
+                        .catch(done);
                 });
 
-                xit('should remove a field from a content type when you do a PUT without that field', function (done) {
+                it('should remove a field from a content type when you do a PUT without that field', function (done) {
                     var updatedContentType = {
                         _id: anotherTestContentTypeId,
                         label: 'updatedlabel',
@@ -880,12 +885,11 @@ describe('Grasshopper core - contentTypes', function () {
                             payload.fields.length.should.equal(1);
                             done();
                         })
-                        .fail(doneError.bind(null, done))
-                        .catch(doneError.bind(null, done))
-                        .done();
+                        .fail(done)
+                        .catch(done);
                 });
 
-                xit('should throw an error when attempting to remove all of the fields with a PUT', function (done) {
+                it('should throw an error when attempting to remove all of the fields with a PUT', function (done) {
                     var updatedContentType = {
                         _id: anotherTestContentTypeId,
                         label: 'updatedlabel',
@@ -895,13 +899,12 @@ describe('Grasshopper core - contentTypes', function () {
                     };
 
                     grasshopper.request(adminToken).contentTypes.update(updatedContentType)
-                        .then(doneError.bind(null, done))
+                        .then(done)
                         .fail(function (err) {
                             err.code.should.equal(404);
                             done();
                         })
-                        .catch(doneError.bind(null, done))
-                        .done();
+                        .catch(done);
                 });
 
             });
@@ -930,7 +933,7 @@ describe('Grasshopper core - contentTypes', function () {
                 ).done();
             });
 
-            xit('should return a 403 because user does not have permissions to access content types', function (done) {
+            it('should return a 403 because user does not have permissions to access content types', function (done) {
                 grasshopper.request(readerToken)
                     .contentTypes.deleteById(testCreatedContentTypeId)
                     .then(done)
@@ -938,11 +941,10 @@ describe('Grasshopper core - contentTypes', function () {
                         err.code.should.equal(403);
                         done();
                     })
-                    .catch(done)
-                    .done();
+                    .catch(done);
             });
 
-            xit('should delete a content type', function (done) {
+            it('should delete a content type', function (done) {
                 grasshopper.request(adminToken)
                     .contentTypes.deleteById(testCreatedContentTypeId)
                     .then(function (payload) {
@@ -950,11 +952,10 @@ describe('Grasshopper core - contentTypes', function () {
                         done();
                     })
                     .fail(done)
-                    .catch(done)
-                    .done();
+                    .catch(done);
             });
 
-            xit('should return 200 when we try to delete a content type that doesn\'t exist', function (done) {
+            it('should return 200 when we try to delete a content type that doesn\'t exist', function (done) {
                 grasshopper.request(adminToken)
                     .contentTypes.deleteById(testCreatedContentTypeId)
                     .then(function (payload) {
@@ -962,8 +963,7 @@ describe('Grasshopper core - contentTypes', function () {
                         done();
                     })
                     .fail(done)
-                    .catch(done)
-                    .done();
+                    .catch(done);
             });
         });
 
