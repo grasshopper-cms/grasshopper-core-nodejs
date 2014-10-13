@@ -1010,8 +1010,7 @@ describe('Grasshopper core - content', function(){
                     .then(deleteAfterInsertion)
                     .then(done)
                     .fail(done)
-                    .catch(done)
-                    .done();
+                    .catch(done);
             });
 
             it('Should throw 400 because required field is empty.', function(done) {
@@ -1029,6 +1028,7 @@ describe('Grasshopper core - content', function(){
                 grasshopper
                     .request(tokens.globalEditorToken)
                     .content.insert(obj)
+                    .then(done)
                     .fail(function(err){
                         err.code.should.equal(400);
                         err.message.should.equal('"Title" is not valid. Please check your validation rules and try again.');
