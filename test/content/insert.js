@@ -1009,7 +1009,6 @@ describe('Grasshopper core - content', function(){
                     })
                     .then(deleteAfterInsertion)
                     .then(done)
-                    .fail(done)
                     .catch(done);
             });
 
