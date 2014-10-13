@@ -986,6 +986,57 @@ describe('Grasshopper core - content', function(){
                     .done();
             });
         });
+
+        describe('Required field validation testing',function(){
+            it('Should pass', function(done) {
+                var obj = {
+                    meta: {
+                        type: '543c10e9926c2be6649cbddb',
+                        node : '53fd0c829cc459747101b022',
+                        labelfield: 'Title'
+                    },
+                    fields: {
+                        title: 'test'
+                    }
+                };
+
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(function(payload){
+                        payload.fields.title.should.equal('test');
+                        return payload._id;
+                    })
+                    .then(deleteAfterInsertion)
+                    .then(done)
+                    .fail(done)
+                    .catch(done)
+                    .done();
+            });
+
+            it('Should throw 400 because required field is empty.', function(done) {
+                var obj = {
+                    meta: {
+                        type: '543c10e9926c2be6649cbddb',
+                        node : '53fd0c829cc459747101b022',
+                        labelfield: 'Title'
+                    },
+                    fields: {
+                        title: ''
+                    }
+                };
+
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .fail(function(err){
+                        err.code.should.equal(400);
+                        err.message.should.equal('"Title" is not valid. Please check your validation rules and try again.');
+                        done();
+                    })
+                    .catch(done);
+            });
+        });
     });
 
     function deleteAfterInsertion(contentId) {
