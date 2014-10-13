@@ -1,0 +1,27 @@
+{
+    "label" : "Testing required field validation",
+    "helpText" : "Required field validation testing type",
+    "description" : "Required field validation testing type",
+    "fields" : [
+        {
+            "_uid" : "6de4c760-5301-11e4-965b-c3720ce2a149",
+            "dataType" : "string",
+            "defaultValue" : "",
+            "_id" : "title",
+            "validation" : [
+                {
+                    "type" : "required"
+                }
+            ],
+            "type" : "textbox",
+            "options" : false,
+            "min" : 1,
+            "max" : 1,
+            "label" : "Title"
+        }
+    ],
+    "_id" : {
+        "$oid": "543c10e9926c2be6649cbddb"
+    },
+    "__v" : 0
+}
