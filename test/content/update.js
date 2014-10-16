@@ -155,6 +155,22 @@ describe('Grasshopper core - content', function(){
         ).done(done);
     });
 
+    it('should successfully update when passed an object containing another object', function(done) {
+        var obj = {};
+        _.extend(obj, sampleContentObject, {dateRead: {"1": "2"}});
+
+        obj.fields.newColumn = 'newValue';
+
+        grasshopper.request(tokens.globalEditorToken).content.update(obj).then(
+            function(payload){
+                payload.fields.newColumn.should.equal('newValue');
+            },
+            function(err){
+                should.not.exist(err);
+            }
+        ).done(done);
+    });
+
     function createGetToken(username, password, storage) {
         return {
             closure : function getToken(cb){
