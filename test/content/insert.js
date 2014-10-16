@@ -356,7 +356,6 @@ describe('Grasshopper core - content', function(){
                     .request(tokens.globalEditorToken)
                     .content.insert(obj)
                     .then(function(payload){
-                        console.log(payload);
                         (payload.fields.nullfield === null).should.equal(true);
                         payload._id;
                     })
