@@ -205,7 +205,7 @@ describe('Grasshopper core - testing assets', function(){
         it('should return a 404 when it could not find the file.', function(done) {
             grasshopper
                 .request(globalEditorToken)
-                .assets.find({
+                .assets.move({
                     nodeid: testNodeId,
                     filename: 'gobledigook.png',
                     newnodeid: '5246e73d56c02c0744000001' })
@@ -372,6 +372,46 @@ describe('Grasshopper core - testing assets', function(){
             done();
         });
          */
+    });
+
+    describe('query assets', function() {
+        it('should return a single asset matched by a query.', function(done) {
+            grasshopper
+                .request(globalReaderToken)
+                .assets.query({
+                    nodeid: testNodeId })
+                .then(function(payload) {
+                    payload.should.be.an.object;
+                    payload.length.should.equal(1);
+                    done(); })
+                .fail(done)
+                .done();
+        });
+
+        it('should return a list of assets matched by a query.', function(done) {
+            grasshopper
+                .request(globalReaderToken)
+                .assets.query({
+                    nodeid: testNodeId })
+                .then(function(payload) {
+                    payload.length.should.equal(5);
+                    done(); })
+                .fail(done)
+                .done();
+        });
+
+        it('should fail to return an asset NOT matched by a query.', function(done) {
+            grasshopper
+                .request(globalReaderToken)
+                .assets.query({
+                    nodeid: testNodeId })
+                .then(function() {
+                    done(new Error('Should not succeed')); })
+                .fail(function(err){
+                    err.code.should.equal(404);
+                    done(); })
+                .done();
+        });
     });
 
     function doneError(done, err) {
