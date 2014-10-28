@@ -1,6 +1,7 @@
 language: node_js
 node_js:
   - "0.10"
+  - "0.11"
 services:
   - mongodb
 before_script:
@@ -12,3 +13,4 @@ notifications:
     - cooper.hilscher@thinksolid.com
     - greg.larrenaga@thinksolid.com
     - kaija.rayne@thinksolid.com
+    - eric.beringer@thinksolid.com
