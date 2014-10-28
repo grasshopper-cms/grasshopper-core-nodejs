@@ -4,7 +4,7 @@ module.exports = function (grunt) {
         main : {
             src : 'grunt/templates/README.template.md',
             dest : 'README.md',
-            baseLinkPath : 'https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/metroid/'
+            baseLinkPath : 'https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/'
         }
     });
 };

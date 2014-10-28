@@ -18,9 +18,15 @@
         },
         {
             "name": "Kaija Rayne"
+        },
+        {
+            "name": "Eric Beringer"
+        },
+        {
+            "name": "J.J. Idt"
         }
   ],
-  "version": "0.16.8",
+  "version": "0.16.10",
   "repository": {
     "type": "git",
     "url": "https://github.com/Solid-Interactive/grasshopper-core-nodejs.git"
