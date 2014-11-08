@@ -379,7 +379,9 @@ describe('Grasshopper core - testing assets', function(){
             grasshopper
                 .request(globalReaderToken)
                 .assets.query({
-                    nodeid: testNodeId })
+                    filters: [{key: 'nonsense', cmp: '=', value: 'XXXNEVERSHOULDMATCHANTYHINGXXX'}],
+                    options: {}
+                })
                 .then(function(payload) {
                     payload.should.be.an.object;
                     payload.length.should.equal(1);
@@ -392,7 +394,10 @@ describe('Grasshopper core - testing assets', function(){
             grasshopper
                 .request(globalReaderToken)
                 .assets.query({
-                    nodeid: testNodeId })
+                    filters: [{key: 'nonsense', cmp: '=', value: 'XXXNEVERSHOULDMATCHANTYHINGXXX'}],
+                    nodes: [testNodeId],
+                    options: {}
+                })
                 .then(function(payload) {
                     payload.length.should.equal(5);
                     done(); })
@@ -404,7 +409,10 @@ describe('Grasshopper core - testing assets', function(){
             grasshopper
                 .request(globalReaderToken)
                 .assets.query({
-                    nodeid: testNodeId })
+                    filters: [{key: 'nonsense', cmp: '=', value: 'XXXNEVERSHOULDMATCHANTYHINGXXX'}],
+                    nodes: [testNodeId],
+                    options: {}
+                })
                 .then(function() {
                     done(new Error('Should not succeed')); })
                 .fail(function(err){

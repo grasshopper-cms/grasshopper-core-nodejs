@@ -4,27 +4,27 @@
   "main": "./lib/grasshopper",
   "author": "Travis McHattie",
   "contributors": [
-        {
-            "name": "Travis McHattie"
-        },
-        {
-            "name": "Peter Ajtai"
-        },
-        {
-            "name": "Greg Larrenaga"
-        },
-        {
-            "name": "Cooper Hilscher"
-        },
-        {
-            "name": "Kaija Rayne"
-        },
-        {
-            "name": "Eric Beringer"
-        },
-        {
-            "name": "J.J. Idt"
-        }
+    {
+      "name": "Travis McHattie"
+    },
+    {
+      "name": "Peter Ajtai"
+    },
+    {
+      "name": "Greg Larrenaga"
+    },
+    {
+      "name": "Cooper Hilscher"
+    },
+    {
+      "name": "Kaija Rayne"
+    },
+    {
+      "name": "Eric Beringer"
+    },
+    {
+      "name": "J.J. Idt"
+    }
   ],
   "version": "0.16.10",
   "repository": {
@@ -55,6 +55,7 @@
     "mongoose-validator": "~0.2.2",
     "node-uuid": "^1.4.1",
     "q": "^1.0.1",
+    "q-io": "^1.11.5",
     "request": "^2.39.0",
     "solid-logger-js": "~0.3.9",
     "validator": "~3.5.1"
