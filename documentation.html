@@ -67,6 +67,40 @@
             </ul>
         </li>
         <li>
+            <a href="#authentication">Authentication</a>
+            <ul class="nav">
+                
+                
+                
+                
+                <li><a href="#google-auth-setup">Setup Google Login</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#users">Users</a>
+            <ul class="nav">
+                
+                
+                
+                
+                <li><a href="#user-properties">User Properties</a></li>
+                
+                <li><a href="#user-roles">User Roles</a></li>
+                
+                <li><a href="#user-methods">User Methods</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#content">Content</a>
+            <ul class="nav">
+                
+                
+                
+                
+                <li><a href="#queries">Queries</a></li>
+            </ul>
+        </li>
+        <li>
             <a href="#contributing">Contributing</a>
             <ul class="nav">
                 
@@ -103,7 +137,7 @@
 
 <p>You will find that many concepts that modern applications need are built right into Grasshopper. User management, flexible data storage, permissions, plus much more are bundled into the framework.</p>
 
-<p>Grasshopper is modular and built on top of a modern web developement stack. It was written entirely in JavaScript and it uses a NoSQL database system. File storage can either be local or in the cloud on a CDN. As the project matures, more database systems and CDN options will become available.</p>
+<p>Grasshopper is modular and built on top of a modern web development stack. It was written entirely in JavaScript and it uses a NoSQL database system. File storage can either be local or in the cloud on a CDN. As the project matures, more database systems and CDN options will become available.</p>
 
 <p>Currently, Grasshopper will run in any environment that supports Node.js and MongoDB. This is great news since loading Node.js apps into modern cloud containers is very simple. Users hosting the application themselves or using services like Heroku, Engine Yard or any other PaaS (Platform as a Service) are fully supported.</p>
 
@@ -145,6 +179,14 @@
 </ul>
 </code>
 </pre>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     
                     
                     
@@ -410,7 +452,11 @@
         "https":{
             "key":"{full path to key}",
             "cert":"{full path to cert}"
-        }
+        },
+        "proxy" : false,
+        "maxFilesSize": 2000000,
+        "maxFieldsSize": 2000000,
+        "maxFields": 1000
     },
     "crypto": {
        "secret_passphrase" : "{unique term per project}"
@@ -482,6 +528,10 @@
           <li><em>cert</em> Absolute path to SSL certificate</li>
         </ul>
       </li>
+      <li><em>proxy</em>: Defaults to false.  Boolean indicating whether you are going to proxy the api onto another express server. If False, when you initialize API, it will create a server for you.</li>
+      <li><em>maxFilesSize</em>: Defaults to 2 megabytes.  The Maximum file size you are allowed to upload. In bytes.</li>
+      <li><em>maxFieldsSize</em>: Defaults to 2 megabytes.  The maximum field size you are allowed to have. In bytes.</li>
+      <li><em>maxFields</em>: Defaults to 1000. The maximum number of fields you are allowed to have.</li>
     </ul>
   </li>
   <li>crypto (required)
@@ -530,6 +580,7 @@
           </li>
         </ul>
       </li>
+      <li>IMPORTANT : Each defined engine will run (saving, updating, etc), but the engine set to default will serve the files.</li>
     </ul>
   </li>
   <li>identities (optional)
@@ -546,6 +597,630 @@
       </li>
     </ul>
   </li>
+</ul>
+</code>
+</pre>
+                    
+                
+                    
+                
+                    </div>
+                </div>
+            </div>
+        
+    
+
+    
+    
+
+    
+
+    
+        <div class="method" id="authentication">
+            <div class="method-section clearfix">
+                <div class="method-description">
+                    <h4 id="authentication">Authentication</h4>
+
+<p>Membership is a critical component to almost all applications. Grasshopper’s authentication methods are fully extensible, and it contains a robust permissions mechanism that allows you to protect data based off of the application’s requirements.</p>
+
+<p>Supported Authentication Methods</p>
+
+<ul>
+  <li>Basic: This is the typical username and password method</li>
+  <li>Google: Allows you to authenticate with your Gmail account.</li>
+</ul>
+
+
+                </div>
+                <div class="method-example">
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+<pre>
+<code class=""><p>// Basic Authentication Example
+grasshopper.auth( ‘basic’, { username: ‘’, password: ‘’ } ).then( function( token ) {
+    // Store user’s token somewhere
+} ).done();</p>
+
+<p>// Google Authentication Example
+grasshopper.auth( ‘google’, { code: ‘TMP GOOGLE TOKEN’ } ).then( function( token ) {
+    // Store user’s token somewhere
+} ).done();</p>
+</code>
+</pre>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
+    
+
+    
+
+        
+        
+        
+    
+
+        
+        
+            <div class="method" id="google-auth-setup">
+                <div class="method-section clearfix">
+                    <div class="method-description">
+                        <h5 id="setup-google-login">Setup Google Login</h5>
+
+<ol>
+  <li>Ensure that the <a href="http://solid-interactive.github.io/grasshopper-core-nodejs/documentation.html#projectconfiguration">identities.google object on your ghapi.json</a> is correctly setup.</li>
+  <li>Ensure that you have added both a a redirect uri and a javascript origin to your <a href="https://developers.google.com/console">Google Developer Console OAuth configuration</a>.
+    <ul>
+      <li>The javascript origin is the root of your website. For example:
+        <ul>
+          <li><code>http://localhost:3000</code></li>
+          <li><code>https://www.grasshopper-admin-sample.herokuapp.com</code></li>
+        </ul>
+      </li>
+      <li>The redirect uri should be the root of your website with the following append to the end <code>/oauth2callback</code>. This endpoint is where google will send the authenticated users temporary token. This endpoint already exists in Grasshopper-Api.
+ This would create the following url’s from the examples mentioned above:
+        <ul>
+          <li><code>http://localhost:3000/auth2Callback</code></li>
+          <li><code>https://www.grasshopper-admin-sample.herokuapp.com/oauth2callback</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Setup the methods to get the googleAuthUrl from API then send the user there.
+ The <code>GET /googleurl</code> endpoint is already available on Api.
+    <ul>
+      <li>This endpoint is not authenticated.</li>
+      <li>This endpoint can also take an override redirect url. If you use this override, it will redirect the user back to that url with the grasshopper token in the url after all auth work is done.</li>
+    </ul>
+  </li>
+  <li>Modify your applications routes to collect the grasshopper token from the redirected route.
+ Grasshopper API will redirect the user back to your app with the grasshopper token appended to the redirectUrl you specified in your config. If you overrode this by passing it as a header in the <code>/geturl</code> request, then it will be appended to that url.
+    <ul>
+      <li>If your redirectUrl in your config was: <code>/login</code>, then the user is redirected to <code>/login/{ grasshopperToken }</code>.</li>
+      <li>If you overrode your redirectUrl then you will see: <code>/someOtherPage/{ grasshopperToken }</code>.</li>
+      <li>Your route will need to be able to accept the returned url, in backbone, this might look like: <code>'login(/:token)'</code>.
+  Where the <code>()</code> signifies an optional param. Then a <code>/</code>. Then a <code>:token</code>.  The word ‘token’ in the example is important as this will be passed the the route function as a parameter.</li>
+    </ul>
+  </li>
+  <li>Once you have a handle on the grasshopper token, save it to local storage, prepended with ‘Google ‘.</li>
+</ol>
+
+<p>Check out our sample projects for examples of both of these authentication methods in working applications.</p>
+
+                    </div>
+                    <div class="method-example">
+            
+                
+                    
+<pre>
+<code class="javascript"><p>// Get Google Oauth Url Example
+$.ajax({
+        dataType : ‘json’,
+        url : yourApiEndpoint + ‘/googleurl’,
+        type : ‘GET’
+    })
+    .done(function(url) {
+        window.location.href = url;
+    });</p>
+
+<p>// Get Google Oauth Url while override the redirectUrl
+$.ajax({
+        dataType : ‘json’,
+        url : yourApiEndpoint + ‘/googleurl’,
+        type : ‘GET’,
+        headers : {‘redirectUrl’ : ‘/someOtherPage’}
+    })
+    .done(function(url) {
+        window.location.href = url;
+    });</p>
+
+<p>// If Using Backbone, your router might look like
+Router.extend({
+    routes : {
+        ‘login(/:token)’ : ‘displayLogin’
+    }
+});</p>
+
+<p>// Accept the token
+function doGoogleLogin(token) {
+    // Do something with google token.
+};</p>
+</code>
+</pre>
+                    
+                
+                    
+                
+                    </div>
+                </div>
+            </div>
+        
+    
+
+    
+        <div class="method" id="users">
+            <div class="method-section clearfix">
+                <div class="method-description">
+                    <h4 id="users">Users</h4>
+
+                </div>
+                <div class="method-example">
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
+    
+
+    
+
+        
+        
+        
+    
+
+        
+        
+            <div class="method" id="user-properties">
+                <div class="method-section clearfix">
+                    <div class="method-description">
+                        <h5 id="user-properties">User Properties</h5>
+
+<pre><code>{
+    _id: 12345657,
+    role: 'admin',
+    enabled: true,
+    firstname: 'firstname',
+    lastname: 'lastname',
+    identities: {
+        basic: {
+            username: 'admin',
+            salt: '111111111',
+            hash: '282828282828282828'
+        },
+        google: {
+            id: '292929292929292',
+            accessToken: '474747474747'
+            refreshToken: '4098409874'
+        }
+    },
+    displayname : 'admin',
+    linkedidentities : ['basic'],
+    email: 'apitestuser@thinksolid.com',
+    profile : {}
+}
+</code></pre>
+
+                    </div>
+                    <div class="method-example">
+            
+                
+                    
+<pre>
+<code class="asciidoc"><ul>
+  <li><em>_id</em>: Valid Mongo Object Id</li>
+  <li><em>role</em>: The users role, see below for more information on roles.</li>
+  <li><em>enabled</em>: Boolean indicating if the user is currently enabled or not.</li>
+  <li><em>firstname</em>: The users First Name.</li>
+  <li><em>lastname</em>: The users Last Name.</li>
+  <li><em>identities</em>: The Identities object represents the identities that the user has, this is private and will never be returned.
+    <ul>
+      <li><em>basic</em>: The basic identity represents the most simple form of auth.
+        <ul>
+          <li><em>username</em>: The Users username that they would use to login.</li>
+          <li><em>salt</em>: Salt for password.</li>
+          <li><em>hash</em>: Hash for password.</li>
+        </ul>
+      </li>
+      <li><em>google</em>: The Identity object representing google auth.
+        <ul>
+          <li><em>id</em>: The users google id. Unique to all google users.</li>
+          <li><em>accessToken</em>: An access token used to auth the user for google services. This token expires.</li>
+          <li><em>refreshToken</em>: A token given by google to refresh the users access token.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><em>displayname</em>: The users display name, if not set when creating a user, it will default to the login for basic auth, and the email address for google auth.</li>
+  <li><em>linkedidentities</em>: Array representing the identities the user has.</li>
+  <li><em>email</em>: The users email address.</li>
+  <li><em>profile</em>: The users profile, This can be an object containing anything.</li>
+</ul>
+</code>
+</pre>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    </div>
+                </div>
+            </div>
+        
+    
+
+        
+        
+            <div class="method" id="user-roles">
+                <div class="method-section clearfix">
+                    <div class="method-description">
+                        <h5 id="user-roles">User Roles</h5>
+
+<p>Roles (in order of power) :</p>
+
+<ol>
+  <li>Admin - Can do anything.</li>
+  <li>Editor - Can create and edit content and content types.</li>
+  <li>Author - Can only create content.</li>
+  <li>Reader - Can only read content.</li>
+  <li>External - Cannot access the admin in any way.</li>
+</ol>
+
+                    </div>
+                    <div class="method-example">
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    </div>
+                </div>
+            </div>
+        
+    
+
+        
+        
+            <div class="method" id="user-methods">
+                <div class="method-section clearfix">
+                    <div class="method-description">
+                        <h5 id="user-methods">User methods</h5>
+
+<ul>
+  <li>users.query
+    <ul>
+      <li>middleware.identity,</li>
+      <li>middleware.role(roles.ADMIN),</li>
+      <li>middleware.event(‘parse’),</li>
+      <li>middleware.event(‘validate’),</li>
+      <li>middleware.users.query,</li>
+      <li>middleware.event(‘out’)</li>
+    </ul>
+  </li>
+  <li>users.insert
+    <ul>
+      <li>middleware.identity,</li>
+      <li>middleware.role(roles.ADMIN),</li>
+      <li>middleware.users.linkedidentities.create,</li>
+      <li>middleware.users.parse,</li>
+      <li>middleware.event(‘parse’),</li>
+      <li>middleware.event(‘validate’),</li>
+      <li>middleware.users.validate,</li>
+      <li>middleware.users.insert,</li>
+      <li>middleware.event(‘out’),</li>
+      <li>middleware.event(‘save’)</li>
+    </ul>
+  </li>
+  <li>users.update
+    <ul>
+      <li>middleware.identity,</li>
+      <li>setDefaultUser,</li>
+      <li>roleOrSelf(roles.ADMIN),</li>
+      <li>middleware.users.parse,</li>
+      <li>middleware.event(‘parse’),</li>
+      <li>middleware.event(‘validate’),</li>
+      <li>middleware.users.validate,</li>
+      <li>middleware.users.update,</li>
+      <li>middleware.event(‘out’),</li>
+      <li>middleware.event(‘save’)</li>
+    </ul>
+  </li>
+  <li>users.getById
+    <ul>
+      <li>middleware.identity,</li>
+      <li>setDefaultUser,</li>
+      <li>roleOrSelf(roles.ADMIN),</li>
+      <li>middleware.event(‘parse’),</li>
+      <li>middleware.event(‘validate’),</li>
+      <li>middleware.users.getById,</li>
+      <li>middleware.event(‘out’)</li>
+    </ul>
+  </li>
+  <li>users.getByEmail
+    <ul>
+      <li>middleware.identity,</li>
+      <li>middleware.role(roles.ADMIN),</li>
+      <li>middleware.event(‘parse’),</li>
+      <li>middleware.event(‘validate’),</li>
+      <li>middleware.users.getByEmail,</li>
+      <li>middleware.event(‘out’)</li>
+    </ul>
+  </li>
+  <li>users.deleteById
+    <ul>
+      <li>middleware.identity,</li>
+      <li>middleware.role(roles.ADMIN),</li>
+      <li>middleware.event(‘parse’),</li>
+      <li>middleware.event(‘validate’),</li>
+      <li>middleware.users.deleteById,</li>
+      <li>middleware.event(‘out’),</li>
+      <li>middleware.event(‘delete’)</li>
+    </ul>
+  </li>
+  <li>users.savePermissions
+    <ul>
+      <li>middleware.event(‘parse’),</li>
+      <li>middleware.event(‘validate’),</li>
+      <li>middleware.identity,</li>
+      <li>middleware.role(roles.ADMIN)</li>
+    </ul>
+  </li>
+  <li>users.deletePermissions
+    <ul>
+      <li>middleware.event(‘parse’),</li>
+      <li>middleware.event(‘validate’),</li>
+      <li>middleware.identity,</li>
+      <li>middleware.role(roles.ADMIN)</li>
+    </ul>
+  </li>
+  <li>users.linkIdentity
+    <ul>
+      <li>middleware.event(‘parse’),</li>
+      <li>middleware.event(‘validate’),</li>
+      <li>middleware.identity,</li>
+      <li>middleware.users.linkIdentity,</li>
+      <li>middleware.event(‘out’),</li>
+      <li>middleware.event(‘save’)</li>
+    </ul>
+  </li>
+  <li>users.unlinkIdentity
+    <ul>
+      <li>middleware.event(‘parse’),</li>
+      <li>middleware.event(‘validate’),</li>
+      <li>middleware.identity,</li>
+      <li>middleware.users.unLinkIdentity,</li>
+      <li>middleware.event(‘out’),</li>
+      <li>middleware.event(‘save’)</li>
+    </ul>
+  </li>
+</ul>
+
+                    </div>
+                    <div class="method-example">
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    </div>
+                </div>
+            </div>
+        
+    
+
+    
+        <div class="method" id="content">
+            <div class="method-section clearfix">
+                <div class="method-description">
+                    <h4 id="content">Content</h4>
+
+                </div>
+                <div class="method-example">
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
+    
+
+    
+
+        
+        
+        
+    
+
+        
+        
+            <div class="method" id="queries">
+                <div class="method-section clearfix">
+                    <div class="method-description">
+                        <h5 id="queries">Queries</h5>
+
+<p>Grasshopper’s query builder accepts a query object that contains several parameters, some optional.</p>
+
+<p>The returned object is an array with limit, skip and total.  The total is the value of all content matched by query, not just returned objects.</p>
+
+<p>Definitions for all possible query parameters/options</p>
+
+<ul>
+  <li><em>filters</em>: An array of optional filter objects for the query.
+    <ul>
+      <li><em>key</em>: The key of the content being filtered.</li>
+      <li><em>cmp</em>: The comparison operator for the filter value.  Currently supported operators (Query accepts symbol or string value):
+        <ul>
+          <li><em>’=’</em>: equals</li>
+          <li><em>’!=’ or ‘not’ or ‘notequal’ or ‘notequals’</em>: not equal to</li>
+          <li><em>’&gt;=’ or ‘gte’</em>: greater than or equals</li>
+          <li><em>’&gt;’ or ‘gt’</em>: greater than</li>
+          <li><em>’&lt;=’ or ‘lte’</em>: less than or equals</li>
+          <li><em>’&lt;’ or ‘lt’</em>: less than</li>
+          <li><em>‘in’ or ‘contains’</em>: contains</li>
+          <li><em>‘!in’ or ‘notin’ or ‘notcontains’</em>: does not contain</li>
+          <li><em>’%’ or ‘like’</em>: like (Allows for ‘fuzzy matching’)</li>
+          <li><em>’!%’ or ‘notlike’</em>: not like (Allows for ‘fuzzy matching’)</li>
+          <li><em>‘between’</em>: between</li>
+          <li><em>‘notbetween’</em>: not between</li>
+          <li><em>‘size’</em>: size</li>
+          <li><em>‘exists’</em>: exists</li>
+        </ul>
+      </li>
+      <li><em>value</em>: Then value the filter will be compared with.</li>
+    </ul>
+  </li>
+  <li><em>types</em>: An optional array of content type ids.</li>
+  <li><em>nodes</em>: An optional array of node ids.</li>
+  <li><em>options</em>: Object.  Possible key/value pairs are:
+    <ul>
+      <li>
+        <ul>
+          <li>limit : Limit number of results. String or number.</li>
+        </ul>
+      </li>
+      <li>
+        <ul>
+          <li>skip : Skip specified number of results.  String or number. (limit and skip support pagination)</li>
+        </ul>
+      </li>
+      <li>
+        <ul>
+          <li>distinct : return distinct results within a find.  Can include types.</li>
+        </ul>
+      </li>
+      <li>
+        <ul>
+          <li>exclude : array of fields to be excluded from query.</li>
+        </ul>
+      </li>
+      <li>
+        <ul>
+          <li>include : array of fields to be included in query.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>Important Notes:</p>
+
+<ul>
+  <li>The options object can have include or exclude parameters, but not both in the same query.</li>
+  <li>When using ‘options.distinct’, filters can’t be used.  This means paging is not available.</li>
+</ul>
+
+                    </div>
+                    <div class="method-example">
+            
+                
+                    
+<pre>
+<code class="javascript"><p>Query object examples:</p>
+
+<pre><code>{ filters : [{ key : 'fields.label', cmp: '&lt;', value: 'search test' }],
+  types : [],
+  nodes : [],
+  options : { limit : 1,
+              skip  : 2,
+              distinct : 'fields.label',
+              exclude : ['fields.newColumn']
+            }
+}
+</code></pre>
+
+<ul>
+  <li>This object would return results  where ‘fields.label’ is less than the value ‘search test.’
+It would limit the result to 1 document and skip the first 2 results.  It would only return documents
+where ‘fields.label’ is a distinct value.  It would also exclude</li>
+</ul>
+
+<hr />
+
+<pre><code>{ filters : [key : 'fields.slug' , cmp : 'equals', value: 'testValue'],
+types : ['2389vj2jf8r', 'ssjkl932'],
+options : {include : ['fields.label', 'fields.name', 'fields.description']}
+}
+</code></pre>
+
+<ul>
+  <li>This object would return results from content types ‘2389vj2jf8r’ and ‘ssjkl932’ where ‘fields.label’,
+‘fields.name’ or ‘fields.description’ match the value ‘testValue’.</li>
+</ul>
+
+<hr />
+
+<p>{ filters : [key : ‘fields.slug’, cmp : ‘between’, value: [‘exampleValue1’, ‘exampleValue2’] ],
+    nodes : [‘83h7hjks8fhh’],
+    options : {}
+  }</p>
+
+<ul>
+  <li>This object would return content with ‘fields.slug’ value between ‘exampleValue1’ and ‘exampleValue2’
+from node ‘83h7hjks8fhh’.  Note that even though the options object is empty, query executes normally.</li>
 </ul>
 </code>
 </pre>
@@ -580,6 +1255,14 @@
 
                 </div>
                 <div class="method-example">
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     
                     
                     
