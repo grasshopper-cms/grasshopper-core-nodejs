@@ -55,3 +55,7 @@ Definitions for all possible config values
         * *[scopes](https://developers.google.com/+/api/oauth#scopes)*: Scopes are strings that enable access to particular resources, such as user data. (https://www.googleapis.com/auth/userinfo.profile', https://www.googleapis.com/auth/userinfo.email)
         * *tokenEndpoint*: Location that will generate an access token in the Google system
         * *oauthCallback*: If the user grants the permission, the Google Authorization Server sends your application an access token (or an authorization code that your application can use to obtain an access token). If the user does not grant the permission, the server returns an error
+
+* bodyParser (optional)
+    * `bodyParser.limit` is passed directly to the [body-parser express middleware](https://github.com/expressjs/body-parser)
+    * the default value is, `2mb`
