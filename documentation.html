@@ -447,28 +447,26 @@ The configuration values are passed into <code>grasshopper-api</code>.</p>
 <p>Start grasshopper api is done by requiring it in and passing in an options object. A convenient way to do this is to create
 a JSON config file and use it as the options object as follows:</p>
 
-<p>```javascript
-var ghapi = require(‘grasshopper-api’),
-    options = require(‘./grasshopper-config.json’),
+<pre><code>var ghapi = require('grasshopper-api'),
+    options = require('./grasshopper-config.json'),
     ghcore,
     ghapiRouter,
-    returnedObject;</p>
+    returnedObject;
 
-<p>returnedObject = ghapi(options);</p>
+returnedObject = ghapi(options);
 
-<p>// the router should be used in conjunction with express
+// the router should be used in conjunction with express
 // it can be added directly to the app or piggy backed on another router
-// e.g. expressApp.use(‘/api’, ghapiRouter);
-ghapiRouter = returnedObject.router;</p>
+// e.g. expressApp.use('/api', ghapiRouter);
+ghapiRouter = returnedObject.router;
 
-<p>// ghcore can be used to make queries, etc.
+// ghcore can be used to make queries, etc.
 ghcore = returnedObject.core;
-```</p>
+</code></pre>
 
 <p>Here is an example file:</p>
 
-<p><code>json
-{
+<pre><code>{
     "server": {
         "https":{
             "key":"{full path to key}",
@@ -521,7 +519,7 @@ ghcore = returnedObject.core;
         "limit" : "5M"
     }
 }
-</code></p>
+</code></pre>
 
                     </div>
                     <div class="method-example">
