@@ -4,17 +4,13 @@ uuid: testing-deployment-example
 language: bash
 ---
 
-// Setting Remote Configuration
+-- Setting Remote Configuration
 
 cd ~/{grasshopper-admin-directory}
 
 grunt deploy:heroku:setupConfigs
 
-
-----
-
-
-// Deploy to Heroku
+-- Deploy to Heroku
 
 cd ~/{grasshopper-admin-directory}
 

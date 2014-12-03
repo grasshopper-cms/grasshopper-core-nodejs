@@ -6,7 +6,7 @@ uuid: user-properties
 
 ##### User Properties
 
-
+```javascript
     {
         _id: 12345657,
         role: 'admin',
@@ -30,3 +30,4 @@ uuid: user-properties
         email: 'apitestuser@thinksolid.com',
         profile : {}
     }
+```
