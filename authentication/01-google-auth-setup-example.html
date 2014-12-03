@@ -1,8 +1,8 @@
 <p>// Get Google Oauth Url Example
 $.ajax({
-        dataType : ‘json’,
-        url : yourApiEndpoint + ‘/googleurl’,
-        type : ‘GET’
+        dataType : &#39;json&#39;,
+        url : yourApiEndpoint + &#39;/googleurl&#39;,
+        type : &#39;GET&#39;
     })
     .done(function(url) {
         window.location.href = url;
@@ -10,10 +10,10 @@ $.ajax({
 
 <p>// Get Google Oauth Url while override the redirectUrl
 $.ajax({
-        dataType : ‘json’,
-        url : yourApiEndpoint + ‘/googleurl’,
-        type : ‘GET’,
-        headers : {‘redirectUrl’ : ‘/someOtherPage’}
+        dataType : &#39;json&#39;,
+        url : yourApiEndpoint + &#39;/googleurl&#39;,
+        type : &#39;GET&#39;,
+        headers : {&#39;redirectUrl&#39; : &#39;/someOtherPage&#39;}
     })
     .done(function(url) {
         window.location.href = url;
@@ -22,7 +22,7 @@ $.ajax({
 <p>// If Using Backbone, your router might look like
 Router.extend({
     routes : {
-        ‘login(/:token)’ : ‘displayLogin’
+        &#39;login(/:token)&#39; : &#39;displayLogin&#39;
     }
 });</p>
 

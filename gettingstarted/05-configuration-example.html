@@ -1,87 +1,85 @@
 <p>Definitions for all possible config values</p>
 
 <ul>
-  <li>server (optional)
-    <ul>
-      <li><em>https</em>: If you need to run the API over https then you should include the server configuration
-        <ul>
-          <li><em>key</em>: Absolute path to SSL private key</li>
-          <li><em>cert</em> Absolute path to SSL certificate</li>
-        </ul>
-      </li>
-      <li><em>proxy</em>: Defaults to false.  Boolean indicating whether you are going to proxy the api onto another express server. If False, when you initialize API, it will create a server for you.</li>
-      <li><em>maxFilesSize</em>: Defaults to 2 megabytes.  The Maximum file size you are allowed to upload. In bytes.</li>
-      <li><em>maxFieldsSize</em>: Defaults to 2 megabytes.  The maximum field size you are allowed to have. In bytes.</li>
-      <li><em>maxFields</em>: Defaults to 1000. The maximum number of fields you are allowed to have.</li>
-    </ul>
-  </li>
-  <li>crypto (required)
-    <ul>
-      <li><em>secret_passphrase</em>: Unique key that will be used when encrypting/decrypting values using the utils/crypto module.</li>
-    </ul>
-  </li>
-  <li>db (required)
-    <ul>
-      <li><em>type</em>: Always should be ‘mongodb’ until more database storage engines are supported.</li>
-      <li>
-        <p><em>host</em>: Full URL of your mongo database connection</p>
+<li>server (optional)
 
-        <p><a href="http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#basic-parts-of-the-url">FORMAT</a></p>
+<ul>
+<li><em>https</em>: If you need to run the API over https then you should include the server configuration
 
-        <p>mongodb://[username:password@]host[:port]/[database][?options]</p>
-      </li>
-      <li><em>shorthost</em>: Identifies either a hostname, IP address, or unix domain socket</li>
-      <li><em>database</em>: Name of the database to login to</li>
-      <li><em>username</em>: (optional) If given, it will attempt to login after connecting to a database server</li>
-      <li><em>password</em>: (optional) If given, it will attempt to login after connecting to a database server</li>
-      <li><em>defaultPageSize</em>: The number of results to be included in a “page.” This value can be customized per your application</li>
-      <li><em>debug</em>: (true/false) Debug mode of “true” will turn on db logging</li>
-    </ul>
-  </li>
-  <li>assets (at least 1 engine is required)
-    <ul>
-      <li><em>default</em>: local/amazon</li>
-      <li><em>tmpdir</em>: Absolute path on your local system where temporary files will be saved</li>
-      <li><em>engines</em>: One or more ways to store assets that are posted to Grasshopper
-        <ul>
-          <li><em>local</em>: Engine needed if you plan on storing files locally on your server
-            <ul>
-              <li><em>path</em>: Absolute path to the “publically” browsable asset folder</li>
-              <li><em>urlbase</em>: The base URL that will be serving the files (ex: http://yoursite.com/assets)</li>
-            </ul>
-          </li>
-          <li><em><a href="http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html">amazon</a></em>: If you are going to use Amazon’s S3 to store your files then you will need to define the amazon engine.
-            <ul>
-              <li><em>accessKeyId</em>:  Your AWS access key ID</li>
-              <li><em>secretAccessKey</em>: Your AWS secret access key</li>
-              <li><em><a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region">region</a></em>: The region to send service requests to</li>
-              <li><em>bucket</em>: Buckets partition the namespace of objects stored in Amazon S3 at the top level</li>
-              <li><em>urlbase</em>: The base URL that will be serving the files (could be your own or amazon’s)</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li>IMPORTANT : Each defined engine will run (saving, updating, etc), but the engine set to default will serve the files.</li>
-    </ul>
-  </li>
-  <li>identities (optional)
-    <ul>
-      <li><em><a href="https://developers.google.com/accounts/docs/OAuth2">google</a></em> Google Oath integration
-        <ul>
-          <li><em><a href="https://support.google.com/a/answer/162105?hl=en">appId</a></em>: The client ID is considered public information, and is used to build login URLs, or included in Javascript source code on a page.</li>
-          <li><em><a href="https://support.google.com/a/answer/162105?hl=en">secret</a></em>: The client secret must be kept confidential. If a deployed app cannot keep the secret confidential, such as Javascript or native apps, then the secret is not used.</li>
-          <li><em>redirectUrl</em>: The service will only redirect users to a registered URI, which helps prevent some attacks. Any HTTP redirect URIs must be protected with TLS security, so the service will only redirect to URIs beginning with “https”. This prevents tokens from being intercepted during the authorization process.</li>
-          <li><em><a href="https://developers.google.com/+/api/oauth#scopes">scopes</a></em>: Scopes are strings that enable access to particular resources, such as user data. (https://www.googleapis.com/auth/userinfo.profile’, https://www.googleapis.com/auth/userinfo.email)</li>
-          <li><em>tokenEndpoint</em>: Location that will generate an access token in the Google system</li>
-          <li><em>oauthCallback</em>: If the user grants the permission, the Google Authorization Server sends your application an access token (or an authorization code that your application can use to obtain an access token). If the user does not grant the permission, the server returns an error</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>bodyParser (optional)
-    <ul>
-      <li><code>bodyParser.limit</code> is passed directly to the <a href="https://github.com/expressjs/body-parser">body-parser express middleware</a></li>
-      <li>the default value is, <code>2mb</code></li>
-    </ul>
-  </li>
+<ul>
+<li><em>key</em>: Absolute path to SSL private key</li>
+<li><em>cert</em> Absolute path to SSL certificate</li>
+</ul></li>
+<li><em>proxy</em>: Defaults to false.  Boolean indicating whether you are going to proxy the api onto another express server. If False, when you initialize API, it will create a server for you.</li>
+<li><em>maxFilesSize</em>: Defaults to 2 megabytes.  The Maximum file size you are allowed to upload. In bytes.</li>
+<li><em>maxFieldsSize</em>: Defaults to 2 megabytes.  The maximum field size you are allowed to have. In bytes.</li>
+<li><em>maxFields</em>: Defaults to 1000. The maximum number of fields you are allowed to have.</li>
+</ul></li>
+<li><p>crypto (required)</p>
+
+<ul>
+<li><em>secret_passphrase</em>: Unique key that will be used when encrypting/decrypting values using the utils/crypto module.</li>
+</ul></li>
+<li><p>db (required)</p>
+
+<ul>
+<li><em>type</em>: Always should be &#39;mongodb&#39; until more database storage engines are supported.</li>
+<li><p><em>host</em>: Full URL of your mongo database connection</p>
+
+<p><a href="http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#basic-parts-of-the-url">FORMAT</a></p>
+
+<p>mongodb://[username:password@]host[:port]/[database][?options]</p></li>
+<li><p><em>shorthost</em>: Identifies either a hostname, IP address, or unix domain socket</p></li>
+<li><p><em>database</em>: Name of the database to login to</p></li>
+<li><p><em>username</em>: (optional) If given, it will attempt to login after connecting to a database server</p></li>
+<li><p><em>password</em>: (optional) If given, it will attempt to login after connecting to a database server</p></li>
+<li><p><em>defaultPageSize</em>: The number of results to be included in a &quot;page.&quot; This value can be customized per your application</p></li>
+<li><p><em>debug</em>: (true/false) Debug mode of &quot;true&quot; will turn on db logging</p></li>
+</ul></li>
+<li><p>assets (at least 1 engine is required)</p>
+
+<ul>
+<li><em>default</em>: local/amazon</li>
+<li><em>tmpdir</em>: Absolute path on your local system where temporary files will be saved</li>
+<li><em>engines</em>: One or more ways to store assets that are posted to Grasshopper
+
+<ul>
+<li><em>local</em>: Engine needed if you plan on storing files locally on your server
+
+<ul>
+<li><em>path</em>: Absolute path to the &quot;publically&quot; browsable asset folder</li>
+<li><em>urlbase</em>: The base URL that will be serving the files (ex: http://yoursite.com/assets)</li>
+</ul></li>
+<li><em><a href="http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html">amazon</a></em>: If you are going to use Amazon&#39;s S3 to store your files then you will need to define the amazon engine.
+
+<ul>
+<li><em>accessKeyId</em>:  Your AWS access key ID</li>
+<li><em>secretAccessKey</em>: Your AWS secret access key</li>
+<li><em><a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region">region</a></em>: The region to send service requests to</li>
+<li><em>bucket</em>: Buckets partition the namespace of objects stored in Amazon S3 at the top level</li>
+<li><em>urlbase</em>: The base URL that will be serving the files (could be your own or amazon&#39;s)</li>
+</ul></li>
+</ul></li>
+<li>IMPORTANT : Each defined engine will run (saving, updating, etc), but the engine set to default will serve the files.</li>
+</ul></li>
+<li><p>identities (optional)</p>
+
+<ul>
+<li><em><a href="https://developers.google.com/accounts/docs/OAuth2">google</a></em> Google Oath integration
+
+<ul>
+<li><em><a href="https://support.google.com/a/answer/162105?hl=en">appId</a></em>: The client ID is considered public information, and is used to build login URLs, or included in Javascript source code on a page.</li>
+<li><em><a href="https://support.google.com/a/answer/162105?hl=en">secret</a></em>: The client secret must be kept confidential. If a deployed app cannot keep the secret confidential, such as Javascript or native apps, then the secret is not used.</li>
+<li><em>redirectUrl</em>: The service will only redirect users to a registered URI, which helps prevent some attacks. Any HTTP redirect URIs must be protected with TLS security, so the service will only redirect to URIs beginning with &quot;https&quot;. This prevents tokens from being intercepted during the authorization process.</li>
+<li><em><a href="https://developers.google.com/+/api/oauth#scopes">scopes</a></em>: Scopes are strings that enable access to particular resources, such as user data. (https://www.googleapis.com/auth/userinfo.profile&#39;, https://www.googleapis.com/auth/userinfo.email)</li>
+<li><em>tokenEndpoint</em>: Location that will generate an access token in the Google system</li>
+<li><em>oauthCallback</em>: If the user grants the permission, the Google Authorization Server sends your application an access token (or an authorization code that your application can use to obtain an access token). If the user does not grant the permission, the server returns an error</li>
+</ul></li>
+</ul></li>
+<li><p>bodyParser (optional)</p>
+
+<ul>
+<li><code>bodyParser.limit</code> is passed directly to the <a href="https://github.com/expressjs/body-parser">body-parser express middleware</a></li>
+<li>the default value is, <code>2mb</code></li>
+</ul></li>
 </ul>

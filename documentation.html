@@ -133,7 +133,7 @@
         <div class="method" id="gettingstarted">
             <div class="method-section clearfix">
                 <div class="method-description">
-                    <h3 id="getting-started">Getting started</h3>
+                    <h3>Getting started</h3>
 
 <p>You will find that many concepts that modern applications need are built right into Grasshopper. User management, flexible data storage, permissions, plus much more are bundled into the framework.</p>
 
@@ -152,30 +152,14 @@
 <code class="asciidoc"><p>Definitions</p>
 
 <ul>
-  <li>
-    <p><a href="http://nodejs.org/">Node.js</a> is a platform built on Chrome’s JavaScript runtime for easily building fast, scalable network applications.</p>
-  </li>
-  <li>
-    <p><a href="http://en.wikipedia.org/wiki/Npm_(software)">npm</a> npm is the official package manager for Node.js. npm is bundled and installed automatically with the environment.</p>
-  </li>
-  <li>
-    <p><a href="http://gruntjs.com/">GruntJS</a> is a JavaScript based command line build tool that helps developers automate repetitive tasks.</p>
-  </li>
-  <li>
-    <p><a href="http://expressjs.com/">ExpressJS</a> is a minimal and flexible node.js web application framework, providing a robust set of features for building single and multi-page, and hybrid web applications.</p>
-  </li>
-  <li>
-    <p><a href="http://www.mongodb.org">MongoDB</a> is an open-source document database, and the leading NoSQL database.</p>
-  </li>
-  <li>
-    <p><a href="http://www.mongodb.com/nosql-explained">NoSQL</a> databases explained.</p>
-  </li>
-  <li>
-    <p><a href="http://en.wikipedia.org/wiki/Content_delivery_network">CDN</a> or content delivery network is a large distributed system of servers deployed in multiple data centers across the Internet.</p>
-  </li>
-  <li>
-    <p><a href="http://en.wikipedia.org/wiki/Platform_as_a_service">PaaS</a> or Platform as a Service provides a solution stack as a service. IE: Heroku or others like it.</p>
-  </li>
+<li><p><a href="http://nodejs.org/">Node.js</a> is a platform built on Chrome&#39;s JavaScript runtime for easily building fast, scalable network applications.</p></li>
+<li><p><a href="http://en.wikipedia.org/wiki/Npm_(software)">npm</a> npm is the official package manager for Node.js. npm is bundled and installed automatically with the environment.</p></li>
+<li><p><a href="http://gruntjs.com/">GruntJS</a> is a JavaScript based command line build tool that helps developers automate repetitive tasks.</p></li>
+<li><p><a href="http://expressjs.com/">ExpressJS</a> is a minimal and flexible node.js web application framework, providing a robust set of features for building single and multi-page, and hybrid web applications.</p></li>
+<li><p><a href="http://www.mongodb.org">MongoDB</a> is an open-source document database, and the leading NoSQL database.</p></li>
+<li><p><a href="http://www.mongodb.com/nosql-explained">NoSQL</a> databases explained.</p></li>
+<li><p><a href="http://en.wikipedia.org/wiki/Content_delivery_network">CDN</a> or content delivery network is a large distributed system of servers deployed in multiple data centers across the Internet.</p></li>
+<li><p><a href="http://en.wikipedia.org/wiki/Platform_as_a_service">PaaS</a> or Platform as a Service provides a solution stack as a service. IE: Heroku or others like it.</p></li>
 </ul>
 </code>
 </pre>
@@ -210,10 +194,10 @@
             <div class="method" id="stack">
                 <div class="method-section clearfix">
                     <div class="method-description">
-                        <h4 id="grasshopper-stack">Grasshopper Stack</h4>
+                        <h4>Grasshopper Stack</h4>
 
 <p>Typical Grasshopper Application Stack
-<img src="images/stack.png" alt="Stack" /></p>
+<img src="images/stack.png" alt="Stack"></p>
 
                     </div>
                     <div class="method-example">
@@ -222,18 +206,10 @@
                     
 <pre>
 <code class=""><ul>
-  <li>
-    <p>Grasshopper Core is responsible for all the heavy lifting of the framework. Core includes methods for managing users (data and access), content types, content, nodes (or folders) and assets.</p>
-  </li>
-  <li>
-    <p>Grasshopper API is an HTTP wrapper of core designed to run on HTTP or HTTPS protocols.</p>
-  </li>
-  <li>
-    <p>Grasshopper Admin is a fully functional administration application that uses the API to manage your applications.</p>
-  </li>
-  <li>
-    <p>Proxy is an optional express application that can site along side the Grasshopper API to extend the base functionality.</p>
-  </li>
+<li><p>Grasshopper Core is responsible for all the heavy lifting of the framework. Core includes methods for managing users (data and access), content types, content, nodes (or folders) and assets.</p></li>
+<li><p>Grasshopper API is an HTTP wrapper of core designed to run on HTTP or HTTPS protocols.</p></li>
+<li><p>Grasshopper Admin is a fully functional administration application that uses the API to manage your applications.</p></li>
+<li><p>Proxy is an optional express application that can site along side the Grasshopper API to extend the base functionality.</p></li>
 </ul>
 </code>
 </pre>
@@ -269,38 +245,20 @@
             <div class="method" id="requirements">
                 <div class="method-section clearfix">
                     <div class="method-description">
-                        <h4 id="requirements">Requirements</h4>
+                        <h4>Requirements</h4>
 
 <p>The Grasshopper framework uses all of the below software/services:</p>
 
 <ul>
-  <li>
-    <p><a href="http://git-scm.com/">Git</a> version control system.</p>
-  </li>
-  <li>
-    <p><a href="http://nodejs.org/download/">Node.js</a>, a platform for easily building fast, scalable network applications.</p>
-  </li>
-  <li>
-    <p><a href="http://www.mongodb.org/">MongoDB</a>, an open-source document database that Grasshopper uses for data storage.</p>
-  </li>
-  <li>
-    <p><a href="http://gruntjs.com/">Grunt</a>, the JavaScript task runner</p>
-  </li>
-  <li>
-    <p><a href="http://bower.io/">bower</a>, a package manager for the web</p>
-  </li>
-  <li>
-    <p><a href="http://sass-lang.com">Sass</a>, Syntactically Awesome Style Sheets.</p>
-  </li>
-  <li>
-    <p>Sass Globbing Plugin (used to compile the admin), Sass globbing allows you to import many sass or scss files in a single import statement.</p>
-  </li>
-  <li>
-    <p>Sass CSS Importer (used to compile the admin): The Sass CSS Importer allows you to import a CSS file into Sass.</p>
-  </li>
-  <li>
-    <p>Access to local file system or CDN like <a href="http://aws.amazon.com/s3/">Amazon S3</a>.</p>
-  </li>
+<li><p><a href="http://git-scm.com/">Git</a> version control system.</p></li>
+<li><p><a href="http://nodejs.org/download/">Node.js</a>, a platform for easily building fast, scalable network applications.</p></li>
+<li><p><a href="http://www.mongodb.org/">MongoDB</a>, an open-source document database that Grasshopper uses for data storage.</p></li>
+<li><p><a href="http://gruntjs.com/">Grunt</a>, the JavaScript task runner</p></li>
+<li><p><a href="http://bower.io/">bower</a>, a package manager for the web</p></li>
+<li><p><a href="http://sass-lang.com">Sass</a>, Syntactically Awesome Style Sheets.</p></li>
+<li><p>Sass Globbing Plugin (used to compile the admin), Sass globbing allows you to import many sass or scss files in a single import statement.</p></li>
+<li><p>Sass CSS Importer (used to compile the admin): The Sass CSS Importer allows you to import a CSS file into Sass.</p></li>
+<li><p>Access to local file system or CDN like <a href="http://aws.amazon.com/s3/">Amazon S3</a>.</p></li>
 </ul>
 
                     </div>
@@ -314,27 +272,13 @@
                     
 <pre>
 <code class=""><ul>
-  <li>
-    <p><a href="http://nodejs.org/download/">http://nodejs.org/download/</a></p>
-  </li>
-  <li>
-    <p>npm install -g grunt-cli</p>
-  </li>
-  <li>
-    <p>npm install -g bower</p>
-  </li>
-  <li>
-    <p><a href="http://sass-lang.com/install">Sass installation instruction</a></p>
-  </li>
-  <li>
-    <p>gem install sass-globbing</p>
-  </li>
-  <li>
-    <p>gem install sass-css-importer</p>
-  </li>
-  <li>
-    <p><a href="http://www.mongodb.org/downloads">http://www.mongodb.org/downloads</a></p>
-  </li>
+<li><p><a href="http://nodejs.org/download/">http://nodejs.org/download/</a></p></li>
+<li><p>npm install -g grunt-cli</p></li>
+<li><p>npm install -g bower</p></li>
+<li><p><a href="http://sass-lang.com/install">Sass installation instruction</a></p></li>
+<li><p>gem install sass-globbing</p></li>
+<li><p>gem install sass-css-importer</p></li>
+<li><p><a href="http://www.mongodb.org/downloads">http://www.mongodb.org/downloads</a></p></li>
 </ul>
 </code>
 </pre>
@@ -366,7 +310,7 @@
             <div class="method" id="installation">
                 <div class="method-section clearfix">
                     <div class="method-description">
-                        <h4 id="installation">Installation</h4>
+                        <h4>Installation</h4>
 
 <p>Installing Grasshopper is super simple. Once your machine is configured, creating a new project is as easy as typing <code>grasshopper fly</code>.</p>
 
@@ -386,7 +330,6 @@
  poster: "http://s3.amazonaws.com/SolidInteractive/images/grasshopper/grasshopper-cli-fly.png",
  width: 480 });
 </script>
-
 
                     </div>
                     <div class="method-example">
@@ -410,7 +353,7 @@
 
 <p>grasshopper fly</p>
 
-<p>– That’s it, you have a working site. Just make whatever configuration changes you need to the project and you are on your way.</p>
+<p>-- That&#39;s it, you have a working site. Just make whatever configuration changes you need to the project and you are on your way.</p>
 </code>
 </pre>
                     
@@ -437,90 +380,86 @@
             <div class="method" id="projectconfiguration">
                 <div class="method-section clearfix">
                     <div class="method-description">
-                        <h4 id="configuring-your-project">Configuring your project</h4>
+                        <h4>Configuring your project</h4>
 
 <p>When you run the <code>grasshopper fly</code> command, you get a fully functional application, but you may want to change some of the configuration values.
 The configuration values are passed into <code>grasshopper-api</code>.</p>
 
-<h5 id="api--core">Api / Core</h5>
+<h5>Api / Core</h5>
 
 <p>Start grasshopper api is done by requiring it in and passing in an options object. A convenient way to do this is to create
 a JSON config file and use it as the options object as follows:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">ghapi</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;grasshopper-api&#39;</span><span class="p">),</span>
+    <span class="nx">options</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./grasshopper-config.json&#39;</span><span class="p">),</span>
+    <span class="nx">ghcore</span><span class="p">,</span>
+    <span class="nx">ghapiRouter</span><span class="p">,</span>
+    <span class="nx">returnedObject</span><span class="p">;</span>
 
-<pre><code>var ghapi = require('grasshopper-api'),
-    options = require('./grasshopper-config.json'),
-    ghcore,
-    ghapiRouter,
-    returnedObject;
+<span class="nx">returnedObject</span> <span class="o">=</span> <span class="nx">ghapi</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
-returnedObject = ghapi(options);
+<span class="c1">// the router should be used in conjunction with express</span>
+<span class="c1">// it can be added directly to the app or piggy backed on another router</span>
+<span class="c1">// e.g. expressApp.use(&#39;/api&#39;, ghapiRouter);</span>
+<span class="nx">ghapiRouter</span> <span class="o">=</span> <span class="nx">returnedObject</span><span class="p">.</span><span class="nx">router</span><span class="p">;</span>
 
-// the router should be used in conjunction with express
-// it can be added directly to the app or piggy backed on another router
-// e.g. expressApp.use('/api', ghapiRouter);
-ghapiRouter = returnedObject.router;
-
-// ghcore can be used to make queries, etc.
-ghcore = returnedObject.core;
-</code></pre>
-
+<span class="c1">// ghcore can be used to make queries, etc.</span>
+<span class="nx">ghcore</span> <span class="o">=</span> <span class="nx">returnedObject</span><span class="p">.</span><span class="nx">core</span><span class="p">;</span>
+</code></pre></div>
 <p>Here is an example file:</p>
-
-<pre><code>{
-    "server": {
-        "https":{
-            "key":"{full path to key}",
-            "cert":"{full path to cert}"
-        },
-        "proxy" : false,
-        "maxFilesSize": 2000000,
-        "maxFieldsSize": 2000000,
-        "maxFields": 1000
-    },
-    "crypto": {
-       "secret_passphrase" : "{unique term per project}"
-    },
-    "db": {
-       "type": "mongodb",
-       "host": "mongodb://localhost/{database name}",
-       "shorthost":"localhost",
-       "database": "{database name}",
-       "username": "",
-       "password": "",
-       "defaultPageSize" : "10000",
-       "debug": false
-    },
-    "assets": {
-       "default" : "local",
-       "tmpdir" : "{absolute path to tmp directory}",
-       "engines": {
-            "local":{
-                "path":"{absolute path to public asset folder}",
-                "urlbase":"{full url base to serve files from}"
-            }
-       }
-    },
-    "logger" : {
-       "adapters": [{
-            "type":"console",
-            "application":"{application name}",
-            "machine":"{machine name}"
-       }]
-    },
-    "identities" : {
-        "google" : {
-            "appId" : "{ your google app id }",
-            "secret" : "{ your google secret id }",
-            "scopes" : [ "{ array of scopes you want to authorize }" ],
-            "redirectUrl" : "{ the url you want to redirect to after successful auth, the users token will be appended to this route ex. '/login' entered here will send the user to '/login/googleToken' }"
-        }
-    },
-    "bodyParser" : {
-        "limit" : "5M"
-    }
-}
-</code></pre>
-
+<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&quot;server&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;https&quot;</span><span class="p">:{</span>
+            <span class="nt">&quot;key&quot;</span><span class="p">:</span><span class="s2">&quot;{full path to key}&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;cert&quot;</span><span class="p">:</span><span class="s2">&quot;{full path to cert}&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;proxy&quot;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;maxFilesSize&quot;</span><span class="p">:</span> <span class="mi">2000000</span><span class="p">,</span>
+        <span class="nt">&quot;maxFieldsSize&quot;</span><span class="p">:</span> <span class="mi">2000000</span><span class="p">,</span>
+        <span class="nt">&quot;maxFields&quot;</span><span class="p">:</span> <span class="mi">1000</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;crypto&quot;</span><span class="p">:</span> <span class="p">{</span>
+       <span class="nt">&quot;secret_passphrase&quot;</span> <span class="p">:</span> <span class="s2">&quot;{unique term per project}&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;db&quot;</span><span class="p">:</span> <span class="p">{</span>
+       <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;mongodb&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;mongodb://localhost/{database name}&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;shorthost&quot;</span><span class="p">:</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;database&quot;</span><span class="p">:</span> <span class="s2">&quot;{database name}&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;defaultPageSize&quot;</span> <span class="p">:</span> <span class="s2">&quot;10000&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;debug&quot;</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;assets&quot;</span><span class="p">:</span> <span class="p">{</span>
+       <span class="nt">&quot;default&quot;</span> <span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;tmpdir&quot;</span> <span class="p">:</span> <span class="s2">&quot;{absolute path to tmp directory}&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;engines&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;local&quot;</span><span class="p">:{</span>
+                <span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="s2">&quot;{absolute path to public asset folder}&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;urlbase&quot;</span><span class="p">:</span><span class="s2">&quot;{full url base to serve files from}&quot;</span>
+            <span class="p">}</span>
+       <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;logger&quot;</span> <span class="p">:</span> <span class="p">{</span>
+       <span class="nt">&quot;adapters&quot;</span><span class="p">:</span> <span class="p">[{</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;console&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;application&quot;</span><span class="p">:</span><span class="s2">&quot;{application name}&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;machine&quot;</span><span class="p">:</span><span class="s2">&quot;{machine name}&quot;</span>
+       <span class="p">}]</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;identities&quot;</span> <span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;google&quot;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;appId&quot;</span> <span class="p">:</span> <span class="s2">&quot;{ your google app id }&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;secret&quot;</span> <span class="p">:</span> <span class="s2">&quot;{ your google secret id }&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;scopes&quot;</span> <span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;{ array of scopes you want to authorize }&quot;</span> <span class="p">],</span>
+            <span class="nt">&quot;redirectUrl&quot;</span> <span class="p">:</span> <span class="s2">&quot;{ the url you want to redirect to after successful auth, the users token will be appended to this route ex. &#39;/login&#39; entered here will send the user to &#39;/login/googleToken&#39; }&quot;</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;bodyParser&quot;</span> <span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;limit&quot;</span> <span class="p">:</span> <span class="s2">&quot;5M&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
                     </div>
                     <div class="method-example">
             
@@ -542,89 +481,87 @@ ghcore = returnedObject.core;
 <code class="asciidoc"><p>Definitions for all possible config values</p>
 
 <ul>
-  <li>server (optional)
-    <ul>
-      <li><em>https</em>: If you need to run the API over https then you should include the server configuration
-        <ul>
-          <li><em>key</em>: Absolute path to SSL private key</li>
-          <li><em>cert</em> Absolute path to SSL certificate</li>
-        </ul>
-      </li>
-      <li><em>proxy</em>: Defaults to false.  Boolean indicating whether you are going to proxy the api onto another express server. If False, when you initialize API, it will create a server for you.</li>
-      <li><em>maxFilesSize</em>: Defaults to 2 megabytes.  The Maximum file size you are allowed to upload. In bytes.</li>
-      <li><em>maxFieldsSize</em>: Defaults to 2 megabytes.  The maximum field size you are allowed to have. In bytes.</li>
-      <li><em>maxFields</em>: Defaults to 1000. The maximum number of fields you are allowed to have.</li>
-    </ul>
-  </li>
-  <li>crypto (required)
-    <ul>
-      <li><em>secret_passphrase</em>: Unique key that will be used when encrypting/decrypting values using the utils/crypto module.</li>
-    </ul>
-  </li>
-  <li>db (required)
-    <ul>
-      <li><em>type</em>: Always should be ‘mongodb’ until more database storage engines are supported.</li>
-      <li>
-        <p><em>host</em>: Full URL of your mongo database connection</p>
+<li>server (optional)
 
-        <p><a href="http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#basic-parts-of-the-url">FORMAT</a></p>
+<ul>
+<li><em>https</em>: If you need to run the API over https then you should include the server configuration
 
-        <p>mongodb://[username:password@]host[:port]/[database][?options]</p>
-      </li>
-      <li><em>shorthost</em>: Identifies either a hostname, IP address, or unix domain socket</li>
-      <li><em>database</em>: Name of the database to login to</li>
-      <li><em>username</em>: (optional) If given, it will attempt to login after connecting to a database server</li>
-      <li><em>password</em>: (optional) If given, it will attempt to login after connecting to a database server</li>
-      <li><em>defaultPageSize</em>: The number of results to be included in a “page.” This value can be customized per your application</li>
-      <li><em>debug</em>: (true/false) Debug mode of “true” will turn on db logging</li>
-    </ul>
-  </li>
-  <li>assets (at least 1 engine is required)
-    <ul>
-      <li><em>default</em>: local/amazon</li>
-      <li><em>tmpdir</em>: Absolute path on your local system where temporary files will be saved</li>
-      <li><em>engines</em>: One or more ways to store assets that are posted to Grasshopper
-        <ul>
-          <li><em>local</em>: Engine needed if you plan on storing files locally on your server
-            <ul>
-              <li><em>path</em>: Absolute path to the “publically” browsable asset folder</li>
-              <li><em>urlbase</em>: The base URL that will be serving the files (ex: http://yoursite.com/assets)</li>
-            </ul>
-          </li>
-          <li><em><a href="http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html">amazon</a></em>: If you are going to use Amazon’s S3 to store your files then you will need to define the amazon engine.
-            <ul>
-              <li><em>accessKeyId</em>:  Your AWS access key ID</li>
-              <li><em>secretAccessKey</em>: Your AWS secret access key</li>
-              <li><em><a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region">region</a></em>: The region to send service requests to</li>
-              <li><em>bucket</em>: Buckets partition the namespace of objects stored in Amazon S3 at the top level</li>
-              <li><em>urlbase</em>: The base URL that will be serving the files (could be your own or amazon’s)</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li>IMPORTANT : Each defined engine will run (saving, updating, etc), but the engine set to default will serve the files.</li>
-    </ul>
-  </li>
-  <li>identities (optional)
-    <ul>
-      <li><em><a href="https://developers.google.com/accounts/docs/OAuth2">google</a></em> Google Oath integration
-        <ul>
-          <li><em><a href="https://support.google.com/a/answer/162105?hl=en">appId</a></em>: The client ID is considered public information, and is used to build login URLs, or included in Javascript source code on a page.</li>
-          <li><em><a href="https://support.google.com/a/answer/162105?hl=en">secret</a></em>: The client secret must be kept confidential. If a deployed app cannot keep the secret confidential, such as Javascript or native apps, then the secret is not used.</li>
-          <li><em>redirectUrl</em>: The service will only redirect users to a registered URI, which helps prevent some attacks. Any HTTP redirect URIs must be protected with TLS security, so the service will only redirect to URIs beginning with “https”. This prevents tokens from being intercepted during the authorization process.</li>
-          <li><em><a href="https://developers.google.com/+/api/oauth#scopes">scopes</a></em>: Scopes are strings that enable access to particular resources, such as user data. (https://www.googleapis.com/auth/userinfo.profile’, https://www.googleapis.com/auth/userinfo.email)</li>
-          <li><em>tokenEndpoint</em>: Location that will generate an access token in the Google system</li>
-          <li><em>oauthCallback</em>: If the user grants the permission, the Google Authorization Server sends your application an access token (or an authorization code that your application can use to obtain an access token). If the user does not grant the permission, the server returns an error</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>bodyParser (optional)
-    <ul>
-      <li><code>bodyParser.limit</code> is passed directly to the <a href="https://github.com/expressjs/body-parser">body-parser express middleware</a></li>
-      <li>the default value is, <code>2mb</code></li>
-    </ul>
-  </li>
+<ul>
+<li><em>key</em>: Absolute path to SSL private key</li>
+<li><em>cert</em> Absolute path to SSL certificate</li>
+</ul></li>
+<li><em>proxy</em>: Defaults to false.  Boolean indicating whether you are going to proxy the api onto another express server. If False, when you initialize API, it will create a server for you.</li>
+<li><em>maxFilesSize</em>: Defaults to 2 megabytes.  The Maximum file size you are allowed to upload. In bytes.</li>
+<li><em>maxFieldsSize</em>: Defaults to 2 megabytes.  The maximum field size you are allowed to have. In bytes.</li>
+<li><em>maxFields</em>: Defaults to 1000. The maximum number of fields you are allowed to have.</li>
+</ul></li>
+<li><p>crypto (required)</p>
+
+<ul>
+<li><em>secret_passphrase</em>: Unique key that will be used when encrypting/decrypting values using the utils/crypto module.</li>
+</ul></li>
+<li><p>db (required)</p>
+
+<ul>
+<li><em>type</em>: Always should be &#39;mongodb&#39; until more database storage engines are supported.</li>
+<li><p><em>host</em>: Full URL of your mongo database connection</p>
+
+<p><a href="http://mongodb.github.io/node-mongodb-native/driver-articles/mongoclient.html#basic-parts-of-the-url">FORMAT</a></p>
+
+<p>mongodb://[username:password@]host[:port]/[database][?options]</p></li>
+<li><p><em>shorthost</em>: Identifies either a hostname, IP address, or unix domain socket</p></li>
+<li><p><em>database</em>: Name of the database to login to</p></li>
+<li><p><em>username</em>: (optional) If given, it will attempt to login after connecting to a database server</p></li>
+<li><p><em>password</em>: (optional) If given, it will attempt to login after connecting to a database server</p></li>
+<li><p><em>defaultPageSize</em>: The number of results to be included in a &quot;page.&quot; This value can be customized per your application</p></li>
+<li><p><em>debug</em>: (true/false) Debug mode of &quot;true&quot; will turn on db logging</p></li>
+</ul></li>
+<li><p>assets (at least 1 engine is required)</p>
+
+<ul>
+<li><em>default</em>: local/amazon</li>
+<li><em>tmpdir</em>: Absolute path on your local system where temporary files will be saved</li>
+<li><em>engines</em>: One or more ways to store assets that are posted to Grasshopper
+
+<ul>
+<li><em>local</em>: Engine needed if you plan on storing files locally on your server
+
+<ul>
+<li><em>path</em>: Absolute path to the &quot;publically&quot; browsable asset folder</li>
+<li><em>urlbase</em>: The base URL that will be serving the files (ex: http://yoursite.com/assets)</li>
+</ul></li>
+<li><em><a href="http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html">amazon</a></em>: If you are going to use Amazon&#39;s S3 to store your files then you will need to define the amazon engine.
+
+<ul>
+<li><em>accessKeyId</em>:  Your AWS access key ID</li>
+<li><em>secretAccessKey</em>: Your AWS secret access key</li>
+<li><em><a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region">region</a></em>: The region to send service requests to</li>
+<li><em>bucket</em>: Buckets partition the namespace of objects stored in Amazon S3 at the top level</li>
+<li><em>urlbase</em>: The base URL that will be serving the files (could be your own or amazon&#39;s)</li>
+</ul></li>
+</ul></li>
+<li>IMPORTANT : Each defined engine will run (saving, updating, etc), but the engine set to default will serve the files.</li>
+</ul></li>
+<li><p>identities (optional)</p>
+
+<ul>
+<li><em><a href="https://developers.google.com/accounts/docs/OAuth2">google</a></em> Google Oath integration
+
+<ul>
+<li><em><a href="https://support.google.com/a/answer/162105?hl=en">appId</a></em>: The client ID is considered public information, and is used to build login URLs, or included in Javascript source code on a page.</li>
+<li><em><a href="https://support.google.com/a/answer/162105?hl=en">secret</a></em>: The client secret must be kept confidential. If a deployed app cannot keep the secret confidential, such as Javascript or native apps, then the secret is not used.</li>
+<li><em>redirectUrl</em>: The service will only redirect users to a registered URI, which helps prevent some attacks. Any HTTP redirect URIs must be protected with TLS security, so the service will only redirect to URIs beginning with &quot;https&quot;. This prevents tokens from being intercepted during the authorization process.</li>
+<li><em><a href="https://developers.google.com/+/api/oauth#scopes">scopes</a></em>: Scopes are strings that enable access to particular resources, such as user data. (https://www.googleapis.com/auth/userinfo.profile&#39;, https://www.googleapis.com/auth/userinfo.email)</li>
+<li><em>tokenEndpoint</em>: Location that will generate an access token in the Google system</li>
+<li><em>oauthCallback</em>: If the user grants the permission, the Google Authorization Server sends your application an access token (or an authorization code that your application can use to obtain an access token). If the user does not grant the permission, the server returns an error</li>
+</ul></li>
+</ul></li>
+<li><p>bodyParser (optional)</p>
+
+<ul>
+<li><code>bodyParser.limit</code> is passed directly to the <a href="https://github.com/expressjs/body-parser">body-parser express middleware</a></li>
+<li>the default value is, <code>2mb</code></li>
+</ul></li>
 </ul>
 </code>
 </pre>
@@ -647,17 +584,16 @@ ghcore = returnedObject.core;
         <div class="method" id="authentication">
             <div class="method-section clearfix">
                 <div class="method-description">
-                    <h4 id="authentication">Authentication</h4>
+                    <h4>Authentication</h4>
 
-<p>Membership is a critical component to almost all applications. Grasshopper’s authentication methods are fully extensible, and it contains a robust permissions mechanism that allows you to protect data based off of the application’s requirements.</p>
+<p>Membership is a critical component to almost all applications. Grasshopper&#39;s authentication methods are fully extensible, and it contains a robust permissions mechanism that allows you to protect data based off of the application’s requirements.</p>
 
 <p>Supported Authentication Methods</p>
 
 <ul>
-  <li>Basic: This is the typical username and password method</li>
-  <li>Google: Allows you to authenticate with your Gmail account.</li>
+<li>Basic: This is the typical username and password method</li>
+<li>Google: Allows you to authenticate with your Gmail account.</li>
 </ul>
-
 
                 </div>
                 <div class="method-example">
@@ -669,14 +605,14 @@ ghcore = returnedObject.core;
                     
                     
 <pre>
-<code class=""><p>// Basic Authentication Example
-grasshopper.auth( ‘basic’, { username: ‘’, password: ‘’ } ).then( function( token ) {
-    // Store user’s token somewhere
+<code class="javascript"><p>// Basic Authentication Example
+grasshopper.auth( &#39;basic&#39;, { username: &#39;&#39;, password: &#39;&#39; } ).then( function( token ) {
+    // Store user&#39;s token somewhere
 } ).done();</p>
 
 <p>// Google Authentication Example
-grasshopper.auth( ‘google’, { code: ‘TMP GOOGLE TOKEN’ } ).then( function( token ) {
-    // Store user’s token somewhere
+grasshopper.auth( &#39;google&#39;, { code: &#39;TMP GOOGLE TOKEN&#39; } ).then( function( token ) {
+    // Store user&#39;s token somewhere
 } ).done();</p>
 </code>
 </pre>
@@ -707,44 +643,44 @@ grasshopper.auth( ‘google’, { code: ‘TMP GOOGLE TOKEN’ } ).then( functio
             <div class="method" id="google-auth-setup">
                 <div class="method-section clearfix">
                     <div class="method-description">
-                        <h5 id="setup-google-login">Setup Google Login</h5>
+                        <h5>Setup Google Login</h5>
 
 <ol>
-  <li>Ensure that the <a href="http://solid-interactive.github.io/grasshopper-core-nodejs/documentation.html#projectconfiguration">identities.google object on your ghapi.json</a> is correctly setup.</li>
-  <li>Ensure that you have added both a a redirect uri and a javascript origin to your <a href="https://developers.google.com/console">Google Developer Console OAuth configuration</a>.
-    <ul>
-      <li>The javascript origin is the root of your website. For example:
-        <ul>
-          <li><code>http://localhost:3000</code></li>
-          <li><code>https://www.grasshopper-admin-sample.herokuapp.com</code></li>
-        </ul>
-      </li>
-      <li>The redirect uri should be the root of your website with the following append to the end <code>/oauth2callback</code>. This endpoint is where google will send the authenticated users temporary token. This endpoint already exists in Grasshopper-Api.
- This would create the following url’s from the examples mentioned above:
-        <ul>
-          <li><code>http://localhost:3000/auth2Callback</code></li>
-          <li><code>https://www.grasshopper-admin-sample.herokuapp.com/oauth2callback</code></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>Setup the methods to get the googleAuthUrl from API then send the user there.
- The <code>GET /googleurl</code> endpoint is already available on Api.
-    <ul>
-      <li>This endpoint is not authenticated.</li>
-      <li>This endpoint can also take an override redirect url. If you use this override, it will redirect the user back to that url with the grasshopper token in the url after all auth work is done.</li>
-    </ul>
-  </li>
-  <li>Modify your applications routes to collect the grasshopper token from the redirected route.
- Grasshopper API will redirect the user back to your app with the grasshopper token appended to the redirectUrl you specified in your config. If you overrode this by passing it as a header in the <code>/geturl</code> request, then it will be appended to that url.
-    <ul>
-      <li>If your redirectUrl in your config was: <code>/login</code>, then the user is redirected to <code>/login/{ grasshopperToken }</code>.</li>
-      <li>If you overrode your redirectUrl then you will see: <code>/someOtherPage/{ grasshopperToken }</code>.</li>
-      <li>Your route will need to be able to accept the returned url, in backbone, this might look like: <code>'login(/:token)'</code>.
-  Where the <code>()</code> signifies an optional param. Then a <code>/</code>. Then a <code>:token</code>.  The word ‘token’ in the example is important as this will be passed the the route function as a parameter.</li>
-    </ul>
-  </li>
-  <li>Once you have a handle on the grasshopper token, save it to local storage, prepended with ‘Google ‘.</li>
+<li>Ensure that the <a href="http://solid-interactive.github.io/grasshopper-core-nodejs/documentation.html#projectconfiguration">identities.google object on your ghapi.json</a> is correctly setup.</li>
+<li>Ensure that you have added both a a redirect uri and a javascript origin to your <a href="https://developers.google.com/console">Google Developer Console OAuth configuration</a>.
+
+<ul>
+<li>The javascript origin is the root of your website. For example:
+
+<ul>
+<li><code>http://localhost:3000</code></li>
+<li><code>https://www.grasshopper-admin-sample.herokuapp.com</code></li>
+</ul></li>
+<li>The redirect uri should be the root of your website with the following append to the end <code>/oauth2callback</code>. This endpoint is where google will send the authenticated users temporary token. This endpoint already exists in Grasshopper-Api.
+This would create the following url&#39;s from the examples mentioned above:
+
+<ul>
+<li><code>http://localhost:3000/auth2Callback</code></li>
+<li><code>https://www.grasshopper-admin-sample.herokuapp.com/oauth2callback</code></li>
+</ul></li>
+</ul></li>
+<li>Setup the methods to get the googleAuthUrl from API then send the user there.
+The <code>GET /googleurl</code> endpoint is already available on Api.
+
+<ul>
+<li>This endpoint is not authenticated.</li>
+<li>This endpoint can also take an override redirect url. If you use this override, it will redirect the user back to that url with the grasshopper token in the url after all auth work is done.</li>
+</ul></li>
+<li>Modify your applications routes to collect the grasshopper token from the redirected route.
+Grasshopper API will redirect the user back to your app with the grasshopper token appended to the redirectUrl you specified in your config. If you overrode this by passing it as a header in the <code>/geturl</code> request, then it will be appended to that url.
+
+<ul>
+<li>If your redirectUrl in your config was: <code>/login</code>, then the user is redirected to <code>/login/{ grasshopperToken }</code>.</li>
+<li>If you overrode your redirectUrl then you will see: <code>/someOtherPage/{ grasshopperToken }</code>.</li>
+<li>Your route will need to be able to accept the returned url, in backbone, this might look like: <code>&#39;login(/:token)&#39;</code>.
+Where the <code>()</code> signifies an optional param. Then a <code>/</code>. Then a <code>:token</code>.  The word &#39;token&#39; in the example is important as this will be passed the the route function as a parameter.</li>
+</ul></li>
+<li>Once you have a handle on the grasshopper token, save it to local storage, prepended with &#39;Google &#39;.</li>
 </ol>
 
 <p>Check out our sample projects for examples of both of these authentication methods in working applications.</p>
@@ -757,9 +693,9 @@ grasshopper.auth( ‘google’, { code: ‘TMP GOOGLE TOKEN’ } ).then( functio
 <pre>
 <code class="javascript"><p>// Get Google Oauth Url Example
 $.ajax({
-        dataType : ‘json’,
-        url : yourApiEndpoint + ‘/googleurl’,
-        type : ‘GET’
+        dataType : &#39;json&#39;,
+        url : yourApiEndpoint + &#39;/googleurl&#39;,
+        type : &#39;GET&#39;
     })
     .done(function(url) {
         window.location.href = url;
@@ -767,10 +703,10 @@ $.ajax({
 
 <p>// Get Google Oauth Url while override the redirectUrl
 $.ajax({
-        dataType : ‘json’,
-        url : yourApiEndpoint + ‘/googleurl’,
-        type : ‘GET’,
-        headers : {‘redirectUrl’ : ‘/someOtherPage’}
+        dataType : &#39;json&#39;,
+        url : yourApiEndpoint + &#39;/googleurl&#39;,
+        type : &#39;GET&#39;,
+        headers : {&#39;redirectUrl&#39; : &#39;/someOtherPage&#39;}
     })
     .done(function(url) {
         window.location.href = url;
@@ -779,7 +715,7 @@ $.ajax({
 <p>// If Using Backbone, your router might look like
 Router.extend({
     routes : {
-        ‘login(/:token)’ : ‘displayLogin’
+        &#39;login(/:token)&#39; : &#39;displayLogin&#39;
     }
 });</p>
 
@@ -803,7 +739,7 @@ function doGoogleLogin(token) {
         <div class="method" id="users">
             <div class="method-section clearfix">
                 <div class="method-description">
-                    <h4 id="users">Users</h4>
+                    <h4>Users</h4>
 
                 </div>
                 <div class="method-example">
@@ -840,33 +776,31 @@ function doGoogleLogin(token) {
             <div class="method" id="user-properties">
                 <div class="method-section clearfix">
                     <div class="method-description">
-                        <h5 id="user-properties">User Properties</h5>
-
-<pre><code>{
-    _id: 12345657,
-    role: 'admin',
-    enabled: true,
-    firstname: 'firstname',
-    lastname: 'lastname',
-    identities: {
-        basic: {
-            username: 'admin',
-            salt: '111111111',
-            hash: '282828282828282828'
-        },
-        google: {
-            id: '292929292929292',
-            accessToken: '474747474747'
-            refreshToken: '4098409874'
-        }
-    },
-    displayname : 'admin',
-    linkedidentities : ['basic'],
-    email: 'apitestuser@thinksolid.com',
-    profile : {}
-}
-</code></pre>
-
+                        <h5>User Properties</h5>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript">    <span class="p">{</span>
+        <span class="nx">_id</span><span class="o">:</span> <span class="mi">12345657</span><span class="p">,</span>
+        <span class="nx">role</span><span class="o">:</span> <span class="s1">&#39;admin&#39;</span><span class="p">,</span>
+        <span class="nx">enabled</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nx">firstname</span><span class="o">:</span> <span class="s1">&#39;firstname&#39;</span><span class="p">,</span>
+        <span class="nx">lastname</span><span class="o">:</span> <span class="s1">&#39;lastname&#39;</span><span class="p">,</span>
+        <span class="nx">identities</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">basic</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">username</span><span class="o">:</span> <span class="s1">&#39;admin&#39;</span><span class="p">,</span>
+                <span class="nx">salt</span><span class="o">:</span> <span class="s1">&#39;111111111&#39;</span><span class="p">,</span>
+                <span class="nx">hash</span><span class="o">:</span> <span class="s1">&#39;282828282828282828&#39;</span>
+            <span class="p">},</span>
+            <span class="nx">google</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;292929292929292&#39;</span><span class="p">,</span>
+                <span class="nx">accessToken</span><span class="o">:</span> <span class="s1">&#39;474747474747&#39;</span>
+                <span class="nx">refreshToken</span><span class="o">:</span> <span class="s1">&#39;4098409874&#39;</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nx">displayname</span> <span class="o">:</span> <span class="s1">&#39;admin&#39;</span><span class="p">,</span>
+        <span class="nx">linkedidentities</span> <span class="o">:</span> <span class="p">[</span><span class="s1">&#39;basic&#39;</span><span class="p">],</span>
+        <span class="nx">email</span><span class="o">:</span> <span class="s1">&#39;apitestuser@thinksolid.com&#39;</span><span class="p">,</span>
+        <span class="nx">profile</span> <span class="o">:</span> <span class="p">{}</span>
+    <span class="p">}</span>
+</code></pre></div>
                     </div>
                     <div class="method-example">
             
@@ -874,33 +808,33 @@ function doGoogleLogin(token) {
                     
 <pre>
 <code class="asciidoc"><ul>
-  <li><em>_id</em>: Valid Mongo Object Id</li>
-  <li><em>role</em>: The users role, see below for more information on roles.</li>
-  <li><em>enabled</em>: Boolean indicating if the user is currently enabled or not.</li>
-  <li><em>firstname</em>: The users First Name.</li>
-  <li><em>lastname</em>: The users Last Name.</li>
-  <li><em>identities</em>: The Identities object represents the identities that the user has, this is private and will never be returned.
-    <ul>
-      <li><em>basic</em>: The basic identity represents the most simple form of auth.
-        <ul>
-          <li><em>username</em>: The Users username that they would use to login.</li>
-          <li><em>salt</em>: Salt for password.</li>
-          <li><em>hash</em>: Hash for password.</li>
-        </ul>
-      </li>
-      <li><em>google</em>: The Identity object representing google auth.
-        <ul>
-          <li><em>id</em>: The users google id. Unique to all google users.</li>
-          <li><em>accessToken</em>: An access token used to auth the user for google services. This token expires.</li>
-          <li><em>refreshToken</em>: A token given by google to refresh the users access token.</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><em>displayname</em>: The users display name, if not set when creating a user, it will default to the login for basic auth, and the email address for google auth.</li>
-  <li><em>linkedidentities</em>: Array representing the identities the user has.</li>
-  <li><em>email</em>: The users email address.</li>
-  <li><em>profile</em>: The users profile, This can be an object containing anything.</li>
+<li><em>_id</em>: Valid Mongo Object Id</li>
+<li><em>role</em>: The users role, see below for more information on roles.</li>
+<li><em>enabled</em>: Boolean indicating if the user is currently enabled or not.</li>
+<li><em>firstname</em>: The users First Name.</li>
+<li><em>lastname</em>: The users Last Name.</li>
+<li><em>identities</em>: The Identities object represents the identities that the user has, this is private and will never be returned.
+
+<ul>
+<li><em>basic</em>: The basic identity represents the most simple form of auth.
+
+<ul>
+<li><em>username</em>: The Users username that they would use to login.</li>
+<li><em>salt</em>: Salt for password.</li>
+<li><em>hash</em>: Hash for password.</li>
+</ul></li>
+<li><em>google</em>: The Identity object representing google auth.
+
+<ul>
+<li><em>id</em>: The users google id. Unique to all google users.</li>
+<li><em>accessToken</em>: An access token used to auth the user for google services. This token expires.</li>
+<li><em>refreshToken</em>: A token given by google to refresh the users access token.</li>
+</ul></li>
+</ul></li>
+<li><em>displayname</em>: The users display name, if not set when creating a user, it will default to the login for basic auth, and the email address for google auth.</li>
+<li><em>linkedidentities</em>: Array representing the identities the user has.</li>
+<li><em>email</em>: The users email address.</li>
+<li><em>profile</em>: The users profile, This can be an object containing anything.</li>
 </ul>
 </code>
 </pre>
@@ -923,16 +857,16 @@ function doGoogleLogin(token) {
             <div class="method" id="user-roles">
                 <div class="method-section clearfix">
                     <div class="method-description">
-                        <h5 id="user-roles">User Roles</h5>
+                        <h5>User Roles</h5>
 
 <p>Roles (in order of power) :</p>
 
 <ol>
-  <li>Admin - Can do anything.</li>
-  <li>Editor - Can create and edit content and content types.</li>
-  <li>Author - Can only create content.</li>
-  <li>Reader - Can only read content.</li>
-  <li>External - Cannot access the admin in any way.</li>
+<li>Admin - Can do anything.</li>
+<li>Editor - Can create and edit content and content types.</li>
+<li>Author - Can only create content.</li>
+<li>Reader - Can only read content.</li>
+<li>External - Cannot access the admin in any way.</li>
 </ol>
 
                     </div>
@@ -958,115 +892,115 @@ function doGoogleLogin(token) {
             <div class="method" id="user-methods">
                 <div class="method-section clearfix">
                     <div class="method-description">
-                        <h5 id="user-methods">User methods</h5>
+                        <h5>User methods</h5>
 
 <ul>
-  <li>users.query
-    <ul>
-      <li>middleware.identity,</li>
-      <li>middleware.role(roles.ADMIN),</li>
-      <li>middleware.event(‘parse’),</li>
-      <li>middleware.event(‘validate’),</li>
-      <li>middleware.users.query,</li>
-      <li>middleware.event(‘out’)</li>
-    </ul>
-  </li>
-  <li>users.insert
-    <ul>
-      <li>middleware.identity,</li>
-      <li>middleware.role(roles.ADMIN),</li>
-      <li>middleware.users.linkedidentities.create,</li>
-      <li>middleware.users.parse,</li>
-      <li>middleware.event(‘parse’),</li>
-      <li>middleware.event(‘validate’),</li>
-      <li>middleware.users.validate,</li>
-      <li>middleware.users.insert,</li>
-      <li>middleware.event(‘out’),</li>
-      <li>middleware.event(‘save’)</li>
-    </ul>
-  </li>
-  <li>users.update
-    <ul>
-      <li>middleware.identity,</li>
-      <li>setDefaultUser,</li>
-      <li>roleOrSelf(roles.ADMIN),</li>
-      <li>middleware.users.parse,</li>
-      <li>middleware.event(‘parse’),</li>
-      <li>middleware.event(‘validate’),</li>
-      <li>middleware.users.validate,</li>
-      <li>middleware.users.update,</li>
-      <li>middleware.event(‘out’),</li>
-      <li>middleware.event(‘save’)</li>
-    </ul>
-  </li>
-  <li>users.getById
-    <ul>
-      <li>middleware.identity,</li>
-      <li>setDefaultUser,</li>
-      <li>roleOrSelf(roles.ADMIN),</li>
-      <li>middleware.event(‘parse’),</li>
-      <li>middleware.event(‘validate’),</li>
-      <li>middleware.users.getById,</li>
-      <li>middleware.event(‘out’)</li>
-    </ul>
-  </li>
-  <li>users.getByEmail
-    <ul>
-      <li>middleware.identity,</li>
-      <li>middleware.role(roles.ADMIN),</li>
-      <li>middleware.event(‘parse’),</li>
-      <li>middleware.event(‘validate’),</li>
-      <li>middleware.users.getByEmail,</li>
-      <li>middleware.event(‘out’)</li>
-    </ul>
-  </li>
-  <li>users.deleteById
-    <ul>
-      <li>middleware.identity,</li>
-      <li>middleware.role(roles.ADMIN),</li>
-      <li>middleware.event(‘parse’),</li>
-      <li>middleware.event(‘validate’),</li>
-      <li>middleware.users.deleteById,</li>
-      <li>middleware.event(‘out’),</li>
-      <li>middleware.event(‘delete’)</li>
-    </ul>
-  </li>
-  <li>users.savePermissions
-    <ul>
-      <li>middleware.event(‘parse’),</li>
-      <li>middleware.event(‘validate’),</li>
-      <li>middleware.identity,</li>
-      <li>middleware.role(roles.ADMIN)</li>
-    </ul>
-  </li>
-  <li>users.deletePermissions
-    <ul>
-      <li>middleware.event(‘parse’),</li>
-      <li>middleware.event(‘validate’),</li>
-      <li>middleware.identity,</li>
-      <li>middleware.role(roles.ADMIN)</li>
-    </ul>
-  </li>
-  <li>users.linkIdentity
-    <ul>
-      <li>middleware.event(‘parse’),</li>
-      <li>middleware.event(‘validate’),</li>
-      <li>middleware.identity,</li>
-      <li>middleware.users.linkIdentity,</li>
-      <li>middleware.event(‘out’),</li>
-      <li>middleware.event(‘save’)</li>
-    </ul>
-  </li>
-  <li>users.unlinkIdentity
-    <ul>
-      <li>middleware.event(‘parse’),</li>
-      <li>middleware.event(‘validate’),</li>
-      <li>middleware.identity,</li>
-      <li>middleware.users.unLinkIdentity,</li>
-      <li>middleware.event(‘out’),</li>
-      <li>middleware.event(‘save’)</li>
-    </ul>
-  </li>
+<li><p>users.query</p>
+
+<ul>
+<li>middleware.identity,</li>
+<li>middleware.role(roles.ADMIN),</li>
+<li>middleware.event(&#39;parse&#39;),</li>
+<li>middleware.event(&#39;validate&#39;),</li>
+<li>middleware.users.query,</li>
+<li>middleware.event(&#39;out&#39;)</li>
+</ul></li>
+<li><p>users.insert</p>
+
+<ul>
+<li>middleware.identity,</li>
+<li>middleware.role(roles.ADMIN),</li>
+<li>middleware.users.linkedidentities.create,</li>
+<li>middleware.users.parse,</li>
+<li>middleware.event(&#39;parse&#39;),</li>
+<li>middleware.event(&#39;validate&#39;),</li>
+<li>middleware.users.validate,</li>
+<li>middleware.users.insert,</li>
+<li>middleware.event(&#39;out&#39;),</li>
+<li>middleware.event(&#39;save&#39;)</li>
+</ul></li>
+<li><p>users.update</p>
+
+<ul>
+<li>middleware.identity,</li>
+<li>setDefaultUser,</li>
+<li>roleOrSelf(roles.ADMIN),</li>
+<li>middleware.users.parse,</li>
+<li>middleware.event(&#39;parse&#39;),</li>
+<li>middleware.event(&#39;validate&#39;),</li>
+<li>middleware.users.validate,</li>
+<li>middleware.users.update,</li>
+<li>middleware.event(&#39;out&#39;),</li>
+<li>middleware.event(&#39;save&#39;)</li>
+</ul></li>
+<li><p>users.getById</p>
+
+<ul>
+<li>middleware.identity,</li>
+<li>setDefaultUser,</li>
+<li>roleOrSelf(roles.ADMIN),</li>
+<li>middleware.event(&#39;parse&#39;),</li>
+<li>middleware.event(&#39;validate&#39;),</li>
+<li>middleware.users.getById,</li>
+<li>middleware.event(&#39;out&#39;)</li>
+</ul></li>
+<li><p>users.getByEmail</p>
+
+<ul>
+<li>middleware.identity,</li>
+<li>middleware.role(roles.ADMIN),</li>
+<li>middleware.event(&#39;parse&#39;),</li>
+<li>middleware.event(&#39;validate&#39;),</li>
+<li>middleware.users.getByEmail,</li>
+<li>middleware.event(&#39;out&#39;)</li>
+</ul></li>
+<li><p>users.deleteById</p>
+
+<ul>
+<li>middleware.identity,</li>
+<li>middleware.role(roles.ADMIN),</li>
+<li>middleware.event(&#39;parse&#39;),</li>
+<li>middleware.event(&#39;validate&#39;),</li>
+<li>middleware.users.deleteById,</li>
+<li>middleware.event(&#39;out&#39;),</li>
+<li>middleware.event(&#39;delete&#39;)</li>
+</ul></li>
+<li><p>users.savePermissions</p>
+
+<ul>
+<li>middleware.event(&#39;parse&#39;),</li>
+<li>middleware.event(&#39;validate&#39;),</li>
+<li>middleware.identity,</li>
+<li>middleware.role(roles.ADMIN)</li>
+</ul></li>
+<li><p>users.deletePermissions</p>
+
+<ul>
+<li>middleware.event(&#39;parse&#39;),</li>
+<li>middleware.event(&#39;validate&#39;),</li>
+<li>middleware.identity,</li>
+<li>middleware.role(roles.ADMIN)</li>
+</ul></li>
+<li><p>users.linkIdentity</p>
+
+<ul>
+<li>middleware.event(&#39;parse&#39;),</li>
+<li>middleware.event(&#39;validate&#39;),</li>
+<li>middleware.identity,</li>
+<li>middleware.users.linkIdentity,</li>
+<li>middleware.event(&#39;out&#39;),</li>
+<li>middleware.event(&#39;save&#39;)</li>
+</ul></li>
+<li><p>users.unlinkIdentity</p>
+
+<ul>
+<li>middleware.event(&#39;parse&#39;),</li>
+<li>middleware.event(&#39;validate&#39;),</li>
+<li>middleware.identity,</li>
+<li>middleware.users.unLinkIdentity,</li>
+<li>middleware.event(&#39;out&#39;),</li>
+<li>middleware.event(&#39;save&#39;)</li>
+</ul></li>
 </ul>
 
                     </div>
@@ -1091,7 +1025,7 @@ function doGoogleLogin(token) {
         <div class="method" id="content">
             <div class="method-section clearfix">
                 <div class="method-description">
-                    <h4 id="content">Content</h4>
+                    <h4>Content</h4>
 
                 </div>
                 <div class="method-example">
@@ -1128,77 +1062,57 @@ function doGoogleLogin(token) {
             <div class="method" id="queries">
                 <div class="method-section clearfix">
                     <div class="method-description">
-                        <h5 id="queries">Queries</h5>
+                        <h5>Queries</h5>
 
-<p>Grasshopper’s query builder accepts a query object that contains several parameters, some optional.</p>
+<p>Grasshopper&#39;s query builder accepts a query object that contains several parameters, some optional.</p>
 
 <p>The returned object is an array with limit, skip and total.  The total is the value of all content matched by query, not just returned objects.</p>
 
 <p>Definitions for all possible query parameters/options</p>
 
 <ul>
-  <li><em>filters</em>: An array of optional filter objects for the query.
-    <ul>
-      <li><em>key</em>: The key of the content being filtered.</li>
-      <li><em>cmp</em>: The comparison operator for the filter value.  Currently supported operators (Query accepts symbol or string value):
-        <ul>
-          <li><em>’=’</em>: equals</li>
-          <li><em>’!=’ or ‘not’ or ‘notequal’ or ‘notequals’</em>: not equal to</li>
-          <li><em>’&gt;=’ or ‘gte’</em>: greater than or equals</li>
-          <li><em>’&gt;’ or ‘gt’</em>: greater than</li>
-          <li><em>’&lt;=’ or ‘lte’</em>: less than or equals</li>
-          <li><em>’&lt;’ or ‘lt’</em>: less than</li>
-          <li><em>‘in’ or ‘contains’</em>: contains</li>
-          <li><em>‘!in’ or ‘notin’ or ‘notcontains’</em>: does not contain</li>
-          <li><em>’%’ or ‘like’</em>: like (Allows for ‘fuzzy matching’)</li>
-          <li><em>’!%’ or ‘notlike’</em>: not like (Allows for ‘fuzzy matching’)</li>
-          <li><em>‘between’</em>: between</li>
-          <li><em>‘notbetween’</em>: not between</li>
-          <li><em>‘size’</em>: size</li>
-          <li><em>‘exists’</em>: exists</li>
-        </ul>
-      </li>
-      <li><em>value</em>: Then value the filter will be compared with.</li>
-    </ul>
-  </li>
-  <li><em>types</em>: An optional array of content type ids.</li>
-  <li><em>nodes</em>: An optional array of node ids.</li>
-  <li><em>options</em>: Object.  Possible key/value pairs are:
-    <ul>
-      <li>
-        <ul>
-          <li>limit : Limit number of results. String or number.</li>
-        </ul>
-      </li>
-      <li>
-        <ul>
-          <li>skip : Skip specified number of results.  String or number. (limit and skip support pagination)</li>
-        </ul>
-      </li>
-      <li>
-        <ul>
-          <li>distinct : return distinct results within a find.  Can include types.</li>
-        </ul>
-      </li>
-      <li>
-        <ul>
-          <li>exclude : array of fields to be excluded from query.</li>
-        </ul>
-      </li>
-      <li>
-        <ul>
-          <li>include : array of fields to be included in query.</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
+<li><em>filters</em>: An array of optional filter objects for the query.
+
+<ul>
+<li><em>key</em>: The key of the content being filtered.</li>
+<li><em>cmp</em>: The comparison operator for the filter value.  Currently supported operators (Query accepts symbol or string value):
+
+<ul>
+<li><em>&#39;=&#39;</em>: equals</li>
+<li><em>&#39;!=&#39; or &#39;not&#39; or &#39;notequal&#39; or &#39;notequals&#39;</em>: not equal to</li>
+<li><em>&#39;&gt;=&#39; or &#39;gte&#39;</em>: greater than or equals</li>
+<li><em>&#39;&gt;&#39; or &#39;gt&#39;</em>: greater than</li>
+<li><em>&#39;&lt;=&#39; or &#39;lte&#39;</em>: less than or equals</li>
+<li><em>&#39;&lt;&#39; or &#39;lt&#39;</em>: less than</li>
+<li><em>&#39;in&#39; or &#39;contains&#39;</em>: contains</li>
+<li><em>&#39;!in&#39; or &#39;notin&#39; or &#39;notcontains&#39;</em>: does not contain</li>
+<li><em>&#39;%&#39; or &#39;like&#39;</em>: like (Allows for &#39;fuzzy matching&#39;)</li>
+<li><em>&#39;!%&#39; or &#39;notlike&#39;</em>: not like (Allows for &#39;fuzzy matching&#39;)</li>
+<li><em>&#39;between&#39;</em>: between</li>
+<li><em>&#39;notbetween&#39;</em>: not between</li>
+<li><em>&#39;size&#39;</em>: size</li>
+<li><em>&#39;exists&#39;</em>: exists</li>
+</ul></li>
+<li><em>value</em>: Then value the filter will be compared with.</li>
+</ul></li>
+<li><em>types</em>: An optional array of content type ids.</li>
+<li><em>nodes</em>: An optional array of node ids.</li>
+<li><em>options</em>: Object.  Possible key/value pairs are:
+
+<ul>
+<li>* limit : Limit number of results. String or number.</li>
+<li>* skip : Skip specified number of results.  String or number. (limit and skip support pagination)</li>
+<li>* distinct : return distinct results within a find.  Can include types.</li>
+<li>* exclude : array of fields to be excluded from query.</li>
+<li>* include : array of fields to be included in query.</li>
+</ul></li>
 </ul>
 
 <p>Important Notes:</p>
 
 <ul>
-  <li>The options object can have include or exclude parameters, but not both in the same query.</li>
-  <li>When using ‘options.distinct’, filters can’t be used.  This means paging is not available.</li>
+<li>The options object can have include or exclude parameters, but not both in the same query.</li>
+<li>When using &#39;options.distinct&#39;, filters can&#39;t be used.  This means paging is not available.</li>
 </ul>
 
                     </div>
@@ -1209,47 +1123,49 @@ function doGoogleLogin(token) {
 <pre>
 <code class="javascript"><p>Query object examples:</p>
 
-<pre><code>{ filters : [{ key : 'fields.label', cmp: '&lt;', value: 'search test' }],
+<p>{ filters : [{ key : &#39;fields.label&#39;, cmp: &#39;&lt;&#39;, value: &#39;search test&#39; }],
   types : [],
   nodes : [],
   options : { limit : 1,
               skip  : 2,
-              distinct : 'fields.label',
-              exclude : ['fields.newColumn']
+              distinct : &#39;fields.label&#39;,
+              exclude : [&#39;fields.newColumn&#39;]
             }
-}
-</code></pre>
+}</p>
 
-<ul>
-  <li>This object would return results  where ‘fields.label’ is less than the value ‘search test.’
-It would limit the result to 1 document and skip the first 2 results.  It would only return documents
-where ‘fields.label’ is a distinct value.  It would also exclude</li>
-</ul>
+<p>/*
+- This object would return results  where &#39;fields.label&#39; is less than the value &#39;search test.&#39;
+  It would limit the result to 1 document and skip the first 2 results.  It would only return documents
+  where &#39;fields.label&#39; is a distinct value.  It would also exclude
+*/</p>
 
-<hr />
+<p>{
+    filters : [key : &#39;fields.slug&#39; , cmp : &#39;equals&#39;, value: &#39;testValue&#39;],
+    types : [&#39;2389vj2jf8r&#39;, &#39;ssjkl932&#39;],
+    options : {include : [&#39;fields.label&#39;, &#39;fields.name&#39;, &#39;fields.description&#39;]}
+}</p>
 
-<pre><code>{ filters : [key : 'fields.slug' , cmp : 'equals', value: 'testValue'],
-types : ['2389vj2jf8r', 'ssjkl932'],
-options : {include : ['fields.label', 'fields.name', 'fields.description']}
-}
-</code></pre>
+<p>/*
+- This object would return results from content types &#39;2389vj2jf8r&#39; and &#39;ssjkl932&#39; where &#39;fields.label&#39;,
+  &#39;fields.name&#39; or &#39;fields.description&#39; match the value &#39;testValue&#39;.
+*/</p>
 
-<ul>
-  <li>This object would return results from content types ‘2389vj2jf8r’ and ‘ssjkl932’ where ‘fields.label’,
-‘fields.name’ or ‘fields.description’ match the value ‘testValue’.</li>
-</ul>
-
-<hr />
-
-<p>{ filters : [key : ‘fields.slug’, cmp : ‘between’, value: [‘exampleValue1’, ‘exampleValue2’] ],
-    nodes : [‘83h7hjks8fhh’],
+<p>{
+    filters : [
+        key : &#39;fields.slug&#39;,
+        cmp : &#39;between&#39;,
+        value: [
+            &#39;exampleValue1&#39;, &#39;exampleValue2&#39;
+            ]
+        ],
+    nodes : [&#39;83h7hjks8fhh&#39;],
     options : {}
-  }</p>
+}</p>
 
-<ul>
-  <li>This object would return content with ‘fields.slug’ value between ‘exampleValue1’ and ‘exampleValue2’
-from node ‘83h7hjks8fhh’.  Note that even though the options object is empty, query executes normally.</li>
-</ul>
+<p>/*
+- This object would return content with &#39;fields.slug&#39; value between &#39;exampleValue1&#39; and &#39;exampleValue2&#39;
+  from node &#39;83h7hjks8fhh&#39;.  Note that even though the options object is empty, query executes normally.
+*/</p>
 </code>
 </pre>
                     
@@ -1266,17 +1182,17 @@ from node ‘83h7hjks8fhh’.  Note that even though the options object is empty
         <div class="method" id="contributing">
             <div class="method-section clearfix">
                 <div class="method-description">
-                    <h3 id="contributing">Contributing</h3>
+                    <h3>Contributing</h3>
 
 <p>Grasshopper is an open source project that is available on <a href="https://github.com/Solid-Interactive/grasshopper-core-nodejs">Github</a> and it has been sponsored by <a href="http://www.thinksolid.com">Solid Interactive</a>. We fully appreciate the contributions that have been made so far and we are excited for future development of this platform.</p>
 
 <p>If you find bugs or have issues please submit them to github issues:</p>
 
 <ul>
-  <li><a href="https://github.com/Solid-Interactive/grasshopper-core-nodejs/issues">Issues for Grasshopper Core</a></li>
-  <li><a href="https://github.com/Solid-Interactive/grasshopper-api-js/issues">Issues for Grasshopper API</a></li>
-  <li><a href="https://github.com/Solid-Interactive/grasshopper-admin/issues">Issues for Grasshopper Admin</a></li>
-  <li><a href="https://github.com/Solid-Interactive/grasshopper-cli/issues">Issues for Grasshopper CLI</a></li>
+<li><a href="https://github.com/Solid-Interactive/grasshopper-core-nodejs/issues">Issues for Grasshopper Core</a></li>
+<li><a href="https://github.com/Solid-Interactive/grasshopper-api-js/issues">Issues for Grasshopper API</a></li>
+<li><a href="https://github.com/Solid-Interactive/grasshopper-admin/issues">Issues for Grasshopper Admin</a></li>
+<li><a href="https://github.com/Solid-Interactive/grasshopper-cli/issues">Issues for Grasshopper CLI</a></li>
 </ul>
 
 <p>To contribute back to the project, you should fork the projects make your changes and submit merge requests back to us.</p>
@@ -1316,7 +1232,7 @@ from node ‘83h7hjks8fhh’.  Note that even though the options object is empty
             <div class="method" id="environment-setup">
                 <div class="method-section clearfix">
                     <div class="method-description">
-                        <h4 id="setting-up-your-development-environment">Setting up your development environment</h4>
+                        <h4>Setting up your development environment</h4>
 
 <p>If you are doing full stack development on Grasshopper you should setup all projects in the solution to work locally.</p>
 
@@ -1328,7 +1244,7 @@ from node ‘83h7hjks8fhh’.  Note that even though the options object is empty
 
 <p>More information on the technique using <a href="https://www.npmjs.org/doc/cli/npm-link.html">NPM LINK</a> can be found <a href="https://www.npmjs.org/doc/cli/npm-link.html">here</a>.</p>
 
-<h5 id="before-you-start">Before you start</h5>
+<h5>Before you start</h5>
 
 <p>Make sure that you development machine meets the minimum <a href="documentation.html#requirements">REQUIREMENTS</a></p>
 
@@ -1340,23 +1256,21 @@ from node ‘83h7hjks8fhh’.  Note that even though the options object is empty
 
 <p>For an example of what this should look like, see <a href="#projectconfiguration">CONFIGURING YOUR PROJECT</a>.</p>
 
-<h5 id="development-server">Development server</h5>
+<h5>Development server</h5>
 
 <p>The <code>grunt server</code> task will start a local express server running the API. It will also start a watch for the files in the <code>admin</code> project. If you save a file then it will be updates and the page will be refreshed.</p>
 
 <p>If you make changes to your local <code>core</code> or <code>api</code> projects. This just restart the node server process to apply your changes.</p>
 
-<h5 id="when-you-finished">When you finished</h5>
+<h5>When you finished</h5>
 
 <p>Once you are have finished your dev work on <code>grasshopper-api</code> or <code>grasshopper-core</code>, you should publish the npm or submit a merge request.</p>
 
 <p>To test the new npm, you should unlink <code>grasshopper-api</code> and/or <code>grasshopper-core</code> and pull the dependency in from npm:</p>
-
-<pre><code>cd ~/workspace/grasshopper-admin/server
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> ~/workspace/grasshopper-admin/server
 npm uninstall grasshopper-api
-npm install --save grasshopper-api@[the newly published version]
-</code></pre>
-
+npm install --save grasshopper-api@<span class="o">[</span>the newly published version<span class="o">]</span>
+</code></pre></div>
 <p>Documentation around removing npm dependencies is available at:</p>
 
 <p><a href="https://www.npmjs.org/doc/cli/npm-uninstall.html">https://www.npmjs.org/doc/cli/npm-uninstall.html</a></p>
@@ -1369,47 +1283,25 @@ npm install --save grasshopper-api@[the newly published version]
                 
                     
 <pre>
-<code class="asciidocs"><p>Help</p>
+<code class="bash"><p>-- Help</p>
 
-<p>Setup solution directory structure</p>
+<p>-- Setup solution directory structure</p>
 
-<ul>
-  <li>
-    <p>mkir grasshopper</p>
-  </li>
-  <li>
-    <p>cd grasshopper</p>
-  </li>
-  <li>
-    <p>git clone git@github.com:Solid-Interactive/grasshopper-admin.git</p>
-  </li>
-  <li>
-    <p>git clone git@github.com:Solid-Interactive/grasshopper-api-js.git</p>
-  </li>
-  <li>
-    <p>git clone git@github.com:Solid-Interactive/grasshopper-core-nodejs.git</p>
-  </li>
-</ul>
+<p>mkir grasshopper
+cd grasshopper
+git clone git@github.com:Solid-Interactive/grasshopper-admin.git
+git clone git@github.com:Solid-Interactive/grasshopper-api-js.git
+git clone git@github.com:Solid-Interactive/grasshopper-core-nodejs.git</p>
 
-<p>Install dependencies and link npms</p>
+<p>-- Install dependencies and link npms</p>
 
-<ul>
-  <li>
-    <p>cd {core project path} &amp;&amp; npm install &amp;&amp; npm link</p>
-  </li>
-  <li>
-    <p>cd {api project path} &amp;&amp; npm install &amp;&amp; npm link grasshopper-core &amp;&amp; npm link</p>
-  </li>
-  <li>
-    <p>cd {admin project path} &amp;&amp; npm install &amp;&amp; bundle install &amp;&amp; bower install &amp;&amp; cd server &amp;&amp; npm install &amp;&amp; npm link grasshopper-api</p>
-  </li>
-</ul>
+<p>cd {core project path} &amp;&amp; npm install &amp;&amp; npm link
+cd {api project path} &amp;&amp; npm install &amp;&amp; npm link grasshopper-core &amp;&amp; npm link
+cd {admin project path} &amp;&amp; npm install &amp;&amp; bundle install &amp;&amp; bower install &amp;&amp; cd server &amp;&amp; npm install &amp;&amp; npm link grasshopper-api</p>
 
-<p>Start dev server</p>
+<p>-- Start dev server</p>
 
-<ul>
-  <li>cd {admin project path} &amp;&amp; grunt server</li>
-</ul>
+<p>cd {admin project path} &amp;&amp; grunt server</p>
 </code>
 </pre>
                     
@@ -1436,17 +1328,17 @@ npm install --save grasshopper-api@[the newly published version]
             <div class="method" id="testing-deployment">
                 <div class="method-section clearfix">
                     <div class="method-description">
-                        <h4 id="deploy-to-a-test-environment">Deploy to a test environment</h4>
+                        <h4>Deploy to a test environment</h4>
 
 <p>If you have a heroku account, then you can deploy to it using the <code>grunt deploy:heroku</code> command .</p>
 
-<h5 id="what-you-need">What you need</h5>
+<h5>What you need</h5>
 
 <ul>
-  <li>Your development environment should already be setup (see above)</li>
-  <li>A ghapi.json file that includes your application configuration at <code>{proj-root}/ghapi.json</code></li>
-  <li>Set heroku environment variables (so you don’t commit your private info). `</li>
-  <li>Publish to heroku <code>grunt deploy:heroku</code></li>
+<li>Your development environment should already be setup (see above)</li>
+<li>A ghapi.json file that includes your application configuration at <code>{proj-root}/ghapi.json</code></li>
+<li>Set heroku environment variables (so you don&#39;t commit your private info). `</li>
+<li>Publish to heroku <code>grunt deploy:heroku</code></li>
 </ul>
 
 <p>Once the environmental variables are on heroku there is no need to load them again, unless you want to change them.
@@ -1462,15 +1354,13 @@ If you ever need to update your environment variables just re-run <code>grunt de
                 
                     
 <pre>
-<code class="bash"><p>// Setting Remote Configuration</p>
+<code class="bash"><p>-- Setting Remote Configuration</p>
 
 <p>cd ~/{grasshopper-admin-directory}</p>
 
 <p>grunt deploy:heroku:setupConfigs</p>
 
-<hr />
-
-<p>// Deploy to Heroku</p>
+<p>-- Deploy to Heroku</p>
 
 <p>cd ~/{grasshopper-admin-directory}</p>
 

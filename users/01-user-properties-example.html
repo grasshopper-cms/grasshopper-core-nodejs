@@ -1,29 +1,29 @@
 <ul>
-  <li><em>_id</em>: Valid Mongo Object Id</li>
-  <li><em>role</em>: The users role, see below for more information on roles.</li>
-  <li><em>enabled</em>: Boolean indicating if the user is currently enabled or not.</li>
-  <li><em>firstname</em>: The users First Name.</li>
-  <li><em>lastname</em>: The users Last Name.</li>
-  <li><em>identities</em>: The Identities object represents the identities that the user has, this is private and will never be returned.
-    <ul>
-      <li><em>basic</em>: The basic identity represents the most simple form of auth.
-        <ul>
-          <li><em>username</em>: The Users username that they would use to login.</li>
-          <li><em>salt</em>: Salt for password.</li>
-          <li><em>hash</em>: Hash for password.</li>
-        </ul>
-      </li>
-      <li><em>google</em>: The Identity object representing google auth.
-        <ul>
-          <li><em>id</em>: The users google id. Unique to all google users.</li>
-          <li><em>accessToken</em>: An access token used to auth the user for google services. This token expires.</li>
-          <li><em>refreshToken</em>: A token given by google to refresh the users access token.</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><em>displayname</em>: The users display name, if not set when creating a user, it will default to the login for basic auth, and the email address for google auth.</li>
-  <li><em>linkedidentities</em>: Array representing the identities the user has.</li>
-  <li><em>email</em>: The users email address.</li>
-  <li><em>profile</em>: The users profile, This can be an object containing anything.</li>
+<li><em>_id</em>: Valid Mongo Object Id</li>
+<li><em>role</em>: The users role, see below for more information on roles.</li>
+<li><em>enabled</em>: Boolean indicating if the user is currently enabled or not.</li>
+<li><em>firstname</em>: The users First Name.</li>
+<li><em>lastname</em>: The users Last Name.</li>
+<li><em>identities</em>: The Identities object represents the identities that the user has, this is private and will never be returned.
+
+<ul>
+<li><em>basic</em>: The basic identity represents the most simple form of auth.
+
+<ul>
+<li><em>username</em>: The Users username that they would use to login.</li>
+<li><em>salt</em>: Salt for password.</li>
+<li><em>hash</em>: Hash for password.</li>
+</ul></li>
+<li><em>google</em>: The Identity object representing google auth.
+
+<ul>
+<li><em>id</em>: The users google id. Unique to all google users.</li>
+<li><em>accessToken</em>: An access token used to auth the user for google services. This token expires.</li>
+<li><em>refreshToken</em>: A token given by google to refresh the users access token.</li>
+</ul></li>
+</ul></li>
+<li><em>displayname</em>: The users display name, if not set when creating a user, it will default to the login for basic auth, and the email address for google auth.</li>
+<li><em>linkedidentities</em>: Array representing the identities the user has.</li>
+<li><em>email</em>: The users email address.</li>
+<li><em>profile</em>: The users profile, This can be an object containing anything.</li>
 </ul>

@@ -1,83 +1,80 @@
-<h4 id="configuring-your-project">Configuring your project</h4>
+<h4>Configuring your project</h4>
 
 <p>When you run the <code>grasshopper fly</code> command, you get a fully functional application, but you may want to change some of the configuration values.
 The configuration values are passed into <code>grasshopper-api</code>.</p>
 
-<h5 id="api--core">Api / Core</h5>
+<h5>Api / Core</h5>
 
 <p>Start grasshopper api is done by requiring it in and passing in an options object. A convenient way to do this is to create
 a JSON config file and use it as the options object as follows:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">ghapi</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;grasshopper-api&#39;</span><span class="p">),</span>
+    <span class="nx">options</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./grasshopper-config.json&#39;</span><span class="p">),</span>
+    <span class="nx">ghcore</span><span class="p">,</span>
+    <span class="nx">ghapiRouter</span><span class="p">,</span>
+    <span class="nx">returnedObject</span><span class="p">;</span>
 
-<pre><code>var ghapi = require('grasshopper-api'),
-    options = require('./grasshopper-config.json'),
-    ghcore,
-    ghapiRouter,
-    returnedObject;
+<span class="nx">returnedObject</span> <span class="o">=</span> <span class="nx">ghapi</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
 
-returnedObject = ghapi(options);
+<span class="c1">// the router should be used in conjunction with express</span>
+<span class="c1">// it can be added directly to the app or piggy backed on another router</span>
+<span class="c1">// e.g. expressApp.use(&#39;/api&#39;, ghapiRouter);</span>
+<span class="nx">ghapiRouter</span> <span class="o">=</span> <span class="nx">returnedObject</span><span class="p">.</span><span class="nx">router</span><span class="p">;</span>
 
-// the router should be used in conjunction with express
-// it can be added directly to the app or piggy backed on another router
-// e.g. expressApp.use('/api', ghapiRouter);
-ghapiRouter = returnedObject.router;
-
-// ghcore can be used to make queries, etc.
-ghcore = returnedObject.core;
-</code></pre>
-
+<span class="c1">// ghcore can be used to make queries, etc.</span>
+<span class="nx">ghcore</span> <span class="o">=</span> <span class="nx">returnedObject</span><span class="p">.</span><span class="nx">core</span><span class="p">;</span>
+</code></pre></div>
 <p>Here is an example file:</p>
-
-<pre><code>{
-    "server": {
-        "https":{
-            "key":"{full path to key}",
-            "cert":"{full path to cert}"
-        },
-        "proxy" : false,
-        "maxFilesSize": 2000000,
-        "maxFieldsSize": 2000000,
-        "maxFields": 1000
-    },
-    "crypto": {
-       "secret_passphrase" : "{unique term per project}"
-    },
-    "db": {
-       "type": "mongodb",
-       "host": "mongodb://localhost/{database name}",
-       "shorthost":"localhost",
-       "database": "{database name}",
-       "username": "",
-       "password": "",
-       "defaultPageSize" : "10000",
-       "debug": false
-    },
-    "assets": {
-       "default" : "local",
-       "tmpdir" : "{absolute path to tmp directory}",
-       "engines": {
-            "local":{
-                "path":"{absolute path to public asset folder}",
-                "urlbase":"{full url base to serve files from}"
-            }
-       }
-    },
-    "logger" : {
-       "adapters": [{
-            "type":"console",
-            "application":"{application name}",
-            "machine":"{machine name}"
-       }]
-    },
-    "identities" : {
-        "google" : {
-            "appId" : "{ your google app id }",
-            "secret" : "{ your google secret id }",
-            "scopes" : [ "{ array of scopes you want to authorize }" ],
-            "redirectUrl" : "{ the url you want to redirect to after successful auth, the users token will be appended to this route ex. '/login' entered here will send the user to '/login/googleToken' }"
-        }
-    },
-    "bodyParser" : {
-        "limit" : "5M"
-    }
-}
-</code></pre>
+<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&quot;server&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;https&quot;</span><span class="p">:{</span>
+            <span class="nt">&quot;key&quot;</span><span class="p">:</span><span class="s2">&quot;{full path to key}&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;cert&quot;</span><span class="p">:</span><span class="s2">&quot;{full path to cert}&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;proxy&quot;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;maxFilesSize&quot;</span><span class="p">:</span> <span class="mi">2000000</span><span class="p">,</span>
+        <span class="nt">&quot;maxFieldsSize&quot;</span><span class="p">:</span> <span class="mi">2000000</span><span class="p">,</span>
+        <span class="nt">&quot;maxFields&quot;</span><span class="p">:</span> <span class="mi">1000</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;crypto&quot;</span><span class="p">:</span> <span class="p">{</span>
+       <span class="nt">&quot;secret_passphrase&quot;</span> <span class="p">:</span> <span class="s2">&quot;{unique term per project}&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;db&quot;</span><span class="p">:</span> <span class="p">{</span>
+       <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;mongodb&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;mongodb://localhost/{database name}&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;shorthost&quot;</span><span class="p">:</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;database&quot;</span><span class="p">:</span> <span class="s2">&quot;{database name}&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;defaultPageSize&quot;</span> <span class="p">:</span> <span class="s2">&quot;10000&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;debug&quot;</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;assets&quot;</span><span class="p">:</span> <span class="p">{</span>
+       <span class="nt">&quot;default&quot;</span> <span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;tmpdir&quot;</span> <span class="p">:</span> <span class="s2">&quot;{absolute path to tmp directory}&quot;</span><span class="p">,</span>
+       <span class="nt">&quot;engines&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;local&quot;</span><span class="p">:{</span>
+                <span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="s2">&quot;{absolute path to public asset folder}&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;urlbase&quot;</span><span class="p">:</span><span class="s2">&quot;{full url base to serve files from}&quot;</span>
+            <span class="p">}</span>
+       <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;logger&quot;</span> <span class="p">:</span> <span class="p">{</span>
+       <span class="nt">&quot;adapters&quot;</span><span class="p">:</span> <span class="p">[{</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;console&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;application&quot;</span><span class="p">:</span><span class="s2">&quot;{application name}&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;machine&quot;</span><span class="p">:</span><span class="s2">&quot;{machine name}&quot;</span>
+       <span class="p">}]</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;identities&quot;</span> <span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;google&quot;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;appId&quot;</span> <span class="p">:</span> <span class="s2">&quot;{ your google app id }&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;secret&quot;</span> <span class="p">:</span> <span class="s2">&quot;{ your google secret id }&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;scopes&quot;</span> <span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;{ array of scopes you want to authorize }&quot;</span> <span class="p">],</span>
+            <span class="nt">&quot;redirectUrl&quot;</span> <span class="p">:</span> <span class="s2">&quot;{ the url you want to redirect to after successful auth, the users token will be appended to this route ex. &#39;/login&#39; entered here will send the user to &#39;/login/googleToken&#39; }&quot;</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;bodyParser&quot;</span> <span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;limit&quot;</span> <span class="p">:</span> <span class="s2">&quot;5M&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>

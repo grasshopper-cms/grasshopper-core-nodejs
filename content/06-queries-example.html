@@ -1,43 +1,45 @@
 <p>Query object examples:</p>
 
-<pre><code>{ filters : [{ key : 'fields.label', cmp: '&lt;', value: 'search test' }],
+<p>{ filters : [{ key : &#39;fields.label&#39;, cmp: &#39;&lt;&#39;, value: &#39;search test&#39; }],
   types : [],
   nodes : [],
   options : { limit : 1,
               skip  : 2,
-              distinct : 'fields.label',
-              exclude : ['fields.newColumn']
+              distinct : &#39;fields.label&#39;,
+              exclude : [&#39;fields.newColumn&#39;]
             }
-}
-</code></pre>
+}</p>
 
-<ul>
-  <li>This object would return results  where ‘fields.label’ is less than the value ‘search test.’
-It would limit the result to 1 document and skip the first 2 results.  It would only return documents
-where ‘fields.label’ is a distinct value.  It would also exclude</li>
-</ul>
+<p>/*
+- This object would return results  where &#39;fields.label&#39; is less than the value &#39;search test.&#39;
+  It would limit the result to 1 document and skip the first 2 results.  It would only return documents
+  where &#39;fields.label&#39; is a distinct value.  It would also exclude
+*/</p>
 
-<hr />
+<p>{
+    filters : [key : &#39;fields.slug&#39; , cmp : &#39;equals&#39;, value: &#39;testValue&#39;],
+    types : [&#39;2389vj2jf8r&#39;, &#39;ssjkl932&#39;],
+    options : {include : [&#39;fields.label&#39;, &#39;fields.name&#39;, &#39;fields.description&#39;]}
+}</p>
 
-<pre><code>{ filters : [key : 'fields.slug' , cmp : 'equals', value: 'testValue'],
-types : ['2389vj2jf8r', 'ssjkl932'],
-options : {include : ['fields.label', 'fields.name', 'fields.description']}
-}
-</code></pre>
+<p>/*
+- This object would return results from content types &#39;2389vj2jf8r&#39; and &#39;ssjkl932&#39; where &#39;fields.label&#39;,
+  &#39;fields.name&#39; or &#39;fields.description&#39; match the value &#39;testValue&#39;.
+*/</p>
 
-<ul>
-  <li>This object would return results from content types ‘2389vj2jf8r’ and ‘ssjkl932’ where ‘fields.label’,
-‘fields.name’ or ‘fields.description’ match the value ‘testValue’.</li>
-</ul>
-
-<hr />
-
-<p>{ filters : [key : ‘fields.slug’, cmp : ‘between’, value: [‘exampleValue1’, ‘exampleValue2’] ],
-    nodes : [‘83h7hjks8fhh’],
+<p>{
+    filters : [
+        key : &#39;fields.slug&#39;,
+        cmp : &#39;between&#39;,
+        value: [
+            &#39;exampleValue1&#39;, &#39;exampleValue2&#39;
+            ]
+        ],
+    nodes : [&#39;83h7hjks8fhh&#39;],
     options : {}
-  }</p>
+}</p>
 
-<ul>
-  <li>This object would return content with ‘fields.slug’ value between ‘exampleValue1’ and ‘exampleValue2’
-from node ‘83h7hjks8fhh’.  Note that even though the options object is empty, query executes normally.</li>
-</ul>
+<p>/*
+- This object would return content with &#39;fields.slug&#39; value between &#39;exampleValue1&#39; and &#39;exampleValue2&#39;
+  from node &#39;83h7hjks8fhh&#39;.  Note that even though the options object is empty, query executes normally.
+*/</p>

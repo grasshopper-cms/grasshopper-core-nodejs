@@ -1,4 +1,4 @@
-<h4 id="setting-up-your-development-environment">Setting up your development environment</h4>
+<h4>Setting up your development environment</h4>
 
 <p>If you are doing full stack development on Grasshopper you should setup all projects in the solution to work locally.</p>
 
@@ -10,7 +10,7 @@
 
 <p>More information on the technique using <a href="https://www.npmjs.org/doc/cli/npm-link.html">NPM LINK</a> can be found <a href="https://www.npmjs.org/doc/cli/npm-link.html">here</a>.</p>
 
-<h5 id="before-you-start">Before you start</h5>
+<h5>Before you start</h5>
 
 <p>Make sure that you development machine meets the minimum <a href="documentation.html#requirements">REQUIREMENTS</a></p>
 
@@ -22,23 +22,21 @@
 
 <p>For an example of what this should look like, see <a href="#projectconfiguration">CONFIGURING YOUR PROJECT</a>.</p>
 
-<h5 id="development-server">Development server</h5>
+<h5>Development server</h5>
 
 <p>The <code>grunt server</code> task will start a local express server running the API. It will also start a watch for the files in the <code>admin</code> project. If you save a file then it will be updates and the page will be refreshed.</p>
 
 <p>If you make changes to your local <code>core</code> or <code>api</code> projects. This just restart the node server process to apply your changes.</p>
 
-<h5 id="when-you-finished">When you finished</h5>
+<h5>When you finished</h5>
 
 <p>Once you are have finished your dev work on <code>grasshopper-api</code> or <code>grasshopper-core</code>, you should publish the npm or submit a merge request.</p>
 
 <p>To test the new npm, you should unlink <code>grasshopper-api</code> and/or <code>grasshopper-core</code> and pull the dependency in from npm:</p>
-
-<pre><code>cd ~/workspace/grasshopper-admin/server
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> ~/workspace/grasshopper-admin/server
 npm uninstall grasshopper-api
-npm install --save grasshopper-api@[the newly published version]
-</code></pre>
-
+npm install --save grasshopper-api@<span class="o">[</span>the newly published version<span class="o">]</span>
+</code></pre></div>
 <p>Documentation around removing npm dependencies is available at:</p>
 
 <p><a href="https://www.npmjs.org/doc/cli/npm-uninstall.html">https://www.npmjs.org/doc/cli/npm-uninstall.html</a></p>
