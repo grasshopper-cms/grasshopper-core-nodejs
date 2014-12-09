@@ -65,7 +65,7 @@ Here is an example file:
        "tmpdir" : "{absolute path to tmp directory}",
        "engines": {
             "local":{
-                "path":"{absolute path to public asset folder}",
+                "path":"{absolute path to public asset folder from the root of your comp}",
                 "urlbase":"{full url base to serve files from}"
             }
        }
@@ -86,7 +86,7 @@ Here is an example file:
         }
     },
     "bodyParser" : {
-        "limit" : "5M"
+        "limit" : "5m"
     }
 }
 ```
