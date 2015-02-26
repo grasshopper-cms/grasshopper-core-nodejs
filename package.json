@@ -4,27 +4,27 @@
   "main": "./lib/grasshopper",
   "author": "Travis McHattie",
   "contributors": [
-        {
-            "name": "Travis McHattie"
-        },
-        {
-            "name": "Peter Ajtai"
-        },
-        {
-            "name": "Greg Larrenaga"
-        },
-        {
-            "name": "Cooper Hilscher"
-        },
-        {
-            "name": "Kaija Rayne"
-        },
-        {
-            "name": "Eric Beringer"
-        },
-        {
-            "name": "J.J. Idt"
-        }
+    {
+      "name": "Travis McHattie"
+    },
+    {
+      "name": "Peter Ajtai"
+    },
+    {
+      "name": "Greg Larrenaga"
+    },
+    {
+      "name": "Cooper Hilscher"
+    },
+    {
+      "name": "Kaija Rayne"
+    },
+    {
+      "name": "Eric Beringer"
+    },
+    {
+      "name": "J.J. Idt"
+    }
   ],
   "version": "0.16.11",
   "repository": {
@@ -47,6 +47,7 @@
   "dependencies": {
     "async": "~0.9.0",
     "aws-sdk": "~1.10.0",
+    "bluebird": "^2.9.12",
     "crypto-js": "~3.1.2-1",
     "googleapis": "^0.8.0",
     "lodash": "^2.4.1",
