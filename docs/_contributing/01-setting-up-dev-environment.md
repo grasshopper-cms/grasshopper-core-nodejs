@@ -39,9 +39,11 @@ Once you are have finished your dev work on `grasshopper-api` or `grasshopper-co
 
 To test the new npm, you should unlink `grasshopper-api` and/or `grasshopper-core` and pull the dependency in from npm:
 
-    cd ~/workspace/grasshopper-admin/server
-    npm uninstall grasshopper-api
-    npm install --save grasshopper-api@[the newly published version]
+```bash
+cd ~/workspace/grasshopper-admin/server
+npm uninstall grasshopper-api
+npm install --save grasshopper-api@[the newly published version]
+```
 
 Documentation around removing npm dependencies is available at:
 

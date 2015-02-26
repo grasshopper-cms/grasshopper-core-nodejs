@@ -6,17 +6,18 @@ uuid: assets
 
 ## Configuration
 
-
-    "assets": {
-        "default" : "local",
-        "tmpdir" : "{absolute path to tmp directory}",
-        "engines": {
-            "local":{
-                "path":"{absolute path to public asset folder}",
-                "urlbase":"{full url base to serve files from}"
-            }
+```json
+"assets": {
+    "default" : "local",
+    "tmpdir" : "{absolute path to tmp directory}",
+    "engines": {
+        "local":{
+            "path":"{absolute path to public asset folder}",
+            "urlbase":"{full url base to serve files from}"
         }
     }
+}
+```
 
 * default :
     * This determines which engine will serve assets

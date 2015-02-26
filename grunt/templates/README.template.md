@@ -8,6 +8,8 @@
 
 ### Grasshopper is an everybody friendly, flexible, extensible CMS.
 
+### [Documentation](http://solid-interactive.github.io/grasshopper-core-nodejs/documentation.html)
+
 A CMS for the people, a great experience for developers, users and customers. Use Grasshopper to drastically speed up development for distributed systems. Support your clients better.
 
 ![Create, Share, Present](http://solid-interactive.github.io/grasshopper-core-nodejs/images/create-share-present.png)
@@ -137,5 +139,7 @@ grunt server
 # once finished save the data back to fixtures with:
 grunt data:save
 ```
+
+### [Documentation](http://solid-interactive.github.io/grasshopper-core-nodejs/documentation.html)
 
 _<%= warning + ' Created: ' + grunt.template.today('yyyy-mm-dd hh:MM:ss') %>_
