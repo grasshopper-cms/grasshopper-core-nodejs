@@ -12,7 +12,7 @@ describe('Grasshopper core - testing authentications', function(){
                 .then(function(obj){
                     should.not.exist(obj);
                 })
-                .fail(function(err){
+                .catch(function(err){
                     err.message.should.equal('Your username was invalid.');
                 })
                 .done(function(){
@@ -25,7 +25,7 @@ describe('Grasshopper core - testing authentications', function(){
                 .then(function(obj){
                     should.exist(obj);
                 })
-                .fail(function(err){
+                .catch(function(err){
                     should.not.exist(err);
                 })
                 .done(function(){

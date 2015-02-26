@@ -914,7 +914,7 @@ describe('Grasshopper core - users', function(){
                         .then(function(token){
                             next(should.not.exist(token));
                         })
-                        .fail(function(){
+                        .catch(function(){
                             next();
                         });
                 }
