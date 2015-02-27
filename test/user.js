@@ -28,7 +28,6 @@ describe('Grasshopper core - users', function(){
                         readerToken = token;
                         done();
                     })
-                    .fail(done)
                     .catch(done)
                     .done();
             });

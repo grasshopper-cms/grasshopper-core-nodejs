@@ -38,7 +38,7 @@ describe('Grasshopper utils - googleAuthUrl', function(){
 
             grasshopper.googleAuthUrl()
                 .then()
-                .fail(function(err) {
+                .catch(function(err) {
                     err.should.equal('Cannot Generate URL: Your ghapi config does not have a identities.google object.');
                 })
                 .done(done);
@@ -49,7 +49,7 @@ describe('Grasshopper utils - googleAuthUrl', function(){
 
             grasshopper.googleAuthUrl()
                 .then()
-                .fail(function(err) {
+                .catch(function(err) {
                     err.should.equal('Cannot Generate URL: You need a google app id on your ghapi config.');
                 })
                 .done(done);
@@ -60,7 +60,7 @@ describe('Grasshopper utils - googleAuthUrl', function(){
 
             grasshopper.googleAuthUrl()
                 .then()
-                .fail(function(err) {
+                .catch(function(err) {
                     err.should.equal('Cannot Generate URL: You need a google secret on your ghapi config.');
                 })
                 .done(done);
@@ -71,7 +71,7 @@ describe('Grasshopper utils - googleAuthUrl', function(){
 
             grasshopper.googleAuthUrl()
                 .then()
-                .fail(function(err) {
+                .catch(function(err) {
                     err.should.equal('Cannot Generate URL: You need a google redirectUrl on your ghapi config.');
                 })
                 .done(done);
@@ -82,7 +82,7 @@ describe('Grasshopper utils - googleAuthUrl', function(){
 
             grasshopper.googleAuthUrl()
                 .then()
-                .fail(function(err) {
+                .catch(function(err) {
                     err.should.equal('Cannot Generate URL: You need a google scopes array on your ghapi config.');
                 })
                 .done(done);
@@ -95,7 +95,7 @@ describe('Grasshopper utils - googleAuthUrl', function(){
             .then(function(url) {
                 url.should.be.a.string;
             })
-            .fail(function() {
+            .catch(function() {
                 true.should.equal(false); // it should not get here.
             })
             .done(done);
