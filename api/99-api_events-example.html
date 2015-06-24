@@ -1,0 +1,16 @@
+<p>// Event examples
+grasshopper.core.event.channel(&#39;/type/*&#39;)
+    .on(&#39;save&#39;, function(kontx, next) {
+        memoize.clearCache();
+        next();
+    });
+grasshopper.core.event.channel(&#39;/type/&#39; + constants.ids.recipes)
+    .on(&#39;parse&#39;, function(payload, next) {
+        // do stuff
+        next();
+    });
+grasshopper.core.event.channel(&#39;/system/db&#39;)
+    .on(&#39;start&#39;, function(payload, next){
+        logger.debug(&#39;starting grasshopper&#39;);
+        next();
+    });    </p>
