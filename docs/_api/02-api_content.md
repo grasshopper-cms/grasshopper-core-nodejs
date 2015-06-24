@@ -3,6 +3,8 @@ title: Content
 uuid: api_content
 ---
 
+### [Content](/grasshopper-core-nodejs/documentation.html#content)
+
 #### [content.deleteById]()
 * **Events:** parse, validate, out, delete
 
@@ -15,10 +17,10 @@ uuid: api_content
 #### [content.insert]()
 * **Events:**  parse, validate, out, save
 
-#### [content.query]()
+#### [content.query](/grasshopper-core-nodejs/documentation.html#queries)
 * **Events:** out
 
-#### [content.queryFull]()
+#### [content.queryFull](/grasshopper-core-nodejs/documentation.html#queries)
 * **Events:** out
 
 #### [content.update]()

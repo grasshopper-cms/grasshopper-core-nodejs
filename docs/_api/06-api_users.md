@@ -3,6 +3,8 @@ title: Users
 uuid: api_users
 ---
 
+### [Users](/grasshopper-core-nodejs/documentation.html#users)
+
 #### [users.deleteById]()
 * **Events:** parse, validate, out, delete
 
