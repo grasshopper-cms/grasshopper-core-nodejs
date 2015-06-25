@@ -1,0 +1,73 @@
+---
+layout: api
+title: Grasshopper - Api
+permalink: /api.html
+bodyid: docs
+---
+
+<div id="api-docs">
+    <div id="methods">
+        <div class="languages">
+            <a class="language selected" data-lang="javascript" href="#">Examples</a>
+        </div>
+
+
+{% for post in site.api%}
+    {% if post.uuid contains '-example' %}
+    {% else %}
+        <div class="method" id="{{ post.uuid }}">
+            <div class="method-section clearfix">
+                <div class="method-description">
+                    {{ post.content | markdownify }}
+                </div>
+                <div class="method-example">
+                    {% assign codeExample = post.uuid | append: '-example' %}
+                    {% for exampleSubpost in site.api %}
+                    {% if exampleSubpost.uuid == codeExample %}
+<pre>
+<code class="{{exampleSubpost.language}}">{{exampleSubpost.content | markdownify}}</code>
+</pre>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% for subpost in site[post.uuid]%}
+
+        {% assign codeExample = '' %}
+        {% if subpost.uuid contains '-example' %}
+        {% else %}
+            <div class="method" id="{{ subpost.uuid }}">
+                <div class="method-section clearfix">
+                    <div class="method-description">
+                        {{ subpost.content | markdownify }}
+                    </div>
+                    <div class="method-example">
+            {% assign codeExample = subpost.uuid | append: '-example' %}
+                {% for exampleSubpost in site[post.uuid] %}
+                    {% if exampleSubpost.uuid == codeExample %}
+<pre>
+<code class="{{exampleSubpost.language}}">{{exampleSubpost.content | markdownify}}</code>
+</pre>
+                    {% endif %}
+                {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+
+</div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        hljs.configure({
+            tabReplace: '  ',
+            classPrefix: ''
+        })
+        hljs.initHighlightingOnLoad();
+    });
+</script>

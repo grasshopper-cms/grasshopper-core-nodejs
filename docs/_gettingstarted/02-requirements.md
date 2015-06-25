@@ -18,6 +18,8 @@ The Grasshopper framework uses all of the below software/services:
 
 * [Sass](http://sass-lang.com), Syntactically Awesome Style Sheets.
 
+* [Bundler](http://bundler.io/): Bundler provides a consistent environment for Ruby projects by tracking and installing the exact gems and versions that are needed. 
+
 * Sass Globbing Plugin (used to compile the admin), Sass globbing allows you to import many sass or scss files in a single import statement.
 
 * Sass CSS Importer (used to compile the admin): The Sass CSS Importer allows you to import a CSS file into Sass.
