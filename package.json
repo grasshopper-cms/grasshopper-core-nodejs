@@ -4,29 +4,29 @@
   "main": "./lib/grasshopper",
   "author": "Travis McHattie",
   "contributors": [
-        {
-            "name": "Travis McHattie"
-        },
-        {
-            "name": "Peter Ajtai"
-        },
-        {
-            "name": "Greg Larrenaga"
-        },
-        {
-            "name": "Cooper Hilscher"
-        },
-        {
-            "name": "Kaija Rayne"
-        },
-        {
-            "name": "Eric Beringer"
-        },
-        {
-            "name": "J.J. Idt"
-        }
+    {
+      "name": "Travis McHattie"
+    },
+    {
+      "name": "Peter Ajtai"
+    },
+    {
+      "name": "Greg Larrenaga"
+    },
+    {
+      "name": "Cooper Hilscher"
+    },
+    {
+      "name": "Kaija Rayne"
+    },
+    {
+      "name": "Eric Beringer"
+    },
+    {
+      "name": "J.J. Idt"
+    }
   ],
-  "version": "0.16.14",
+  "version": "0.16.17",
   "repository": {
     "type": "git",
     "url": "https://github.com/Solid-Interactive/grasshopper-core-nodejs.git"
@@ -47,6 +47,7 @@
   "dependencies": {
     "async": "~0.9.0",
     "aws-sdk": "~1.10.0",
+    "bluebird": "^2.9.30",
     "crypto-js": "~3.1.2-1",
     "googleapis": "^0.8.0",
     "lodash": "^2.4.1",
@@ -78,6 +79,7 @@
     "mocha": "~1.12.1",
     "mongodb": "~1.3.19",
     "nodelint": "~0.6.2",
+    "pre-commit": "^1.0.10",
     "uglify-js": "1.2.x",
     "validator": "~3.5.1"
   },
@@ -90,6 +92,7 @@
     ]
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "jshint": "(command -v jshint >/dev/null 2>&1) || npm install -g jshint; jshint app/ --exclude-path .jshintignore"
   }
 }
