@@ -539,6 +539,8 @@ a JSON config file and use it as the options object as follows:</p>
 <li><em><a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region">region</a></em>: The region to send service requests to</li>
 <li><em>bucket</em>: Buckets partition the namespace of objects stored in Amazon S3 at the top level</li>
 <li><em>urlbase</em>: The base URL that will be serving the files (could be your own or amazon&#39;s)</li>
+<li><em>assetsDir</em>: A prefix (folder) to add to your s3 keys. The keys are the node id combined with the file name.</li>
+<li><em>archiveDeletionsTo</em>: A folder to move items to instead of deleting them. Impacts individual asset deletions and node deletions. If falsey, then items will really be deleted instead of just moved.</li>
 </ul></li>
 </ul></li>
 <li>IMPORTANT : Each defined engine will run (saving, updating, etc), but the engine set to default will serve the files.</li>
