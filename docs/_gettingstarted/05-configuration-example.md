@@ -45,6 +45,8 @@ Definitions for all possible config values
             * *[region](http://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region)*: The region to send service requests to
             * *bucket*: Buckets partition the namespace of objects stored in Amazon S3 at the top level
             * *urlbase*: The base URL that will be serving the files (could be your own or amazon's)
+            * *assetsDir*: A prefix (folder) to add to your s3 keys. The keys are the node id combined with the file name.
+            * *archiveDeletionsTo*: A folder to move items to instead of deleting them. Impacts individual asset deletions and node deletions. If falsey, then items will really be deleted instead of just moved.
     * IMPORTANT : Each defined engine will run (saving, updating, etc), but the engine set to default will serve the files.
 
 * identities (optional)
