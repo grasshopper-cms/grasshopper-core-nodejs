@@ -484,6 +484,38 @@ describe('Grasshopper core - content', function(){
                     .done();
             });
         });
+
+        describe('like (%) operator', function() {
+            it ('accepts a regular expression as a value', function (done) {
+                grasshopper.request(tokens.globalAdminToken).content.query({
+                    filters: [{ key: 'fields.label', cmp: '%', value: /test(1|2)/ }]
+                }).then(function (results) {
+                    results.should.be.ok;
+                    results.total.should.equal(2);
+                    done();
+                })
+                .fail(done)
+                .catch(done)
+                .done();
+            });
+
+            it ('should apply a case insensitive search when a string is supplied as a value', function (done) {
+                grasshopper.request(tokens.globalAdminToken).content.query({
+                    filters : [{key : 'fields.label', cmp : '%', value : 'TEST1'}]
+                }).then(function (results) {
+                    results.should.be.ok;
+                    results.total.should.equal(1);
+                    done();
+                })
+                .fail(done)
+                .catch(done)
+                .done();
+            });
+        });
+
+        describe('or query', function() {
+
+        });
     });
 
     function createGetToken(username, password, storage) {
