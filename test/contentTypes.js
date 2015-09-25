@@ -5,8 +5,6 @@ var should = require('chai').should(),
     path = require('path'),
     start = require('./_start');
 
-start(grasshopper).then(run);
-
 describe('Grasshopper core - contentTypes', function () {
 
     var testContentTypeId = '524362aa56c02c0703000001',
@@ -15,19 +13,22 @@ describe('Grasshopper core - contentTypes', function () {
         adminToken = '',
         testCreatedContentTypeId = '';
 
-    before(function (done) {
-        grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
-            .then(function (token) {
-                adminToken = token;
-                grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' })
-                    .then(function (token) {
-                        readerToken = token;
-                        done();
-                    },
-                    function (err) {
-                        console.log(err);
-                    });
-            });
+    before(function(done) {
+        this.timeout(10000);
+        start(grasshopper).then(function() {
+            grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
+                .then(function (token) {
+                    adminToken = token;
+                    grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' })
+                        .then(function (token) {
+                            readerToken = token;
+                            done();
+                        },
+                            function (err) {
+                                console.log(err);
+                            });
+                });
+        });
     });
 
     describe('getById', function () {
@@ -964,6 +965,5 @@ describe('Grasshopper core - contentTypes', function () {
 });
 
 function doneError (done, err) {
-    'use strict';
     done(err);
 }

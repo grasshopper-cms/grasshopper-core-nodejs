@@ -5,8 +5,6 @@ var grasshopper = require('../lib/grasshopper').init(require('./fixtures/config'
 
 require('chai').should();
 
-process.nextTick(run);
-
 function getConfig() {
     return {
         identities : {

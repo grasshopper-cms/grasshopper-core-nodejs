@@ -7,8 +7,6 @@ var chai = require('chai'),
     async = require('async'),
     start = require('./_start');
 
-start(grasshopper).then(run);
-
 describe('Grasshopper core - users', function(){
 
     var
@@ -23,19 +21,21 @@ describe('Grasshopper core - users', function(){
         testCreatedUserIdCustomVerb = '';
 
     before(function(done){
-
-        grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
-            .then(function(token){
-                adminToken = token;
-                grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' })
-                    .then(function(token){
-                        readerToken = token;
-                        done();
-                    })
-                    .fail(done)
-                    .catch(done)
-                    .done();
-            });
+        this.timeout(10000);
+        start(grasshopper).then(function() {
+            grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
+                .then(function(token){
+                    adminToken = token;
+                    grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' })
+                        .then(function(token){
+                            readerToken = token;
+                            done();
+                        })
+                        .fail(done)
+                        .catch(done)
+                        .done();
+                });
+        });
     });
 
     describe('Get a user by email', function(){

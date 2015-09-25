@@ -5,8 +5,6 @@ var should = require('chai').should(),
     db = require('../lib/db'),
     start = require('./_start');
 
-start(grasshopper).then(run);
-
 describe('Grasshopper core - testing tokens', function(){
     var adminToken = '',
         readerToken = '',
@@ -14,9 +12,9 @@ describe('Grasshopper core - testing tokens', function(){
         readerToken3 = '',
         userId = '5245ce1d56c02c066b000001';
 
-    before(function(done){
-
-
+    before(function(done) {
+        this.timeout(10000);
+        start(grasshopper).then(function() {
             grasshopper.auth('basic', { username: 'admin', password: 'TestPassword' }).then(function(token){
                 adminToken = token;
                 grasshopper.auth('basic', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){
@@ -30,7 +28,7 @@ describe('Grasshopper core - testing tokens', function(){
                     });
                 });
             });
-
+        });
     });
 
     describe('tokens.deleteById', function(){

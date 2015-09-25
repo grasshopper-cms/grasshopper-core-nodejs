@@ -4,8 +4,6 @@ var should = require('chai').should(),
     config = require('../lib/config'),
     path = require('path');
 
-process.nextTick(run);
-
 describe('config', function(){
 
     after(function(){

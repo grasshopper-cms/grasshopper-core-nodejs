@@ -5,17 +5,17 @@ var should = require('chai').should(),
     _ = require('lodash'),
     start = require('./_start');
 
-start(grasshopper).then(run);
-
 describe('Grasshopper core - testing event events', function(){
 
+    before(function(done) {
+        this.timeout(10000);
+        start(grasshopper).then(function() {
+            grasshopper.event.channel('/system/db').on('start', function(payload, next){
+                next();
+            });
 
-    before(function(done){
-        grasshopper.event.channel('/system/db').on('start', function(payload, next){
-            next();
+            done();
         });
-
-        done();
     });
 
     describe('Content Events', function(){

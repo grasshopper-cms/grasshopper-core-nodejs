@@ -1,8 +1,6 @@
 'use strict';
 require('chai').should();
 
-process.nextTick(run);
-
 describe('Grasshopper utils - version', function(){
 
     it('check and see if we can get the current grasshopper version', function(){

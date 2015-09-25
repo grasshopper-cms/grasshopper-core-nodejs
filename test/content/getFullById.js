@@ -4,8 +4,6 @@ var grasshopper = require('../../lib/grasshopper').init(require('../fixtures/con
     path = require('path'),
     start = require('../_start');
 
-start(grasshopper).then(run);
-
 describe('Grasshopper core - content', function(){
 
     var
@@ -89,16 +87,19 @@ describe('Grasshopper core - content', function(){
             ]
         };
 
-    before(function (done) {
-        grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
-            .then(function (token) {
-                adminToken = token;
-                grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' })
-                    .then(function (token) {
-                        readerToken = token;
-                        done(); })
-                    .catch(done);
-            });
+    before(function(done) {
+        this.timeout(10000);
+        start(grasshopper).then(function() {
+            grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
+                .then(function (token) {
+                    adminToken = token;
+                    grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' })
+                        .then(function (token) {
+                            readerToken = token;
+                            done(); })
+                        .catch(done);
+                });
+        });
     });
 
     describe('getFullById', function() {

@@ -1,7 +1,7 @@
+'use strict';
 var should = require('chai').should();
 
 describe('Grasshopper core - content', function(){
-    'use strict';
 
     var async = require('async'),
         path = require('path'),

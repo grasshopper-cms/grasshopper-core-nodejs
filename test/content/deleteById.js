@@ -6,8 +6,6 @@ var should = require('chai').should(),
     grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
     start = require('./../_start');
 
-start(grasshopper).then(run);
-
 describe('Grasshopper core - content', function(){
 
     var
@@ -25,12 +23,14 @@ describe('Grasshopper core - content', function(){
         ],
         parallelTokenRequests = [];
 
-    before(function(done){
-        _.each(tokenRequests, function(theRequest) {
-            parallelTokenRequests.push(createGetToken(theRequest[0], theRequest[1], theRequest[2]).closure);
+    before(function(done) {
+        this.timeout(10000);
+        start(grasshopper).then(function() {
+            _.each(tokenRequests, function(theRequest) {
+                parallelTokenRequests.push(createGetToken(theRequest[0], theRequest[1], theRequest[2]).closure);
+            });
+            async.parallel(parallelTokenRequests, done);
         });
-        async.parallel(parallelTokenRequests, done);
-
     });
 
     describe('deleteById', function() {

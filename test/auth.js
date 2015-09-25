@@ -4,11 +4,13 @@ var should = require('chai').should(),
     grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
     start = require('./_start');
 
-start(grasshopper)
-    .then(run);
 
 describe('Grasshopper core - testing authentications', function(){
 
+    before(function(done) {
+        this.timeout(10000);
+        start(grasshopper).then(function() { done(); });
+    });
 
     describe('Basic Authentication', function() {
         it('not authenticate because user doesn\'t exist', function(done) {

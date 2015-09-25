@@ -14,58 +14,61 @@ var should = require('chai').should(),
 
 
 
-start(grasshopper)
-    .then(function() {
-        async.parallel(
-            [
-                function(cb){
-                    grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' }).then(function(token){
-                        globalAdminToken = token;
-                        cb();
-                    }).catch(function(e) {
-                        console.log('erroer',e);
-                    });
-                },
-                function(cb){
-                    grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){
-                        globalReaderToken = token;
-                        cb();
-                    }).catch(function(e) {
-                        console.log('erroer',e);
-                    });
-                },
-                function(cb){
-                    grasshopper.auth('username', { username: 'apitestusereditor', password: 'TestPassword' }).then(function(token){
-                        globalEditorToken = token;
-                        cb();
-                    }).catch(function(e) {
-                        console.log('erroer',e);
-                    });
-                },
-                function(cb){
-                    grasshopper.auth('username', { username: 'apitestuserreader_1', password: 'TestPassword' }).then(function(token){
-                        nodeEditorToken = token;
-                        cb();
-                    }).catch(function(e) {
-                        console.log('erroer',e);
-                    });
-                },
-                function(cb){
-                    grasshopper.auth('username', { username: 'apitestusereditor_restricted', password: 'TestPassword' }).then(function(token){
-                        console.log('ok');
-                        restrictedEditorToken = token;
-                        cb();
-                    }).catch(function(e) {
-                        console.log('erroer',e);
-                    });
-                }
-            ],function(){
-                run();
-            }
-        );
-    });
-
 describe('Grasshopper core - testing assets', function(){
+    before(function(run) {
+        this.timeout(10000);
+        start(grasshopper)
+            .then(function() {
+                async.parallel(
+                    [
+                        function(cb){
+                            grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' }).then(function(token){
+                                globalAdminToken = token;
+                                cb();
+                            }).catch(function(e) {
+                                console.log('erroer',e);
+                            });
+                        },
+                        function(cb){
+                            grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){
+                                globalReaderToken = token;
+                                cb();
+                            }).catch(function(e) {
+                                console.log('erroer',e);
+                            });
+                        },
+                        function(cb){
+                            grasshopper.auth('username', { username: 'apitestusereditor', password: 'TestPassword' }).then(function(token){
+                                globalEditorToken = token;
+                                cb();
+                            }).catch(function(e) {
+                                console.log('erroer',e);
+                            });
+                        },
+                        function(cb){
+                            grasshopper.auth('username', { username: 'apitestuserreader_1', password: 'TestPassword' }).then(function(token){
+                                nodeEditorToken = token;
+                                cb();
+                            }).catch(function(e) {
+                                console.log('erroer',e);
+                            });
+                        },
+                        function(cb){
+                            grasshopper.auth('username', { username: 'apitestusereditor_restricted', password: 'TestPassword' }).then(function(token){
+                                console.log('ok');
+                                restrictedEditorToken = token;
+                                cb();
+                            }).catch(function(e) {
+                                console.log('erroer',e);
+                            });
+                        }
+                    ],function(){
+                        run();
+                    }
+                );
+            });
+
+    });
 
     describe('create a new asset in a node', function() {
         it('post test fixtures', function(done) {

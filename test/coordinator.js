@@ -2,8 +2,6 @@
 var should = require('chai').should(),
     coordinator = require('../lib/runners/coordinator');
 
-process.nextTick(run);
-
 describe('Grasshopper core - coordinator', function(){
 
 

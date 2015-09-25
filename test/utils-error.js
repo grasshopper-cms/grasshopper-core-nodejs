@@ -1,8 +1,6 @@
 'use strict';
 require('chai').should();
 
-process.nextTick(run);
-
 describe('Grasshopper utilts - error', function(){
 
     var err = require('../lib/utils/error');
