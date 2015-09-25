@@ -1,12 +1,14 @@
-var should = require('chai').should();
+'use strict';
+var should = require('chai').should(),
+    path = require('path'),
+    grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+    db = require('../lib/db'),
+    start = require('./_start');
+
+start(grasshopper).then(run);
 
 describe('Grasshopper core - testing tokens', function(){
-    'use strict';
-
-    var path = require('path'),
-        grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
-        db = require('../lib/db'),
-        adminToken = '',
+    var adminToken = '',
         readerToken = '',
         readerToken2 = '',
         readerToken3 = '',

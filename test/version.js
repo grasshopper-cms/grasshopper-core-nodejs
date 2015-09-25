@@ -1,7 +1,9 @@
+'use strict';
 require('chai').should();
 
+process.nextTick(run);
+
 describe('Grasshopper utils - version', function(){
-    'use strict';
 
     it('check and see if we can get the current grasshopper version', function(){
         var grasshopper = require('../lib/grasshopper');

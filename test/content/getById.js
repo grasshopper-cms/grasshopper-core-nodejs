@@ -1,12 +1,16 @@
-var should = require('chai').should();
+'use strict';
+var should = require('chai').should(),
+    async = require('async'),
+    path = require('path'),
+    _ = require('lodash'),
+    grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
+    start = require('../_start');
+
+start(grasshopper).then(run);
 
 describe('Grasshopper core - content', function(){
-    'use strict';
 
-    var async = require('async'),
-        path = require('path'),
-        _ = require('lodash'),
-        grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
+        var
         testContentId  = '5261781556c02c072a000007',
         restrictedContentId = '5254908d56c02c076e000001',
         tokens = {},

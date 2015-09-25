@@ -1,10 +1,14 @@
+'use strict';
 var should = require('chai').should();
+var grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
+    path = require('path'),
+    start = require('../_start');
+
+start(grasshopper).then(run);
 
 describe('Grasshopper core - content', function(){
-    'use strict';
-    
-    var grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
-        path = require('path'),
+
+    var
         readerToken = '',
         adminToken = '',
         expectedImage = {

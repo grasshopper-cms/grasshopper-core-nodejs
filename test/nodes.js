@@ -1,13 +1,17 @@
+'use strict';
 var should = require('chai').should(),
     async = require('async'),
-    path = require('path');
+    path = require('path'),
+    async = require('async'),
+    fs = require('fs'),
+    grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+    start = require('./_start');
+
+start(grasshopper).then(run);
 
 describe('Grasshopper core - testing nodes', function(){
-    'use strict';
 
-    var async = require('async'),
-        fs = require('fs'),
-        grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+    var
         globalAdminToken  = '',
         globalReaderToken = '',
         globalEditorToken = '',

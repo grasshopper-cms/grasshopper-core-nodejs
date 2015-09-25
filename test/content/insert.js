@@ -1,12 +1,15 @@
+'use strict';
 var should = require('chai').should();
+var async = require('async'),
+    path = require('path'),
+    _ = require('lodash'),
+    grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
+    start = require('../_start');
+
+start(grasshopper).then(run);
 
 describe('Grasshopper core - content', function(){
-    'use strict';
-
-    var async = require('async'),
-        path = require('path'),
-        _ = require('lodash'),
-        grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
+    var
         tokens = {},
         tokenRequests = [
             ['apitestuseradmin', 'TestPassword', 'globalAdminToken'],

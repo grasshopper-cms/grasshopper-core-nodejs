@@ -1,10 +1,14 @@
-var should = require('chai').should();
+'use strict';
+var should = require('chai').should(),
+    path = require('path'),
+    grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+    start = require('./_start');
+
+start(grasshopper).then(run);
+
 
 describe('Grasshopper core - testing channels', function(){
-    'use strict';
 
-    var path = require('path'),
-        grasshopper = require('../lib/grasshopper').init(require('./fixtures/config'));
 
     before(function(done){
         grasshopper.event.channel('/system/*').on('error', function(payload, next){

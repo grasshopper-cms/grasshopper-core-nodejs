@@ -5,6 +5,8 @@ var grasshopper = require('../../lib/grasshopper'),
 
 require('chai').should();
 
+process.nextTick(run);
+
 describe('Query builder', function() {
 
     it('find by id', function() {

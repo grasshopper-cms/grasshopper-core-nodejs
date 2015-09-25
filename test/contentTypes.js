@@ -1,12 +1,15 @@
+'use strict';
 var should = require('chai').should(),
-    _ = require('lodash');
+    _ = require('lodash'),
+    grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+    path = require('path'),
+    start = require('./_start');
+
+start(grasshopper).then(run);
 
 describe('Grasshopper core - contentTypes', function () {
-    'use strict';
 
-    var grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
-        path = require('path'),
-        testContentTypeId = '524362aa56c02c0703000001',
+    var testContentTypeId = '524362aa56c02c0703000001',
         anotherTestContentTypeId = '524362aa56c02c0703000123',
         readerToken = '',
         adminToken = '',

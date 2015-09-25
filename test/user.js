@@ -1,13 +1,17 @@
+'use strict';
 var chai = require('chai'),
     config = require('../lib/config'),
-    should = require('chai').should();
+    should = require('chai').should(),
+    grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+    path = require('path'),
+    async = require('async'),
+    start = require('./_start');
+
+start(grasshopper).then(run);
 
 describe('Grasshopper core - users', function(){
-    'use strict';
 
-    var grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
-        path = require('path'),
-        async = require('async'),
+    var
         testUserId  = '5245ce1d56c02c066b000001',
         adminToken = '',
         admin2UserId = '5246e73d56c02c0744000004',

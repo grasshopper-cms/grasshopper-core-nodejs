@@ -1,10 +1,13 @@
-require('chai').should();
+'use strict';
 
 var grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
     config;
 
+require('chai').should();
+
+process.nextTick(run);
+
 function getConfig() {
-    'use strict';
     return {
         identities : {
             google : {
@@ -24,7 +27,6 @@ function getConfig() {
 
 
 describe('Grasshopper utils - googleAuthUrl', function(){
-    'use strict';
 
     beforeEach(function() {
         grasshopper.config.init(getConfig());
