@@ -92,7 +92,7 @@
     ]
   },
   "scripts": {
-    "test": "jshint && mocha --color -R spec --recursive test",
+    "test": "mocha --color -R spec --recursive test",
     "jshint": "(command -v jshint >/dev/null 2>&1) || npm install -g jshint; jshint app/ --exclude-path .jshintignore"
   }
 }
