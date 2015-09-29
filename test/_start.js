@@ -14,7 +14,6 @@ function start(grasshopper) {
 
         // TODO: create way of stopping gh - or having inti call system/db start again
         if (running) {
-            console.lgo('resolve');
            resolve();
         } else {
             grasshopper.event.channel('/system/*').on('error', function(payload, next){
