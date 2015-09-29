@@ -5,11 +5,10 @@ node_js:
   - "0.12"
 services:
   - mongodb
+sudo: false
 before_script:
   - npm install -g mocha
   - npm install -g grunt-cli
-sudo:
-  - false
 notifications:
   email:
     - travis.mchattie@thinksolid.com
