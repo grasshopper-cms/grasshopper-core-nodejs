@@ -284,7 +284,7 @@ describe('Grasshopper core - contentTypes', function () {
                     .done();
             });
 
-            it('should turn an empty fields object into an arry, so it does not break everything says Kaija', function(done) {
+            it('should turn an empty fields object into an array, so it does not break everything says Kaija', function(done) {
                 var newContentType = {
                     label: 'newtestsuitecontent',
                     fields: {},
@@ -904,26 +904,6 @@ describe('Grasshopper core - contentTypes', function () {
         });
 
     describe('deleteById', function () {
-            before(function (done) {
-                grasshopper.request(adminToken).content.insert({
-                    "label": "Future deletee",
-                    "type": testCreatedContentTypeId,
-                    "fields": {
-                        "testfield": "test value"
-                    },
-                    "node": {
-                        "_id": '526d5179966a883540000006',
-                        "displayOrder": 1
-                    }
-                }).then(
-                    function (payload) {
-                        done();
-                    },
-                    function (err) {
-                        done();
-                    }
-                ).done();
-            });
 
             it('should return a 403 because user does not have permissions to access content types', function (done) {
                 grasshopper.request(readerToken)
@@ -960,9 +940,11 @@ describe('Grasshopper core - contentTypes', function () {
                     .catch(done)
                     .done();
             });
+
+            xit('should delete associated content when deleting a content type', function() {});
+
+            xit('should delete content that has embedded the deleted content type', function() {});
         });
-
-
 });
 
 function doneError (done, err) {
