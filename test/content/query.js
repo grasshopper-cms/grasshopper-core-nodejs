@@ -283,7 +283,7 @@ describe('Grasshopper core - content', function(){
             ).done(done);
         });
 
-        it('return valid results even if sortBy is not valid', function(done) {
+        it('cast typeof sortBy to string if not a string and return unsorted, yet full results', function(done) {
             grasshopper.request(tokens.globalReaderToken).content.query(query5)
                 .then(function(payload){
                     payload.results.length.should.equal(1);
