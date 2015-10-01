@@ -96,9 +96,9 @@ describe('Grasshopper utils - googleAuthUrl', function(){
                 url.should.be.a.string;
             })
             .fail(function() {
+                console.log("FAIL SECTION");
                 true.should.equal(false); // it should not get here.
             })
             .done(done);
     });
 });
-
