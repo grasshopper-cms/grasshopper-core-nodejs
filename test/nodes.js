@@ -114,7 +114,7 @@ describe('Grasshopper core - testing nodes', function(){
                 .then(doneError.bind(null, done))
                 .fail(function(err){
                     err.code.should.equal(400);
-                    err.message.should.equal('"label" is a required field.');
+                    err.message.should.equal('Path \`label\` is required.');
                     done();
                 })
                 .catch(doneError.bind(null, done))
