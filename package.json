@@ -24,9 +24,15 @@
     },
     {
       "name": "J.J. Idt"
+    },
+    {
+        "name": "Luke Chinworth"
+    },
+    {
+        "name": "Mike Mostachetti"
     }
   ],
-  "version": "0.18.2",
+  "version": "0.18.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/Solid-Interactive/grasshopper-core-nodejs.git"
