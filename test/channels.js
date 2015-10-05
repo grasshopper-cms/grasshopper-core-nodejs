@@ -1,21 +1,14 @@
-var should = require('chai').should();
+'use strict';
+var should = require('chai').should(),
+    path = require('path'),
+    grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+    start = require('./_start');
 
 describe('Grasshopper core - testing channels', function(){
-    'use strict';
 
-    var path = require('path'),
-        grasshopper = require('../lib/grasshopper').init(require('./fixtures/config'));
-
-    before(function(done){
-        grasshopper.event.channel('/system/*').on('error', function(payload, next){
-            console.log(payload);
-        });
-
-        grasshopper.event.channel('/system/db').on('start', function(payload, next){
-
-            next();
-        });
-        done();
+    before(function(done) {
+        this.timeout(10000);
+        start(grasshopper).then(function() { done(); });
     });
 
     describe('Registering channels', function(){

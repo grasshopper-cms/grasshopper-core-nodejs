@@ -141,8 +141,8 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 * 0.12.2 - 2014-06-11 - [patch](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.12.2_2014-06-11.md)
 * 0.13.0 - 2014-06-24 - [minor](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.0_2014-06-24.md)
 * 0.13.1 - 2014-06-24 - [patch](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.1_2014-06-24.md)
-* 0.13.2 - 2014-06-25 - [patch](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.2_2014-06-25.md)
 * 0.13.2 - 2014-06-24 - [patch](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.2_2014-06-24.md)
+* 0.13.2 - 2014-06-25 - [patch](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.2_2014-06-25.md)
 * 0.13.3 - 2014-06-26 - [patch](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.3_2014-06-26.md)
 * 0.13.4 - 2014-06-30 - [patch](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.4_2014-06-30.md)
 * 0.13.5 - 2014-07-01 - [patch](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.13.5_2014-07-01.md)
@@ -212,6 +212,7 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 * 0.17.2 - 2015-08-10 - [](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.17.2_2015-08-10.md)
 * 0.18.0 - 2015-08-17 - [minor](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.18.0_2015-08-17.md)
 * 0.18.2 - 2015-08-20 - [](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.18.2_2015-08-20.md)
+* 0.18.3 - 2015-10-02 - [patch](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.18.3_2015-10-02.md)
 
 
 ## Contributors (`git shortlog -s -n`)
@@ -225,6 +226,7 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 * Eric Beringer
 * Luke Chinworth
 * JJ Idt
+* Mike Mostachetti
 * Valentine Nesterov
 * Jonathan Waltner
 
@@ -252,4 +254,4 @@ grunt data:save
 
 ### [Documentation](http://solid-interactive.github.io/grasshopper-core-nodejs/documentation.html)
 
-_Compiled file. Do not modify directly. Created: 2015-08-20 12:31:46_
+_Compiled file. Do not modify directly. Created: 2015-10-02 10:05:41_

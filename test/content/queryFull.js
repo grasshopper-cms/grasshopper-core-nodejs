@@ -1,12 +1,14 @@
+'use strict';
 var should = require('chai').should();
-
-describe('Grasshopper core - content', function(){
-    'use strict';
-
     var async = require('async'),
         path = require('path'),
         _ = require('lodash'),
         grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
+        start = require('../_start');
+
+describe('Grasshopper core - content', function(){
+
+    var
         tokens = {},
         tokenRequests = [
             ['admin', 'TestPassword', 'globalAdminToken']
@@ -14,10 +16,13 @@ describe('Grasshopper core - content', function(){
         parallelTokenRequests = [];
 
     before(function(done){
-        _.each(tokenRequests, function(theRequest) {
-            parallelTokenRequests.push(createGetToken(theRequest[0], theRequest[1], theRequest[2]).closure);
+        this.timeout(10000);
+        start(grasshopper).then(function() {
+            _.each(tokenRequests, function(theRequest) {
+                parallelTokenRequests.push(createGetToken(theRequest[0], theRequest[1], theRequest[2]).closure);
+            });
+            async.parallel(parallelTokenRequests, done);
         });
-        async.parallel(parallelTokenRequests, done);
     });
 
     describe('query', function() {

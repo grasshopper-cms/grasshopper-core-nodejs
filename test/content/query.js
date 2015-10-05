@@ -1,12 +1,14 @@
+'use strict';
 var should = require('chai').should();
-
-describe('Grasshopper core - content', function(){
-    'use strict';
-
     var async = require('async'),
         path = require('path'),
         _ = require('lodash'),
         grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
+        start = require('../_start');
+
+describe('Grasshopper core - content', function(){
+
+    var
         tokens = {},
         tokenRequests = [
             ['apitestuseradmin', 'TestPassword', 'globalAdminToken'],
@@ -19,11 +21,14 @@ describe('Grasshopper core - content', function(){
         ],
         parallelTokenRequests = [];
 
-    before(function(done){
-        _.each(tokenRequests, function(theRequest) {
-            parallelTokenRequests.push(createGetToken(theRequest[0], theRequest[1], theRequest[2]).closure);
+    before(function(done) {
+        this.timeout(10000);
+        start(grasshopper).then(function() {
+            _.each(tokenRequests, function(theRequest) {
+                parallelTokenRequests.push(createGetToken(theRequest[0], theRequest[1], theRequest[2]).closure);
+            });
+            async.parallel(parallelTokenRequests, insertContent.bind(null, done));
         });
-        async.parallel(parallelTokenRequests, insertContent.bind(null, done));
 
     });
 
@@ -278,7 +283,7 @@ describe('Grasshopper core - content', function(){
             ).done(done);
         });
 
-        it('return valid results even if sortBy is not valid', function(done) {
+        it('cast typeof sortBy to string if not a string and return unsorted, yet full results', function(done) {
             grasshopper.request(tokens.globalReaderToken).content.query(query5)
                 .then(function(payload){
                     payload.results.length.should.equal(1);

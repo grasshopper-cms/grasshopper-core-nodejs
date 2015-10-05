@@ -1,30 +1,34 @@
+'use strict';
 var should = require('chai').should(),
-    _ = require('lodash');
+    _ = require('lodash'),
+    grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+    path = require('path'),
+    start = require('./_start');
 
 describe('Grasshopper core - contentTypes', function () {
-    'use strict';
 
-    var grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
-        path = require('path'),
-        testContentTypeId = '524362aa56c02c0703000001',
+    var testContentTypeId = '524362aa56c02c0703000001',
         anotherTestContentTypeId = '524362aa56c02c0703000123',
         readerToken = '',
         adminToken = '',
         testCreatedContentTypeId = '';
 
-    before(function (done) {
-        grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
-            .then(function (token) {
-                adminToken = token;
-                grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' })
-                    .then(function (token) {
-                        readerToken = token;
-                        done();
-                    },
-                    function (err) {
-                        console.log(err);
-                    });
-            });
+    before(function(done) {
+        this.timeout(10000);
+        start(grasshopper).then(function() {
+            grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
+                .then(function (token) {
+                    adminToken = token;
+                    grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' })
+                        .then(function (token) {
+                            readerToken = token;
+                            done();
+                        },
+                            function (err) {
+                                console.log(err);
+                            });
+                });
+        });
     });
 
     describe('getById', function () {
@@ -251,7 +255,7 @@ describe('Grasshopper core - contentTypes', function () {
                 .then(doneError.bind(null, done))
                 .fail(function (err) {
                     err.code.should.equal(400);
-                    err.message.should.equal('"label" is a required field.');
+                    err.message.should.equal('Path `label` is required.');
                     done();
                 })
                 .catch(doneError.bind(null, done))
@@ -277,11 +281,10 @@ describe('Grasshopper core - contentTypes', function () {
                         err.message.should.equal('Invalid Field Object');
                         done();
                     })
-                    .catch(doneError.bind(null, done))
                     .done();
             });
 
-            it('should turn an empty fields object into an arry, so it does not break everything says Kaija', function(done) {
+            it('should turn an empty fields object into an array, so it does not break everything says Kaija', function(done) {
                 var newContentType = {
                     label: 'newtestsuitecontent',
                     fields: {},
@@ -427,23 +430,24 @@ describe('Grasshopper core - contentTypes', function () {
     });
 
     describe('update', function () {
-        before(function (done) {
-            grasshopper.request(adminToken).content.insert({
-                meta: {
-                    type: testCreatedContentTypeId,
-                    node: '526d5179966a883540000006',
-                    labelfield: 'label'
-                },
-                fields: {
-                    label: 'Generated title',
-                    testfield: 'testtest',
-                    alphanumfield: 'tes123fdsfafsdafdsafsdafasfdsaest'
-                }
-            }).then(
-                function () {
-                    done();
-                });
-        });
+        // TODO: what type is this? it is error things out, so commented out until a type id is added
+        //before(function (done) {
+        //    grasshopper.request(adminToken).content.insert({
+        //        meta: {
+        //            type: testCreatedContentTypeId,
+        //            node: '526d5179966a883540000006',
+        //            labelfield: 'label'
+        //        },
+        //        fields: {
+        //            label: 'Generated title',
+        //            testfield: 'testtest',
+        //            alphanumfield: 'tes123fdsfafsdafdsafsdafasfdsaest'
+        //        }
+        //    }).then(
+        //        function () {
+        //            done();
+        //        });
+        //});
 
         it('should return a 403 because user does not have permissions to access users', function (done) {
             var newContentType = {
@@ -603,7 +607,7 @@ describe('Grasshopper core - contentTypes', function () {
                         },
                         "meta": {
                             "node": "53cece8de1c9ff0b00e6b4a3",
-                            "type": createdContentType._id,
+                            "type": createdContentType._id.toString(),
                             "labelfield": "title",
                             "typelabel": "new test content type",
                             "created": "2014-08-11T19:24:54.138Z",
@@ -636,175 +640,181 @@ describe('Grasshopper core - contentTypes', function () {
 
             });
 
+        xit('should update the labelfield when the id of the contents contentType\'s first field is changed', function() {
+
+        });
+
         it('should update content field ids on embedded content if a contenttype field id is changed on an embedded type.', function (done) {
-                var originalId = "origId",
-                    typeToEmbed = {
-                        "label": "cooperembeddeep",
-                        "fields": [
-                            {
-                                "dataType": "string",
-                                "defaultValue": "",
-                                "_id": "title",
-                                "validation": [],
-                                "type": "textbox",
-                                "options": false,
-                                "min": 1,
-                                "max": 1,
-                                "label": "Title"
-                            },
-                            {
-                                "dataType": "date",
-                                "_id": "date",
-                                "validation": [],
-                                "type": "date",
-                                "options": false,
-                                "min": 1,
-                                "max": 1,
-                                "label": "date"
-                            }
-                        ]
-                    },
-                    typeWithEmbed = {
-                        "label": "cooperembed",
-                        "fields": [
-                            {
-                                "dataType": "string",
-                                "defaultValue": "",
-                                "_id": "title",
-                                "validation": [],
-                                "type": "textbox",
-                                "options": false,
-                                "min": 1,
-                                "max": 1,
-                                "label": "Title"
-                            },
-                            {
-                                "dataType": "ref",
-                                "_id": "theembed",
-                                "validation": [],
-                                "type": "embeddedtype",
-                                "options": "",
-                                "min": 1,
-                                "max": 1,
-                                "label": "theembed"
-                            }
-                        ]
-                    },
-                    typeWithEmbedShallow = {
-                        "label": "cooperembedshallow",
-                        "fields": [
-                            {
-                                "dataType": "string",
-                                "defaultValue": "",
-                                "_id": "titlewakka",
-                                "validation": [],
-                                "type": "textbox",
-                                "options": false,
-                                "min": 1,
-                                "max": 1,
-                                "label": "Titlewakka"
-                            },
-                            {
-                                "dataType": "ref",
-                                "_id": "theshallowembed",
-                                "validation": [],
-                                "type": "embeddedtype",
-                                "options": "",
-                                "min": 1,
-                                "max": 1,
-                                "label": "theshallowembed"
-                            }
-                        ]
-                    },
-                    thecontent = {
-                        "fields": {
-                            "theshallowembed":{
-                                "theembed": {
-                                    "date": "2014/08/12",
-                                    "title": "testingembedtitle"
-                                },
-                                "title": "maintitletest"
-                            },
-                            "titlewakka" : "some title"
+            var originalId = "origId",
+                typeToEmbed = {
+                    "label": "cooperembeddeep",
+                    "fields": [
+                        {
+                            "dataType": "string",
+                            "defaultValue": "",
+                            "_id": "title",
+                            "validation": [],
+                            "type": "textbox",
+                            "options": false,
+                            "min": 1,
+                            "max": 1,
+                            "label": "Title"
                         },
-                        "meta": {
-                            "node": "53ecde8c54eae3173a09960f",
-                            "type": "",
-                            "labelfield": "title",
-                            "typelabel": "cooperembed",
-                            "created": "2014-08-14T16:08:15.323Z",
-                            "lastmodified": "2014-08-14T16:08:15.323Z"
+                        {
+                            "dataType": "date",
+                            "_id": "date",
+                            "validation": [],
+                            "type": "date",
+                            "options": false,
+                            "min": 1,
+                            "max": 1,
+                            "label": "date"
                         }
-                    },
-                    thecontent2 = {
-                        "fields": {
-                            "theshallowembed":{
-                                "theembed": {
-                                    "date": "2014/08/12",
-                                    "title": "testingembedtitle"
-                                },
-                                "title": "maintitletest"
-                            },
-                            "titlewakka" : "some title"
+                    ]
+                },
+                typeWithEmbed = {
+                    "label": "cooperembed",
+                    "fields": [
+                        {
+                            "dataType": "string",
+                            "defaultValue": "",
+                            "_id": "title",
+                            "validation": [],
+                            "type": "textbox",
+                            "options": false,
+                            "min": 1,
+                            "max": 1,
+                            "label": "Title"
                         },
-                        "meta": {
-                            "node": "53ecde8c54eae3173a09960f",
-                            "type": "",
-                            "labelfield": "title",
-                            "typelabel": "cooperembed2",
-                            "created": "2014-08-14T16:08:15.323Z",
-                            "lastmodified": "2014-08-14T16:08:15.323Z"
+                        {
+                            "dataType": "ref",
+                            "_id": "theembed",
+                            "validation": [],
+                            "type": "embeddedtype",
+                            "options": "",
+                            "min": 1,
+                            "max": 1,
+                            "label": "theembed"
                         }
+                    ]
+                },
+                typeWithEmbedShallow = {
+                    "label": "cooperembedshallow",
+                    "fields": [
+                        {
+                            "dataType": "string",
+                            "defaultValue": "",
+                            "_id": "titlewakka",
+                            "validation": [],
+                            "type": "textbox",
+                            "options": false,
+                            "min": 1,
+                            "max": 1,
+                            "label": "Titlewakka"
+                        },
+                        {
+                            "dataType": "ref",
+                            "_id": "theshallowembed",
+                            "validation": [],
+                            "type": "embeddedtype",
+                            "options": "",
+                            "min": 1,
+                            "max": 1,
+                            "label": "theshallowembed"
+                        }
+                    ]
+                },
+                thecontent = {
+                    "fields": {
+                        "theshallowembed":{
+                            "theembed": {
+                                "date": "2014/08/12",
+                                "title": "testingembedtitle"
+                            },
+                            "title": "maintitletest"
+                        },
+                        "titlewakka" : "some title"
                     },
-                    valueToLookFor = "sillytitle",
-                    foundContent1 = '',
-                    foundContent2 = '';
+                    "meta": {
+                        "node": "53ecde8c54eae3173a09960f",
+                        "type": "",
+                        "labelfield": "title",
+                        "typelabel": "cooperembed",
+                        "created": "2014-08-14T16:08:15.323Z",
+                        "lastmodified": "2014-08-14T16:08:15.323Z"
+                    }
+                },
+                thecontent2 = {
+                    "fields": {
+                        "theshallowembed":{
+                            "theembed": {
+                                "date": "2014/08/12",
+                                "title": "testingembedtitle"
+                            },
+                            "title": "maintitletest"
+                        },
+                        "titlewakka" : "some title"
+                    },
+                    "meta": {
+                        "node": "53ecde8c54eae3173a09960f",
+                        "type": "",
+                        "labelfield": "title",
+                        "typelabel": "cooperembed2",
+                        "created": "2014-08-14T16:08:15.323Z",
+                        "lastmodified": "2014-08-14T16:08:15.323Z"
+                    }
+                },
+                valueToLookFor = "sillytitle",
+                foundContent1 = '',
+                foundContent2 = '';
 
-                grasshopper.request(adminToken).contentTypes.insert(typeToEmbed)
-                    .then(function (createdContentType) {
-                        typeToEmbed = createdContentType;
-                        typeWithEmbed.fields[1].options = String(typeToEmbed._id).valueOf();
-                        return grasshopper.request(adminToken).contentTypes.insert(typeWithEmbed);
-                    })
-                    .then(function (secondaryContentType) {
-                        typeWithEmbed = secondaryContentType;
-                        typeWithEmbedShallow.fields[1].options = String(typeWithEmbed._id).valueOf();
-                        return grasshopper.request(adminToken).contentTypes.insert(typeWithEmbedShallow);
-                    })
-                    .then(function(typeWithEmbedShallow){
-                        thecontent.meta.type = typeWithEmbedShallow._id;
-                        thecontent2.meta.type = typeWithEmbedShallow._id;
-                        return grasshopper.request(adminToken).content.insert(thecontent);
-                    })
-                    .then(function (createdContent) {
-                        thecontent = createdContent;
-                        return grasshopper.request(adminToken).content.insert(thecontent2);
-                    })
-                    .then(function (createdContent2) {
-                        thecontent2 = createdContent2;
-                        typeToEmbed.fields[0]._id = valueToLookFor;
-                        return grasshopper.request(adminToken).contentTypes.update(typeToEmbed);
-                    })
-                    .then(function () {
-                        return grasshopper.request(adminToken).content.getById(thecontent._id);
-                    })
-                    .then(function (document) {
-                        foundContent1 = document;
-                        return grasshopper.request(adminToken).content.getById(thecontent2._id);
-                    })
-                    .then(function (document2) {
-                        foundContent2 = document2;
-                        _.has(foundContent1.fields.theshallowembed.theembed, valueToLookFor).should.be.ok;
-                        _.has(foundContent1.fields.theshallowembed.theembed, originalId).should.not.be.ok;
-                        _.has(foundContent2.fields.theshallowembed.theembed, valueToLookFor).should.be.ok;
-                        _.has(foundContent2.fields.theshallowembed.theembed, originalId).should.not.be.ok;
-                        done();
-                    })
-                    .catch(doneError.bind(null, done))
-                    .fail(doneError.bind(null, done))
-                    .done();
+            grasshopper.request(adminToken).contentTypes.insert(typeToEmbed)
+                .then(function (createdContentType) {
+                    typeToEmbed = createdContentType;
+                    typeWithEmbed.fields[1].options = String(typeToEmbed._id).valueOf();
+                    return grasshopper.request(adminToken).contentTypes.insert(typeWithEmbed);
+                })
+                .then(function (secondaryContentType) {
+                    typeWithEmbed = secondaryContentType;
+                    typeWithEmbedShallow.fields[1].options = String(typeWithEmbed._id).valueOf();
+                    return grasshopper.request(adminToken).contentTypes.insert(typeWithEmbedShallow);
+                })
+                .then(function(typeWithEmbedShallow){
+                    thecontent.meta.type = typeWithEmbedShallow._id;
+                    thecontent2.meta.type = typeWithEmbedShallow._id;
+                    return grasshopper.request(adminToken).content.insert(thecontent);
+                })
+                .then(function (createdContent) {
+                    thecontent = createdContent;
+                    return grasshopper.request(adminToken).content.insert(thecontent2);
+                })
+                .then(function (createdContent2) {
+                    thecontent2 = createdContent2;
 
-            });
+                    typeToEmbed.fields[0]._id = valueToLookFor;
+                    return grasshopper.request(adminToken).contentTypes.update(typeToEmbed);
+                })
+                .then(function () {
+                    return grasshopper.request(adminToken).content.getById(thecontent._id);
+                })
+                .then(function (doc) {
+                    foundContent1 = doc;
+                    return grasshopper.request(adminToken).content.getById(thecontent2._id);
+                })
+                .then(function (doc2) {
+                    foundContent2 = doc2;
+
+                    _.has(foundContent1.fields.theshallowembed.theembed, valueToLookFor).should.be.ok;
+                    _.has(foundContent1.fields.theshallowembed.theembed, originalId).should.not.be.ok;
+                    _.has(foundContent2.fields.theshallowembed.theembed, valueToLookFor).should.be.ok;
+                    _.has(foundContent2.fields.theshallowembed.theembed, originalId).should.not.be.ok;
+                    done();
+                })
+                .catch(doneError.bind(null, done))
+                .fail(doneError.bind(null, done))
+                .done();
+
+        });
 
         describe('updating the fields array on a content type', function () {
 
@@ -899,26 +909,6 @@ describe('Grasshopper core - contentTypes', function () {
         });
 
     describe('deleteById', function () {
-            before(function (done) {
-                grasshopper.request(adminToken).content.insert({
-                    "label": "Future deletee",
-                    "type": testCreatedContentTypeId,
-                    "fields": {
-                        "testfield": "test value"
-                    },
-                    "node": {
-                        "_id": '526d5179966a883540000006',
-                        "displayOrder": 1
-                    }
-                }).then(
-                    function (payload) {
-                        done();
-                    },
-                    function (err) {
-                        done();
-                    }
-                ).done();
-            });
 
             it('should return a 403 because user does not have permissions to access content types', function (done) {
                 grasshopper.request(readerToken)
@@ -955,12 +945,13 @@ describe('Grasshopper core - contentTypes', function () {
                     .catch(done)
                     .done();
             });
+
+            xit('should delete associated content when deleting a content type', function() {});
+
+            xit('should delete content that has embedded the deleted content type', function() {});
         });
-
-
 });
 
 function doneError (done, err) {
-    'use strict';
     done(err);
 }

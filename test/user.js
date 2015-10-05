@@ -1,13 +1,15 @@
+'use strict';
 var chai = require('chai'),
     config = require('../lib/config'),
-    should = require('chai').should();
+    should = require('chai').should(),
+    grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+    path = require('path'),
+    async = require('async'),
+    start = require('./_start');
 
 describe('Grasshopper core - users', function(){
-    'use strict';
 
-    var grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
-        path = require('path'),
-        async = require('async'),
+    var
         testUserId  = '5245ce1d56c02c066b000001',
         adminToken = '',
         admin2UserId = '5246e73d56c02c0744000004',
@@ -19,19 +21,21 @@ describe('Grasshopper core - users', function(){
         testCreatedUserIdCustomVerb = '';
 
     before(function(done){
-
-        grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
-            .then(function(token){
-                adminToken = token;
-                grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' })
-                    .then(function(token){
-                        readerToken = token;
-                        done();
-                    })
-                    .fail(done)
-                    .catch(done)
-                    .done();
-            });
+        this.timeout(10000);
+        start(grasshopper).then(function() {
+            grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
+                .then(function(token){
+                    adminToken = token;
+                    grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' })
+                        .then(function(token){
+                            readerToken = token;
+                            done();
+                        })
+                        .fail(done)
+                        .catch(done)
+                        .done();
+                });
+        });
     });
 
     describe('Get a user by email', function(){
