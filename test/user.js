@@ -1,13 +1,15 @@
+'use strict';
 var chai = require('chai'),
     config = require('../lib/config'),
-    should = require('chai').should();
+    should = require('chai').should(),
+    grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+    path = require('path'),
+    async = require('async'),
+    start = require('./_start');
 
 describe('Grasshopper core - users', function(){
-    'use strict';
 
-    var grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
-        path = require('path'),
-        async = require('async'),
+    var
         testUserId  = '5245ce1d56c02c066b000001',
         adminToken = '',
         admin2UserId = '5246e73d56c02c0744000004',
@@ -19,19 +21,21 @@ describe('Grasshopper core - users', function(){
         testCreatedUserIdCustomVerb = '';
 
     before(function(done){
-
-        grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
-            .then(function(token){
-                adminToken = token;
-                grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' })
-                    .then(function(token){
-                        readerToken = token;
-                        done();
-                    })
-                    .fail(done)
-                    .catch(done)
-                    .done();
-            });
+        this.timeout(10000);
+        start(grasshopper).then(function() {
+            grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
+                .then(function(token){
+                    adminToken = token;
+                    grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' })
+                        .then(function(token){
+                            readerToken = token;
+                            done();
+                        })
+                        .fail(done)
+                        .catch(done)
+                        .done();
+                });
+        });
     });
 
     describe('Get a user by email', function(){
@@ -276,6 +280,33 @@ describe('Grasshopper core - users', function(){
                 .catch(done)
                 .fail(done)
                 .done();
+        });
+
+        describe('profile', function() {
+            it('should insert a user with a empty profile even if one was not sent', function(done){
+                var newUser = {
+                    role: 'external',
+                    enabled: true,
+                    email: 'newtestuser1@thinksolid.com',
+                    firstname: 'Test',
+                    lastname: 'User',
+                    identities: {
+                        basic: {
+                            username: 'Leonardo',
+                            password: 'TestPassword'
+                        }
+                    }
+                };
+
+                grasshopper.request(adminToken).users.insert(newUser)
+                    .then(function(payload){
+                        payload.should.have.property('profile');
+                        done();
+                    })
+                    .catch(done)
+                    .fail(done)
+                    .done();
+            });
         });
 
         describe('displayname', function() {
@@ -751,81 +782,81 @@ describe('Grasshopper core - users', function(){
         });
         describe('updatedby and createdby', function() {
 
-        it('should add a createdby property on user update if one does not already exist.', function(done){
-            var newUser = {
-                role: 'reader',
-                enabled: true,
-                email: 'newtestuser1@thinksolid.com',
-                firstname: 'Test',
-                lastname: 'User',
-                identities: {
-                    basic: {
-                        username: 'updateProfileValue',
-                        password: 'TestPassword'
+            it('should add a createdby property on user update if one does not already exist.', function(done){
+                var newUser = {
+                    role: 'reader',
+                    enabled: true,
+                    email: 'newtestuser1@thinksolid.com',
+                    firstname: 'Test',
+                    lastname: 'User',
+                    identities: {
+                        basic: {
+                            username: 'updateProfileValue',
+                            password: 'TestPassword'
+                        }
+                    },
+                    profile: {
+                        testval1: 'testval2',
+                        testval2: 'testval1'
                     }
-                },
-                profile: {
-                    testval1: 'testval2',
-                    testval2: 'testval1'
-                }
-            };
+                };
 
-            grasshopper.request(adminToken).users.insert(newUser)
-                .then(function(payload){
-                    should.not.exist(payload.createdby);
-                    delete payload.profile.testval1;
+                grasshopper.request(adminToken).users.insert(newUser)
+                    .then(function(payload){
+                        payload.should.have.property('createdby');
+                        delete payload.profile.testval1;
 
-                    grasshopper.request(adminToken).users.update(payload)
-                        .then(function(payload){
-                            should.exist(payload.createdby);
-                            done();
-                        })
-                        .fail(done)
-                        .catch(done)
-                        .done();
-                })
-                .fail(done)
-                .catch(done)
-                .done();
-        });
+                        grasshopper.request(adminToken).users.update(payload)
+                            .then(function(payload){
+                                should.exist(payload.createdby);
+                                done();
+                            })
+                            .fail(done)
+                            .catch(done)
+                            .done();
+                    })
+                    .fail(done)
+                    .catch(done)
+                    .done();
+            });
 
-        it('should add an updatedby property on user update.', function(done) {
-            var newUser = {
-                role: 'reader',
-                enabled: true,
-                email: 'newtestuser1@thinksolid.com',
-                firstname: 'Test',
-                lastname: 'User',
-                identities: {
-                    basic: {
-                        username: 'updatedbyTest',
-                        password: 'TestPassword'
+            it('should add an updatedby property on user update.', function(done) {
+                var newUser = {
+                    role: 'reader',
+                    enabled: true,
+                    email: 'newtestuser1@thinksolid.com',
+                    firstname: 'Test',
+                    lastname: 'User',
+                    identities: {
+                        basic: {
+                            username: 'updatedbyTest',
+                            password: 'TestPassword'
+                        }
+                    },
+                    profile: {
+                        testval1: 'testval1',
+                        testval2: 'testval2'
                     }
-                },
-                profile: {
-                    testval1: 'testval1',
-                    testval2: 'testval2'
-                }
-            };
+                };
 
-            grasshopper.request(adminToken).users.insert(newUser)
-                .then(function(payload){
-                    should.not.exist(payload.updatedby);
-                    delete payload.profile.testval2;
+                grasshopper.request(adminToken).users.insert(newUser)
+                    .then(function(payload){
+                        payload.should.have.property('updatedby');
+                        delete payload.profile.testval2;
 
-                    grasshopper.request(adminToken).users.update(payload)
-                        .then(function(payload){
-                            should.exist(payload.updatedby);
-                            done();
-                        })
-                        .fail(done)
-                        .catch(done)
-                        .done();
-                })
-                .fail(done)
-                .catch(done)
-                .done();
-        });
+                        grasshopper.request(adminToken).users.update(payload)
+                            .then(function(payload){
+                                should.exist(payload.updatedby);
+                                done();
+                            })
+                            .fail(done)
+                            .catch(done)
+                            .done();
+                    })
+                    .fail(done)
+                    .catch(done)
+                    .done();
+            });
 
         });
 
@@ -1416,4 +1447,3 @@ describe('Grasshopper core - users', function(){
         });
     });
 });
-

@@ -1,9 +1,9 @@
-var should = require('chai').should();
+'use strict';
+var should = require('chai').should(),
+    coordinator = require('../lib/runners/coordinator');
 
 describe('Grasshopper core - coordinator', function(){
-    'use strict';
 
-    var coordinator = require('../lib/runners/coordinator');
 
     it('coordinator should see the changes made to kontx by it\' middleware.', function(done) {
         coordinator.use('example.method', [

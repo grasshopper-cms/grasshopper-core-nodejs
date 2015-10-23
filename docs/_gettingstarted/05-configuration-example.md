@@ -45,6 +45,8 @@ Definitions for all possible config values
             * *[region](http://docs.aws.amazon.com/general/latest/gr/rande.html#ec2_region)*: The region to send service requests to
             * *bucket*: Buckets partition the namespace of objects stored in Amazon S3 at the top level
             * *urlbase*: The base URL that will be serving the files (could be your own or amazon's)
+            * *assetsDir*: A prefix (folder) to add to your s3 keys. The keys are the node id combined with the file name.
+            * *archiveDeletionsTo*: A folder to move items to instead of deleting them. Impacts individual asset deletions and node deletions. If falsey, then items will really be deleted instead of just moved.
     * IMPORTANT : Each defined engine will run (saving, updating, etc), but the engine set to default will serve the files.
 
 * identities (optional)
@@ -55,3 +57,7 @@ Definitions for all possible config values
         * *[scopes](https://developers.google.com/+/api/oauth#scopes)*: Scopes are strings that enable access to particular resources, such as user data. (https://www.googleapis.com/auth/userinfo.profile', https://www.googleapis.com/auth/userinfo.email)
         * *tokenEndpoint*: Location that will generate an access token in the Google system
         * *oauthCallback*: If the user grants the permission, the Google Authorization Server sends your application an access token (or an authorization code that your application can use to obtain an access token). If the user does not grant the permission, the server returns an error
+
+* bodyParser (optional)
+    * `bodyParser.limit` is passed directly to the [body-parser express middleware](https://github.com/expressjs/body-parser)
+    * the default value is, `2mb`

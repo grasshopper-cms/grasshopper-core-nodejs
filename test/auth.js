@@ -1,10 +1,16 @@
-var should = require('chai').should();
+'use strict';
+var should = require('chai').should(),
+    path = require('path'),
+    grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+    start = require('./_start');
+
 
 describe('Grasshopper core - testing authentications', function(){
-    'use strict';
 
-    var path = require('path'),
-        grasshopper = require('../lib/grasshopper').init(require('./fixtures/config'));
+    before(function(done) {
+        this.timeout(10000);
+        start(grasshopper).then(function() { done(); });
+    });
 
     describe('Basic Authentication', function() {
         it('not authenticate because user doesn\'t exist', function(done) {

@@ -1,7 +1,7 @@
+'use strict';
 var should = require('chai').should();
 
 describe('Grasshopper core - content', function(){
-    'use strict';
 
     var async = require('async'),
         path = require('path'),
@@ -105,6 +105,86 @@ describe('Grasshopper core - content', function(){
                 }
             ).done(done);
         });
+    });
+
+    it('should successfully update when passed an object containing a null value', function(done) {
+        var obj = {};
+        _.extend(obj, sampleContentObject, {dateRead: null});
+
+        obj.fields.newColumn = 'newValue';
+
+        grasshopper.request(tokens.globalEditorToken).content.update(obj).then(
+            function(payload){
+                payload.fields.newColumn.should.equal('newValue');
+            },
+            function(err){
+                should.not.exist(err);
+            }
+        ).done(done);
+    });
+
+    it('should successfully update when passed an object containing an empty string value', function(done) {
+        var obj = {};
+        _.extend(obj, sampleContentObject, {dateRead: ''});
+
+        obj.fields.newColumn = 'newValue';
+
+        grasshopper.request(tokens.globalEditorToken).content.update(obj).then(
+            function(payload){
+                payload.fields.newColumn.should.equal('newValue');
+            },
+            function(err){
+                should.not.exist(err);
+            }
+        ).done(done);
+    });
+
+    it('should successfully update when passed an object containing a boolean value', function(done) {
+        var obj = {};
+        _.extend(obj, sampleContentObject, {dateRead: true});
+
+        obj.fields.newColumn = 'newValue';
+
+        grasshopper.request(tokens.globalEditorToken).content.update(obj).then(
+            function(payload){
+                payload.fields.newColumn.should.equal('newValue');
+            },
+            function(err){
+                should.not.exist(err);
+            }
+        ).done(done);
+    });
+
+    it('should successfully update when passed an object containing another object', function(done) {
+        var obj = {};
+        _.extend(obj, sampleContentObject, {dateRead: {"1": "2"}});
+
+        obj.fields.newColumn = 'newValue';
+
+        grasshopper.request(tokens.globalEditorToken).content.update(obj).then(
+            function(payload){
+                payload.fields.newColumn.should.equal('newValue');
+            },
+            function(err){
+                should.not.exist(err);
+            }
+        ).done(done);
+    });
+
+    it('should successfully update when passed an object containing a number value', function(done) {
+        var obj = {};
+        _.extend(obj, sampleContentObject, {dateRead: 5});
+
+        obj.fields.newColumn = 'newValue';
+
+        grasshopper.request(tokens.globalEditorToken).content.update(obj).then(
+            function(payload){
+                payload.fields.newColumn.should.equal('newValue');
+            },
+            function(err){
+                should.not.exist(err);
+            }
+        ).done(done);
     });
 
     function createGetToken(username, password, storage) {

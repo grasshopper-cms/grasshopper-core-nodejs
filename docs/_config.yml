@@ -6,9 +6,8 @@ baseurl: "/grasshopper-core-nodejs"
 url: "http://solid-interactive.github.io"
 destination: ../_docs
 # Build settings
-markdown: kramdown
-kramdown:
-  use_coderay: true
+markdown: redcarpet
+highlighter: pygments
 permalink: pretty
 collections:
   core:

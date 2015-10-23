@@ -2,7 +2,6 @@
 
 var should = require('chai').should(),
     config = require('../lib/config'),
-    configVals = require('./fixtures/config'),
     path = require('path');
 
 describe('config', function(){

@@ -3,20 +3,6 @@ module.exports = function (grunt) {
     var lineEnding = '\n',
         _ = require('lodash');
     grunt.config('shell', {
-        test : {
-            command : 'mocha <%= debug %> --colors --recursive -R spec <%= test %>',
-            options : {
-                stdout : true,
-                stderr : true
-            }
-        },
-        testInspector : {
-            command : 'node-debug _mocha -t 60000 --colors -R spec <%= test %>',
-            options : {
-                stdout : true,
-                stderr : true
-            }
-        },
         'jekyllBuild': {
             command : 'cd docs && jekyll build && cd ../',
             options : {

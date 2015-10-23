@@ -1,18 +1,21 @@
-var should = require('chai').should();
+'use strict';
+var should = require('chai').should(),
+    grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+    path = require('path'),
+    _ = require('lodash'),
+    start = require('./_start');
 
 describe('Grasshopper core - testing event events', function(){
-    'use strict';
 
-    var grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
-        path = require('path'),
-        _ = require('lodash');
+    before(function(done) {
+        this.timeout(10000);
+        start(grasshopper).then(function() {
+            grasshopper.event.channel('/system/db').on('start', function(payload, next){
+                next();
+            });
 
-    before(function(done){
-        grasshopper.event.channel('/system/db').on('start', function(payload, next){
-            next();
+            done();
         });
-
-        done();
     });
 
     describe('Content Events', function(){

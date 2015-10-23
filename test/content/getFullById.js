@@ -1,10 +1,12 @@
+'use strict';
 var should = require('chai').should();
+var grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
+    path = require('path'),
+    start = require('../_start');
 
 describe('Grasshopper core - content', function(){
-    'use strict';
-    
-    var grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
-        path = require('path'),
+
+    var
         readerToken = '',
         adminToken = '',
         expectedImage = {
@@ -85,16 +87,19 @@ describe('Grasshopper core - content', function(){
             ]
         };
 
-    before(function (done) {
-        grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
-            .then(function (token) {
-                adminToken = token;
-                grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' })
-                    .then(function (token) {
-                        readerToken = token;
-                        done(); })
-                    .catch(done);
-            });
+    before(function(done) {
+        this.timeout(10000);
+        start(grasshopper).then(function() {
+            grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
+                .then(function (token) {
+                    adminToken = token;
+                    grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' })
+                        .then(function (token) {
+                            readerToken = token;
+                            done(); })
+                        .catch(done);
+                });
+        });
     });
 
     describe('getFullById', function() {

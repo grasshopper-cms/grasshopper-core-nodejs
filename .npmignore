@@ -10,6 +10,7 @@ Makefile
 /dist
 /cache
 /log
+/_docs
 /.vagrant
 configuration.json
 atlassian-ide-plugin.xml

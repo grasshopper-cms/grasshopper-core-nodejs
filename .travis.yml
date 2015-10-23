@@ -1,9 +1,12 @@
 language: node_js
 node_js:
-  - "0.10"
+  - "0.11"
+  - "0.12"
 services:
   - mongodb
+sudo: false
 before_script:
+  - npm install -g mocha
   - npm install -g grunt-cli
 notifications:
   email:
@@ -12,3 +15,4 @@ notifications:
     - cooper.hilscher@thinksolid.com
     - greg.larrenaga@thinksolid.com
     - kaija.rayne@thinksolid.com
+    - eric.beringer@thinksolid.com

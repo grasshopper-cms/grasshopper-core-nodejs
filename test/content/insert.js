@@ -1,12 +1,13 @@
+'use strict';
 var should = require('chai').should();
+var async = require('async'),
+    path = require('path'),
+    _ = require('lodash'),
+    grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
+    start = require('../_start');
 
 describe('Grasshopper core - content', function(){
-    'use strict';
-
-    var async = require('async'),
-        path = require('path'),
-        _ = require('lodash'),
-        grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
+    var
         tokens = {},
         tokenRequests = [
             ['apitestuseradmin', 'TestPassword', 'globalAdminToken'],
@@ -19,11 +20,15 @@ describe('Grasshopper core - content', function(){
         ],
         parallelTokenRequests = [];
 
-    before(function(done){
-        _.each(tokenRequests, function(theRequest) {
-            parallelTokenRequests.push(createGetToken(theRequest[0], theRequest[1], theRequest[2]).closure);
+    before(function(done) {
+        this.timeout(10000);
+        start(grasshopper).then(function() {
+
+            _.each(tokenRequests, function(theRequest) {
+                parallelTokenRequests.push(createGetToken(theRequest[0], theRequest[1], theRequest[2]).closure);
+            });
+            async.parallel(parallelTokenRequests, done);
         });
-        async.parallel(parallelTokenRequests, done);
 
     });
 
@@ -325,6 +330,38 @@ describe('Grasshopper core - content', function(){
                     .content.insert(obj)
                     .then(function(payload){
                         payload.fields.booleanfield.should.equal(true);
+                        payload._id;
+                    })
+                    .then(deleteAfterInsertion)
+                    .then(done)
+                    .fail(done)
+                    .catch(done)
+                    .done();
+            });
+
+            it('should successfully insert content and not convert null values to a date object.', function(done) {
+                var obj = {
+                    meta: {
+                        type: '5254908d56c02c076e000001',
+                        node : '526d5179966a883540000006',
+                        labelfield: 'testfield'
+                    },
+                    fields: {
+                        label: 'Generated title',
+                        testfield: 'testvalue',
+                        testDateField: '2014-04-30T20:00:00.000Z',
+                        testNested: {
+                            dateField: '2014-04-30T20:00:00.000Z'
+                        },
+                        nullfield : null
+                    }
+                };
+
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(function(payload){
+                        (payload.fields.nullfield === null).should.equal(true);
                         payload._id;
                     })
                     .then(deleteAfterInsertion)
@@ -984,6 +1021,56 @@ describe('Grasshopper core - content', function(){
                     .fail(done)
                     .catch(done)
                     .done();
+            });
+        });
+
+        describe('Required field validation testing',function(){
+            it('Should pass', function(done) {
+                var obj = {
+                    meta: {
+                        type: '543c10e9926c2be6649cbddb',
+                        node : '53fd0c829cc459747101b022',
+                        labelfield: 'Title'
+                    },
+                    fields: {
+                        title: 'test'
+                    }
+                };
+
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(function(payload){
+                        payload.fields.title.should.equal('test');
+                        return payload._id;
+                    })
+                    .then(deleteAfterInsertion)
+                    .then(done)
+                    .catch(done);
+            });
+
+            it('Should throw 400 because required field is empty.', function(done) {
+                var obj = {
+                    meta: {
+                        type: '543c10e9926c2be6649cbddb',
+                        node : '53fd0c829cc459747101b022',
+                        labelfield: 'Title'
+                    },
+                    fields: {
+                        title: ''
+                    }
+                };
+
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(done)
+                    .fail(function(err){
+                        err.code.should.equal(400);
+                        err.message.should.equal('"Title" is not valid. Please check your validation rules and try again.');
+                        done();
+                    })
+                    .catch(done);
             });
         });
     });

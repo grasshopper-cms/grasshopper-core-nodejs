@@ -1,13 +1,15 @@
+'use strict';
 var should = require('chai').should(),
     async = require('async'),
-    path = require('path');
+    path = require('path'),
+    async = require('async'),
+    fs = require('fs'),
+    grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+    start = require('./_start');
 
 describe('Grasshopper core - testing nodes', function(){
-    'use strict';
 
-    var async = require('async'),
-        fs = require('fs'),
-        grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+    var
         globalAdminToken  = '',
         globalReaderToken = '',
         globalEditorToken = '',
@@ -19,48 +21,51 @@ describe('Grasshopper core - testing nodes', function(){
         testContentTypeID_Users = '5254908d56c02c076e000001',
         badTestContentTypeID = '52698a0033e248a360000006';
 
-    before(function(done){
-        async.parallel(
-            [
-                function(cb){
-                    grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
-                        .then(function(token) {
-                            globalAdminToken = token;
-                            cb();
-                        });
-                },
-                function(cb){
-                    grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' })
-                        .then(function(token){
-                            globalReaderToken = token;
-                            cb();
-                        });
-                },
-                function(cb){
-                    grasshopper.auth('username', { username: 'apitestusereditor', password: 'TestPassword' })
-                        .then(function(token){
-                            globalEditorToken = token;
-                            cb();
-                        });
-                },
-                function(cb){
-                    grasshopper.auth('username', { username: 'apitestuserreader_1', password: 'TestPassword' })
-                        .then(function(token){
-                            nodeEditorToken = token;
-                            cb();
-                        });
-                },
-                function(cb){
-                    grasshopper.auth('username', { username: 'apitestusereditor_restricted', password: 'TestPassword' })
-                        .then(function(token){
-                            restrictedEditorToken = token;
-                            cb();
-                        });
+    before(function(done) {
+        this.timeout(10000);
+        start(grasshopper).then(function() {
+            async.parallel(
+                [
+                    function(cb){
+                        grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
+                            .then(function(token) {
+                                globalAdminToken = token;
+                                cb();
+                            });
+                    },
+                    function(cb){
+                        grasshopper.auth('username', { username: 'apitestuserreader', password: 'TestPassword' })
+                            .then(function(token){
+                                globalReaderToken = token;
+                                cb();
+                            });
+                    },
+                    function(cb){
+                        grasshopper.auth('username', { username: 'apitestusereditor', password: 'TestPassword' })
+                            .then(function(token){
+                                globalEditorToken = token;
+                                cb();
+                            });
+                    },
+                    function(cb){
+                        grasshopper.auth('username', { username: 'apitestuserreader_1', password: 'TestPassword' })
+                            .then(function(token){
+                                nodeEditorToken = token;
+                                cb();
+                            });
+                    },
+                    function(cb){
+                        grasshopper.auth('username', { username: 'apitestusereditor_restricted', password: 'TestPassword' })
+                            .then(function(token){
+                                restrictedEditorToken = token;
+                                cb();
+                            });
+                    }
+                ],function(){
+                    done();
                 }
-            ],function(){
-                done();
-            }
-        );
+            );
+        });
     });
 
     describe('insert', function() {
@@ -109,7 +114,7 @@ describe('Grasshopper core - testing nodes', function(){
                 .then(doneError.bind(null, done))
                 .fail(function(err){
                     err.code.should.equal(400);
-                    err.message.should.equal('"label" is a required field.');
+                    err.message.should.equal('Path \`label\` is required.');
                     done();
                 })
                 .catch(doneError.bind(null, done))

@@ -1,12 +1,14 @@
-var should = require('chai').should();
+'use strict';
+var should = require('chai').should(),
+    async = require('async'),
+    path = require('path'),
+    _ = require('lodash'),
+    grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
+    start = require('./../_start');
 
 describe('Grasshopper core - content', function(){
-    'use strict';
 
-    var async = require('async'),
-        path = require('path'),
-        _ = require('lodash'),
-        grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
+    var
         testContentId  = '5261781556c02c072a000007',
         restrictedContentId = '5254908d56c02c076e000001',
         tokens = {},
@@ -21,12 +23,14 @@ describe('Grasshopper core - content', function(){
         ],
         parallelTokenRequests = [];
 
-    before(function(done){
-        _.each(tokenRequests, function(theRequest) {
-            parallelTokenRequests.push(createGetToken(theRequest[0], theRequest[1], theRequest[2]).closure);
+    before(function(done) {
+        this.timeout(10000);
+        start(grasshopper).then(function() {
+            _.each(tokenRequests, function(theRequest) {
+                parallelTokenRequests.push(createGetToken(theRequest[0], theRequest[1], theRequest[2]).closure);
+            });
+            async.parallel(parallelTokenRequests, done);
         });
-        async.parallel(parallelTokenRequests, done);
-
     });
 
     describe('deleteById', function() {

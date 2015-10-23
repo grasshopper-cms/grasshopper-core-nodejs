@@ -1,20 +1,20 @@
-var should = require('chai').should();
+'use strict';
+var should = require('chai').should(),
+    path = require('path'),
+    grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+    db = require('../lib/db'),
+    start = require('./_start');
 
 describe('Grasshopper core - testing tokens', function(){
-    'use strict';
-
-    var path = require('path'),
-        grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
-        db = require('../lib/db'),
-        adminToken = '',
+    var adminToken = '',
         readerToken = '',
         readerToken2 = '',
         readerToken3 = '',
         userId = '5245ce1d56c02c066b000001';
 
-    before(function(done){
-
-
+    before(function(done) {
+        this.timeout(10000);
+        start(grasshopper).then(function() {
             grasshopper.auth('basic', { username: 'admin', password: 'TestPassword' }).then(function(token){
                 adminToken = token;
                 grasshopper.auth('basic', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){
@@ -28,7 +28,7 @@ describe('Grasshopper core - testing tokens', function(){
                     });
                 });
             });
-
+        });
     });
 
     describe('tokens.deleteById', function(){
