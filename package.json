@@ -26,10 +26,10 @@
       "name": "J.J. Idt"
     },
     {
-        "name": "Luke Chinworth"
+      "name": "Luke Chinworth"
     },
     {
-        "name": "Mike Mostachetti"
+      "name": "Mike Mostachetti"
     }
   ],
   "version": "0.18.3",
@@ -55,6 +55,7 @@
     "aws-sdk": "^2.2.4",
     "bluebird": "^2.9.30",
     "crypto-js": "^3.1.2-1",
+    "fbgraph": "^1.1.0",
     "googleapis": "^2.1.5",
     "lodash": "^3.10.1",
     "mime": "^1.2.11",
