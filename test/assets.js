@@ -4,6 +4,8 @@ var should = require('chai').should(),
     async = require('async'),
     fs = require('fs'),
     path = require('path'),
+    _ = require('lodash'),
+    BB = require('bluebird'),
     grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
     testNodeId = '5261781556c02c072a000007',
     globalAdminToken  = '',
@@ -284,17 +286,67 @@ describe('Grasshopper core - testing assets', function(){
          */
     });
 
-    xdescribe('get all the assets in a node.', function() {
+    describe('get all the assets in a node.', function() {
+        var numberOfAssetsToCreate = 1478;
+
+        this.timeout(15000);
+
+        before('post test fixtures', function(done) {
+            fs.mkdirSync(path.join(__dirname, 'tmp', 'assets-retrieval-test'));
+
+            BB.all(
+                _.times(numberOfAssetsToCreate, function(index) {
+                    fs.writeFileSync(path.join(__dirname, 'tmp', 'assets-retrieval-test', index + '.png'), index);
+
+                    return grasshopper
+                        .request(globalAdminToken)
+                        .assets.save({
+                            nodeid: testNodeId,
+                            filename: index + '.png',
+                            path: path.join(__dirname, 'tmp', 'assets-retrieval-test', index + '.png')
+                        });
+                }))
+                .then(function() {
+                    done();
+                });
+        });
+
+        after('remove test fixtures', function(done) {
+            _.times(numberOfAssetsToCreate, function(index) {
+                fs.unlinkSync(path.join(__dirname, 'public', testNodeId, index + '.png'));
+            });
+
+            fs.rmdirSync(path.join(__dirname, 'tmp', 'assets-retrieval-test'));
+
+            done();
+        });
+
         it('should return 401 because trying to access unauthenticated', function(done) {
             grasshopper
                 .request()
                 .assets.list({
-                    nodeid: testNodeId })
+                    nodeid: testNodeId
+                })
                 .then(function() {
                     done(new Error('Should not succeed')); })
                 .fail(function(err){
                     err.code.should.equal(401);
-                    done(); })
+                    done();
+                })
+                .done();
+        });
+
+        it('an admin should be able to retrieve all files in a node', function(done) {
+            grasshopper
+                .request(globalAdminToken)
+                .assets.list({
+                    nodeid : testNodeId
+                })
+                .then(function(payload) {
+                    payload.length.should.equal(numberOfAssetsToCreate + 1); // 1478 Plus the one that was allready in that node
+                    done();
+                })
+                .fail(done)
                 .done();
         });
 
@@ -310,19 +362,7 @@ describe('Grasshopper core - testing assets', function(){
          });
          */
 
-        it('an editor should return a list of files in a node', function(done) {
-            grasshopper
-                .request(globalEditorToken)
-                .assets.list({
-                    nodeid: testNodeId })
-                .then(function(payload) {
-                    payload.length.should.equal(5);
-                    done(); })
-                .fail(done)
-                .done();
-        });
-
-        it('Getting root node should work', function(done) {
+        xit('Getting root node should work', function(done) {
             grasshopper.request(globalEditorToken).assets.list({
                 nodeid: 0
             })
