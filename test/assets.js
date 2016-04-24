@@ -287,11 +287,13 @@ describe('Grasshopper core - testing assets', function(){
     });
 
     describe('get all the assets in a node.', function() {
+        var numberOfAssetsToCreate = 1478;
+
         before('post test fixtures', function(done) {
             fs.mkdirSync(path.join(__dirname, 'tmp', 'assets-retrieval-test'));
 
             BB.all(
-                _.times(1478, function(index) {
+                _.times(numberOfAssetsToCreate, function(index) {
                     fs.writeFileSync(path.join(__dirname, 'tmp', 'assets-retrieval-test', index + '.png'), index);
 
                     return grasshopper
@@ -308,7 +310,7 @@ describe('Grasshopper core - testing assets', function(){
         });
 
         after('remove test fixtures', function(done) {
-            _.times(1478, function(index) {
+            _.times(numberOfAssetsToCreate, function(index) {
                 fs.unlinkSync(path.join(__dirname, 'public', testNodeId, index + '.png'));
             });
 
@@ -339,10 +341,11 @@ describe('Grasshopper core - testing assets', function(){
                     nodeid : testNodeId
                 })
                 .then(function(payload) {
-                    payload.length.should.equal(1479); // 1478 Plus the one that was allready in that node
+                    payload.length.should.equal(numberOfAssetsToCreate + 1); // 1478 Plus the one that was allready in that node
                     done();
                 })
-                .fail(done);
+                .fail(done)
+                .done();
         });
 
         /* Requires Node Level Permissions
@@ -356,19 +359,6 @@ describe('Grasshopper core - testing assets', function(){
          done();
          });
          */
-
-        xit('an editor should return a list of files in a node', function(done) {
-            grasshopper
-                .request(globalEditorToken)
-                .assets.list({
-                    nodeid: testNodeId })
-                .then(function(payload) {
-                    payload.length.should.equal(5);
-                    done();
-                })
-                .fail(done)
-                .done();
-        });
 
         xit('Getting root node should work', function(done) {
             grasshopper.request(globalEditorToken).assets.list({
