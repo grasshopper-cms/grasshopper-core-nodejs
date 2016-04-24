@@ -101,7 +101,7 @@
     ]
   },
   "scripts": {
-    "test": "mocha --timeout 9000 --color -R spec --recursive test",
+    "test": "mocha --timeout 6000 --color -R spec --recursive test",
     "jshint": "jshint"
   }
 }

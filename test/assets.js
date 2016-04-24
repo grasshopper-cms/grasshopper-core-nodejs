@@ -289,6 +289,8 @@ describe('Grasshopper core - testing assets', function(){
     describe('get all the assets in a node.', function() {
         var numberOfAssetsToCreate = 1478;
 
+        this.timeout(15000);
+
         before('post test fixtures', function(done) {
             fs.mkdirSync(path.join(__dirname, 'tmp', 'assets-retrieval-test'));
 
