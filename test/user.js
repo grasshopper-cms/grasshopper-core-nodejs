@@ -907,6 +907,7 @@ describe('Grasshopper core - users', function(){
 
         });
 
+        // This block should be rewritten with promises - would be easy to break apart into actual separate tests like that
         describe('admin should be able to change a user\'s password', function(){
             var token,
                 error;
@@ -975,6 +976,44 @@ describe('Grasshopper core - users', function(){
 
             it('should return a valid token for new username',function() {
                 token.length.should.be.greaterThan(0);
+            });
+
+            it('on a user with no initial password', function(done) {
+                var newUser = {
+                    role: 'reader',
+                    identities: {
+                        facebook: {
+                            "id" : "335847583474555",
+                            "accessToken" : "KzOX7aHcO4WT21hfsm",
+                            "expires" : "5184000"
+                        }
+                    },
+                    enabled: true,
+                    email: 'newtestuser1@thinksolid.com',
+                    firstname: 'Test',
+                    lastname: 'User'
+                };
+                grasshopper.request(adminToken).users.insert(newUser)
+                    .then(function(user) {
+                        user.identities = {
+                            basic : {
+                                username: 'newtestuser1@thinksolid.com',
+                                password : 'thisismytestpassword'
+                            }
+                        };
+
+                        return grasshopper.request(adminToken).users.update(user);
+                    })
+                    .then(function() {
+                        return grasshopper.auth('basic', {
+                            username: 'newtestuser1@thinksolid.com',
+                            password: 'thisismytestpassword'
+                        })
+                    })
+                    .then(function() {
+                        done();
+                    })
+                    .catch(done);
             });
         });
 
