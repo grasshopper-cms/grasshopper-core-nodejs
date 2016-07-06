@@ -2,15 +2,31 @@
 
 var BB = require('bluebird'),
     execSync = require('child_process').execSync,
+    MongoClient = require('mongodb').MongoClient,
     running = false;
 
 module.exports = start;
 
-function start(grasshopper) {
+function start(grasshopper, mongoUrl) {
 
     process.stdout.write(execSync('grunt data:load'));
 
-    return new BB(function(resolve, reject) {
+    var mongoPromise = new BB(function(resolve, reject) {
+        if (! mongoUrl) {
+            resolve();
+        } else {
+            // Use connect method to connect to the Server
+            MongoClient.connect(mongoUrl, function(err, db) {
+                if (err) {
+                    reject(err);
+                } else {
+                    process.stdout.write('Connected correctly to Mongo server');
+                    resolve(db);
+                }
+            });
+        }
+    });
+    var ghPromise = new BB(function(resolve, reject) {
 
         // TODO: create way of stopping gh - or having inti call system/db start again
         if (running) {
@@ -29,4 +45,8 @@ function start(grasshopper) {
             });
         }
     });
+
+    return BB.join(ghPromise, mongoPromise, function(gh, db) {
+        return db;
+    })
 }

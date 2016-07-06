@@ -3,8 +3,10 @@ var should = require('chai').should();
 var async = require('async'),
     path = require('path'),
     _ = require('lodash'),
-    grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
-    start = require('../_start');
+    configs = require('../fixtures/config'),
+    grasshopper = require('../../lib/grasshopper').init(configs),
+    start = require('../_start'),
+    db = null;
 
 describe('Grasshopper core - content', function(){
     var
@@ -22,8 +24,8 @@ describe('Grasshopper core - content', function(){
 
     before(function(done) {
         this.timeout(10000);
-        start(grasshopper).then(function() {
-
+        start(grasshopper, configs.db.host).then(function(mongoDb) {
+            db = mongoDb;
             _.each(tokenRequests, function(theRequest) {
                 parallelTokenRequests.push(createGetToken(theRequest[0], theRequest[1], theRequest[2]).closure);
             });
@@ -1071,6 +1073,59 @@ describe('Grasshopper core - content', function(){
                         done();
                     })
                     .catch(done);
+            });
+        });
+    
+        describe('multi collection support', function() {
+            it('should insert content into a custom collection', function(done) {
+
+                var newContentType = {
+                    "label": "Test Type",
+                    "destination" : "newone",
+                    "fields": [
+                        {
+                            "label": "Title",
+                            "max": 1,
+                            "min": 1,
+                            "options": false,
+                            "type": "textbox",
+                            "validation": [],
+                            "_id": "title"
+                        }
+                    ]
+                };
+
+                grasshopper.request(tokens.globalAdminToken)
+                    .contentTypes.insert(newContentType)
+                    .then(function (payload) {
+                        var contentTypeId = payload._id;
+
+                        return grasshopper
+                            .request(tokens.globalAdminToken)
+                            .content.insert({
+                                meta: {
+                                    type: '543c10e9926c2be6649cbddb',
+                                    node : '53fd0c829cc459747101b022',
+                                    labelfield: 'Title'
+                                },
+                                fields: {
+                                    title: 'test yankovich'
+                                }
+                            });
+                    })
+                    .then(function() {
+                        return db.collection('newone').find({
+                            'fields.title' : 'test yankovich'
+                        }).count();
+                    })
+                    .then(function(count) {
+                        count.should.equal(1);
+                        done();
+                    })
+                    .fail(done)
+                    .catch(done);
+
+
             });
         });
     });
