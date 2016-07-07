@@ -1075,7 +1075,7 @@ describe('Grasshopper core - content', function(){
                     .catch(done);
             });
         });
-    
+
         describe('multi collection support', function() {
             it('should insert content into a custom collection', function(done) {
 
@@ -1098,13 +1098,14 @@ describe('Grasshopper core - content', function(){
                 grasshopper.request(tokens.globalAdminToken)
                     .contentTypes.insert(newContentType)
                     .then(function (payload) {
-                        var contentTypeId = payload._id;
+
+                        console.log('the created type is', payload._id);
 
                         return grasshopper
                             .request(tokens.globalAdminToken)
                             .content.insert({
                                 meta: {
-                                    type: '543c10e9926c2be6649cbddb',
+                                    type: payload._id,
                                     node : '53fd0c829cc459747101b022',
                                     labelfield: 'Title'
                                 },
@@ -1113,9 +1114,10 @@ describe('Grasshopper core - content', function(){
                                 }
                             });
                     })
-                    .then(function() {
+                    .then(function(doc) {
+                        console.log('\n\n\n', doc);
                         return db.collection('newone').find({
-                            'fields.title' : 'test yankovich'
+                            _id : doc._id
                         }).count();
                     })
                     .then(function(count) {
