@@ -55,7 +55,7 @@ describe('Grasshopper core - content', function(){
             query5 = {
                 filters: [{key: 'fields.label', cmp: '=', value: 'search test4'}],
                 options: {
-                    sortBy: 1111
+                    sortBy: '1111'
                 }
             },
             query6 = {
@@ -283,15 +283,12 @@ describe('Grasshopper core - content', function(){
             ).done(done);
         });
 
-        it('cast typeof sortBy to string if not a string and return unsorted, yet full results', function(done) {
+        it('if options.sortBy is not an object, throw an error. ', function(done) {
             grasshopper.request(tokens.globalReaderToken).content.query(query5)
-                .then(function(payload){
-                    payload.results.length.should.equal(1);
+                .then(done)
+                .fail(function(err) {
                     done();
-                })
-                .catch(done)
-                .fail(done)
-                .done();
+                });
         });
 
         it('return valid results even if options is an empty array', function(done) {
