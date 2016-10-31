@@ -515,6 +515,34 @@ describe('Grasshopper core - content', function(){
             });
         });
 
+        describe('notlike (!%) operator', function() {
+            it ('accepts a regular expression as a value', function (done) {
+                grasshopper.request(tokens.globalAdminToken).content.query({
+                    filters: [{ key: 'fields.label', cmp: '!%', value: /search test7/ }]
+                }).then(function (results) {
+                    results.should.be.ok;
+                    results.total.should.equal(20);
+                    done();
+                })
+                .fail(done)
+                .catch(done)
+                .done();
+            });
+
+            it ('should apply a case insensitive search when a string is supplied as a value', function (done) {
+                grasshopper.request(tokens.globalAdminToken).content.query({
+                    filters : [{key : 'fields.label', cmp : '!%', value : 'search'}]
+                }).then(function (results) {
+                    results.should.be.ok;
+                    results.total.should.equal(13);
+                    done();
+                })
+                .fail(done)
+                .catch(done)
+                .done();
+            });
+        });
+        
         describe('or query', function() {
 
         });
