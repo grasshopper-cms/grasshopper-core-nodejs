@@ -21,6 +21,10 @@ describe('Grasshopper core - testing nodes', function(){
         testContentTypeID_Users = '5254908d56c02c076e000001',
         badTestContentTypeID = '52698a0033e248a360000006';
 
+    after(function(){
+        this.timeout(10000);
+    });
+    
     before(function(done) {
         this.timeout(10000);
         start(grasshopper).then(function() {

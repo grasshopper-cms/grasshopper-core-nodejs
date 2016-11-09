@@ -15,6 +15,10 @@ var should = require('chai').should(),
 
 
 describe('Grasshopper core - testing assets', function(){
+    after(function(){
+        this.timeout(10000)
+    });
+    
     before(function(run) {
         this.timeout(10000);
         start(grasshopper)

@@ -38,6 +38,10 @@ describe('Grasshopper core - users', function(){
         });
     });
 
+    after(function(){
+        this.timeout(10000);
+    });
+    
     describe('Get a user by email', function(){
         it('Make sure that a reader cannot call getByEmail method (only admins can)', function(done) {
             grasshopper.request(readerToken).users.getByEmail('apitestuser_1@thinksolid.com')
