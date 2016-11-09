@@ -7,6 +7,7 @@ describe('Grasshopper core - content', function(){
         path = require('path'),
         _ = require('lodash'),
         grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
+        start = require('../_start'),
         testContentId  = '5261781556c02c072a000007',
         tokens = {},
         restrictedContentId = '5254908d56c02c076e000001',
@@ -23,11 +24,13 @@ describe('Grasshopper core - content', function(){
         parallelTokenRequests = [];
 
     before(function(done){
-        _.each(tokenRequests, function(theRequest) {
-            parallelTokenRequests.push(createGetToken(theRequest[0], theRequest[1], theRequest[2]).closure);
+        this.timeout(10000);
+        start(grasshopper).then(function() {
+            _.each(tokenRequests, function(theRequest) {
+                parallelTokenRequests.push(createGetToken(theRequest[0], theRequest[1], theRequest[2]).closure);
+            });
+            async.parallel(parallelTokenRequests, createSampleContent.bind(null, done));
         });
-        async.parallel(parallelTokenRequests, createSampleContent.bind(null, done));
-
     });
 
     function createSampleContent(done) {

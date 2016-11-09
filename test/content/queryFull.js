@@ -25,6 +25,10 @@ describe('Grasshopper core - content', function(){
         });
     });
 
+    after(function(){
+        this.timeout(10000)
+    });
+
     describe('query', function() {
         var expected1 = {
                 'embedded-array': [],
@@ -70,10 +74,19 @@ describe('Grasshopper core - content', function(){
                     .equals('fields.title', 'Query for this')
                     .build())
                 .then(function (payload) {
+
                     payload.results.length.should.equal(2);
-                    // Unsure if this order is guaranteed? Could this come back reversed?
-                    payload.results[0].fields.should.deep.equal(expected1);
-                    payload.results[1].fields.should.deep.equal(expected2);
+                    // Unsure if this order is guaranteed? Could this come back reversed: NOTE THIS IS NOT GUARANTEED. CONFIRMED
+                    _.each(payload.results, function(result){
+                        console.log(result.fields['simple-embedded'].title);
+                        if(result.fields['simple-embedded'].title === 'One in'){
+                            result.fields.should.deep.equal(expected1);
+                        }
+                        else {
+                            result.fields.should.deep.equal(expected2);
+                        }
+                    });
+
                     done();
                 })
                 .catch(done)

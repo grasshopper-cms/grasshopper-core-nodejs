@@ -59,7 +59,7 @@
     "googleapis": "^2.1.5",
     "lodash": "^3.10.1",
     "mime": "^1.2.11",
-    "mongodb": "^2.1.16",
+    "mongodb": "^2.2.11",
     "mongoose": "^4.1.8",
     "mongoose-validator": "^1.2.4",
     "node-uuid": "^1.4.1",
