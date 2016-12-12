@@ -1,6 +1,6 @@
 'use strict';
 
-var grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+var grasshopper = require('../lib/grasshopper'),
     config;
 
 require('chai').should();
