@@ -8,6 +8,7 @@ var should = require('chai').should(),
 describe('Grasshopper core - contentTypes', function () {
 
     var testContentTypeId = '524362aa56c02c0703000001',
+        testContentTypeSlug = 'content-slug',
         anotherTestContentTypeId = '524362aa56c02c0703000123',
         readerToken = '',
         adminToken = '',
@@ -58,6 +59,43 @@ describe('Grasshopper core - contentTypes', function () {
         it('should return 404 because test user id does not exist', function (done) {
             grasshopper.request(adminToken)
                 .contentTypes.getById('5246e73d56c02c0744000004')
+                .then(done)
+                .fail(function (err) {
+                    err.code.should.equal(404);
+                    done();
+                })
+                .catch(done)
+                .done();
+        });
+    });
+
+    describe('getBySlug', function () {
+        it('should return 401 because trying to access unauthenticated', function (done) {
+            grasshopper.request()
+                .contentTypes.getBySlug(testContentTypeId)
+                .then(done)
+                .fail(function (err) {
+                    err.code.should.equal(401);
+                    done();
+                })
+                .catch(done)
+                .done();
+        });
+
+        it('should return an existing content type', function (done) {
+            grasshopper.request(adminToken)
+                .contentTypes.getById(testContentTypeSlug)
+                .then(function (payload) {
+                    payload._id.toString().should.equal(testContentTypeId);
+                    done();
+                })
+                .fail(done)
+                .catch(done)
+                .done();
+        });
+        it('should return 404 because test content type slug does not exist', function (done) {
+            grasshopper.request(adminToken)
+                .contentTypes.getBySlug('5246e73d56c02c0744000004')
                 .then(done)
                 .fail(function (err) {
                     err.code.should.equal(404);
