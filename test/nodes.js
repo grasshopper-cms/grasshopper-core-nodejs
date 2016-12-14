@@ -387,6 +387,97 @@ describe('Grasshopper core - testing nodes', function(){
         });
     });
 
+    describe('getById', function() {
+        it('should return 401 because trying to access unauthenticated', function(done) {
+            grasshopper.request().nodes.getById(testNodeId)
+                .then(doneError.bind(null, done))
+                .fail(function(err) {
+                    err.code.should.equal(401);
+                    done();
+                })
+                .catch(doneError.bind(null, done))
+                .done();
+        });
+
+        it('should return a node when using a id', function(done) {
+            grasshopper.request(globalAdminToken).nodes.getById(testNodeId)
+                .then(function(payload){
+                    payload._id.toString().should.equal(testNodeId);
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
+        });
+
+        it('should return a nodes allowedTypes when using a id', function(done) {
+            grasshopper.request(globalAdminToken).nodes.getById(testNodeId)
+                .then(function(payload){
+                    payload.should.include.keys('allowedTypes');
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
+        });
+
+        it('should return a nodes allowedTypes with the fields (id, label, helptext) when using a id', function(done) {
+            grasshopper.request(globalEditorToken).nodes.getById(testNodeId)
+                .then(function(payload){
+                    payload.should.include.keys('allowedTypes');
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
+        });
+
+        /* Requires Node Level Permissions
+         it('a reader should return a 403 because user does not have permissions to access a particular node', function(done) {
+         grasshopper.request(nodeEditorToken).nodes.getById(testLockedDownNodeId).then(
+         function(payload){
+         should.not.exist(payload);
+         },
+         function(err){
+         err.code.should.equal(403);
+         }
+         ).done(done);
+         });
+
+         it('an editor with rights restricted to a specific node should return a 403 error', function(done) {
+         grasshopper.request(restrictedEditorToken).nodes.getById(testLockedDownNodeId).then(
+         function(payload){
+         should.not.exist(payload);
+         },
+         function(err){
+         err.code.should.equal(403);
+         }
+         ).done(done);
+         });*/
+
+        it('an editor should return an existing node object', function(done) {
+            grasshopper.request(globalEditorToken).nodes.getById(testNodeId)
+                .then(function(payload){
+                    payload._id.toString().should.equal(testNodeId);
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
+        });
+
+        it('a reader should return an existing node object', function(done) {
+            grasshopper.request(globalReaderToken).nodes.getById(testNodeId)
+                .then(function(payload){
+                    payload._id.toString().should.equal(testNodeId);
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
+        });
+    });
+
     /* Future requirement
     describe('getById hydrated.', function() {
         it('a reader with all valid permissions should get a node object back with a full collection of child nodes and its content', function(done) {
