@@ -1,8 +1,8 @@
 'use strict';
 var should = require('chai').should(),
     path = require('path'),
-    grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
-    db = require('../lib/db'),
+    grasshopper,
+    db,
     start = require('./_start');
 
 describe('Grasshopper core - testing tokens', function(){
@@ -14,7 +14,10 @@ describe('Grasshopper core - testing tokens', function(){
 
     before(function(done) {
         this.timeout(10000);
-        start(grasshopper).then(function() {
+        start(grasshopper).then(function(gh) {
+            grasshopper = gh;
+            // db is only setup after gh is initialized
+            db = require('../lib/db')();
             grasshopper.auth('basic', { username: 'admin', password: 'TestPassword' }).then(function(token){
                 adminToken = token;
                 grasshopper.auth('basic', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){

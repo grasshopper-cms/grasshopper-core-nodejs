@@ -1,7 +1,7 @@
 'use strict';
 var should = require('chai').should(),
     _ = require('lodash'),
-    grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+    grasshopper,
     path = require('path'),
     start = require('./_start');
 
@@ -15,7 +15,8 @@ describe('Grasshopper core - contentTypes', function () {
 
     before(function(done) {
         this.timeout(10000);
-        start(grasshopper).then(function() {
+        start(grasshopper).then(function(gh) {
+            grasshopper = gh;
             grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
                 .then(function (token) {
                     adminToken = token;

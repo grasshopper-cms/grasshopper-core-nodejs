@@ -2,7 +2,7 @@
 var chai = require('chai'),
     config = require('../lib/config'),
     should = require('chai').should(),
-    grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+    grasshopper,
     path = require('path'),
     async = require('async'),
     start = require('./_start');
@@ -22,7 +22,8 @@ describe('Grasshopper core - users', function(){
 
     before(function(done){
         this.timeout(10000);
-        start(grasshopper).then(function() {
+        start(grasshopper).then(function(gh) {
+            grasshopper = gh;
             grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
                 .then(function(token){
                     adminToken = token;
