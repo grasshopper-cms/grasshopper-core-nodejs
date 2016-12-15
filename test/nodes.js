@@ -16,6 +16,7 @@ describe('Grasshopper core - testing nodes', function(){
         nodeEditorToken = '',
         restrictedEditorToken = '',
         testNodeId = '5261781556c02c072a000007',
+        testNodeSlug = 'node-slug',
         testNodeIdRoot_generated = '',
         testContentTypeID = '524362aa56c02c0703000001',
         testContentTypeID_Users = '5254908d56c02c076e000001',
@@ -378,6 +379,74 @@ describe('Grasshopper core - testing nodes', function(){
 
         it('a reader should return an existing node object', function(done) {
             grasshopper.request(globalReaderToken).nodes.getById(testNodeId)
+                .then(function(payload){
+                    payload._id.toString().should.equal(testNodeId);
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
+        });
+    });
+
+    describe('getBySlug', function() {
+        it('should return 401 because trying to access unauthenticated', function(done) {
+            grasshopper.request().nodes.getBySlug(testNodeSlug)
+                .then(doneError.bind(null, done))
+                .fail(function(err) {
+                    err.code.should.equal(401);
+                    done();
+                })
+                .catch(doneError.bind(null, done))
+                .done();
+        });
+
+        it('should return a node when using a id', function(done) {
+            grasshopper.request(globalAdminToken).nodes.getBySlug(testNodeSlug)
+                .then(function(payload){
+                    payload._id.toString().should.equal(testNodeId);
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
+        });
+
+        it('should return a nodes allowedTypes when using a id', function(done) {
+            grasshopper.request(globalAdminToken).nodes.getBySlug(testNodeSlug)
+                .then(function(payload){
+                    payload.should.include.keys('allowedTypes');
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
+        });
+
+        it('should return a nodes allowedTypes with the fields (id, label, helptext) when using a id', function(done) {
+            grasshopper.request(globalEditorToken).nodes.getBySlug(testNodeSlug)
+                .then(function(payload){
+                    payload.should.include.keys('allowedTypes');
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
+        });
+
+        it('an editor should return an existing node object', function(done) {
+            grasshopper.request(globalEditorToken).nodes.getBySlug(testNodeSlug)
+                .then(function(payload){
+                    payload._id.toString().should.equal(testNodeId);
+                    done();
+                })
+                .fail(doneError.bind(null, done))
+                .catch(doneError.bind(null, done))
+                .done();
+        });
+
+        it('a reader should return an existing node object', function(done) {
+            grasshopper.request(globalReaderToken).nodes.getBySlug(testNodeSlug)
                 .then(function(payload){
                     payload._id.toString().should.equal(testNodeId);
                     done();
