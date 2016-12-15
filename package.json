@@ -30,9 +30,12 @@
     },
     {
       "name": "Mike Mostachetti"
+    },
+    {
+      "name": "William Davies"
     }
   ],
-  "version": "0.19.3",
+  "version": "0.20.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/Solid-Interactive/grasshopper-core-nodejs.git"
