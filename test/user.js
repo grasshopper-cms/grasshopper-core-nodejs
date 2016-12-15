@@ -85,6 +85,52 @@ describe('Grasshopper core - users', function(){
         });
     });
 
+    describe('Get a user by slug', function(){
+        it('Make sure that a reader cannot call getBySlug method (only admins can)', function(done) {
+            grasshopper.request(readerToken).users.getBySlug('user-slug')
+                .then(done)
+                .fail(function(err){
+                    err.code.should.equal(403);
+                    done();
+                })
+                .catch(done)
+                .done();
+        });
+
+        it('Make sure that admin can get a user by slug.', function(done) {
+            grasshopper.request(adminToken).users.getBySlug('user-slug')
+                .then(function(payload){
+                    payload.slug.should.equal('user-slug');
+                    done();
+                })
+                .fail(done)
+                .catch(done)
+                .done();
+        });
+
+        it('should return 401 because trying to access unauthenticated', function(done) {
+            grasshopper.request().users.getBySlug('user-slug')
+                .then(done)
+                .fail(function(err){
+                    err.code.should.equal(401);
+                    done();
+                })
+                .catch(done)
+                .done();
+        });
+
+        it('should return 404 because test user id does not exist', function(done) {
+            grasshopper.request(adminToken).users.getBySlug('user-slugblah')
+                .then(done)
+                .fail(function(err){
+                    err.code.should.equal(404);
+                    done();
+                })
+                .catch(done)
+                .done();
+        });
+    });
+
     describe('Get a user by id', function() {
         it('Make sure that a reader cannot call getById method (only admins can)', function(done) {
             grasshopper.request(readerToken).users.getById('5246e73d56c02c0744000004')

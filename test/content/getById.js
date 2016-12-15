@@ -76,7 +76,6 @@ describe('Grasshopper core - content', function(){
                 .request(tokens.restrictedEditorToken)
                 .content.getById(restrictedContentId)
                 .then(function(payload){
-                    console.log(payload);
                     done(new Error('Should not succeed')); })
                 .fail(function(err){
                     err.code.should.equal(403);
