@@ -85,8 +85,9 @@ describe('Grasshopper core - contentTypes', function () {
 
         it('should return an existing content type', function (done) {
             grasshopper.request(adminToken)
-                .contentTypes.getById(testContentTypeSlug)
+                .contentTypes.getBySlug(testContentTypeSlug)
                 .then(function (payload) {
+                    console.log(payload);
                     payload._id.toString().should.equal(testContentTypeId);
                     done();
                 })
