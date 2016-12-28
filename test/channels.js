@@ -1,14 +1,14 @@
 'use strict';
 var should = require('chai').should(),
     path = require('path'),
-    grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+    grasshopper,
     start = require('./_start');
 
 describe('Grasshopper core - testing channels', function(){
 
     before(function(done) {
         this.timeout(10000);
-        start(grasshopper).then(function() { done(); });
+        start(grasshopper).then(function(gh) { grasshopper = gh; done(); });
     });
     after(function(){
         this.timeout(10000);

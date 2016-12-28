@@ -3,7 +3,7 @@ var should = require('chai').should(),
     async = require('async'),
     path = require('path'),
     _ = require('lodash'),
-    grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
+    grasshopper,
     start = require('../_start');
 
 
@@ -26,7 +26,8 @@ describe('Grasshopper core - content', function(){
 
     before(function(done) {
         this.timeout(10000);
-        start(grasshopper).then(function() {
+        start(grasshopper).then(function(gh) {
+            grasshopper = gh;
             _.each(tokenRequests, function(theRequest) {
                 parallelTokenRequests.push(createGetToken(theRequest[0], theRequest[1], theRequest[2]).closure);
             });
@@ -37,7 +38,7 @@ describe('Grasshopper core - content', function(){
     after(function(){
         this.timeout(10000);
     });
-    
+
     describe('getById', function() {
         it('should return 401 because trying to access unauthenticated', function(done) {
             grasshopper
@@ -78,7 +79,6 @@ describe('Grasshopper core - content', function(){
                 .request(tokens.restrictedEditorToken)
                 .content.getById(restrictedContentId)
                 .then(function(payload){
-                    //console.log(payload);
                     done(new Error('Should not succeed')); })
                 .fail(function(err){
                     err.code.should.equal(403);

@@ -222,7 +222,8 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 * 0.18.10 - 2016-08-12 - [patch](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.18.10_2016-08-12.md)
 * 0.18.11 - 2016-08-12 - [patch](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.18.11_2016-08-12.md)
 * 0.19.0 - 2016-09-01 - [minor](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.19.0_2016-09-01.md)
-* 0.19.2 - 2016-11-08 - [](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.19.2_2016-11-08.md)
+* 0.19.2 - 2016-12-10 - [](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.19.2_2016-12-10.md)
+* 0.19.3 - 2016-12-11 - [patch](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.19.3_2016-12-11.md)
 
 
 ## Contributors (`git shortlog -s -n`)
@@ -265,4 +266,4 @@ grunt data:save
 
 ### [Documentation](http://solid-interactive.github.io/grasshopper-core-nodejs/documentation.html)
 
-_Compiled file. Do not modify directly. Created: 2016-11-08 11:04:28_
+_Compiled file. Do not modify directly. Created: 2016-12-11 11:44:16_

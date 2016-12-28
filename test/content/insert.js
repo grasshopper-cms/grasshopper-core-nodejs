@@ -3,7 +3,7 @@ var should = require('chai').should();
 var async = require('async'),
     path = require('path'),
     _ = require('lodash'),
-    grasshopper = require('../../lib/grasshopper').init(require('../fixtures/config')),
+    grasshopper,
     start = require('../_start');
 
 describe('Grasshopper core - content', function(){
@@ -22,8 +22,8 @@ describe('Grasshopper core - content', function(){
 
     before(function(done) {
         this.timeout(10000);
-        start(grasshopper).then(function() {
-
+        start(grasshopper).then(function(gh) {
+            grasshopper = gh;
             _.each(tokenRequests, function(theRequest) {
                 parallelTokenRequests.push(createGetToken(theRequest[0], theRequest[1], theRequest[2]).closure);
             });

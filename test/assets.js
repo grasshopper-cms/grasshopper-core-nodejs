@@ -1,10 +1,11 @@
 'use strict';
+
 var should = require('chai').should(),
     start = require('./_start'),
     async = require('async'),
     fs = require('fs'),
     path = require('path'),
-    grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+    grasshopper,
     testNodeId = '5261781556c02c072a000007',
     globalAdminToken  = '',
     globalReaderToken = '',
@@ -22,7 +23,8 @@ describe('Grasshopper core - testing assets', function(){
     before(function(run) {
         this.timeout(10000);
         start(grasshopper)
-            .then(function() {
+            .then(function(gh) {
+                grasshopper = gh;
                 async.parallel(
                     [
                         function(cb){

@@ -1,13 +1,14 @@
 'use strict';
 var should = require('chai').should(),
     _ = require('lodash'),
-    grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+    grasshopper,
     path = require('path'),
     start = require('./_start');
 
 describe('Grasshopper core - contentTypes', function () {
 
     var testContentTypeId = '524362aa56c02c0703000001',
+        testContentTypeSlug = 'content-slug',
         anotherTestContentTypeId = '524362aa56c02c0703000123',
         readerToken = '',
         adminToken = '',
@@ -15,7 +16,8 @@ describe('Grasshopper core - contentTypes', function () {
 
     before(function(done) {
         this.timeout(10000);
-        start(grasshopper).then(function() {
+        start(grasshopper).then(function(gh) {
+            grasshopper = gh;
             grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
                 .then(function (token) {
                     adminToken = token;
@@ -34,7 +36,7 @@ describe('Grasshopper core - contentTypes', function () {
     after(function(){
         this.timeout(10000);
     });
-    
+
     describe('getById', function () {
         it('should return 401 because trying to access unauthenticated', function (done) {
             grasshopper.request()
@@ -62,6 +64,43 @@ describe('Grasshopper core - contentTypes', function () {
         it('should return 404 because test user id does not exist', function (done) {
             grasshopper.request(adminToken)
                 .contentTypes.getById('5246e73d56c02c0744000004')
+                .then(done)
+                .fail(function (err) {
+                    err.code.should.equal(404);
+                    done();
+                })
+                .catch(done)
+                .done();
+        });
+    });
+
+    describe('getBySlug', function () {
+        it('should return 401 because trying to access unauthenticated', function (done) {
+            grasshopper.request()
+                .contentTypes.getBySlug(testContentTypeId)
+                .then(done)
+                .fail(function (err) {
+                    err.code.should.equal(401);
+                    done();
+                })
+                .catch(done)
+                .done();
+        });
+
+        it('should return an existing content type', function (done) {
+            grasshopper.request(adminToken)
+                .contentTypes.getBySlug(testContentTypeSlug)
+                .then(function (payload) {
+                    payload._id.toString().should.equal(testContentTypeId);
+                    done();
+                })
+                .fail(done)
+                .catch(done)
+                .done();
+        });
+        it('should return 404 because test content type slug does not exist', function (done) {
+            grasshopper.request(adminToken)
+                .contentTypes.getBySlug('5246e73d56c02c0744000004')
                 .then(done)
                 .fail(function (err) {
                     err.code.should.equal(404);

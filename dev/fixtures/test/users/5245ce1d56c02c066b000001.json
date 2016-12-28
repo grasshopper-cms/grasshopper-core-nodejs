@@ -2,6 +2,7 @@
     "_id": {
         "$oid": "5245ce1d56c02c066b000001"
     },
+    "slug": "user-slug",
     "email": "apitestuser@thinksolid.com",
     "identities": {
         "basic": {

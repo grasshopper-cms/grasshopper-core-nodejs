@@ -2,7 +2,7 @@
 var chai = require('chai'),
     config = require('../lib/config'),
     should = require('chai').should(),
-    grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+    grasshopper,
     path = require('path'),
     async = require('async'),
     start = require('./_start');
@@ -22,7 +22,8 @@ describe('Grasshopper core - users', function(){
 
     before(function(done){
         this.timeout(10000);
-        start(grasshopper).then(function() {
+        start(grasshopper).then(function(gh) {
+            grasshopper = gh;
             grasshopper.auth('username', { username: 'apitestuseradmin', password: 'TestPassword' })
                 .then(function(token){
                     adminToken = token;
@@ -78,6 +79,52 @@ describe('Grasshopper core - users', function(){
 
         it('should return 404 because test user id does not exist', function(done) {
             grasshopper.request(adminToken).users.getByEmail('test@test.com')
+                .then(done)
+                .fail(function(err){
+                    err.code.should.equal(404);
+                    done();
+                })
+                .catch(done)
+                .done();
+        });
+    });
+
+    describe('Get a user by slug', function(){
+        it('Make sure that a reader cannot call getBySlug method (only admins can)', function(done) {
+            grasshopper.request(readerToken).users.getBySlug('user-slug')
+                .then(done)
+                .fail(function(err){
+                    err.code.should.equal(403);
+                    done();
+                })
+                .catch(done)
+                .done();
+        });
+
+        it('Make sure that admin can get a user by slug.', function(done) {
+            grasshopper.request(adminToken).users.getBySlug('user-slug')
+                .then(function(payload){
+                    payload.slug.should.equal('user-slug');
+                    done();
+                })
+                .fail(done)
+                .catch(done)
+                .done();
+        });
+
+        it('should return 401 because trying to access unauthenticated', function(done) {
+            grasshopper.request().users.getBySlug('user-slug')
+                .then(done)
+                .fail(function(err){
+                    err.code.should.equal(401);
+                    done();
+                })
+                .catch(done)
+                .done();
+        });
+
+        it('should return 404 because test user id does not exist', function(done) {
+            grasshopper.request(adminToken).users.getBySlug('user-slugblah')
                 .then(done)
                 .fail(function(err){
                     err.code.should.equal(404);

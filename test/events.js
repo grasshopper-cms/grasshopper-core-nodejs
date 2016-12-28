@@ -1,6 +1,6 @@
 'use strict';
 var should = require('chai').should(),
-    grasshopper = require('../lib/grasshopper').init(require('./fixtures/config')),
+    grasshopper,
     path = require('path'),
     _ = require('lodash'),
     start = require('./_start');
@@ -9,7 +9,8 @@ describe('Grasshopper core - testing event events', function(){
 
     before(function(done) {
         this.timeout(10000);
-        start(grasshopper).then(function() {
+        start(grasshopper).then(function(gh) {
+            grasshopper = gh;
             grasshopper.event.channel('/system/db').on('start', function(payload, next){
                 next();
             });
