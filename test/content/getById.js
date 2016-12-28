@@ -35,6 +35,9 @@ describe('Grasshopper core - content', function(){
         });
     });
 
+    after(function(){
+        this.timeout(10000);
+    });
 
     describe('getById', function() {
         it('should return 401 because trying to access unauthenticated', function(done) {

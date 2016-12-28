@@ -19,6 +19,10 @@ describe('Grasshopper core - testing event events', function(){
         });
     });
 
+    after(function(){
+        this.timeout(10000);
+    });
+    
     describe('Content Events', function(){
         var token;
 

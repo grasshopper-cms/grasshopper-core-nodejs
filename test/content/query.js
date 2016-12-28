@@ -33,6 +33,10 @@ describe('Grasshopper core - content', function(){
 
     });
 
+    after(function(){
+        this.timeout(10000);
+    });
+    
     describe('query', function() {
         var query = {
                 filters: [{key: 'fields.label', cmp: '=', value: 'search test1'}]

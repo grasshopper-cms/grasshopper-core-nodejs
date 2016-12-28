@@ -24,6 +24,7 @@ describe('Grasshopper core - content', function(){
 
     before(function(done){
         this.timeout(10000);
+
         require('../_start')()
             .then(function(gh) {
                 grasshopper = gh;
@@ -32,6 +33,7 @@ describe('Grasshopper core - content', function(){
                 });
                 async.parallel(parallelTokenRequests, createSampleContent.bind(null, done));
             })
+
     });
 
     function createSampleContent(done) {
