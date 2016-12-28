@@ -10,7 +10,10 @@ describe('Grasshopper core - testing channels', function(){
         this.timeout(10000);
         start(grasshopper).then(function(gh) { grasshopper = gh; done(); });
     });
-
+    after(function(){
+        this.timeout(10000);
+    });
+    
     describe('Registering channels', function(){
         it('I should be able to register a channel and fire and event and get the result.', function(done){
             grasshopper.event.channel('/type/1').on('save', function(payload, next){
@@ -43,4 +46,3 @@ describe('Grasshopper core - testing channels', function(){
         });
     });
 });
-

@@ -103,6 +103,10 @@ describe('Grasshopper core - content', function(){
         });
     });
 
+    after(function(){
+        this.timeout(10000);
+    });
+    
     describe('getFullById', function() {
         it('existing: should return unchanged object if there are no content references', function(done) {
             grasshopper

@@ -34,6 +34,10 @@ describe('Grasshopper core - testing tokens', function(){
         });
     });
 
+    after(function(){
+        this.timeout(10000);
+    });
+    
     describe('tokens.deleteById', function(){
 
         it('a user has to be logged in to use tokens.deleteById function.', function(done) {
@@ -296,4 +300,3 @@ describe('Grasshopper core - testing tokens', function(){
     }
 
 });
-

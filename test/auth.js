@@ -12,6 +12,10 @@ describe('Grasshopper core - testing authentications', function(){
         start(grasshopper).then(function(gh) { grasshopper = gh; done(); });
     });
 
+    after(function(){
+        this.timeout(10000);
+    });
+
     describe('Basic Authentication', function() {
         it('not authenticate because user doesn\'t exist', function(done) {
             grasshopper.auth('Basic', {username:'travis', password:'12345'})
