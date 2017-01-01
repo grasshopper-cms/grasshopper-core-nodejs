@@ -10,3 +10,4 @@ atlassian-ide-plugin.xml
 Vagrantfile
 .DS_Store
 _docs
+*.log
