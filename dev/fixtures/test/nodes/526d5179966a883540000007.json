@@ -1,0 +1,7 @@
+{
+    "_id": {
+        "$oid": "526d5179966a883540000007"
+    },
+    "label": "Node with custom collection",
+    "parent": null
+}

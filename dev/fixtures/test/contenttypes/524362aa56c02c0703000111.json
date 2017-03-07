@@ -1,0 +1,28 @@
+{
+    "_id": {
+        "$oid": "524362aa56c02c0703000111"
+    },
+    "slug": "content-slug-w-destination",
+    "label": "This is my test content type",
+    "helpText": "",
+    "description": "",
+    "destination":"special",
+    "fields": [
+        {
+            "_id": "testfield",
+            "required": true,
+            "instancing": 1,
+            "type": "textbox",
+            "label": "Title",
+            "validation": [
+                {
+                    "type": "alpha",
+                    "options": {
+                        "min": 5,
+                        "max": 10
+                    }
+                }
+            ]
+        }
+    ]
+}

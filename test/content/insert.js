@@ -111,6 +111,35 @@ describe('Grasshopper core - content', function(){
                 .done();
         });
 
+        it.only('should successfully insert content to a custom collection.', function(done) {
+            const obj = {
+                meta: {
+                    type: '524362aa56c02c0703000111',
+                    node : '526d5179966a883540000007',
+                    labelfield: 'testfield'
+                },
+                fields: {
+                    label: 'okay',
+                    testfield: 'testvalue'
+                }
+            };
+
+            grasshopper
+                .request(tokens.globalEditorToken)
+                .content.insert(obj)
+                .then(function(payload){
+                    console.log('back', payload);
+                    payload.fields.label.should.equal(obj.fields.label);
+                    process.exit();
+                    return payload._id;
+                })
+                .then(deleteAfterInsertion)
+                .then(done)
+                .fail(done)
+                .catch(done)
+                .done();
+        });
+
         it('should return 403 because I am trying to insert content in a node that is restricted to me.', function(done) {
             var obj = {
                 meta: {
@@ -196,7 +225,7 @@ describe('Grasshopper core - content', function(){
                     .done();
             });
 
-            it('should successfully insert content and also convert multis that are strings that are valid native dates to a date object.', function(done) {
+            it.only('should successfully insert content and also convert multis that are strings that are valid native dates to a date object.', function(done) {
                 var obj = {
                     meta: {
                         type: '524362aa56c02c0703000001',
