@@ -4,7 +4,7 @@
 
 [![NPM](https://nodei.co/npm/grasshopper-core.png)](https://nodei.co/npm/grasshopper-core/)
 
-[![Build Status](https://travis-ci.org/Solid-Interactive/grasshopper-core-nodejs.png?branch=master)](https://travis-ci.org/Solid-Interactive/grasshopper-core-nodejs)
+[![Build Status](https://travis-ci.org/grasshopper-cms/grasshopper-core-nodejs.png?branch=master)](https://travis-ci.org/grasshopper-cms/grasshopper-core-nodejs)
 
 ### Grasshopper is an everybody friendly, flexible, extensible CMS.
 
