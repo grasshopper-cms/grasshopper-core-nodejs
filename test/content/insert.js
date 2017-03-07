@@ -84,7 +84,7 @@ describe('Grasshopper core - content', function(){
                 .done();
         });
 
-        it.only('should successfully insert content because I have the correct permissions.', function(done) {
+        it('should successfully insert content because I have the correct permissions.', function(done) {
             var obj = {
                 meta: {
                     type: '524362aa56c02c0703000001',
