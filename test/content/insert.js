@@ -35,7 +35,7 @@ describe('Grasshopper core - content', function(){
     after(function(){
         this.timeout(10000);
     });
-    
+
     describe('insert', function() {
         it('should return 401 because trying to access unauthenticated', function(done) {
             var obj = {
@@ -84,7 +84,7 @@ describe('Grasshopper core - content', function(){
                 .done();
         });
 
-        it('should successfully insert content because I have the correct permissions.', function(done) {
+        it.only('should successfully insert content because I have the correct permissions.', function(done) {
             var obj = {
                 meta: {
                     type: '524362aa56c02c0703000001',
