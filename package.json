@@ -32,7 +32,7 @@
       "name": "Mike Mostachetti"
     }
   ],
-  "version": "0.18.4",
+  "version": "0.18.5-patch",
   "repository": {
     "type": "git",
     "url": "https://github.com/Solid-Interactive/grasshopper-core-nodejs.git"
