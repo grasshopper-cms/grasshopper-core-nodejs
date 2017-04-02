@@ -6,7 +6,8 @@
             "hookevents",
             "nodes",
             "tokens",
-            "users"
+            "users",
+            "special"
         ]
     }
 }

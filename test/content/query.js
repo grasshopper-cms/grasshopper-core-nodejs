@@ -381,7 +381,7 @@ describe('Grasshopper core - content', function(){
         });
 
         describe('custom collections', () => {
-            xit('should query a custom collection if the destination field is set', () => {
+            it('should query a custom collection if the destination field is set', (done) => {
                 const obj = {
                     meta: {
                         type: '524362aa56c02c0703000111',
@@ -393,17 +393,29 @@ describe('Grasshopper core - content', function(){
                         testfield: 'testvalue'
                     }
                 };
+                let _id = null;
 
                 grasshopper
                     .request(tokens.globalEditorToken)
                     .content.insert(obj)
                     .then(function(payload){
-                        console.log('back', payload);
-                        payload.fields.label.should.equal(obj.fields.label);
-                        process.exit();
-                        return payload._id;
+                        _id = payload._id;
+                        return grasshopper.request(tokens.globalReaderToken).content.query({
+                            filters : [
+                                { key: 'fields.label', cmp: '=', value: 'okay'}
+                            ],
+                            options: {
+                                destination: 'special'
+                            }
+                        })
+                            .then((results) => {
+                                console.log('rrrrrr', results);
+                                results.total.should.equal(1);
+                            });
                     })
-                    .then(deleteAfterInsertion)
+                    .then(() => {
+                        return deleteAfterInsertion(_id);
+                    })
                     .then(done)
                     .fail(done)
                     .catch(done)
@@ -585,6 +597,15 @@ describe('Grasshopper core - content', function(){
 
         });
     });
+
+    function deleteAfterInsertion(contentId) {
+        return grasshopper
+            .request(tokens.globalAdminToken)
+            // this delete needs a destination too
+            .content.deleteById(contentId)
+            .then(function() {})
+            .fail(function() {});
+    }
 
     function createGetToken(username, password, storage) {
         return {
