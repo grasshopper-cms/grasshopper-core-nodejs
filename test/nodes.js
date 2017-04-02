@@ -25,7 +25,7 @@ describe('Grasshopper core - testing nodes', function(){
     after(function(){
         this.timeout(10000);
     });
-    
+
     before(function(done) {
         this.timeout(10000);
         start(grasshopper).then(function(gh) {
@@ -553,7 +553,7 @@ describe('Grasshopper core - testing nodes', function(){
             grasshopper.request(globalReaderToken).nodes.getChildren(null)
                 .then(function(payload){
                     // 4 nodes in fixtures + 1 generated
-                    payload.length.should.equal(4 + 1);
+                    payload.length.should.equal(5 + 1);
                     done();
                 })
                 .fail(doneError.bind(null, done))

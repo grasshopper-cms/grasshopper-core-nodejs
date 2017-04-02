@@ -111,7 +111,7 @@ describe('Grasshopper core - content', function(){
                 .done();
         });
 
-        it.only('should successfully insert content to a custom collection.', function(done) {
+        it('should successfully insert content to a custom collection.', function(done) {
             const obj = {
                 meta: {
                     type: '524362aa56c02c0703000111',
@@ -130,7 +130,6 @@ describe('Grasshopper core - content', function(){
                 .then(function(payload){
                     console.log('back', payload);
                     payload.fields.label.should.equal(obj.fields.label);
-                    process.exit();
                     return payload._id;
                 })
                 .then(deleteAfterInsertion)
@@ -225,7 +224,7 @@ describe('Grasshopper core - content', function(){
                     .done();
             });
 
-            it.only('should successfully insert content and also convert multis that are strings that are valid native dates to a date object.', function(done) {
+            it('should successfully insert content and also convert multis that are strings that are valid native dates to a date object.', function(done) {
                 var obj = {
                     meta: {
                         type: '524362aa56c02c0703000001',

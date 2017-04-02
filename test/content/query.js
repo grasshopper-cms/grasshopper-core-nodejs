@@ -36,7 +36,7 @@ describe('Grasshopper core - content', function(){
     after(function(){
         this.timeout(10000);
     });
-    
+
     describe('query', function() {
         var query = {
                 filters: [{key: 'fields.label', cmp: '=', value: 'search test1'}]
@@ -378,6 +378,37 @@ describe('Grasshopper core - content', function(){
                 .catch(done)
                 .fail(done)
                 .done();
+        });
+
+        describe('custom collections', () => {
+            xit('should query a custom collection if the destination field is set', () => {
+                const obj = {
+                    meta: {
+                        type: '524362aa56c02c0703000111',
+                        node : '526d5179966a883540000007',
+                        labelfield: 'testfield'
+                    },
+                    fields: {
+                        label: 'okay',
+                        testfield: 'testvalue'
+                    }
+                };
+
+                grasshopper
+                    .request(tokens.globalEditorToken)
+                    .content.insert(obj)
+                    .then(function(payload){
+                        console.log('back', payload);
+                        payload.fields.label.should.equal(obj.fields.label);
+                        process.exit();
+                        return payload._id;
+                    })
+                    .then(deleteAfterInsertion)
+                    .then(done)
+                    .fail(done)
+                    .catch(done)
+                    .done();
+            });
         });
 
         describe('options.limit eq number', function() {
