@@ -4,7 +4,7 @@
 
 [![NPM](https://nodei.co/npm/grasshopper-core.png)](https://nodei.co/npm/grasshopper-core/)
 
-[![Build Status](https://travis-ci.org/grasshopper-cms/grasshopper-core-nodejs.png?branch=master)](https://travis-ci.org/grasshopper-cms/grasshopper-core-nodejs)
+[![Build Status](https://travis-ci.org/Solid-Interactive/grasshopper-core-nodejs.png?branch=master)](https://travis-ci.org/Solid-Interactive/grasshopper-core-nodejs)
 
 ### Grasshopper is an everybody friendly, flexible, extensible CMS.
 
@@ -227,6 +227,7 @@ Grasshopper CORE JS is released under a [MIT license](https://github.com/Solid-I
 * 0.19.3 - 2016-12-11 - [patch](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.19.3_2016-12-11.md)
 * 0.20.1 - 2016-12-27 - [](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.20.1_2016-12-27.md)
 * 0.20.2 - 2017-01-01 - [patch](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.20.2_2017-01-01.md)
+* 0.21.0 - 2017-04-20 - [minor](https://github.com/Solid-Interactive/grasshopper-core-nodejs/tree/master/release_notes/0.21.0_2017-04-20.md)
 
 
 ## Contributors (`git shortlog -s -n`)
@@ -270,4 +271,4 @@ grunt data:save
 
 ### [Documentation](http://solid-interactive.github.io/grasshopper-core-nodejs/documentation.html)
 
-_Compiled file. Do not modify directly. Created: 2017-01-01 02:19:46_
+_Compiled file. Do not modify directly. Created: 2017-04-20 11:47:11_
