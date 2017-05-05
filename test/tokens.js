@@ -3,7 +3,8 @@ var should = require('chai').should(),
     path = require('path'),
     grasshopper,
     db,
-    start = require('./_start');
+    start = require('./_start'),
+    crypto = require('../lib/utils/crypto');
 
 describe('Grasshopper core - testing tokens', function(){
     var adminToken = '',
@@ -18,6 +19,7 @@ describe('Grasshopper core - testing tokens', function(){
             grasshopper = gh;
             // db is only setup after gh is initialized
             db = require('../lib/db')();
+
             grasshopper.auth('basic', { username: 'admin', password: 'TestPassword' }).then(function(token){
                 adminToken = token;
                 grasshopper.auth('basic', { username: 'apitestuserreader', password: 'TestPassword' }).then(function(token){
@@ -37,7 +39,7 @@ describe('Grasshopper core - testing tokens', function(){
     after(function(){
         this.timeout(10000);
     });
-    
+
     describe('tokens.deleteById', function(){
 
         it('a user has to be logged in to use tokens.deleteById function.', function(done) {
@@ -208,7 +210,9 @@ describe('Grasshopper core - testing tokens', function(){
         it('should add the type onto the token', function(done){
             grasshopper.request(adminToken).tokens.getNew('google')
                 .then(function(payload){
-                    db.tokens.getById(payload)
+                    var token = crypto.createHash(payload, grasshopper.config.crypto.secret_passphrase);
+
+                    db.tokens.getById(token)
                         .then(function(tokenObj){
                                 tokenObj.should.have.property('type');
                                 tokenObj.type.should.equal('google');
@@ -226,7 +230,9 @@ describe('Grasshopper core - testing tokens', function(){
         it('should default to basic if no type is passed in', function(done){
             grasshopper.request(adminToken).tokens.getNew()
                 .then(function(payload){
-                    db.tokens.getById(payload)
+                    var token = crypto.createHash(payload, grasshopper.config.crypto.secret_passphrase);
+
+                    db.tokens.getById(token)
                         .then(function(tokenObj){
                             tokenObj.should.have.property('type');
                             tokenObj.type.should.equal('basic');
