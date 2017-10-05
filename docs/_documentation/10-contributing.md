@@ -5,7 +5,7 @@ uuid: contributing
 
 ### Contributing
 
-Grasshopper is an open source project that is available on [Github](https://github.com/Solid-Interactive/grasshopper-core-nodejs) and it has been sponsored by [Solid Interactive](http://www.thinksolid.com). We fully appreciate the contributions that have been made so far and we are excited for future development of this platform.
+Grasshopper is an open source project that is available on [Github](https://github.com/Solid-Interactive/grasshopper-core-nodejs) and it has been sponsored by [Solid Digital](http://www.soliddigital.com). We fully appreciate the contributions that have been made so far and we are excited for future development of this platform.
 
 If you find bugs or have issues please submit them to github issues:
 
