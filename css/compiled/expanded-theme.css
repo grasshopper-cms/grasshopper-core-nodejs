@@ -1,8 +1,8 @@
 @import url(../bootstrap/bootstrap.min.css);
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300italic,300,400italic,500,500italic,700,700italic,900,900italic);
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);
-@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic);
-@import url(http://fonts.googleapis.com/css?family=Merriweather:400,300italic,300,400italic,700,700italic);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300italic,300,400italic,500,500italic,700,700italic,900,900italic);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);
+@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic);
+@import url(https://fonts.googleapis.com/css?family=Merriweather:400,300italic,300,400italic,700,700italic);
 /* modules */
 /* this mixin makes possible to add transition to a specific vendor, example: */
 /* -webkit-transition: -webkit-transform 0.5s linear; */
@@ -507,7 +507,7 @@ a:focus, button:focus {
   background: #4B4848;
   background-size: cover;
   /*background-image: url("../../images/bg2blur2.png");*/
-  background-image: url("http://24.media.tumblr.com/899355a7363be380170ecfcbdc9744d7/tumblr_myp93odkni1st5lhmo1_1280.jpg");
+  background-image: url("https://24.media.tumblr.com/899355a7363be380170ecfcbdc9744d7/tumblr_myp93odkni1st5lhmo1_1280.jpg");
   background-position: center center;
   height: 650px;
   position: relative;
@@ -1891,7 +1891,7 @@ a:focus, button:focus {
   -ms-animation-delay: 0.15s;
   animation-delay: 0.15s;
   /*background-image: url("../../images/bg2.png");*/
-  background-image: url("http://31.media.tumblr.com/fe341bc8e2f82db9e03cbb5a4323a84f/tumblr_mq7ejb3POL1st5lhmo1_1280.jpg");
+  background-image: url("https://31.media.tumblr.com/fe341bc8e2f82db9e03cbb5a4323a84f/tumblr_mq7ejb3POL1st5lhmo1_1280.jpg");
 }
 @media (max-width: 991px) {
   #home3 #hero #cover-image {
@@ -2688,7 +2688,7 @@ a:focus, button:focus {
   top: 0;
 }
 #home4 #hero .slides .slide.first .bg {
-  background-image: url("http://24.media.tumblr.com/899355a7363be380170ecfcbdc9744d7/tumblr_myp93odkni1st5lhmo1_1280.jpg");
+  background-image: url("https://24.media.tumblr.com/899355a7363be380170ecfcbdc9744d7/tumblr_myp93odkni1st5lhmo1_1280.jpg");
 }
 #home4 #hero .slides .slide.first .bg:after {
   background: rgba(6, 13, 32, 0.26);
@@ -2769,7 +2769,7 @@ a:focus, button:focus {
   }
 }
 #home4 #hero .slides .slide.second .bg {
-  background-image: url("http://31.media.tumblr.com/5d40ddbd07fc716e715bd5462e305edd/tumblr_mx3tmhXNNE1st5lhmo1_1280.jpg");
+  background-image: url("https://31.media.tumblr.com/5d40ddbd07fc716e715bd5462e305edd/tumblr_mx3tmhXNNE1st5lhmo1_1280.jpg");
 }
 #home4 #hero .slides .slide.second .bg:after {
   background: rgba(13, 28, 73, 0.35);
@@ -2826,7 +2826,7 @@ a:focus, button:focus {
   padding-top: 115px;
 }
 #home4 #hero .slides .slide.third .bg {
-  background-image: url("http://25.media.tumblr.com/30c0fdcfdec477eafdee2f837e269b9e/tumblr_mxrv62sm2I1st5lhmo1_1280.jpg");
+  background-image: url("https://25.media.tumblr.com/30c0fdcfdec477eafdee2f837e269b9e/tumblr_mxrv62sm2I1st5lhmo1_1280.jpg");
 }
 #home4 #hero .slides .slide.third .bg:after {
   background: rgba(3, 9, 27, 0.45);
