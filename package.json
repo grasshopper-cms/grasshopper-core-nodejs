@@ -54,15 +54,15 @@
   },
   "dependencies": {
     "async": "^1.4.2",
-    "aws-sdk": "^2.2.4",
+    "aws-sdk": "^2.188.0",
     "bluebird": "^2.11.0",
     "crypto-js": "^3.1.2-1",
     "fbgraph": "^1.1.0",
     "googleapis": "^2.1.5",
     "lodash": "^3.10.1",
-    "mime": "^1.2.11",
-    "mongodb": "^2.2.11",
-    "mongoose": "^4.7.2",
+    "mime": "^1.6.0",
+    "mongodb": "^2.2.34",
+    "mongoose": "^4.13.10",
     "mongoose-validator": "^1.2.4",
     "node-uuid": "^1.4.1",
     "oauth": "^0.9.14",
@@ -70,12 +70,11 @@
     "q": "^1.0.1",
     "request": "^2.39.0",
     "solid-logger-js": "^0.4.3",
-    "validator": "^4.0.6"
+    "validator": "^4.9.0"
   },
   "devDependencies": {
     "chai": "^3.3.0",
     "express": "^4.8.5",
-    "grasshopper-admin": "^0.35.0",
     "grasshopper-api": "^0.18.2",
     "grunt": "^0.4.5",
     "grunt-build-gh-pages": "^1.0.3",
@@ -89,11 +88,9 @@
     "grunt-shell": "^1.1.2",
     "matchdep": "^0.3.0",
     "mocha": "^3.2.0",
-    "mongodb": "^2.2.15",
     "nodelint": "^0.6.2",
     "pre-commit": "^1.0.10",
-    "uglify-js": "2.4.x",
-    "validator": "^4.0.6"
+    "uglify-js": "^2.8.29"
   },
   "jam": {
     "main": "lib/grasshopper.js",
